@@ -277,10 +277,11 @@ main > aside > .best > ol > li > a > .thumb{
     margin: 0 auto;
     box-sizing: border-box;
 }
-main > aside > .best > ol > li:first-child > a > .thumb{
+main > aside > .best > ol > li:first-child > a > .thumb {
     position: relative;
-    width: 50px;
-    height: 50px;
+    float: none;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     margin: 0 auto;
 }
@@ -345,7 +346,7 @@ main > aside > .best > ol > li > a .org_price > ins{
 main > aside > .best > ol > li > a .org_price > ins::after{
     content:"원";
 }
-main > aside > .best > ol > li > a .org_price > span{
+main > aside > .best > ol > li > a .org_price > .free{
     display: inline-block;
     font-size: 0;
     vertical-align: text-bottom;
