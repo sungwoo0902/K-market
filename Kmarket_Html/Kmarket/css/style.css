@@ -100,7 +100,7 @@ header > .logo > div > form > input{
     box-sizing: border-box;
 }
 
-header > .logo > .div > form > button{
+header > .logo > div > form > button{
     position: absolute;
     right: 6px;
     top: 10px;
