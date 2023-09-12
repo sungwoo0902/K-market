@@ -35,6 +35,10 @@
                     <h1>약관동의</h1>
                 </nav>
                 <section>
+                	<!-- 
+                		이용약관 13일부터 작업 예정
+                		작업 이후 회원가입 기능 구현 예정
+               		 -->
 
                     <h3><span class="essential">(필수)</span>케이마켓 이용약관</h3>
                     <textarea class="terms" readonly></textarea>
