@@ -14,6 +14,9 @@ ul, ol{
 input, textarea{
     outline: none;
 }
+input, textarea {
+    outline: none;
+}
 
 
 /* 컨테이너 영역 */
