@@ -7,6 +7,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="../img/favicon.ico" />
     <link rel="stylesheet" href="../css/style.css" />    
   </head>
+  <!-- 
+  		날짜 : 2023/09/12
+  		이름 : 고성우
+   -->
   <body>
     <div id="wrapper">
       <header>
