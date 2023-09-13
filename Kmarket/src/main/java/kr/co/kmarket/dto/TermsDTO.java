@@ -39,18 +39,18 @@ public class TermsDTO {
 		this.tax = tax;
 	}
 	
-	String tv = (terms    == null)?"null":"data";
-	String tp = (privacy  == null)?"null":"data";
-	String tl = (location == null)?"null":"data";
-	String tf = (finance  == null)?"null":"data";
-	String tt = (tax      == null)?"null":"data";
+	public String termsResult(String signup) {
+		String result = null;
+		result = (signup == null)?"EMPTY!!":"good";
+		return result;
+	}
 	
 	@Override
 	public String toString() {
-		return "TermsDTO [terms=" + tv + ", "
-				+ "privacy=" + privacy + ", "
-				+ "location=" + location + ", "
-				+ "finance=" + finance + ", "
-				+ "tax=" + tax + "]";
+		return "TermsDTO [terms=" + termsResult(terms) + ", "
+				+ "privacy=" + termsResult(privacy) + ", "
+				+ "location=" + termsResult(location) + ", "
+				+ "finance=" + termsResult(finance) + ", "
+				+ "tax=" + termsResult(tax) + "]";
 	}
 }
