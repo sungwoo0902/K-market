@@ -1,11 +1,27 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+	$(function() {
+
+		if(${success eq '100'}) {
+			alert('회원가입에 실패하였습니다.\n다시 시도하거나 고객센터로 문의해주세요.')
+			
+		}else if(${success eq '101'}) {
+			alert('로그인에 실패했습니다.\n아이디, 비밀번호를 다시 확인해주세요.')
+		
+		}else if(${success eq '200'}) {
+			alert('성공적으로 회원가입 됐습니다.')
+		
+		}
+		
+	});
+</script>
         <main id="member">
             <div class="login">
                 <nav>
                     <h1>로그인</h1>
                 </nav>
-                <form action="#">
+                <form action="/Kmarket/member/login.do" method="post">
                     <table border="0">
                         <tr>
                             <td>아이디</td>

@@ -1,5 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Kmarket/js/zipcode.js"></script>
+<script>
+	$(function() {
+		
+		if(${sessUser ne null}) {
+			location.href = '/Kmarket/index.do?success=101';
+		}
+	});
+</script>
         <main id="member">
             <div class="register">
                 <nav><h1>일반 회원가입</h1></nav>
@@ -60,9 +70,12 @@
                             <tr class="addr">
                                 <th>주소</th>
                                 <td>
-                                    <div><input type="text" name="km_zip" id="zip" placeholder="우편번호 입력 클릭" readonly></div>
+                                    <div>
+	                                    <input type="text" name="km_zip" id="zip" placeholder="우편번호 입력 클릭" readonly>
+	                                    <input type="button" onclick="zipcode()" value="우편번호입력">
+                                    </div>
                                     <div><input type="text" name="km_addr1" id="addr1" size="50" placeholder="주소를 검색하세요" readonly></div>
-                                    <div><input type="text" name="km_adrr2" id="addr2" size="50" placeholder="상세주소를 입력하세요"></div>
+                                    <div><input type="text" name="km_addr2" id="addr2" size="50" placeholder="상세주소를 입력하세요"></div>
                                 </td>
                             </tr>
                         </table>
