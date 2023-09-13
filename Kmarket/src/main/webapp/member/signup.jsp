@@ -6,10 +6,7 @@
 		
 		$('.class').click(function() {
 			
-			locate.href = '/Kmarket/member/';
-			
-			
-			
+			location.href = '/Kmarket/member/register.jsp';
 			
 		});
 	});

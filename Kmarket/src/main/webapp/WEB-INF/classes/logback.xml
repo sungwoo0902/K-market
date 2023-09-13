@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<property name="NAME" value="Farmstory2"/>
+	<property name="NAME" value="Kmarket"/>
 	
 	<!-- 개발용 --> 
-	<!-- <property name="DIR" value="/logs"/> -->
+	<property name="LOG_DIR" value="/logs"/>
 	 
 	<!-- 배포용 -->
-	<property name="DIR" value="/home/jsp/logs"/>
+	<!-- <property name="DIR" value="/home/jsp/logs"/>  -->
 	
 	
 	
@@ -56,9 +56,9 @@
 		</encoder>
 	</appender>
   
-	<root level="info">
-	  <!-- <appender-ref ref="STDOUT" /> -->
-	  <appender-ref ref="FILE" />
-	  <appender-ref ref="ROLLING_DAILY" />
-</root>
+	<root level="debug">
+	  <appender-ref ref="STDOUT" />
+	  <!-- <appender-ref ref="FILE" /> -->
+	  <!-- <appender-ref ref="ROLLING_DAILY" /> -->
+	</root>
 </configuration>
