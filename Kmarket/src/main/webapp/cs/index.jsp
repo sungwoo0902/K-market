@@ -1,32 +1,18 @@
 <%@ include file="./_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       <section id="cs">
         <div class="main">
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
             <h1>공지사항<a href="./notice/list.jsp">전체보기</a></h1>
-            <ul>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-              <li>
-                <a href="#" class="title">[안내] 해외결제 사칭 문자 주의</a>
-                <span class="date">22.10.31</span>
-              </li>
-            </ul>
+	        <c:forEach var="board" items="${boards}">    
+	            <ul>
+	              	<li><a href="./view.do?no=${article.no}">${article.title}[${article.comment}]</a></li>
+        		  	<li>${article.nick}</li>
+        			<li>${article.rdate}</li>
+	            </ul>
+	        </c:forEach>   
           </section>
         
           <section class="faq">
@@ -34,22 +20,22 @@
             </h1>
             <ol>
               <li>
-                <a href="#"><span>회원</span></a>
+                <a href="./notice/faq_list.jsp"><span>회원</span></a>
               </li>
               <li>
-                <a href="#"><span>쿠폰/이벤트</span></a>
+                <a href="./notice/faq_list.jsp"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="#"><span>주문/결제</span></a>
+                <a href="./notice/faq_list.jsp"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="#"><span>배송</span></a>
+                <a href="./notice/faq_list.jsp"><span>배송</span></a>
               </li>
               <li>
-                <a href="#"><span>취소/반품/교환</span></a>
+                <a href="./notice/faq_list.jsp"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="#"><span>여행/숙박/항공</span></a>
+                <a href="./notice/faq_list.jsp"><span>여행/숙박/항공</span></a>
               </li>
               <li>
                 <a href="#"><span>안전거래</span></a>

@@ -22,6 +22,7 @@ public class Notice_viewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice_view.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
 }
