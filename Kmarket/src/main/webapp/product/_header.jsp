@@ -31,7 +31,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="../index.html">
+                    <a href="${ctxPath}/index.do">
                         <img src="../images/header_logo.png" alt="로고">
                     </a>
                     <form action="#">
