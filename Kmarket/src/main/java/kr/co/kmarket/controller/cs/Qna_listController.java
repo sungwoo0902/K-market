@@ -22,5 +22,6 @@ public class Qna_listController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna_list.jsp");
+		dispatcher.forward(req, resp);
 	}
 }
