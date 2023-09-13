@@ -1,16 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <script>
-	/*
-	$(function() {
+	
+	window.onload = function() {
 		
-		$('.class').click(function() {
+		$('.agree').click(function() {
+			
+			alert('클릭');
 			
 			location.href = '/Kmarket/member/register.jsp';
 			
 		});
-	});
-	*/
+	}
+	
 </script>
         <main id="member">
             <div class="signup">
