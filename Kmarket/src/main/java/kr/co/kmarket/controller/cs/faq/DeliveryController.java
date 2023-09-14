@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/faq/faq_list_member.do")
-public class Member extends HttpServlet{
+@WebServlet("/cs/faq/faq_list_delivery.do")
+public class DeliveryController extends HttpServlet{
 
-	private static final long serialVersionUID = -6445139976108310093L;
+	private static final long serialVersionUID = -8881135765164610827L;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/faq_list_member.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/faq_list_delivery.jsp");
 		dispatcher.forward(req, resp);
-	}
 		
+	}
 }

@@ -1,4 +1,4 @@
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$(document).ready(function(){
@@ -37,7 +37,17 @@
                     <td>문의유형</td>
                     <td>
                       <select name="type">
-                        <option value="0">선택</option>
+                        <option value="0">1차 선택</option>
+                        <option>회원</option>
+                        <option>쿠폰/이벤트</option>
+                        <option>주문/결제</option>
+                        <option>배송</option>
+                        <option>취소/반품/교환</option>
+                        <option>여행/숙박/항공</option>
+                        <option>안전거래</option>
+                      </select>
+                      <select name="type">
+                      	<option value="0">2차 선택</option>
                         <option>가입</option>
                         <option>탈퇴</option>
                         <option>회원정보</option>
@@ -67,4 +77,4 @@
           </section>
         </div>
       </section>
-<%@ include file = "./_footer.jsp" %>
+<%@ include file = "../_footer.jsp" %>

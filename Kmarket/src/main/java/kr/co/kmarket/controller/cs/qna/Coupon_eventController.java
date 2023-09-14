@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.cs.faq;
+package kr.co.kmarket.controller.cs.qna;
 
 import java.io.IOException;
 
@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/faq/faq_list_travel_lodgment_airline.do")
-public class Travel_lodgment_airline extends HttpServlet{
-	
-	private static final long serialVersionUID = -7442223043970435150L;
+@WebServlet("/cs/qna/qna_list_coupon_event.do")
+public class Coupon_eventController extends HttpServlet{
+
+	private static final long serialVersionUID = -3749125754967582604L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/faq_list_travel_lodgment_airline.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/qna_list_coupon_event.jsp");
 		dispatcher.forward(req, resp);
-		
 	}
 }

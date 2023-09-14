@@ -1,4 +1,4 @@
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 	$(document).ready(function(){
@@ -101,4 +101,4 @@
           </section>
         </div>
       </section>
-<%@ include file = "./_footer.jsp" %>
+<%@ include file = "../_footer.jsp" %>

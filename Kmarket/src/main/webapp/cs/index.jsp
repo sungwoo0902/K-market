@@ -16,29 +16,29 @@
           </section>
         
           <section class="faq">
-            <h1>자주 묻는 질문<a href="./faq/list.jsp">전체보기</a>
+            <h1>자주 묻는 질문<a href="./faq/faq_list.jsp">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="./notice/faq_list.jsp"><span>회원</span></a>
+                <a href="./faq/faq_list_member.jsp"><span>회원</span></a>
               </li>
               <li>
-                <a href="./notice/faq_list.jsp"><span>쿠폰/이벤트</span></a>
+                <a href="./faq/faq_list_coupon_event.jsp"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="./notice/faq_list.jsp"><span>주문/결제</span></a>
+                <a href="./faq/faq_list_order_payment.jsp"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="./notice/faq_list.jsp"><span>배송</span></a>
+                <a href="./faq/faq_list_delivery.jsp"><span>배송</span></a>
               </li>
               <li>
-                <a href="./notice/faq_list.jsp"><span>취소/반품/교환</span></a>
+                <a href="./faq/faq_list_cancel_return_exchange.jsp"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="./notice/faq_list.jsp"><span>여행/숙박/항공</span></a>
+                <a href="./faq/faq_list_travel_lodgment_airline.jsp"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="#"><span>안전거래</span></a>
+                <a href="./faq/faq_list_safe.jsp"><span>안전거래</span></a>
               </li>
             </ol>
           </section>

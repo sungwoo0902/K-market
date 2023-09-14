@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.cs.qna;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,17 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/qna/qna_list_cancel_return_exchange.do")
-public class Cancel_return_exchange extends HttpServlet{
+import kr.co.kmarket.dto.BoardDTO;
+import kr.co.kmarket.service.BoardService;
 
-	private static final long serialVersionUID = -618143016578367197L;
-	
+@WebServlet("/cs/qna/qna_view.do")
+public class ViewContrtoller extends HttpServlet{
+
+	private static final long serialVersionUID = 64605479721014960L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private BoardService service = BoardService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/qna_list_cancel_return_exchange.jsp");
-		dispatcher.forward(req, resp);
 		
+		String no = req.getParameter("no");
+		
+		// 글 조회
+		BoardDTO board = service.selectBoard(no);
+		logger.debug(board.toString());
+				
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/qna_view.jsp");
 	}
 }

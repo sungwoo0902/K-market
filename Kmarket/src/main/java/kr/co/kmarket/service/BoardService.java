@@ -1,5 +1,7 @@
 package kr.co.kmarket.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +11,7 @@ import kr.co.kmarket.dto.BoardDTO;
 public enum BoardService {
 	
 	INSTANCE;
-	/*
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private BoardDAO dao = new BoardDAO();
 	
@@ -21,12 +23,21 @@ public enum BoardService {
 		return dao.selectBoard(no);
 	}
 	
+	public List<BoardDTO> selectBoards(int start, String search){
+		return dao.selectBoards(start, search);
+	}
+	
 	public void updateBoard(BoardDTO dto) {
 		dao.updateBoard(dto);
 	}
 	
 	public void deleteBoard(String no) {
 		dao.deleteBoard(no);
+	}
+	
+	// 추가
+	public int selectCountTotal(String search) {
+		return dao.selectCountTotal(search);
 	}
 	
 	// 페이지 마지막 번호
@@ -78,6 +89,6 @@ public enum BoardService {
 		// Limit 시작번호
 		public int getStartNum(int currentPage) {
 			return (currentPage - 1) * 10;
-	}
-	*/	
+		}
+
 }
