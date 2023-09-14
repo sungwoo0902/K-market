@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,13 +22,13 @@ public class CategoryDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CATE1S);
+			psmt = conn.prepareStatement(SQL.SELECT_CATE1);
 			psmt.setString(1, cate1);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				dto = new CategoryDTO();
-				dto.setCate1(rs.getString(1));
+				dto.setCate1No(rs.getString(1));
 				dto.setC1Name(rs.getString(2));
 			}
 			close();
@@ -38,24 +39,60 @@ public class CategoryDAO extends DBHelper{
 		return dto;
 	}
 	
-	public List<CategoryDTO> selectCate1s(String cate1){
+	public List<CategoryDTO> selectCate1s(){
 		
-		List<CategoryDTO> cate1s = null;
+		List<CategoryDTO> cate1s = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_CATE1S);
+			
+			while(rs.next()) {
+				CategoryDTO dto = new CategoryDTO();
+				dto.setCate1No(rs.getString(1));
+				dto.setC1Name(rs.getString(2));
+				cate1s.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCate1s() error : "+ e.getMessage());
+		}
+		return cate1s;
+	}
+	
+	
+	public CategoryDTO selectCate2(String cate1){
 		
 		return null;
 	}
 	
-	public List<CategoryDTO> selectCate2s(String cate2){
+	
+	public List<CategoryDTO> selectCate2s(String cate1){
+		
+		List<CategoryDTO> cate2s = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CATE2S);
+			psmt.setString(1, cate1);
+			rs = psmt.executeQuery();
 			
+			System.out.println("cate1 : "+cate1);
 			
+			while(rs.next()) {
+				CategoryDTO dto = new CategoryDTO();
+				dto.setCate1No(rs.getString(1));
+				dto.setCate2No(rs.getString(2));
+				dto.setC2Name(rs.getString(3));
+				cate2s.add(dto);
+			}
+			close();
 			
 		} catch (Exception e) {
 			logger.error("selectCate2s() error : "+ e.getMessage());
 		}
-		
-		return null;
+		return cate2s;
 	}
 }

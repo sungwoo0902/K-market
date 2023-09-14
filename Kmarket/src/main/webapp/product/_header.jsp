@@ -23,7 +23,7 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="./member/login.html">로그인</a>
+                    <a href="${ctxPath}/member/login.do">로그인</a>
                     <a href="#">회원가입</a>
                     <a href="#">마이페이지</a>
                     <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
@@ -32,7 +32,7 @@
             <div class="logo">
                 <div>
                     <a href="${ctxPath}/index.do">
-                        <img src="../images/header_logo.png" alt="로고">
+                        <img src="${ctxPath}/images/header_logo.png" alt="로고">
                     </a>
                     <form action="#">
                         <input type="text" name="keyword">

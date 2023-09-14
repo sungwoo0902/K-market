@@ -3,11 +3,41 @@ package kr.co.kmarket.dto;
 public class ProductDTO {
 
 	private int prodNo;
+	private int prodCate1;
+	private int prodCate2;
+	private String prodName;
+	private String descript;
+	private String company;
+	private String seller;
+	private int price;
+	private int discount;
+	private int point;
+	private int stock;
+	private int sold;
+	private int delivery;
+	private int hit;
+	private int score;
+	private int review;
+	private String thumb1;
+	private String thumb2;
+	private String thumb3;
+	private String detail;
+	private String status;
+	private String duty;
+	private String receipt;
+	private String bizType;
+	private String origin;
+	private String ip;
+	private String rdate;
+	
 	public int getProdNo() {
 		return prodNo;
 	}
 	public void setProdNo(int prodNo) {
 		this.prodNo = prodNo;
+	}
+	public void setProdNo(String prodNo) {
+		this.prodNo = Integer.parseInt(prodNo);
 	}
 	public int getProdCate1() {
 		return prodCate1;
@@ -15,11 +45,17 @@ public class ProductDTO {
 	public void setProdCate1(int prodCate1) {
 		this.prodCate1 = prodCate1;
 	}
+	public void setProdCate1(String prodCate1) {
+		this.prodCate1 = Integer.parseInt(prodCate1);
+	}
 	public int getProdCate2() {
 		return prodCate2;
 	}
 	public void setProdCate2(int prodCate2) {
 		this.prodCate2 = prodCate2;
+	}
+	public void setProdCate2(String prodCate2) {
+		this.prodCate2 = Integer.parseInt(prodCate2);
 	}
 	public String getProdName() {
 		return prodName;
@@ -51,11 +87,14 @@ public class ProductDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	public void setPrice(String price) {
+		this.price = Integer.parseInt(price);
+	}
 	public int getDiscount() {
 		return discount;
 	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
+	public void setDiscount(String discount) {
+		this.discount = Integer.parseInt(discount);
 	}
 	public int getPoint() {
 		return point;
@@ -63,11 +102,17 @@ public class ProductDTO {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+	public void setPoint(String point) {
+		this.point = Integer.parseInt(point);
+	}
 	public int getStock() {
 		return stock;
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	public void setStock(String stock) {
+		this.stock = Integer.parseInt(stock);
 	}
 	public int getSold() {
 		return sold;
@@ -75,11 +120,17 @@ public class ProductDTO {
 	public void setSold(int sold) {
 		this.sold = sold;
 	}
+	public void setSold(String sold) {
+		this.sold = Integer.parseInt(sold);
+	}
 	public int getDelivery() {
 		return delivery;
 	}
 	public void setDelivery(int delivery) {
 		this.delivery = delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = Integer.parseInt(delivery);
 	}
 	public int getHit() {
 		return hit;
@@ -87,17 +138,26 @@ public class ProductDTO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+	public void setHit(String hit) {
+		this.hit = Integer.parseInt(hit);
+	}
 	public int getScore() {
 		return score;
 	}
 	public void setScore(int score) {
 		this.score = score;
 	}
+	public void setScore(String score) {
+		this.score = Integer.parseInt(score);
+	}
 	public int getReview() {
 		return review;
 	}
 	public void setReview(int review) {
 		this.review = review;
+	}
+	public void setReview(String review) {
+		this.review = Integer.parseInt(review);
 	}
 	public String getThumb1() {
 		return thumb1;
@@ -165,32 +225,7 @@ public class ProductDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	private int prodCate1;
-	private int prodCate2;
-	private String prodName;
-	private String descript;
-	private String company;
-	private String seller;
-	private int price;
-	private int discount;
-	private int point;
-	private int stock;
-	private int sold;
-	private int delivery;
-	private int hit;
-	private int score;
-	private int review;
-	private String thumb1;
-	private String thumb2;
-	private String thumb3;
-	private String detail;
-	private String status;
-	private String duty;
-	private String receipt;
-	private String bizType;
-	private String origin;
-	private String ip;
-	private String rdate;
+	
 	
 	
 	
