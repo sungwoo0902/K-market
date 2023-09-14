@@ -1,5 +1,8 @@
 package kr.co.kmarket.dto;
 
+import java.io.File;
+import java.util.UUID;
+
 public class ProductDTO {
 
 	private int prodNo;
@@ -30,6 +33,19 @@ public class ProductDTO {
 	private String ip;
 	private String rdate;
 	
+	/************************* 추가 *************************/
+	private String path;
+	
+	public ProductDTO() {
+		
+	}
+	
+	public ProductDTO(String path) {
+		this.path = path;
+	}
+	
+	
+	/******************************************************/
 	public int getProdNo() {
 		return prodNo;
 	}
@@ -165,11 +181,17 @@ public class ProductDTO {
 	public void setThumb1(String thumb1) {
 		this.thumb1 = thumb1;
 	}
+	public void setThumb1ForRename(String thumb1) {
+		this.thumb1 = fileRename(thumb1);
+	}
 	public String getThumb2() {
 		return thumb2;
 	}
 	public void setThumb2(String thumb2) {
 		this.thumb2 = thumb2;
+	}
+	public void setThumb2ForRename(String thumb2) {
+		this.thumb2 = fileRename(thumb2);
 	}
 	public String getThumb3() {
 		return thumb3;
@@ -177,11 +199,17 @@ public class ProductDTO {
 	public void setThumb3(String thumb3) {
 		this.thumb3 = thumb3;
 	}
+	public void setThumb3ForRename(String thumb3) {
+		this.thumb3 = fileRename(thumb3);
+	}
 	public String getDetail() {
 		return detail;
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public void setDetailForRename(String detail) {
+		this.detail = fileRename(detail);
 	}
 	public String getStatus() {
 		return status;
@@ -227,7 +255,22 @@ public class ProductDTO {
 	}
 	
 	
-	
+	public String fileRename(String thumb) {
+		
+		int i = thumb.lastIndexOf(".");
+		// 확장자
+		String ext = thumb.substring(i);
+		// 중복되지 않는 랜덤 이름 생성
+		String uuid = UUID.randomUUID().toString();
+		// 랜덤 이름과 확장자 붙여서 저장할 때 사용할 이름 생성
+		String sName = uuid + ext;
+		
+		File f1 = new File(path+"/"+thumb);
+		File f2 = new File(path+"/"+sName);
+		f1.renameTo(f2);
+		
+		return sName;
+	}
 	
 	
 }

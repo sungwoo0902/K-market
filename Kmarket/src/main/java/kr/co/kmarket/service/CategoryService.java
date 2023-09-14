@@ -19,6 +19,10 @@ public enum CategoryService {
 		return dao.selectCate1s();
 	}
 	
+	public CategoryDTO selectCate2(String cate2){
+		return dao.selectCate1(cate2);
+	}
+	
 	public List<CategoryDTO> selectCate2s(String cate1){
 		return dao.selectCate2s(cate1);
 	}
