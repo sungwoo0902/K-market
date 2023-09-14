@@ -69,7 +69,7 @@
                 <nav>
                     <span class="origin">원산지-상세설명 참조</span>
                 </nav>
-                <img src="../images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립" class="banner">
+                <img src="${ctxPath}/images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립" class="banner">
                 <div class="count">
                     <button class="decrease">-</button>
                     <input type="text" name="num" value="1" readonly>

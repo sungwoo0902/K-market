@@ -15,8 +15,8 @@ public enum ProductService {
 	private ProductDAO dao = new ProductDAO();
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertProduct() {
-		dao.insertProduct();
+	public void insertProduct(ProductDTO product) {
+		dao.insertProduct(product);
 	}
 	public ProductDTO selectProduct(String uid) {
 		return dao.selectProduct(uid);

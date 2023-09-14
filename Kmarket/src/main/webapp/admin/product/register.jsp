@@ -4,15 +4,52 @@
 <script>
 	$(function(){
 
-		const cate1 = $('select[name=category1]');
-		const cate2 = $('select[name=category2]');
+		const cate1 = $('#category1');
+		const cate2 = $('#category2');
+		let selectCate = null;
 		
-		
-		$(cate1).click(function(){
-			alert('cate1 click');
+		$(cate1).change(function(){
+			const selectedCate1 = $(this).val();
 			
+			console.log(selectedCate1);
+			
+			$.ajax({
+				url: '/Kmarket/category.do',
+				type: 'post',
+				data: {category1: selectedCate1},
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+					
+					// 기존 옵션 제거
+				    cate2.empty();
+					
+				    console.log('empty complete'+data);
+				    
+				    // "2차 분류 선택" 옵션 추가
+				    cate2.append($('<option>', {
+				        value: 'cate0',
+				        text: '2차 분류 선택'
+				    }));
+					
+				    console.log('append complete'+data);
+				 	// 받아온 JSON 데이터를 기반으로 2차 분류 옵션 추가
+				    for (let i = 0; i < data.cate2s.length; i++) {
+				        const category = data.cate2s[i];
+				        cate2.append($('<option>', {
+				            value: 'cate' + category.cate2No,
+				            text: category.c2Name
+				        }));
+				    }
+				},
+				error: function(error){
+					console.error('Error:',error);
+				}
+			});
 			
 		});// cate1 click end
+		
+
 		
 	});// end
 
@@ -27,6 +64,8 @@
         </nav>
         <article>
             <form action="#">
+            	<!-- sessUser 설정 후 적용 -->
+            	<!-- <input type="hidden" name="seller" value="${sessUser.uid}"> -->
                 <section>
                     <h4>상품분류</h4>
                     <p>
@@ -36,24 +75,19 @@
                         <tr>
                             <td>1차 분류</td>
                             <td>
-                                <select name="category1">
+                                <select id="category1" name="prodCate1">
                                     <option value="cate0">1차 분류 선택</option>
-                                    <option value="cate11">패션 · 의류 · 뷰티</option>
-                                    <option value="cate12">가전 · 디지털</option>
-                                    <option value="cate13">식품 · 생필품</option>
-                                    <option value="cate14">홈 · 문구 · 취미</option>
+                                		<c:forEach var="cate1" items="${cate1s}">
+	                                    <option value="${cate1.cate1No}">${cate1.c1Name}</option>
+                                		</c:forEach>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td>2차 분류</td>
                             <td>
-                                <select name="category2">
+                                <select id="category2" name="prodCate2">
                                     <option value="cate0">2차 분류 선택</option>
-                                    <option value="cate21">남성의류</option>
-                                    <option value="cate22">여성의류</option>
-                                    <option value="cate23">잡화</option>
-                                    <option value="cate24">뷰티</option>
                                 </select>
                             </td>
                         </tr>

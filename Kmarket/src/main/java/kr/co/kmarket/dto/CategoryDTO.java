@@ -2,20 +2,20 @@ package kr.co.kmarket.dto;
 
 public class CategoryDTO {
 
-	private int cate1;
+	private int cate1No;
 	private String c1Name;
-	private int cate2;
+	private int cate2No;
 	private String c2Name;
 	
 	
-	public int getCate1() {
-		return cate1;
+	public int getCate1No() {
+		return cate1No;
 	}
-	public void setCate1(int cate1) {
-		this.cate1 = cate1;
+	public void setCate1No(int cate1No) {
+		this.cate1No = cate1No;
 	}
-	public void setCate1(String cate1) {
-		this.cate1 = Integer.parseInt(cate1);
+	public void setCate1No(String cate1No) {
+		this.cate1No = Integer.parseInt(cate1No);
 	}
 	public String getC1Name() {
 		return c1Name;
@@ -23,14 +23,14 @@ public class CategoryDTO {
 	public void setC1Name(String c1Name) {
 		this.c1Name = c1Name;
 	}
-	public int getCate2() {
-		return cate2;
+	public int getCate2No() {
+		return cate2No;
 	}
-	public void setCate2(int cate2) {
-		this.cate2 = cate2;
+	public void setCate2No(int cate2No) {
+		this.cate2No = cate2No;
 	}
-	public void setCate2(String cate2) {
-		this.cate2 = Integer.parseInt(cate2);
+	public void setCate2No(String cate2No) {
+		this.cate2No = Integer.parseInt(cate2No);
 	}
 	public String getC2Name() {
 		return c2Name;
@@ -42,6 +42,6 @@ public class CategoryDTO {
 	
 	@Override
 	public String toString() {
-		return "CategoryDAO [cate1=" + cate1 + ", c1Name=" + c1Name + ", cate2=" + cate2 + ", c2Name=" + c2Name + "]";
+		return "CategoryDAO [cate1=" + cate1No + ", c1Name=" + c1Name + ", cate2=" + cate2No + ", c2Name=" + c2Name + "]";
 	}
 }
