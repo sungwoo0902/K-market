@@ -1,4 +1,4 @@
-package kr.co.kmarket.controller.cs;
+package kr.co.kmarket.controller.cs.faq;
 
 import java.io.IOException;
 
@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/notice_list.do")
-public class Notice_listController extends HttpServlet{
-
-	private static final long serialVersionUID = 1896764154831288457L;
-
+@WebServlet("/cs/faq/faq_list_travel_lodgment_airline.do")
+public class Travel_lodgment_airlineController extends HttpServlet{
+	
+	private static final long serialVersionUID = -7442223043970435150L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice_list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/faq_list_travel_lodgment_airline.jsp");
 		dispatcher.forward(req, resp);
+		
 	}
 }
