@@ -9,9 +9,11 @@
 		}else if(${success eq '101'}) {
 			alert('로그인에 실패했습니다.\n아이디, 비밀번호를 다시 확인해주세요.')
 		
+		}else if(${success eq '102'}) {
+			alert('[경고] 비정상적인 접근을 통한 회원가입')
+			
 		}else if(${success eq '200'}) {
 			alert('성공적으로 회원가입 됐습니다.')
-		
 		}
 	});
 </script>
