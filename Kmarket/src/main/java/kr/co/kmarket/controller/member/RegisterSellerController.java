@@ -42,7 +42,7 @@ public class RegisterSellerController extends HttpServlet {
 		String comRegNum = req.getParameter("kms_online_reg");
 		String tel       = req.getParameter("kms_tel");
 		String fax       = req.getParameter("kms_fax");
-		String email     = req.getParameter("kms_email");
+		String email     = req.getParameter("km_email");
 		String zip       = req.getParameter("km_zip");
 		String addr1     = req.getParameter("km_addr1");
 		String addr2     = req.getParameter("km_addr2");
