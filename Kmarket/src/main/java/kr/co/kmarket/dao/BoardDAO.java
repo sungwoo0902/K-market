@@ -11,7 +11,7 @@ import kr.co.kmarket.dto.BoardDTO;
 
 
 public class BoardDAO extends DBHelper{
-
+	/*
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public int insertBoard(BoardDTO dto) {
@@ -92,4 +92,5 @@ public class BoardDAO extends DBHelper{
 			e.printStackTrace();
 		}
 	}
+	*/
 }
