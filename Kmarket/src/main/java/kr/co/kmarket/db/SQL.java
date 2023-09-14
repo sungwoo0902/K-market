@@ -17,7 +17,31 @@ public class SQL {
 												+ "`addr1`= ?, "
 												+ "`addr2`= ?, "
 												+ "`regip`= ?, "
+												+ "`location`= ?, "
 												+ "`rdate`= NOW()";
+	
+	public static final String INSERT_SELLER = "INSERT INTO `km_member` SET "
+												+ "`uid`=?, "
+												+ "`pass`=SHA2(?, 256), "
+												+ "`company`=?, "
+												+ "`ceo`=?, "
+												+ "`bizRegNum`=?, "
+												+ "`comRegNum`=?, "
+												+ "`tel`=?, "
+												+ "`fax`=?, "
+												+ "`email`=?, "
+												+ "`zip`=?, "
+												+ "`addr1`=?, "
+												+ "`addr2`=?, "
+												+ "`manager`=?, "
+												+ "`managerHp`=?, "
+												+ "`regip`=?, "
+												+ "`name`=?, "
+												+ "`hp`=?, "
+												+ "`type`=2, "
+												+ "`level`=5, "
+												+ "`gender`=0, "
+												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	

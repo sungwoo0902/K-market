@@ -2,6 +2,7 @@
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Kmarket/js/zipcode.js"></script>
+<script src="/Kmarket/js/validation.js"></script>
 <script>
 	$(function() {
 		
@@ -14,6 +15,7 @@
             <div class="register">
                 <nav><h1>일반 회원가입</h1></nav>
                 <form action="#" method="POST">
+                	<input type="hidden" name="location" value="${location}">
                     <section>
                         <table>
                             <caption>필수 정보입력</caption>
@@ -21,7 +23,7 @@
                                 <th><span class="essential">*</span>아이디</th>
                                 <td>
                                     <input type="text" name="km_uid" placeholder="아이디를 입력" required>
-                                    <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
+                                    <input type="button" class="check" value="중복 체크"><span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
                                 </td>
                             </tr>
 
@@ -36,7 +38,7 @@
                             <tr>
                                 <th><span class="essential">*</span>비밀번호확인</th>
                                 <td>
-                                    <input type="password" name="km_pass" placeholder="비밀번호를 확인" required>
+                                    <input type="password" name="km_pass2" placeholder="비밀번호를 확인" required>
                                     <span class="msgPass">비밀번호 재입력</span>
                                 </td>
                             </tr>
@@ -47,7 +49,10 @@
                             <caption>기본 정보입력</caption>
                             <tr>
                                 <th><span class="essential">*</span>이름</th>
-                                <td><input type="text" name="km_name" placeholder="이름을 입력" required></td>
+                                <td>
+                                	<input type="text" name="km_name" placeholder="이름을 입력" required>
+                               		<span class="msgName"></span>
+                               	</td>
                             </tr>
                             <tr>
                                 <th><span class="essential">*</span>성별</th>

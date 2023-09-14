@@ -8,9 +8,19 @@
 		const ag2 = document.getElementsByName('agree2')[0];
 		const ag3 = document.getElementsByName('agree3')[0];
 		const ag4 = document.getElementsByName('agree4')[0];
+		const all = document.getElementsByName('agreeALL')[0];
 		
 		const agree = document.querySelector('.agree');
 		
+		// 전체 동의
+		all.addEventListener('change', function() {
+			ag1.checked = all.checked;
+			ag2.checked = all.checked;
+			ag3.checked = all.checked;
+			ag4.checked = all.checked;
+		});
+		
+		// 동의 경고창
 		agree.addEventListener('click', function() {
 			
 			if(!ag1.checked) {
@@ -28,15 +38,15 @@
 			}else if(!ag3.checked) {
 				alert('개인정보 취급방침에 동의해주세요.')
 				return;
-				
-			}else if(!ag4.checked) {
-				alert('위치정보 이용약관에 동의해주세요.')
-				return;
-				
 			}
 			
 			if(${type eq "normal"}) {
-				location.href = '/Kmarket/member/register.do';
+				if(ag4.checked){
+					location.href = '/Kmarket/member/register.do?lc=1';
+				}else {
+					location.href = '/Kmarket/member/register.do?lc=0';
+				}
+				
 			}else {
 				location.href = '/Kmarket/member/registerSeller.do';
 			}
@@ -71,10 +81,16 @@
                     <label><input type="checkbox" name="agree3">동의합니다.</label>
                 </section>
 
+				<c:if test="${type eq 'normal'}">
                 <section>
                     <h3><span class="optional">(선택)</span>위치정보 이용약관</h3>
                     <textarea class="location" readonly>${member_terms.location}</textarea>
                     <label><input type="checkbox" name="agree4">동의합니다.</label>
+                </section>
+                </c:if>
+                
+                <section class="agAll">
+                	<label><input type="checkbox" name="agreeALL">전체 동의</label>
                 </section>
                 
                 <div>

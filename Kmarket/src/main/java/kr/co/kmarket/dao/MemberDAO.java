@@ -19,6 +19,7 @@ public class MemberDAO extends DBHelper {
 	private MemberDAO() {}
 	
 	public int insertMember(MemberDTO dto) {
+		
 		int result = 0;
 		try {
 			conn = getConnection();
@@ -34,6 +35,7 @@ public class MemberDAO extends DBHelper {
 			psmt.setString(8, dto.getAddr1());
 			psmt.setString(9, dto.getAddr2());
 			psmt.setString(10, dto.getRegip());
+			psmt.setInt(11, dto.getLocation());
 			result = psmt.executeUpdate();
 			logger.debug("result : " + result);
 			close();
@@ -44,14 +46,41 @@ public class MemberDAO extends DBHelper {
 		return result;
 	}
 	
-	public void insertSeller(MemberDTO dto) {
+	public int insertSeller(MemberDTO dto) {
 		
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_SELLER);
+			psmt.setString(1, dto.getUid());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getCompany());
+			psmt.setString(4, dto.getCeo());
+			psmt.setString(5, dto.getBizRegNum());
+			psmt.setString(6, dto.getComRegNum());
+			psmt.setString(7, dto.getTel());
+			psmt.setString(8, dto.getFax());
+			psmt.setString(9, dto.getEmail());
+			psmt.setString(10, dto.getZip());
+			psmt.setString(11, dto.getAddr1());
+			psmt.setString(12, dto.getAddr2());
+			psmt.setString(13, dto.getManager());
+			psmt.setString(14, dto.getManagerHp());
+			psmt.setString(15, dto.getRegip());
+			psmt.setString(16, dto.getManager());
+			psmt.setString(17, dto.getManagerHp());
+			result = psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("insertSeller : " + e.getMessage());
+		}
+		return result;
 	}
 	
 	public MemberDTO selectMember(String uid, String pass) {
 		
 		MemberDTO member = null;
-		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_MEMBER);
@@ -84,7 +113,7 @@ public class MemberDAO extends DBHelper {
 				member.setRegip(rs.getString(21));
 				member.setWdate(rs.getString(22));
 				member.setRdate(rs.getString(23));
-				member.setEtc1(rs.getString(24));
+				member.setLocation(rs.getString(24));
 				member.setEtc2(rs.getString(25));
 				member.setEtc3(rs.getString(26));
 				member.setEtc4(rs.getString(27));

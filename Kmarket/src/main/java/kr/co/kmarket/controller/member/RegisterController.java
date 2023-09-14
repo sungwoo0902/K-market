@@ -26,6 +26,10 @@ public class RegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doGet()...1");
 		
+		String location = req.getParameter("lc");
+		logger.debug("location : " + location);
+		req.setAttribute("location", location);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/register.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -35,7 +39,7 @@ public class RegisterController extends HttpServlet {
 		logger.info("doPost()...1");
 		
 		String uid    = req.getParameter("km_uid");
-		String pass   = req.getParameter("km_pass");
+		String pass   = req.getParameter("km_pass2");
 		String name   = req.getParameter("km_name");
 		String gender = req.getParameter("km_gender");
 		String email  = req.getParameter("km_email");
@@ -43,6 +47,7 @@ public class RegisterController extends HttpServlet {
 		String zip    = req.getParameter("km_zip");
 		String addr1  = req.getParameter("km_addr1");
 		String addr2  = req.getParameter("km_addr2");
+		String location  = req.getParameter("location");
 		String regip  = req.getRemoteAddr();
 		
 		logger.debug("uid    : " + uid);
@@ -55,6 +60,7 @@ public class RegisterController extends HttpServlet {
 		logger.debug("addr1  : " + addr1);
 		logger.debug("addr2  : " + addr2);
 		logger.debug("regip  : " + regip);
+		logger.debug("location  : " + location);
 		
 		MemberDTO dto = new MemberDTO();
 		dto.setUid(uid);
@@ -67,6 +73,7 @@ public class RegisterController extends HttpServlet {
 		dto.setAddr1(addr1);
 		dto.setAddr2(addr2);
 		dto.setRegip(regip);
+		dto.setLocation(location);
 		
 		int result = service.insertMember(dto);
 		

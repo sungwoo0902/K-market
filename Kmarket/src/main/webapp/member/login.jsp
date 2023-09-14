@@ -13,7 +13,6 @@
 			alert('성공적으로 회원가입 됐습니다.')
 		
 		}
-		
 	});
 </script>
         <main id="member">
@@ -41,9 +40,9 @@
                         <label>
                             <input type="checkbox" name="auto">자동로그인
                         </label>
-                        <a href="#">아이디찾기</a>
-                        <a href="#">비밀번호찾기</a>
-                        <a href="#">회원가입</a>
+                        <a href="#" class="unready">아이디찾기</a>
+                        <a href="#" class="unready">비밀번호찾기</a>
+                        <a href="/Kmarket/member/join.do">회원가입</a>
                     </span>
                     <a href="#" class="banner">
                         <img src="./images/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">

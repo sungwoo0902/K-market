@@ -17,7 +17,7 @@ public class MemberDTO {
 	private String company;
 	private String ceo;
 	private String bizRegNum;
-	private int    comRegNum;
+	private String comRegNum;
 	private String tel;
 	private String manager;
 	private String managerHp;
@@ -25,7 +25,7 @@ public class MemberDTO {
 	private String regip;
 	private String wdate;
 	private String rdate;
-	private int    etc1;
+	private int    location;
 	private int    etc2;
 	private String etc3;
 	private String etc4;
@@ -179,14 +179,11 @@ public class MemberDTO {
 	
 	
 	
-	public int getComRegNum() {
+	public String getComRegNum() {
 		return comRegNum;
 	}
-	public void setComRegNum(int comRegNum) {
-		this.comRegNum = comRegNum;
-	}
 	public void setComRegNum(String comRegNum) {
-		this.comRegNum = Integer.parseInt(comRegNum);
+		this.comRegNum = comRegNum;
 	}
 	
 	
@@ -254,14 +251,14 @@ public class MemberDTO {
 	
 	
 	
-	public int getEtc1() {
-		return etc1;
+	public int getLocation() {
+		return location;
 	}
-	public void setEtc1(int etc1) {
-		this.etc1 = etc1;
+	public void setLocation(int location) {
+		this.location = location;
 	}
-	public void setEtc1(String etc1) {
-		this.etc1 = Integer.parseInt(etc1);
+	public void setLocation(String location) {
+		this.location = Integer.parseInt(location);
 	}
 	
 	
@@ -273,7 +270,7 @@ public class MemberDTO {
 		this.etc2 = etc2;
 	}
 	public void setEtc2(String etc2) {
-		this.etc1 = Integer.parseInt(etc2);
+		this.location = Integer.parseInt(etc2);
 	}
 	
 	
@@ -310,8 +307,8 @@ public class MemberDTO {
 				+ ", email=" + email + ", type=" + type + ", point=" + point + ", level=" + level + ", zip=" + zip
 				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", company=" + company + ", ceo=" + ceo + ", bizRegNum="
 				+ bizRegNum + ", comRegNum=" + comRegNum + ", tel=" + tel + ", manager=" + manager + ", managerHp="
-				+ managerHp + ", fax=" + fax + ", regip=" + regip + ", wdate=" + wdate + ", rdate=" + rdate + ", etc1="
-				+ etc1 + ", etc2=" + etc2 + ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + "]";
+				+ managerHp + ", fax=" + fax + ", regip=" + regip + ", wdate=" + wdate + ", rdate=" + rdate + ", location="
+				+ location + ", etc2=" + etc2 + ", etc3=" + etc3 + ", etc4=" + etc4 + ", etc5=" + etc5 + "]";
 	}
 	
 	

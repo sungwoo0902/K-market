@@ -9,7 +9,7 @@ import kr.co.kmarket.dto.BoardDTO;
 public enum BoardService {
 	
 	INSTANCE;
-	
+	/*
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private BoardDAO dao = new BoardDAO();
 	
@@ -78,5 +78,6 @@ public enum BoardService {
 		// Limit 시작번호
 		public int getStartNum(int currentPage) {
 			return (currentPage - 1) * 10;
-		}
+	}
+	*/	
 }
