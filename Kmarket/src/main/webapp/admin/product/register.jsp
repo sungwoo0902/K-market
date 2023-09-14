@@ -37,7 +37,7 @@
 				    for (let i = 0; i < data.cate2s.length; i++) {
 				        const category = data.cate2s[i];
 				        cate2.append($('<option>', {
-				            value: 'cate' + category.cate2No,
+				            value: category.cate2No,
 				            text: category.c2Name
 				        }));
 				    }
@@ -49,12 +49,35 @@
 			
 		});// cate1 click end
 		
-
+		
+		// 할인율 radio 체크
+		const percentRadio = $('#percentRadio');
+		const absoluteRadio = $('#absoluteRadio');
+		const percentInput = $('#percent');
+		const absoluteInput = $('#absolute');
+		
+		$(percentRadio).change(function(){
+			if(percentRadio.is(':checked')){
+			 	absoluteRadio.prop('checked', false);
+			 	absoluteInput.attr('readonly', true);
+		        percentInput.prop('readonly', false).focus();
+			}
+		})
+		
+		$(absoluteRadio).change(function(){
+			if(absoluteRadio.is(':checked')){
+				percentRadio.prop('checked', false);
+		        percentInput.attr('readonly', true);
+		        absoluteInput.prop('readonly', false).focus();
+			}
+		})
+		// radio 체크 end
 		
 	});// end
 
 </script>
 <main>
+	<%@ include file="../_aside.jsp" %>
     <section id="admin-product-register">
         <nav>
             <h3>상품등록</h3>
@@ -63,9 +86,9 @@
             </p>
         </nav>
         <article>
-            <form action="#">
+            <form action="${ctxPath}/admin/product/register.do" method="post" enctype="multipart/form-data">
             	<!-- sessUser 설정 후 적용 -->
-            	<!-- <input type="hidden" name="seller" value="${sessUser.uid}"> -->
+            	<input type="hidden" name="seller" value="a12345">
                 <section>
                     <h4>상품분류</h4>
                     <p>
@@ -108,7 +131,7 @@
                             <td>기본설명</td>
                             <td>
                                 <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                                <input type="text" name="descript" required>
+                                <input type="text" name="descript">
                             </td>
                         </tr>
                         <tr>
@@ -123,14 +146,17 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input type="text" name="discount" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
+                                <input type="text" name="discount" id="percent" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
+                                <input type="radio" name="discountType" id="percentRadio" value="percent" checked>
+                                <input type="text" name="discount"  id="absolute" required readonly oninput="this.value = Math.min(99, Math.max(0, this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')));">%
+                                <input type="radio" name="discountType" id="absoluteRadio" value="absolute">
                             </td>
                         </tr>
                         <tr>
                             <td>포인트</td>
                             <td>
                                 <span>0을 입력하면 포인트 없음</span>
-                                <input type="text" name="point" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">점
+                                <input type="text" name="point" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">%
                             </td>
                         </tr>
                         <tr>

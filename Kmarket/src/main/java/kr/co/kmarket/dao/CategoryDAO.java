@@ -63,9 +63,28 @@ public class CategoryDAO extends DBHelper{
 	}
 	
 	
-	public CategoryDTO selectCate2(String cate1){
+	public CategoryDTO selectCate2(String cate2){
 		
-		return null;
+		CategoryDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CATE2);
+			psmt.setString(1, cate2);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CategoryDTO();
+				dto.setCate1No(rs.getString(1));
+				dto.setCate2No(rs.getString(2));
+				dto.setC2Name(rs.getString(3));
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCate2() error : "+ e.getMessage());
+		}
+		return dto;
 	}
 	
 	

@@ -82,6 +82,7 @@ public class SQL {
 												+ "`receipt`=?,"
 												+ "`bizType`=?,"
 												+ "`origin`=?,"
+												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
 	
 	
@@ -101,6 +102,7 @@ public class SQL {
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate2 *********************************************//
 	//*********************************************************************************************************//
+	public static final String SELECT_CATE2 = "SELECT * FROM `km_product_cate2` WHERE `cate2`=?";
 	public static final String SELECT_CATE2S = "SELECT * FROM `km_product_cate2` WHERE `cate1`=? ORDER BY `cate2`";
 	
 	
