@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -49,16 +50,103 @@ public class ProductDAO extends DBHelper{
 			
 			close();
 		} catch (Exception e) {
-			logger.error("insertProduct() error :"+e.getMessage());
+			logger.error("insertProduct() error : "+e.getMessage());
 		}
 	}
 	public ProductDTO selectProduct(String uid) {
 		return null;
 	}
-	public List<ProductDTO> selectProducts() {
-		return null;
+	public List<ProductDTO> selectProductsAll(int start) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
+			psmt.setInt(1, start);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
 	}
 	public void updateProduct(ProductDTO dto) {}
 	public void deleteProduct(String uid) {}
-	
+	public int selectCountProductsAll() {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error : "+e.getMessage());
+		}
+		return total;
+	}
+	public int selectCountProductsByCate1(String cate1) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_BY_CATE1);
+			psmt.setString(1, cate1);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectCountProductsByCate1() error : "+e.getMessage());
+		}
+		return total;
+		
+	}
 }
