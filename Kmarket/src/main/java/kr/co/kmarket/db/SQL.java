@@ -97,6 +97,7 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	public final static String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
 	public final static String SELECT_PRODUCTS_ALL = "SELECT a.*, b.level, b.company FROM `km_product` AS a JOIN `km_member` AS b ON a.seller=b.uid WHERE `stock` > 0 LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1 = "SELECT a.*, b.level, b.company FROM `km_product` AS a JOIN `km_member` AS b ON a.seller=b.uid WHERE `stock` > 0 AND `prodCate1`=? LIMIT ?, 10";
 	public static final String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=? AND `cate2`=?";

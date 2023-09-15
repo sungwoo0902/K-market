@@ -54,7 +54,7 @@ public class ListController extends HttpServlet{
 		int start = prodService.getStartNum(currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<ProductDTO> products = prodService.selectProductsAll(start);
+		List<ProductDTO> products = prodService.selectProductsByCate1(cate1, start);
 		
 		req.setAttribute("success", success);
 		req.setAttribute("produts", products);

@@ -130,6 +130,60 @@ public class ProductDAO extends DBHelper{
 		
 		return products;
 	}
+	
+	/************************* 대분류 상품 불러오기 *************************/
+	public List<ProductDTO> selectProductsByCate1(String cate1, int start) {
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1);
+			psmt.setString(1, cate1);
+			psmt.setInt(2, start);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsByCate1() error :"+e.getMessage());
+		}
+		return products;
+	}
+	/************************* 대분류 상품 불러오기 *************************/
 	public int selectCountProductsAll() {
 		int total = 0;
 		

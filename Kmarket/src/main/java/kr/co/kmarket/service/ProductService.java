@@ -30,7 +30,9 @@ public enum ProductService {
 	public ProductDTO selectProduct(String uid) {
 		return dao.selectProduct(uid);
 	}
-
+	public List<ProductDTO> selectProductsByCate1(String cate1, int start) {
+		return dao.selectProductsByCate1(cate1, start);
+	}
 	public List<ProductDTO> selectProductsAll(int start) {
 		return dao.selectProductsAll(start);
 	}
