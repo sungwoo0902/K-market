@@ -124,4 +124,32 @@ public class SQL {
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
 	//**********************************************************************************************************//
+	
+	//**************************************************************************************************//
+	//********************************************* Member *********************************************//
+	//**************************************************************************************************//
+	public static final String INSERT_BOARD = "INSERT INTO `km_board` SET "
+											  + "`boardCate1`=?,"
+											  + "`boardCate21=?,"
+											  + "`uid`=?,"
+											  + "`title`=?,"
+											  + "`content`=?"
+											  + "`rDate`=NOW()";
+	
+	public static final String SELECT_BOARD = "SELECT * FROM `km_board` WHERE `no`=?";
+	public final static String SELECT_BOARDS = "SELECT "
+												+ "a.*, "
+												+ "b.`uid` "
+												+ "FROM `km_board` AS a "
+												+ "JOIN `km_member` AS b ON a.uid = b.uid "
+												+ "WHERE `parent`=0 AND `boardCate1`=? "
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `board` WHERE `parent`=0 AND `boardCate1`=?";
+	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `board` WHERE `parent`= 0 AND `title` LIKE ?";
+	
+	public static final String UPDATE_BOARD = "UPDATE * FROM `km_board` SET `title`=?, `content`=? WHERE `no`=?";
+	
+	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE `no`=?";
+	
 }

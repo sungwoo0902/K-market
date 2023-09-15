@@ -1,5 +1,5 @@
-<%@ include file="../_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_header.jsp" %>
 <script>
 	$(document).ready(function(){
 		$(".theme-link").click(function(){
