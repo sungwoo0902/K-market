@@ -1,5 +1,14 @@
-<%@ include file="../_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_header.jsp" %>
+<script>
+	$(document).ready(function(){
+		$(".theme-link").click(function(){
+			// 현재 클릭한 링크를 강조하기 위해 "on" 클래스를 추가한다.
+			$(".theme-link").removeClass("on");
+			$(this).addClass("on");
+		});
+	});
+</script>
       <section id="cs">
         <div class="faq">
           <nav>
