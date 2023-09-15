@@ -1,25 +1,6 @@
-<%@ include file="./_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-      <section id="cs">
-        <div class="qna">
-          <nav>
-            <div>
-              <p>홈<span>></span>문의하기</p>
-            </div>
-          </nav>
-          <section class="view">
-            <aside>
-              <h2>문의하기</h2>
-              <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
-              </ul>
-            </aside>
+<%@ include file="../_header.jsp" %>
+<jsp:include page="./_aside${group}.jsp"/>
             <article>
               <nav>
                 <h2 class="title">[가입] 가입 문의내용</h2>                
@@ -28,6 +9,8 @@
                   <span>2022-11-21</span>
                 </p>
               </nav>
+
+
 
               <div class="content">
                 <p>
@@ -42,9 +25,11 @@
                   감사합니다.<br />
                 </p>
               </div>
-              <a href="./list.jsp" class="btnList">목록보기</a>
+              
+              
+              <a href="./list.html" class="btnList">목록보기</a>
             </article>
           </section>
         </div>
       </section>
-<%@ include file = "./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>
