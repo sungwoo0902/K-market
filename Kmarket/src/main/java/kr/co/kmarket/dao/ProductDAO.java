@@ -56,6 +56,26 @@ public class ProductDAO extends DBHelper{
 	public ProductDTO selectProduct(String uid) {
 		return null;
 	}
+
+	public void updateProduct(ProductDTO dto) {}
+	public void deleteProduct(String uid) {
+		
+		try {
+			conn= getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_PRODUCT);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			
+			close();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+
 	public List<ProductDTO> selectProductsAll(int start) {
 		
 		List<ProductDTO> products = new ArrayList<>();
@@ -147,6 +167,5 @@ public class ProductDAO extends DBHelper{
 			logger.error("selectCountProductsByCate1() error : "+e.getMessage());
 		}
 		return total;
-		
 	}
 }
