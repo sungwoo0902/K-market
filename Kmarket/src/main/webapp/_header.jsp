@@ -79,10 +79,18 @@
         <header>
             <div class="top">
                 <div>
-                    <a href="${ctxPath}/member/login.do">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">마이페이지</a>
-                    <a href="#"><i class="fas fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+                    <c:choose>
+                    <c:when test="${sessUser eq null}">
+                    <a href="/Kmarket/member/login.do">로그인</a>
+                    <a href="/Kmarket/member/join.do">회원가입</a>
+                    </c:when>
+                    <c:otherwise>
+                    <a href="/Kmarket/member/logout.do">로그아웃</a>
+                    <a href="#" class="unready">마이페이지</a>
+                    </c:otherwise>
+                    </c:choose>
+                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">
+                    </i>&nbsp;장바구니</a>
                 </div>
             </div>
             <div class="logo">

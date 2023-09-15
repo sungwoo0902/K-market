@@ -10,7 +10,7 @@ public class ProductDTO {
 	private int prodCate2;
 	private String prodName;
 	private String descript;
-	private String company;
+	private String prodCompany;
 	private String seller;
 	private int price;
 	private int discount;
@@ -35,6 +35,8 @@ public class ProductDTO {
 	
 	/************************* 추가 *************************/
 	private String path;
+	private int level;
+	private String company;
 	
 	public ProductDTO() {
 		
@@ -42,6 +44,26 @@ public class ProductDTO {
 	
 	public ProductDTO(String path) {
 		this.path = path;
+	}
+	
+	public int getDisPrice() {
+		return this.price - ((this.price/100) * this.discount);
+	}
+	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	public void setLevel(String level) {
+		this.level = Integer.parseInt(level);
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	
 	
@@ -85,11 +107,11 @@ public class ProductDTO {
 	public void setDescript(String descript) {
 		this.descript = descript;
 	}
-	public String getCompany() {
-		return company;
+	public String getProdCompany() {
+		return prodCompany;
 	}
-	public void setCompany(String company) {
-		this.company = company;
+	public void setProdCompany(String prodCompany) {
+		this.prodCompany = prodCompany;
 	}
 	public String getSeller() {
 		return seller;
