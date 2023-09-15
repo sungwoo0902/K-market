@@ -2,13 +2,26 @@ package kr.co.kmarket.dto;
 
 public class BoardDTO {
 	private int no;
-	private int boardCate;
+	private int boardCate1;
+	private int boardCate2;	
 	private String uid;
 	private String title;
 	private String content;
 	private String rDate;
 	
 	
+	public int getBoardCate1() {
+		return boardCate1;
+	}
+	public void setBoardCate1(int boardCate1) {
+		this.boardCate1 = boardCate1;
+	}
+	public int getBoardCate2() {
+		return boardCate2;
+	}
+	public void setBoardCate2(int boardCate2) {
+		this.boardCate2 = boardCate2;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -23,12 +36,6 @@ public class BoardDTO {
 	}
 	public void setrDate(String rDate) {
 		this.rDate = rDate;
-	}
-	public int getBoardCate() {
-		return boardCate;
-	}
-	public void setBoardCate(int boardCate) {
-		this.boardCate = boardCate;
 	}
 	public String getUid() {
 		return uid;
