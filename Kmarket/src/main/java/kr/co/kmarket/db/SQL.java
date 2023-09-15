@@ -44,6 +44,17 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+
+	
+	// 사용자 중복체크
+	public static final String DUPLICATION_CHECK_UID        = "SELECT COUNT(*) FROM `km_member` WHERE `uid`=?";
+	public static final String DUPLICATION_CHECK_HP         = "SELECT COUNT(*) FROM `km_member` WHERE `hp`=?";
+	public static final String DUPLICATION_CHECK_TEL        = "SELECT COUNT(*) FROM `km_member` WHERE `tel`=?";
+	public static final String DUPLICATION_CHECK_FAX        = "SELECT COUNT(*) FROM `km_member` WHERE `fax`=?";
+	public static final String DUPLICATION_CHECK_BIZ_NUM    = "SELECT COUNT(*) FROM `km_member` WHERE `bizRegNum`=?";
+	public static final String DUPLICATION_CHECK_ONLINE_NUM = "SELECT COUNT(*) FROM `km_member` WHERE `comRegNum`=?";
+	public static final String DUPLICATION_CHECK_EMAIL      = "SELECT COUNT(*) FROM `km_member` WHERE `email`=?";
+	public static final String DUPLICATION_CHECK_MANAGER_HP = "SELECT COUNT(*) FROM `km_member` WHERE `managerHp`=?";
 	
 	
 	//********************************************************************************************************//

@@ -4,19 +4,7 @@
 <script src="/Kmarket/js/zipcode.js"></script>
 <script src="/Kmarket/js/autoHyphen.js"></script>
 <script src="/Kmarket/js/validation.js"></script>
-<script>
-	$(function() {
-		
-		const chkBtn = document.getElementById('check');
-		
-		chkBtn.onclick = function(e) {
-			
-			e.preventDefault();
-			
-			alert('클릭');
-		}
-	});
-</script>
+<script src="/Kmarket/js/duplication.js"></script>
         <main id="member">
             <div class="registerSeller">
                 <nav><h1>판매자 회원가입</h1></nav>
@@ -30,7 +18,7 @@
                                 <td>
                                     <input type="text" name="km_uid" placeholder="아이디를 입력">
                                     <input type="button" id="check" value="중복 체크">
-                                    <span class="msgSId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
+                                    <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
                                 </td>
                             </tr>
 
@@ -93,12 +81,15 @@
                                 <th><span class="essential">*</span>팩스번호</th>
                                 <td>
                                     <input type="text" name="kms_fax" class="auto1" maxlength="12" placeholder="팩스번호 입력">
-                                    <span class="msgFax">지역번호 포함, 예) 02-234-1234</span>
+                                    <span class="msgFax">지역번호 포함, 예) 02-234-1234, 070-234-1234</span>
                                 </td>
                             </tr>
                             <tr>
                                 <th><span class="essential">*</span>EMAIL</th>
-                                <td><input type="email" name="km_email" placeholder="이메일 입력"></td>
+                                <td>
+                                	<input type="email" name="km_email" placeholder="이메일 입력">
+                                	<span class="msgEmail"></span>
+                                </td>
                             </tr>
                             <tr class="addr">
                                 <th>회사주소</th>

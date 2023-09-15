@@ -138,5 +138,172 @@ public class MemberDAO extends DBHelper {
 	public void deleteMember(String uid) {
 		
 	}
+	
+	
+	
+	// 회원가입시 중복체크 메서드
+	public int selectCheckUid(String uid) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckUid result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckHp(String hp) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_HP);
+			psmt.setString(1, hp);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckHp result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckTel(String tel) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_TEL);
+			psmt.setString(1, tel);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckTel result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckFax(String fax) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_FAX);
+			psmt.setString(1, fax);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckFax result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckBizRegNum(String bizRegNum) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_BIZ_NUM);
+			psmt.setString(1, bizRegNum);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckbizRegNum result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckComRegNum(String comRegNum) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_ONLINE_NUM);
+			psmt.setString(1, comRegNum);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckComRegNum result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckEmail(String email) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_EMAIL);
+			psmt.setString(1, email);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckEmail result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCheckManagerHp(String managerHp) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DUPLICATION_CHECK_MANAGER_HP);
+			psmt.setString(1, managerHp);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			logger.debug("selectCheckManagerHp result : " + result);
+			close();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	
+
+		
 
 }
