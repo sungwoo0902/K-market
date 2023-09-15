@@ -31,7 +31,7 @@
         </div>
         <div class="logo">
           <div>
-            <a href="#"><img src="./images/logo.png" alt="로고" />고객센터</a>
+            <a href="#"><img src="../images/logo.png" alt="로고" />고객센터</a>
           </div>
         </div>
       </header>
