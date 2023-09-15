@@ -15,41 +15,46 @@ $(function(){
 			$('input[name=chk]').prop('checked', false);
 		}
 	});	
+	/*
+	function deleteProduct() {
+	    var url = "delete.do";
+	    var productArr = [];
+	    var list = $("input[name='chk']:checked");
+	    
+	    if (list.length === 0) {
+	        alert("선택된 상품이 없습니다.");
+	        return;
+	    }
+	    
+	    var productIds = [];
+	    
+	    list.each(function() {
+	        productIds.push($(this).val());
+	    });
+	    
+	    var chk = confirm("정말 삭제하시겠습니까?");
+	    
+	    if (chk) {
+	        $.ajax({
+	            url: url,
+	            type: 'GET',
+	            data: { productIds: productIds }, // 삭제할 상품 ID들을 서버에 전달
+	            success: function(response) {
+	                if (response.success) {
+	                    alert("삭제 성공");
+	                    // 페이지 새로고침 또는 선택한 상품 제거 등의 작업 수행
+	                } else {
+	                    alert("삭제 실패");
+	                }
+	            },
+	            error: function() {
+	                alert("서버 오류 발생");
+	            }
+	        });
+	    }
+	}
+	*/
 });
-
-function deleteProduct() {
-    var url = "/admin/product/delete.do";
-    var productArr = new Array();
-    var list = $("input[name='chk']");
-    
-    for (var i = 0; i < list.length; i++) {
-        productArr.push(list[i].value);
-    }
-    
-    if (productArr.length == 0) {
-        alert("선택된 글이 없습니다.");
-    } else {
-        var chk = confirm("정말 삭제하시겠습니까?");
-        
-        if (chk) {
-            $.ajax({
-                url: url,
-                type: 'POST',
-                traditional: true,
-                data: {
-                    productArr: productArr
-                },
-                success: function (jdata) {
-                    if (productArr.length == 0) {
-                        alert("선택된 글이 없습니다.");
-                    } else {
-                        alert("삭제 실패");
-                    }
-                }
-            });
-        }
-    }
-}
 
 </script>
 
@@ -97,14 +102,14 @@ function deleteProduct() {
                     <td>${product.seller}</td>
                     <td>${product.hit}</td>
                     <td>
-                        <a href="#">[삭제]</a>
+                        <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
                         <a href="#">[수정]</a>
                     </td>
                 </tr>
                 </c:forEach>
             </table>
             
-            <input type="button" value="선택 삭제" onclick="deleteProduct">
+            <input type="button" value="선택 삭제" onclick="deleteProduct()">
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">

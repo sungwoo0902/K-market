@@ -23,10 +23,16 @@ public class Admin_ProductDeleteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String pg = req.getParameter("pg");
 		String uid = req.getParameter("uid");
+		String no = req.getParameter("no");
 		
+		req.setAttribute("uid", uid);
+		req.setAttribute("no", no);
 		
-		resp.sendRedirect("/admin/product/list.do");
+		service.deleteProduct(uid, no);
+		
+		resp.sendRedirect("/admin/product/list.jsp?pg=" + pg);
 	}
 	
 }
