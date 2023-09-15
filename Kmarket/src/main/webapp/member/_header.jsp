@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 개발/배포에서 ContextPath 포함 여부에 따른 동적처리 -->
+<c:set var="ctxPath" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,11 +37,11 @@
                 <div>
 					<c:choose>
 					<c:when test="${sessUser eq null}">
-                    <a href="/Kmarket/member/login.do">로그인</a>
-                    <a href="/Kmarket/member/join.do">회원가입</a>
+                    <a href="${ctxPath}/member/login.do">로그인</a>
+                    <a href="${ctxPath}/member/join.do">회원가입</a>
                     </c:when>
                     <c:otherwise>
-                    <a href="/Kmarket/member/logout.do">로그아웃</a>
+                    <a href="${ctxPath}/member/logout.do">로그아웃</a>
                     <a href="#" class="unready">마이페이지</a>
                     </c:otherwise>
                     </c:choose>
@@ -49,7 +51,7 @@
             </div>
             <div class="logo">
                 <div>
-                    <a href="/Kmarket/index.do">
+                    <a href="${ctxPath}/index.do">
                         <img src="../images/header_logo.png" alt="로고">
                     </a>
                 </div>

@@ -22,7 +22,7 @@
                 <nav>
                     <h1>로그인</h1>
                 </nav>
-                <form action="/Kmarket/member/login.do" method="post">
+                <form action="${ctxPath}/member/login.do" method="post">
                     <table border="0">
                         <tr>
                             <td>아이디</td>
@@ -44,7 +44,7 @@
                         </label>
                         <a href="#" class="unready">아이디찾기</a>
                         <a href="#" class="unready">비밀번호찾기</a>
-                        <a href="/Kmarket/member/join.do">회원가입</a>
+                        <a href="${ctxPath}/member/join.do">회원가입</a>
                     </span>
                     <a href="#" class="banner">
                         <img src="./images/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">
