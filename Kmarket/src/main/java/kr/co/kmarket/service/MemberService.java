@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dao.MemberDAO;
+import kr.co.kmarket.db.SQL;
 import kr.co.kmarket.dto.MemberDTO;
 
 public enum MemberService {
@@ -37,5 +38,39 @@ public enum MemberService {
 	
 	public void deleteMember(String uid) {
 		dao.deleteMember(uid);
+	}
+	
+	
+	// 회원가입 시 중복체크 메서드
+	public int selectCheckUid(String uid) {
+		return dao.selectCheckUid(uid);
+	}
+	
+	public int selectCheckHp(String hp) {
+		return dao.selectCheckHp(hp);
+	}
+	
+	public int selectCheckTel(String tel) {
+		return dao.selectCheckTel(tel);
+	}
+	
+	public int selectCheckFax(String fax) {
+		return dao.selectCheckFax(fax);
+	}
+	
+	public int selectCheckBizRegNum(String bizRegNum) {
+		return dao.selectCheckBizRegNum(bizRegNum);
+	}
+	
+	public int selectCheckComRegNum(String comRegNum) {
+		return dao.selectCheckComRegNum(comRegNum);
+	}
+	
+	public int selectCheckEmail(String email) {
+		return dao.selectCheckEmail(email);
+	}
+	
+	public int selectCheckManagerHp(String managerHp) {
+		return dao.selectCheckManagerHp(managerHp);
 	}
 }
