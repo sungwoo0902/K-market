@@ -58,12 +58,13 @@ public class ProductDAO extends DBHelper{
 	}
 
 	public void updateProduct(ProductDTO dto) {}
-	public void deleteProduct(String uid) {
+	public void deleteProduct(String uid, String no) {
 		
 		try {
 			conn= getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_PRODUCT);
 			psmt.setString(1, uid);
+			psmt.setString(2, no);
 			psmt.executeUpdate();
 			
 			close();
@@ -129,8 +130,6 @@ public class ProductDAO extends DBHelper{
 		
 		return products;
 	}
-	public void updateProduct(ProductDTO dto) {}
-	public void deleteProduct(String uid) {}
 	public int selectCountProductsAll() {
 		int total = 0;
 		

@@ -1,9 +1,7 @@
 package kr.co.kmarket.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.kmarket.dto.ProductDTO;
 import kr.co.kmarket.service.ProductService;
 
 @WebServlet("/admin/product/delete.do")
@@ -24,14 +21,8 @@ public class Admin_ProductDeleteController extends HttpServlet {
 	private ProductService service = ProductService.INSTANCE;
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String uid = req.getParameter("uid");
-		
-		logger.debug("uid : " + uid);
-		
-		service.deleteProduct(uid);
-		
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		resp.sendRedirect("/admin/product/list.do");
 	}
 	
