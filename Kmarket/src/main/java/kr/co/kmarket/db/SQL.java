@@ -84,7 +84,11 @@ public class SQL {
 												+ "`origin`=?,"
 												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
+	public final static String SELECT_PRODUCTS_ALL = "SELECT * FROM `km_product` WHERE `stock` > 0 LIMIT ?, 10";
 	
+	public final static String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	
+	public final static String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `uid`=?";
 	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//

@@ -85,7 +85,7 @@ main > aside {
 }
 
 #gnb ol {
-    display: none;
+	display: none;
     width: 100%;
     height: auto;
 }
@@ -99,8 +99,6 @@ main > aside {
     height: 100%;
     text-indent: 52px;
 }        
-
-
 
 main > section {
     float: right;
