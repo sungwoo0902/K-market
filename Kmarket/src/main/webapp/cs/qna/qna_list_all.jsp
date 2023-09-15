@@ -8,18 +8,6 @@
 			$(this).addClass("on");
 		});
 	});
-
-	//버튼 클릭 시 이벤트 처리
-	document.addEventListener("DOMContentLoaded", function () {
-	  // btnList 버튼을 클릭하면 실행될 함수
-	  document.querySelector(".btnList").addEventListener("click", function () {
-	    // 모든 li 태그 숨기기
-	    const liElements = document.querySelectorAll(".theme-link");
-	    liElements.forEach(function (li) {
-	      li.style.display = "none";
-	    });
-	  });
-	});
 </script>
       <section id="cs">
         <div class="qna">
@@ -28,12 +16,12 @@
               <p>홈<span>></span>문의하기</p>
             </div>
           </nav>
-          <section class="view">
+          <section class="list">
             <aside>
               <h2>문의하기</h2>
               <ul>
               	<li class="theme-link"><a href="./qna_list_all.do">전체</a></li>
-              	<li class="theme-link"><a href="./qna_list_member.do">회원</a></li>
+                <li class="theme-link"><a href="./qna_list_member.do">회원</a></li>
                 <li class="theme-link"><a href="./qna_list_coupon_event.do">쿠폰/이벤트</a></li>
                 <li class="theme-link"><a href="./qna_list_order_payment.do">주문/결제</a></li>
                 <li class="theme-link"><a href="./qna_list_delivery.jsp">배송</a></li>
@@ -44,20 +32,37 @@
             </aside>
             <article>
               <nav>
-                <h2 class="title"><input type="text" name="title" value="${board.title}" readonly/></h2>                
-                <p>
-                  <span><input type="text" name="uid" value="${board.uid}" readonly/></span>
-                  <span><input type="text" name="rDate" value="${board.rDate}" readonly/></span>
-                  
-                </p>
+                <h1>회원</h1>
+                <h2>회원관련 문의 내용입니다.</h2>
               </nav>
+              <table>
+              	<c:forEach var="board" items="${boards}">
+	                <tr>
+	                	<td>${pageStartNum = pageStartNum - 1}</td>
+		                <td><a href="./view.do?no=${article.no}">${article.title}[${article.comment}]</a></td>
+		                <td>${article.nick}</td>
+		                <td>${article.rdate}</td>
+		                <td>${article.hit}</td>
+	                </tr>
+	          	</c:forEach>  
+              </table>
 
-              <div class="content">
-                <p>${board.content}</p>
+              <div class="page">
+                <c:if test="${pageGroupStart > 1}">
+            		<a href="/Kmarket/qna_list_cancel_return_exchange.do?pg=${pageGroupStart - 1}&search=${search}" class="prev">이전</a>
+            	</c:if>
+            	<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+            		<a href="/Kmarket/qna_list_cancel_return_exchange?pg=${i}&search=${search}" class="num ${currentPage == i?'current':'off'}">${i}</a>
+            	</c:forEach>
+            	<c:if test="${pageGroupEnd < lastPageNum}">
+            		<a href="/Kmarket/qna_list_cancel_return_exchange?pg=${pageGroupEnd + 1}&search=${search}" class="next">다음</a>
+            	</c:if>
               </div>
-              <a href="./list.jsp" class="btnList">목록보기</a>
+
+              <a href="./qna_write.jsp" class="btnWrite">문의하기</a>
+
             </article>
           </section>
         </div>
       </section>
-<%@ include file="../_footer.jsp" %>
+<%@ include file = "../_footer.jsp" %>

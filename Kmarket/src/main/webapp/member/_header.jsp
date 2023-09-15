@@ -16,9 +16,9 @@
 		$(function() {
 			
 			// 로그인 상태에서 member그룹 접근시 메인화면으로 추후 필터 계획
-			if(${sessUser ne null}) {
-				location.href = '/Kmarket/index.do?success=101';
-			}
+			//if(${sessUser ne null}) {
+			//	location.href = '/Kmarket/index.do';
+			//}
 			
 			// 구현되지 않은 서비스 및 2차 개발 예정인 서비스 알림
 			$('.unready').click(function() {
@@ -39,10 +39,11 @@
                     <a href="/Kmarket/member/join.do">회원가입</a>
                     </c:when>
                     <c:otherwise>
+                    <a href="/Kmarket/member/logout.do">로그아웃</a>
                     <a href="#" class="unready">마이페이지</a>
                     </c:otherwise>
                     </c:choose>
-                    <a href="#" class="unready"><i class="fa fa-shopping-cart" aria-hidden="true">
+                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">
                     </i>&nbsp;장바구니</a>
                 </div>
             </div>

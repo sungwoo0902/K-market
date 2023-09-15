@@ -1,5 +1,44 @@
-<%@ include file="../_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_header.jsp" %>
+<script>
+	$(document).ready(function(){
+		$(".theme-link").click(function(){
+			// 현재 클릭한 링크를 강조하기 위해 "on" 클래스를 추가한다.
+			$(".theme-link").removeClass("on");
+			$(this).addClass("on");
+		});
+	});
+	
+	//버튼 클릭 시 이벤트 처리
+	document.addEventListener("DOMContentLoaded", function () {
+	  // btnList 버튼을 클릭하면 실행될 함수
+	  document.querySelector(".btnList").addEventListener("click", function () {
+	    // 모든 li 태그 숨기기
+	    const liElements = document.querySelectorAll(".theme-link");
+	    liElements.forEach(function (li) {
+	      li.style.display = "none";
+	    });
+	  });
+	});
+	
+	$(document).ready(function(){
+		$(".theme-link").click(function(){
+			// 현재 클릭한 링크를 강조하기 위해 "on" 클래스를 추가한다.
+			$(".theme-link").removeClass("on");
+			$(this).addClass("on");
+		});
+		
+		// 버튼 클릭 시 이벤트 처리
+		$(".btnList").click(function(){
+			// 현재 페이지의 URL을 가져오고, 현재 theme-link 클래스가 실행중인 페이지로 이동한다.
+			const currentPageURL = window.location.href;
+			const currentThemeLink = $(".theme-link.on a").attr("href");
+			
+			// 현재 theme-link의 URL로 이동
+			window.location.href = currentThemeLink;
+		})
+	});
+</script>
       <section id="cs">
         <div class="notice">
           <nav>
@@ -11,39 +50,23 @@
             <aside>
               <h2>공지사항</h2>
               <ul>
-                <li class="on"><a href="./cs/notice/notice_list_all.jsp">전체</a></li>
-                <li><a href="./cs/notice/notice_list_customerservice.jsp">고객서비스</a></li>
-                <li><a href="./cs/notice/notice_list_safe.jsp">안전거래</a></li>
-                <li><a href="./cs/notice/notice_list_danger.jsp">위해상품</a></li>
-                <li><a href="./cs/notice/notice_list_event.jsp">이벤트당첨</a></li>
+                <li class="theme-link"><a href="./cs/notice/notice_list_all.jsp">전체</a></li>
+                <li class="theme-link"><a href="./cs/notice/notice_list_customerservice.jsp">고객서비스</a></li>
+                <li class="theme-link"><a href="./cs/notice/notice_list_safe.jsp">안전거래</a></li>
+                <li class="theme-link"><a href="./cs/notice/notice_list_danger.jsp">위해상품</a></li>
+                <li class="theme-link"><a href="./cs/notice/notice_list_event.jsp">이벤트당첨</a></li>
               </ul>
             </aside>
             <article>
               <nav>
-                <h2 class="title">[안내] 해외결제 사칭 문자 주의</h2>
-                <span class="date">2022.11.20</span>
+                <h2 class="title"><input type="text" name="title" value="${board.title}" readonly></h2>
+                <span class="date">${board.rDate}</span>
               </nav>
 
               <div class="content">
-                <p>
-                  안녕하세요. G마켓입니다.<br />
-                  G마켓 해외직구를 사칭하는 피싱 문자가 최근 다시 신고되고 있어
-                  주의 안내드립니다.<br />
-                  아래와 같이 G마켓 해외직구 승인결제 피싱 문자 또는 발신번호
-                  006, 002 등으로 시작하는 피싱 문자를 수신하신 고객님께서는
-                  통화 또는 문자 내 기재된 번호/링크 등을 클릭하지 않도록
-                  주의하여 주시기 바랍니다.<br /><br />
-                </p>
-                <p>
-                  ※ 피싱 관련 피해신고<br /><br />
-                  ▶ 경찰청 사이버수사국 (국번없이)182 :
-                  http://cyberbureau.police.go.kr<br />
-                  ▶ KISA 인터넷침해대응센터 (국번없이)118 :
-                  http://www.krcert.or.kr<br />
-                  감사합니다.<br />
-                </p>
+                <p>${board.content}</p>
               </div>
-              <a href="./list.jsp" class="btnList">목록보기</a>
+              <a href="./notice_list_all.jsp" class="btnList">목록보기</a>
             </article>
           </section>
         </div>

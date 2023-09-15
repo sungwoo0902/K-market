@@ -15,6 +15,19 @@ let isComNoOk  = false;
 let isFaxOk    = false;
 let isTelOk    = false;
 
+//console.log("isUidOk : " + isUidOk)
+//console.log("isPassOk : " + isPassOk)
+//console.log("isNameOk : " + isNameOk)
+//console.log("isEmailOk: " + isEmailOk)
+//console.log("isHpOk : " + isHpOk)
+	
+//console.log("isCeoOk : " + isCeoOk)
+//console.log("isCompOk : " + isCompOk)
+//console.log("isBizNoOk : " + isBizNoOk)
+//console.log("isComNoOk : " + isComNoOk)
+//console.log("isFaxOk : " + isFaxOk)
+//console.log("isTelOk : " + isTelOk)
+
 // 데이터 검증에 사용하는 정규표현식
 // 일반 회원
 const reUid   = /^[a-z]+[a-z0-9]{5,19}$/g;
@@ -36,9 +49,9 @@ const reFax   = /^(02|070)-\d{3,4}-\d{4}$/;
 $(document).ready(function() {
 	
 	/** 회원가입 일반, 판매자 공통영역 */
-	// 아이디 검사 (중복체크서 자세히 구현)
+	// 아이디 검사 (중복체크는 duplication.js)
 	$('input[name=km_uid]').keydown(function(){
-		$('.msgId').text('영문, 숫자로 4~12자까지 설정해 주세요.');
+		$('.msgId').css('color', 'black').text('영문, 숫자로 4~12자까지 설정해 주세요.');
 		isUidOk = false;
 	});
 	
@@ -75,24 +88,29 @@ $(document).ready(function() {
 		}
 	})
 	
-	// 이메일 검사 (중복체크서 자세히 구현)
+	// 이메일 검사 (중복체크는 duplication.js)
 	$('input[name=km_email]').keydown(function(){
-		const name = $(this).val();
-		
-		if(name.match(reEmail)){
-			$('.msgEmail').text('');
-			isEmailOk = true;
-		}else {
-			$('.msgEmail').css('color', 'red').text('유효한 이메일이 아닙니다.');
-		}
+		$('.msgEmail').text('');
+		isEmailOk = false;
 	});
+	//$('input[name=km_email]').keydown(function(){
+	//	const name = $(this).val();
+	//	
+	//	if(name.match(reEmail)){
+	//		$('.msgEmail').text('');
+	//		isEmailOk = true;
+	//		
+	//	}else {
+	//		$('.msgEmail').css('color', 'red').text('유효한 이메일이 아닙니다.');
+	//		isEmailOk = false;
+	//	}
+	//});
 	
-	// 휴대폰 검사 (중복체크서 자세히 구현)
+	// 휴대폰 검사 (중복체크는 duplication.js)
 	$('input[name=km_hp]').keydown(function(){
-		$('.msgHp').text('휴대번호 11자리를 입력하세요.');
+		$('.msgHp').css('color', 'black').text('휴대번호 11자리를 입력하세요.');
 		isHpOk = false;
 	});
-	
 	
 	
 	
@@ -132,27 +150,15 @@ $(document).ready(function() {
 	
 	// 사업자번호 검사
 	$('input[name=kms_corp_reg]').focusout(function() {
-		const name = $(this).val();
-		
-		if(name.match(reBizNo) || name == ''){
-			$('.msgCorp').css('color', 'black').text('사업자번호 10자리 입력, 예) 123-45-67890');
-			isBizNoOk = true;
-			
-		}else if(name == ''){
-			$('.msgCorp').css('color', 'black').text('사업자번호 10자리 입력, 예) 123-45-67890');
-			isBizNoOk = false;
-		
-		}else {
-			$('.msgCorp').css('color', 'red').text('유효한 사업자번호가 아닙니다.');
-			isComNoOk = false;
-		}
+		$('.msgCorp').css('color', 'black').text('사업자등록번호 10자리 입력, 예) 123-45-67890');
+		isBizNoOk = false;
 	})
 	
 	// 통신판매신고번호 검사
 	$('input[name=kms_online_reg]').focusout(function() {
 		const name = $(this).val();
 		
-		if(name.match(reComNo) || name == ''){
+		if(name.match(reComNo)){
 			$('.msgOnline').css('color', 'black').text('예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011');
 			isComNoOk = true;
 			
@@ -170,7 +176,7 @@ $(document).ready(function() {
 	$('input[name=kms_tel]').focusout(function() {
 		const name = $(this).val();
 		
-		if(name.match(reTel) || name == ''){
+		if(name.match(reTel)){
 			$('.msgTel').css('color', 'black').text('지역번호 포함, 예) 02-234-1234');
 			isTelOk = true;
 			
@@ -299,6 +305,4 @@ $(document).ready(function() {
 		
 		return true; // 폼 전송 시작
 	});
-	
-	
 });

@@ -44,6 +44,17 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+
+	
+	// 사용자 중복체크
+	public static final String DUPLICATION_CHECK_UID        = "SELECT COUNT(*) FROM `km_member` WHERE `uid`=?";
+	public static final String DUPLICATION_CHECK_HP         = "SELECT COUNT(*) FROM `km_member` WHERE `hp`=?";
+	public static final String DUPLICATION_CHECK_TEL        = "SELECT COUNT(*) FROM `km_member` WHERE `tel`=?";
+	public static final String DUPLICATION_CHECK_FAX        = "SELECT COUNT(*) FROM `km_member` WHERE `fax`=?";
+	public static final String DUPLICATION_CHECK_BIZ_NUM    = "SELECT COUNT(*) FROM `km_member` WHERE `bizRegNum`=?";
+	public static final String DUPLICATION_CHECK_ONLINE_NUM = "SELECT COUNT(*) FROM `km_member` WHERE `comRegNum`=?";
+	public static final String DUPLICATION_CHECK_EMAIL      = "SELECT COUNT(*) FROM `km_member` WHERE `email`=?";
+	public static final String DUPLICATION_CHECK_MANAGER_HP = "SELECT COUNT(*) FROM `km_member` WHERE `managerHp`=?";
 	
 	
 	//********************************************************************************************************//
@@ -66,7 +77,7 @@ public class SQL {
 												+ "`prodCate2`=?,"
 												+ "`prodName`=?,"
 												+ "`descript`=?,"
-												+ "`company`=?,"
+												+ "`prodCompany`=?,"
 												+ "`seller`=?,"
 												+ "`price`=?,"
 												+ "`discount`=?,"
@@ -85,10 +96,12 @@ public class SQL {
 												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
 	public final static String SELECT_PRODUCTS_ALL = "SELECT * FROM `km_product` WHERE `stock` > 0 LIMIT ?, 10";
-	
 	public final static String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
-	
 	public final static String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `uid`=?";
+	public final static String SELECT_PRODUCTS_ALL = "SELECT a.*, b.level, b.company FROM `km_product` AS a JOIN `km_member` AS b ON a.seller=b.uid WHERE `stock` > 0 LIMIT ?, 10";
+	public static final String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=?";
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=? AND `cate2`=?";
 	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//
@@ -125,4 +138,32 @@ public class SQL {
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
 	//**********************************************************************************************************//
+	
+	//**************************************************************************************************//
+	//********************************************* Member *********************************************//
+	//**************************************************************************************************//
+	public static final String INSERT_BOARD = "INSERT INTO `km_board` SET "
+											  + "`boardCate1`=?,"
+											  + "`boardCate21=?,"
+											  + "`uid`=?,"
+											  + "`title`=?,"
+											  + "`content`=?"
+											  + "`rDate`=NOW()";
+	
+	public static final String SELECT_BOARD = "SELECT * FROM `km_board` WHERE `no`=?";
+	public final static String SELECT_BOARDS = "SELECT "
+												+ "a.*, "
+												+ "b.`uid` "
+												+ "FROM `km_board` AS a "
+												+ "JOIN `km_member` AS b ON a.uid = b.uid "
+												+ "WHERE `parent`=0 AND `boardCate1`=? "
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `board` WHERE `parent`=0 AND `boardCate1`=?";
+	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `board` WHERE `parent`= 0 AND `title` LIKE ?";
+	
+	public static final String UPDATE_BOARD = "UPDATE * FROM `km_board` SET `title`=?, `content`=? WHERE `no`=?";
+	
+	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE `no`=?";
+	
 }

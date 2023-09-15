@@ -47,13 +47,13 @@ public class LoginController extends HttpServlet {
 		logger.debug("member : " + member);
 		
 		if(member != null) {
-			logger.info("LOGIN SUCEES : " + member.getUid() + "(" + req.getRemoteAddr() + ")");
+			logger.info("LOGIN SUCEES : " + member.getUid() + " (regip : " + req.getRemoteAddr() + ")");
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("sessUser", member);
 			resp.sendRedirect("/Kmarket/");
 		}else {
-			logger.info("LOGIN FAILED : " + "(" + req.getRemoteAddr() + ")");
+			logger.info("LOGIN FAILED : " + " (regip : " + req.getRemoteAddr() + ")");
 			resp.sendRedirect("/Kmarket/member/login.do?success=101");
 		}
 		

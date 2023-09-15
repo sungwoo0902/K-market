@@ -37,33 +37,39 @@
         <!-- 상품목록 -->
         <table border="0">
             <tbody>
+            	<c:forEach var="prod" items="${products}">
                 <tr>
                     <td>
                         <a href="#" class="thumb">
-                            <img src="./images/120x120.png" alt="상품이미지">
+                            <img src="${ctxPath}/images/${prod.thumb2}" alt="상품이미지">
                         </a>
                     </td>
                     <td>
-                        <h3 class="name">상품명</h3>
-                        <a href="#" class="desc">상품설명</a>
+                        <h3 class="name">${prod.prodName}</h3>
+                        <a href="#" class="desc">${prod.descript}</a>
                     </td>
                     <td>
                         <ul>
                             <li>
                                 <ins class="dis-price">
-                                    27000
+                                    ${prod.disPrice}
                                 </ins>
                             </li>
                             <li>
                                 <del class="org-price">
-                                    30000
+                                    ${prod.price}
                                 </del>
                                 <span class="discount">
-                                    10%
+                                    ${prod.discount}%
                                 </span>
                             </li>
                             <li>
+                            	<c:if test="${prod.delivery eq 0}">
                                 <span class="free-delivery">무료배송</span>
+                                </c:if>
+                                <c:if test="${prod.delivery ne 0}">
+                                <span class="free-delivery">배송비 ${prod.delivery}</span>
+                                </c:if>
                             </li>
                         </ul>
                     </td>
@@ -71,12 +77,14 @@
                         <h4 class="seller">
                             <i class="fas fa-home" aria-hidden="true">
                             </i>
-                            &nbsp;판매자
+                            &nbsp;${prod.company}
                         </h4>
-                        <h5 class="badge power">판매자등급</h5>
-                        <h6 class="rating star1">상품평</h6>
+                        <h5 class="badge power">${prod.level}</h5>
+                        <h6 class="rating star1">${prod.score}</h6>
                     </td>
                 </tr>
+                </c:forEach>
+                
                 <tr>
                     <td>
                         <a href="#" class="thumb">

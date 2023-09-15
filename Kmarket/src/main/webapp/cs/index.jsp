@@ -6,12 +6,14 @@
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
             <h1>공지사항<a href="./notice/list.jsp">전체보기</a></h1>
-	        <c:forEach var="board" items="${boards}">    
-	            <ul>
-	              	<li><a href="./view.do?no=${article.no}">${article.title}[${article.comment}]</a></li>
-        		  	<li>${article.nick}</li>
-        			<li>${article.rdate}</li>
-	            </ul>
+	        <c:forEach var="board" items="${boards}"> 
+	        	<c:if test="${board.no == 11}">   
+		            <ul>
+		              	<li><a href="./notice/notice_list_all.do?no=${board.no}">${board.title}[${board.comment}]</a></li>
+	        		  	<li>${board.uid}</li>
+	        			<li>${board.rDate}</li>
+		            </ul>
+	            </c:if>
 	        </c:forEach>   
           </section>
         
@@ -46,46 +48,22 @@
           <section class="qna">
             <h1>
               문의하기
-              <a href="#">전체보기</a>
+              <a href="./qna/qna_list_all.jsp">전체보기</a>
             </h1>
-            <ul>
-              <li>
-                <a href="./qna/list.jsp" class="title">[회원] 개인회원과 법인회원에 차이가 있나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[주문/결제] 신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[배송] 주문한 상품은 언제 배송되나요?</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-              <li>
-                <a href="#" class="title">[취소/반품/교환] 주문을 취소하고 싶어요.</a>
-                <p>
-                  <span class="uid">chh**</span>
-                  <span class="date">22.10.31</span>
-                </p>
-              </li>
-            </ul>
-            <a href="#" class="ask">문의글 작성 ></a>
+            <c:forEach var="board" items="${boards}">
+            	<c:if test="${board.no == 13}">
+		        	<ul>
+		            	<li>
+		                <a href="./qna/qna_list_all.jsp?no=${board.no}" class="title">${board.title}</a>
+		                	<p>
+		                  		<span class="uid">${board.uid}</span>
+		                  		<span class="date">${board.rDate}</span>
+		                	</p>
+		            	</li>
+		            </ul>
+	            </c:if>
+            </c:forEach>
+            <a href="./qna/qna_writewrite/jsp" class="ask">문의글 작성 ></a>
           </section>
 
           <section class="tel">
