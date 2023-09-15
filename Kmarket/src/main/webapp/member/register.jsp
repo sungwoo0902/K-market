@@ -22,7 +22,7 @@
                                 <th><span class="essential">*</span>아이디</th>
                                 <td>
                                     <input type="text" name="km_uid" placeholder="아이디를 입력">
-                                    <input type="button" class="id" value="중복 체크">
+                                    <input type="button" id="check" value="중복 체크">
                                     <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
                                 </td>
                             </tr>
