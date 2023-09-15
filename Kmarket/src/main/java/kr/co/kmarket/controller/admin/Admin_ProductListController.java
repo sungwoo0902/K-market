@@ -32,7 +32,7 @@ public class Admin_ProductListController extends HttpServlet {
 		int currentPage = service.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountProductsTotal();
+		int total = service.selectCountProductsAll();
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -47,7 +47,7 @@ public class Admin_ProductListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 	
 		// 현재 페이지 게시물 조회
-			List<ProductDTO> products = service.selectProducts(start);
+			List<ProductDTO> products = service.selectProductsAll(start);
 
 			req.setAttribute("products", products);
 			req.setAttribute("currentPage", currentPage);

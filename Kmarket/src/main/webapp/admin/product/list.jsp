@@ -16,34 +16,11 @@ $(function(){
 		}
 	});
 	
-    $('#deleteButton').click(function(){
-        var selectedItems = [];
-        $('input[name=chk]:checked').each(function(){
-            selectedItems.push($(this).closest('tr').find('td:eq(2)').text()); // 상품명 가져오기
-        });
-
-        if (selectedItems.length === 0) {
-            alert('삭제할 상품을 선택하세요.');
-        } else {
-            var confirmDelete = confirm('선택한 ' + selectedItems.length + '개 상품을 삭제하시겠습니까?');
-            if (confirmDelete) {
-                // 서버로 선택한 상품 목록을 전송합니다.
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/product/delete.do',
-                    data: { selectedItems: selectedItems.join(',') },
-                    success: function(response) {
-                        alert(response);
-                        // 선택한 항목을 화면에서 제거합니다.
-                        $('input[name=chk]:checked').closest('tr').remove();
-                    },
-                    error: function(error) {
-                        console.error(error);
-                    }
-                });
-            }
-        }
+	$("#deleteButton").click(function() {
+        
+        $("#deleteProduct").submit();
     });
+	
 });
 </script>
 
@@ -97,8 +74,9 @@ $(function(){
                 </tr>
                 </c:forEach>
             </table>
+            
             <input type="button" id="deleteButton" value="선택 삭제">
-
+			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
                 <span class="prev">
