@@ -14,14 +14,43 @@ $(function(){
 			// 전체해제
 			$('input[name=chk]').prop('checked', false);
 		}
-	});
-	
-	$("#deleteButton").click(function() {
-        
-        $("#deleteProduct").submit();
-    });
-	
+	});	
 });
+
+function deleteProduct() {
+    var url = "/admin/product/delete.do";
+    var productArr = new Array();
+    var list = $("input[name='chk']");
+    
+    for (var i = 0; i < list.length; i++) {
+        productArr.push(list[i].value);
+    }
+    
+    if (productArr.length == 0) {
+        alert("선택된 글이 없습니다.");
+    } else {
+        var chk = confirm("정말 삭제하시겠습니까?");
+        
+        if (chk) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                traditional: true,
+                data: {
+                    productArr: productArr
+                },
+                success: function (jdata) {
+                    if (productArr.length == 0) {
+                        alert("선택된 글이 없습니다.");
+                    } else {
+                        alert("삭제 실패");
+                    }
+                }
+            });
+        }
+    }
+}
+
 </script>
 
 <main>
@@ -75,7 +104,7 @@ $(function(){
                 </c:forEach>
             </table>
             
-            <input type="button" id="deleteButton" value="선택 삭제">
+            <input type="button" value="선택 삭제" onclick="deleteProduct">
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
