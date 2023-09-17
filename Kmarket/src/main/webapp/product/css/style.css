@@ -130,7 +130,7 @@
 
 #product > .list > table .name > a{
     font-size: 16px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color:#111;
     margin-bottom: 6px;
 }
@@ -150,7 +150,8 @@
 }
 
 #product > .list > table .dis-price{
-    font-size: 16px;
+    font-size: 19px;
+    font-weight: bold;
     text-decoration: none;
 }
 
@@ -165,12 +166,17 @@
 
 #product > .list > table .free-delivery{
     display: inline-block;
-    font-size: 0;
+    font-size: 9px;
+    color: gray;
     vertical-align: text-bottom;
-    width: 55px;
+    width: 70px;
     height: 13px;
     background: url('../images/ico_free_delivery.gif') no-repeat;
     margin-top: 4px;
+}
+
+#product > .list > table .has-delivery {
+    background-image: none; /* 배경 이미지 제거 */
 }
 
 #product > .list > table .seller{
@@ -320,9 +326,13 @@
 }
 #product > .view > .info > .summary .dis_price > ins::after { content: "원"; }
 
-#product > .view > .info > .summary .delivery {
+#product > .view > .info > .summary .free-delivery {
     font-size: 16px;
     color: #2e8de5;
+}
+#product > .view > .info > .summary .delivery {
+	font-size: 16px;
+    color: gray;
 }
 #product > .view > .info > .summary .arrival {
     font-size: 14px;
@@ -530,7 +540,7 @@
 	position: absolute;
   width: 21px;
   height: 21px;
-  background-image: url('../img/ico_sprites.png');
+  background-image: url('../images/ico_sprites.png');
   font-size: 0;
   background-color: transparent;
   border: none;

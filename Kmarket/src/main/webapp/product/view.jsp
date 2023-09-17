@@ -1,6 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="./_header.jsp" %>
+<script>
+
+	$(function () {
+	    const inputCount = $('.inputCount');
+	    const increase = $('.increase');
+	    const decrease = $('.decrease');
+	 	// 숫자가 아닌 다른 값 입력시 이전 값 입력을 위한 초기화
+	    let prevCount = 1; 
+	 	let price = $('#org_price').val();
+	 	const discount = $('#discount').val();
+	 	const totalPrice = $('.totalPrice');
+	 	
+	 	if(discount != 0){
+	 		price = $('#dis_price').val();
+	 	}
+	
+	 	//***********************************************//
+	    //************ 입력값이 변경될 때 이벤트 처리 ************//
+	    //***********************************************//
+	    inputCount.on('input', function () {
+	        let currentValue = parseInt(inputCount.val()) || 1; // 현재 값이 숫자가 아니면 최솟값(1)로 설정
+	        //const max = parseInt(inputCount.attr('max'));
+	        
+	        // 숫자인 경우만 prevCount 업데이트
+	        if (/^\d+$/.test(inputCount.val())) {
+	            prevCount = currentValue;
+	        }
+	        
+	        totalPrice.text($.numberWithCommas(parseInt(price * prevCount)));
+	    });
+		
+	  	//***********************************************//
+	    //*** input focus, focusout할 때 input의 숫자 저장 ***//
+	    //***********************************************//
+	    inputCount.on('focus', function () {
+	        prevCount = $(this).val();
+	    });
+	    inputCount.on('focusout', function () {
+	        inputCount.val(prevCount);
+	        console.log('inputCount :'+inputCount.val());
+	        console.log('discount :'+discount);
+	        console.log('price :'+price);
+	    }); // focus, focusout end
+	    
+	    //***********************************************//
+		//***************** +버튼 클릭 함수 *****************//
+	    //***********************************************//
+		$(increase).click(function () {
+	        let currentValue = parseInt(inputCount.val());
+	
+	        // 만약 현재 값이 max 값 미만이면 1을 더하고 업데이트
+	        if (currentValue < 999) {
+	            currentValue += 1;
+	            inputCount.val(currentValue);
+	        }
+	        totalPrice.text($.numberWithCommas(parseInt(price * inputCount.val())));
+	    }); // increase click end 
+	    
+	  	//***********************************************//
+		//***************** -버튼 클릭 함수 *****************//
+		//***********************************************//
+	    $(decrease).click(function () {
+	        let currentValue = parseInt(inputCount.val());
+	
+	        // 만약 현재 값이 최솟값 초과이면 1을 빼고 업데이트
+	        if (currentValue > 1) {
+	            currentValue -= 1;
+	            inputCount.val(currentValue);
+	        }
+	        totalPrice.text($.numberWithCommas(parseInt(price * inputCount.val())));
+	    }); // decrease click end 
+		
+	  	//***********************************************//
+		//*************** 0이하 입력시 1로 변경 ***************//
+		//***********************************************//
+	    inputCount.blur(function () {
+	        let currentValue = parseInt(inputCount.val());
+	        // 현재 값이 최솟값 미만일 경우 최솟값으로 설정
+	        if (currentValue < 1) {
+	            inputCount.val(prevCount);
+	        }
+	    }); //inputCount blur end
+	    
+	  	//***********************************************//
+	    //*************** 숫자 3자리 콤마 함수 ***************//
+	    //***********************************************//
+	    $.numberWithCommas = function (x) {
+	  	  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	  	}
+	}); // end
+</script>
+
 <main id="product">
     <%@ include file="./_aside.jsp" %>
     <!-- 상품 상세페이지 시작 -->
@@ -17,41 +110,56 @@
         </nav>
         <!-- 상품 전체 정보 내용 -->
         <article class="info">
+        <input type="hidden" id="discount" name="discount" value="${prod.discount}">
+        <input type="hidden" id="org_price" name="org_price" value="${prod.price}">
+        <input type="hidden" id="dis_price" name="dis_price" value="${prod.disPrice}">
             <div class="image">
-                <img src="./images/460x460.png" alt="상품이미지">
+                <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.thumb3}" alt="상품이미지">
             </div>
             <div class="summary">
                 <nav>
-                    <h1>(주)판매자명</h1>
+                    <h1>${prod.company}</h1>
                     <h2>
                         상품번호&nbsp;:&nbsp;
-                        <span>10010118412</span>
+                        <span>${prod.prodNo}</span>
                     </h2>
                 </nav>
                 <nav>
-                    <h3>상품명</h3>
-                    <p>상품설명 출력</p>
+                    <h3>${prod.prodName}</h3>
+                    <!-- 상품 설명 없으면 다르게 출력되게 해야함 -->
+                    <p>상품설명 : ${prod.descript}</p>
+                    <!-- 별점 처리 해야함 -->
                     <h5 class="rating star4">
                     <a href="#">상품평보기</a>
                     </h5>
                 </nav>
                 <nav>
-                    <div class="org_price">
-                        <del>
-                            30000
-                        </del>
-                        <span>
-                            10%
-                        </span>
-                    </div>
+                
+                	<!-- 할인율이 있다면 가격 아래에 정가와 할인율 표시 -->
+                	<c:if test="${prod.discount ne 0}">
+	                    <div class="org_price">
+	                        <del>
+	                            <fmt:formatNumber value="${prod.price}" pattern="#,###" />
+	                        </del>
+	                        <span>
+	                            ${prod.discount}%
+	                        </span>
+	                    </div>
+                    </c:if>
+                    <!-- 할인율이 없다면 가격만 표시(이름은 disPrice지만 할인율이 없다면 정가임) -->
                     <div class="dis_price">
                         <ins>
-                            27000
+                            <fmt:formatNumber value="${prod.disPrice}" pattern="#,###" />
                         </ins>
                     </div>
                 </nav>
                 <nav>
-                    <span class="delivery">무료배송</span>
+                	<c:if test="${prod.delivery eq 0}">
+                    	<span class="free-delivery">무료배송</span>
+                    </c:if>
+                	<c:if test="${prod.delivery ne 0}">
+                    	<span class="delivery">배송비 <fmt:formatNumber value="${prod.delivery}" pattern="#,###" />원</span>
+                    </c:if>
                     <span class="arrival">모레(금) 7/8 도착예정</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
@@ -67,16 +175,24 @@
                     </span>
                 </nav>
                 <nav>
-                    <span class="origin">원산지-상세설명 참조</span>
+                    <span class="origin">원산지-${prod.origin}</span>
                 </nav>
                 <img src="${ctxPath}/images/vip_plcc_banner.png" alt="100원만 결제해도 1만원 적립" class="banner">
                 <div class="count">
                     <button class="decrease">-</button>
-                    <input type="text" name="num" value="1" readonly>
+                    <!-- 수량 입력 칸은 3자리 이상 입력하지 못하게끔 함 -->
+                    <input type="text" class="inputCount" name="num" min="1" max="${prod.stock}" value="1" maxlength="3" pattern="\d*">
                     <button class="increase">+</button>
                 </div>
                 <div class="total">
-                    <span>35000</span>
+                	<!-- 화면을 불러왔을 때 할인율이 없다면 정가 표시 -->
+                	<c:if test="${prod.discount eq 0}">
+                    	<span class="totalPrice"><fmt:formatNumber value="${prod.price}" pattern="#,###" /></span>
+                    </c:if>
+                    <!-- 화면을 불러왔을 때 할인율이 없다면 할인가 표시 -->
+                	<c:if test="${prod.discount ne 0}">
+                    	<span class="totalPrice"><fmt:formatNumber value="${prod.disPrice}" pattern="#,###" /></span>
+                    </c:if>
                     <em>총 상품금액</em>
                 </div>
                 <div class="button">
@@ -91,7 +207,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="./images/860x460.png" alt="상세페이지1">
+            <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.detail}" alt="상세페이지1">
             <img src="./images/860x460.png" alt="상세페이지2">
             <img src="./images/860x460.png" alt="상세페이지3">
         </article>
@@ -105,31 +221,31 @@
                 <tbody>
                     <tr>
                         <td>상품번호</td>
-                        <td>10110125435</td>
+                        <td>${prod.prodNo}</td>
                     </tr>
                     <tr>
                         <td>상품상태</td>
-                        <td>새상품</td>
+                        <td>${prod.status}</td>
                     </tr>
                     <tr>
                         <td>부가세 면세여부</td>
-                        <td>과세상품</td>
+                        <td>${prod.duty}</td>
                     </tr>
                     <tr>
                         <td>영수증발행</td>
-                        <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                        <td>${prod.receipt}</td>
                     </tr>
                     <tr>
                         <td>사업자구분</td>
-                        <td>사업자 판매자</td>
+                        <td>${prod.bizType}</td>
                     </tr>
                     <tr>
                         <td>브랜드</td>
-                        <td>블루포스</td>
+                        <td>${prod.prodCompany}</td>
                     </tr>
                     <tr>
                         <td>원산지</td>
-                        <td>국내생산</td>
+                        <td>${prod.origin}</td>
                     </tr>
                 </tbody>
             </table>
