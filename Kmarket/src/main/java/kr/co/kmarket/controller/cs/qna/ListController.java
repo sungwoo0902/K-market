@@ -12,16 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/qna/qna_list_delivery.do")
-public class DeliveryController extends HttpServlet{
+@WebServlet("/cs/qna/list.do")
+public class ListController extends HttpServlet {
 
-	private static final long serialVersionUID = -463252985302346303L;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final long serialVersionUID = -4092848915441871453L;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/qna_list_delivery.jsp");
-		dispatcher.forward(req, resp);
+		logger.info("doGet()...");
+		req.setAttribute("board", "list");
 		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
+		dispatcher.forward(req, resp);
 	}
 }

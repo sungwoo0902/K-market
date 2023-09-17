@@ -12,16 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@WebServlet("/cs/qna/qna_list_travel_lodgment_airline.do")
-public class Travel_lodgment_airlineController extends HttpServlet{
+@WebServlet("/cs/qna/view.do")
+public class ViewController extends HttpServlet {
 
-	private static final long serialVersionUID = 1635820938968580150L;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final long serialVersionUID = 824910349917258619L;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/qna_list_travel_lodgment_airline.jsp");
-		dispatcher.forward(req, resp);
+		logger.info("doGet()...");
+		req.setAttribute("board", "view");
 		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
+		dispatcher.forward(req, resp);
 	}
 }
