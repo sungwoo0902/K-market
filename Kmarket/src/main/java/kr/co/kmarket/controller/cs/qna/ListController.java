@@ -23,6 +23,9 @@ public class ListController extends HttpServlet {
 		logger.info("doGet()...");
 		req.setAttribute("board", "list");
 		
+		String succcess = req.getParameter("success");
+		req.setAttribute("succcess", succcess);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
 		dispatcher.forward(req, resp);
 	}

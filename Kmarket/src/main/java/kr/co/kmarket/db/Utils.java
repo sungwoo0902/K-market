@@ -18,4 +18,9 @@ public class Utils {
 	public static String ellipsis(String str, int length) {
 		return str.substring(0, length)+"...";
 	}
+	
+	public static String masking(String uid) {
+		String maskingId = uid.replaceAll("(?<=.{2})." , "*");
+		return maskingId;
+	}
 }

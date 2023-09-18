@@ -2,6 +2,7 @@ package kr.co.kmarket.dto;
 
 public class CsDTO {
 	private int no;
+	private int parent;
 	private int boardCate1;
 	private int boardCate2;	
 	private int boardCate3;
@@ -60,6 +61,18 @@ public class CsDTO {
 	
 	
 	
+	public int getParent() {
+		return parent;
+	}
+	public void setParent(int parent) {
+		this.parent = parent;
+	}
+	public void setParent(String parent) {
+		this.parent = Integer.parseInt(parent);
+	}
+	
+	
+	
 	public String getrDate() {
 		return rDate;
 	}
@@ -112,7 +125,7 @@ public class CsDTO {
 	
 	
 	public String getCate2_name() {
-		return cate2_name;
+		return cate2_name; 
 	}
 	public void setCate2_name(String cate2_name) {
 		this.cate2_name = cate2_name;

@@ -224,6 +224,9 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
+	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
+	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate3` WHERE `cate2`=?";
+	
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=?";
 	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=?";
