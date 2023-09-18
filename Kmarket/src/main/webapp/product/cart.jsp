@@ -35,28 +35,30 @@
                     <tr class="empty">
                         <td colspan="7">장바구니에 상품이 없습니다.</td>
                     </tr>
+                    <c:forEach var="cart" items="${carts}">
                     <tr>
                         <td><input type="checkbox" name></td>
                         <td>
                             <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
+                                <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">
+                                    <img src="${ctxPath}/thumb/${cart.prodCate1}/${cart.prodCate2}/${cart.thumb1}" alt="">
                                 </a>
                                 <div>
                                     <h2>
-                                        <a href="#">상품명</a>
+                                        <a href="#">${cart.prodName}</a>
                                     </h2>
-                                    <p>상품설명</p>
+                                    <p>상품설명:${cart.descript}</p>
                                 </div>
                             </article>
                         </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>5%</td>
-                        <td>270</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
+                        <td>${cart.count}</td>
+                        <td>${cart.price}</td>
+                        <td>${cart.discount}%</td>
+                        <td>${cart.point}</td>
+                        <td>${cart.delivery}</td>
+                        <td>${cart.total}</td>
                     </tr>
+                    </c:forEach>
                     <tr>
                         <td><input type="checkbox" name></td>
                         <td>
