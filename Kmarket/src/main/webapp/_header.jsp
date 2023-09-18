@@ -81,16 +81,24 @@
                 <div>
                     <c:choose>
                     <c:when test="${sessUser eq null}">
-                    <a href="/Kmarket/member/login.do">로그인</a>
-                    <a href="/Kmarket/member/join.do">회원가입</a>
+                    <a href="${ctxPath}/member/login.do">로그인</a>
+                    <a href="${ctxPath}/member/join.do">회원가입</a>
                     </c:when>
                     <c:otherwise>
-                    <a href="/Kmarket/member/logout.do">로그아웃</a>
+                    <c:if test="${sessUser.type eq 2 or sessUser.type eq 3}">
+                    <a href="${ctxPath}/admin/index.do">관리자</a>
+                    </c:if>
+            		
+                    <a href="${ctxPath}/member/logout.do">로그아웃</a>
+                    <c:if test="${sessUser.type eq 1}">
                     <a href="#" class="unready">마이페이지</a>
+                    <a href="${ctxPath}/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true">
+                    </i>&nbsp;장바구니</a>
+                    </c:if>
                     </c:otherwise>
                     </c:choose>
-                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">
-                    </i>&nbsp;장바구니</a>
+                    
+                    
                 </div>
             </div>
             <div class="logo">
@@ -110,10 +118,10 @@
                     <li><a href="#">할인상품</a></li>
                   </ul>
                   <ul>
-                    <li><a href="#">공지사항</a></li>
-                    <li><a href="#">자주묻는질문</a></li>
-                    <li><a href="#">문의하기</a></li>
-                    <li><a href="#">고객센터</a></li>
+                    <li><a href="${ctxPath}/cs/notice/list.do">공지사항</a></li>
+                    <li><a href="${ctxPath}/cs/faq/list.do">자주묻는질문</a></li>
+                    <li><a href="${ctxPath}/cs/qna/list.do">문의하기</a></li>
+                    <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
                   </ul>
                 </div>
               </div>

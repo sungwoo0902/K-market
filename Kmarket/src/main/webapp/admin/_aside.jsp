@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <aside>
         <!-- Global Navigation Bar -->
         <ul id="gnb">
@@ -31,7 +32,7 @@
             <li>
                 <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol id="menu">
-                    <li><a href="${ctxPath}/admin/product/list.do">상품현황</a></li>
+                    <li><a href="${ctxPath}/admin/product/list.do?seller=${sessUser.uid}">상품현황</a></li>
                     <li><a href="${ctxPath}/admin/product/register.do">상품등록</a></li>
                 </ol>
             </li>
@@ -45,13 +46,15 @@
                     <li><a href="#">배송관리</a></li>
                 </ol>
             </li>
-            
+            <c:if test="${sessUser.type eq 3}">
             <li>
-                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
+                <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                 <ol>
-                    <li><a href="#">게시판현황</a></li>
+                    <li><a href="${ctxPath}/admin/notice/list.do">공지사항</a></li>
+                    <li><a href="#">자주묻는질문</a></li>
                     <li><a href="#">고객문의</a></li>
                 </ol>
             </li>
+            </c:if>
         </ul>
     </aside>
