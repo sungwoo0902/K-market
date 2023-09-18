@@ -95,11 +95,35 @@ public class SQL {
 												+ "`origin`=?,"
 												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
-	public final static String DELETE_PRODUCT = "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
-	public final static String SELECT_PRODUCTS_ALL = "SELECT a.*, b.level, b.company FROM `km_product` AS a JOIN `km_member` AS b ON a.seller=b.uid WHERE `stock` > 0 LIMIT ?, 10";
-	public static final String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
-	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=?";
-	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 = "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `cate1`=? AND `cate2`=?";
+	public final static String DELETE_PRODUCT 					= "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
+	public final static String SELECT_PRODUCT 					= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "AND `prodNo`=?";
+	public final static String SELECT_PRODUCTS_ALL 				= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "LIMIT ?, 10";
+	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//
@@ -138,30 +162,77 @@ public class SQL {
 	//**********************************************************************************************************//
 	
 	//**************************************************************************************************//
-	//********************************************* Member *********************************************//
+	//********************************************* CS *************************************************//
 	//**************************************************************************************************//
+
 	public static final String INSERT_BOARD = "INSERT INTO `km_board` SET "
-											  + "`boardCate1`=?,"
-											  + "`boardCate21=?,"
-											  + "`uid`=?,"
-											  + "`title`=?,"
-											  + "`content`=?"
-											  + "`rDate`=NOW()";
+												+ "`boardCate1`=?, "
+												+ "`boardCate2`=?, "
+												+ "`boardCate3`=?, "
+												+ "`uid`=?, "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "`rDate`=NOW()";
 	
-	public static final String SELECT_BOARD = "SELECT * FROM `km_board` WHERE `no`=?";
-	public final static String SELECT_BOARDS = "SELECT "
+	public static final String SELECT_BOARD = "SELECT "
 												+ "a.*, "
-												+ "b.`uid` "
+												+ "b.`cate1_name`, "
+												+ "c.`cate2_name`, "
+												+ "d.`cate3_name` "
 												+ "FROM `km_board` AS a "
-												+ "JOIN `km_member` AS b ON a.uid = b.uid "
-												+ "WHERE `parent`=0 AND `boardCate1`=? "
-												+ "ORDER BY `no` DESC "
-												+ "LIMIT ?, 10";
-	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `board` WHERE `parent`=0 AND `boardCate1`=?";
-	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `board` WHERE `parent`= 0 AND `title` LIKE ?";
+												+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
+												+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
+												+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
+												+ "WHERE `no`=?";
 	
-	public static final String UPDATE_BOARD = "UPDATE * FROM `km_board` SET `title`=?, `content`=? WHERE `no`=?";
+	public static final String SELECT_BOARDS = "";
+												 
+	public static final String SELECT_BOARDS_FOR_SEARCH = "SELECT";
+												
 	
-	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE `no`=?";
+	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
+														+ "a.*, "
+														+ "b.`cate1_name`, "
+														+ "c.`cate2_name`, "
+														+ "d.`cate3_name` "
+														+ "FROM `km_board` AS a "
+														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
+														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
+														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
+														+ "WHERE `parent`=0 AND `boardCate1`=? "
+														+ "ORDER BY `no` DESC "
+														+ "LIMIT ?, 10";
 	
+	public static final String SELECT_BOARDS_MIDDLE_CATE = "SELECT "
+														+ "a.*, "
+														+ "b.`cate1_name`, "
+														+ "c.`cate2_name`, "
+														+ "d.`cate3_name` "
+														+ "FROM `km_board` AS a "
+														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
+														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
+														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
+														+ "WHERE `parent`=0 AND `boardCate1`=? AND `boardCate2`=? "
+														+ "ORDER BY `no` DESC "
+														+ "LIMIT ?, 10";
+	
+	public static final String SELECT_BOARDS_SUB_CATE = "SELECT "
+														+ "a.*, "
+														+ "b.`cate1_name`, "
+														+ "c.`cate2_name`, "
+														+ "d.`cate3_name` "
+														+ "FROM `km_board` AS a "
+														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
+														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
+														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
+														+ "WHERE `parent`=0 AND `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=? "
+														+ "ORDER BY `no` DESC "
+														+ "LIMIT ?, 10";
+	
+	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHEN `cate1`=?";
+	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate3` WHEN `cate2`=?";
+	
+	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=?";
+	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=?";
+	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=?";
 }

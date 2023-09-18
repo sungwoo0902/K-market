@@ -9,7 +9,7 @@
             <div class="registerSeller">
                 <nav><h1>판매자 회원가입</h1></nav>
 
-                <form action="/Kmarket/member/registerSeller.do" method="post" id="formRegSeller">
+                <form action="${ctxPath}/member/registerSeller.do" method="post" id="formRegSeller">
                     <section>
                         <table>
                             <caption>필수 정보입력</caption>

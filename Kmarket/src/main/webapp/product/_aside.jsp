@@ -15,16 +15,16 @@
                 </a>
                 <ol>
                     <li>
-                        <a href="#">남성의류</a>
+                        <a href="${ctxPath}/product/list.do?cate1=10&cate2=10">남성의류</a>
                     </li>
                     <li>
-                        <a href="#">여성의류</a>
+                        <a href="${ctxPath}/product/list.do?cate1=10&cate2=11">여성의류</a>
                     </li>
                     <li>
-                        <a href="#">잡화</a>
+                        <a href="${ctxPath}/product/list.do?cate1=10&cate2=12">잡화</a>
                     </li>
                     <li>
-                        <a href="#">뷰티</a>
+                        <a href="${ctxPath}/product/list.do?cate1=10&cate2=13">뷰티</a>
                     </li>
                 </ol>
             </li>
@@ -36,16 +36,16 @@
                 </a>
                 <ol>
                     <li>
-                        <a href="#">노트북/PC</a>
+                        <a href="${ctxPath}/product/list.do?cate1=11&cate2=10">노트북/PC</a>
                     </li>
                     <li>
-                        <a href="#">가전</a>
+                        <a href="${ctxPath}/product/list.do?cate1=11&cate2=11">가전</a>
                     </li>
                     <li>
-                        <a href="#">휴대폰</a>
+                        <a href="${ctxPath}/product/list.do?cate1=11&cate2=12">휴대폰</a>
                     </li>
                     <li>
-                        <a href="#">기타</a>
+                        <a href="${ctxPath}/product/list.do?cate1=11&cate2=13">기타</a>
                     </li>
                 </ol>
             </li>
@@ -57,16 +57,16 @@
                 </a>
                 <ol>
                     <li>
-                        <a href="#">신선식품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=12&cate2=10">신선식품</a>
                     </li>
                     <li>
-                        <a href="#">가공식품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=12&cate2=11">가공식품</a>
                     </li>
                     <li>
-                        <a href="#">건강식품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=12&cate2=12">건강식품</a>
                     </li>
                     <li>
-                        <a href="#">생필품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=12&cate2=13">생필품</a>
                     </li>
                 </ol>
             </li>
@@ -78,16 +78,16 @@
                 </a>
                 <ol>
                     <li>
-                        <a href="#">가구/DIY</a>
+                        <a href="${ctxPath}/product/list.do?cate1=13&cate2=10">가구/DIY</a>
                     </li>
                     <li>
-                        <a href="#">침구·커튼</a>
+                        <a href="${ctxPath}/product/list.do?cate1=13&cate2=11">침구·커튼</a>
                     </li>
                     <li>
-                        <a href="#">생활용품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=13&cate2=12">생활용품</a>
                     </li>
                     <li>
-                        <a href="#">사무용품</a>
+                        <a href="${ctxPath}/product/list.do?cate1=13&cate2=13">사무용품</a>
                     </li>
                 </ol>
             </li>

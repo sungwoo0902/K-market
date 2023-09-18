@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+</script>
 <main id="product">
     <%@ include file="./_aside.jsp" %>
     <section class="list">
         <!-- 제목, 페이지 네비게이션 -->
         <nav>
             <h1>상품목록</h1>
+            <!-- 처리해야됨 -->
             <p>
                 HOME > 
                 <span>패션·의류·뷰티</span>
@@ -40,35 +43,41 @@
             	<c:forEach var="prod" items="${products}">
                 <tr>
                     <td>
-                        <a href="#" class="thumb">
-                            <img src="${ctxPath}/images/${prod.thumb2}" alt="상품이미지">
+                        <a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}" class="thumb">
+                            <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.thumb2}" alt="상품이미지">
                         </a>
                     </td>
                     <td>
-                        <h3 class="name">${prod.prodName}</h3>
+                        <h3 class="name"><a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}">${prod.prodName}</a></h3>
                         <a href="#" class="desc">${prod.descript}</a>
                     </td>
                     <td>
                         <ul>
                             <li>
                                 <ins class="dis-price">
-                                    ${prod.disPrice}
+                                    <fmt:formatNumber value="${prod.disPrice}" pattern="#,###" />
                                 </ins>
                             </li>
+                            
+                            <!-- 할인율이 있다면 할인표시를 띄우고 아니라면 정가의 할인 표시 띄우기 -->
+                            <c:if test="${prod.discount ne 0}">
                             <li>
                                 <del class="org-price">
-                                    ${prod.price}
+                                    <fmt:formatNumber value="${prod.price}" pattern="#,###" />
                                 </del>
                                 <span class="discount">
                                     ${prod.discount}%
                                 </span>
                             </li>
+                            </c:if>
+                            
+                            <!-- 배송비도 무료배송이 아니라면 정상적으로 나오게끔 수정 예정 -->
                             <li>
                             	<c:if test="${prod.delivery eq 0}">
-                                <span class="free-delivery">무료배송</span>
+                                <span class="free-delivery"></span>
                                 </c:if>
                                 <c:if test="${prod.delivery ne 0}">
-                                <span class="free-delivery">배송비 ${prod.delivery}</span>
+                                <span class="free-delivery has-delivery">배송비 <fmt:formatNumber value="${prod.delivery}" pattern="#,###" />원</span>
                                 </c:if>
                             </li>
                         </ul>
@@ -79,191 +88,37 @@
                             </i>
                             &nbsp;${prod.company}
                         </h4>
+                        <!-- 나중에 등급별로 다르게 나오게끔 수정 예정 -->
                         <h5 class="badge power">${prod.level}</h5>
                         <h6 class="rating star1">${prod.score}</h6>
                     </td>
                 </tr>
                 </c:forEach>
-                
-                <tr>
-                    <td>
-                        <a href="#" class="thumb">
-                            <img src="./images/120x120.png" alt="상품이미지">
-                        </a>
-                    </td>
-                    <td>
-                        <h3 class="name">상품명</h3>
-                        <a href="#" class="desc">상품설명</a>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <ins class="dis-price">
-                                    27000
-                                </ins>
-                            </li>
-                            <li>
-                                <del class="org-price">
-                                    30000
-                                </del>
-                                <span class="discount">
-                                    10%
-                                </span>
-                            </li>
-                            <li>
-                                <span class="free-delivery">무료배송</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <h4 class="seller">
-                            <i class="fas fa-home" aria-hidden="true">
-                            </i>
-                            &nbsp;판매자
-                        </h4>
-                        <h5 class="badge power">판매자등급</h5>
-                        <h6 class="rating star1">상품평</h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#" class="thumb">
-                            <img src="./images/120x120.png" alt="상품이미지">
-                        </a>
-                    </td>
-                    <td>
-                        <h3 class="name">상품명</h3>
-                        <a href="#" class="desc">상품설명</a>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <ins class="dis-price">
-                                    27000
-                                </ins>
-                            </li>
-                            <li>
-                                <del class="org-price">
-                                    30000
-                                </del>
-                                <span class="discount">
-                                    10%
-                                </span>
-                            </li>
-                            <li>
-                                <span class="free-delivery">무료배송</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <h4 class="seller">
-                            <i class="fas fa-home" aria-hidden="true">
-                            </i>
-                            &nbsp;판매자
-                        </h4>
-                        <h5 class="badge power">판매자등급</h5>
-                        <h6 class="rating star1">상품평</h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#" class="thumb">
-                            <img src="./images/120x120.png" alt="상품이미지">
-                        </a>
-                    </td>
-                    <td>
-                        <h3 class="name">상품명</h3>
-                        <a href="#" class="desc">상품설명</a>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <ins class="dis-price">
-                                    27000
-                                </ins>
-                            </li>
-                            <li>
-                                <del class="org-price">
-                                    30000
-                                </del>
-                                <span class="discount">
-                                    10%
-                                </span>
-                            </li>
-                            <li>
-                                <span class="free-delivery">무료배송</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <h4 class="seller">
-                            <i class="fas fa-home" aria-hidden="true">
-                            </i>
-                            &nbsp;판매자
-                        </h4>
-                        <h5 class="badge power">판매자등급</h5>
-                        <h6 class="rating star1">상품평</h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="#" class="thumb">
-                            <img src="./images/120x120.png" alt="상품이미지">
-                        </a>
-                    </td>
-                    <td>
-                        <h3 class="name">상품명</h3>
-                        <a href="#" class="desc">상품설명</a>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <ins class="dis-price">
-                                    27000
-                                </ins>
-                            </li>
-                            <li>
-                                <del class="org-price">
-                                    30000
-                                </del>
-                                <span class="discount">
-                                    10%
-                                </span>
-                            </li>
-                            <li>
-                                <span class="free-delivery">무료배송</span>
-                            </li>
-                        </ul>
-                    </td>
-                    <td>
-                        <h4 class="seller">
-                            <i class="fas fa-home" aria-hidden="true">
-                            </i>
-                            &nbsp;판매자
-                        </h4>
-                        <h5 class="badge power">판매자등급</h5>
-                        <h6 class="rating star1">상품평</h6>
-                    </td>
-                </tr>
             </tbody>
         </table>
         <!-- 상품목록 페이지번호 -->
         <div class="paging">
+        <c:if test="${pageGroupStart > 1}">
             <span class="prev">
-                <a href="#">〈&nbsp;이전</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupStart - 1}">〈&nbsp;이전</a>
             </span>
+        </c:if>
+        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
             <span class="num">
-                <a href="#" class="on">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#">6</a>
-                <a href="#">7</a>
+            <!-- 대분류 소분류 구분 -->
+            	<c:if test="${cate2 ne null}">
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
+            	</c:if>
+            	<c:if test="${cate2 eq null}">
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
+            	</c:if>
             </span>
+        </c:forEach>
+        <c:if test="${pageGroupEnd < lastPageNum}">
             <span class="next">
-                <a href="#">다음&nbsp;〉</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupEnd + 1}">다음&nbsp;〉</a>
             </span>
+        </c:if>
         </div>
     </section>
 </main>

@@ -27,10 +27,15 @@ public enum ProductService {
 	public void insertProduct(ProductDTO product) {
 		dao.insertProduct(product);
 	}
-	public ProductDTO selectProduct(String uid) {
-		return dao.selectProduct(uid);
+	public ProductDTO selectProduct(String cate1, String cate2, String prodNo) {
+		return dao.selectProduct(cate1, cate2, prodNo);
 	}
-
+	public List<ProductDTO> selectProductsByCate1(String cate1, int start) {
+		return dao.selectProductsByCate1(cate1, start);
+	}
+	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start) {
+		return dao.selectProductsByCate2(cate1, cate2, start);
+	}
 	public List<ProductDTO> selectProductsAll(int start) {
 		return dao.selectProductsAll(start);
 	}
@@ -46,7 +51,8 @@ public enum ProductService {
 	public int selectCountProductsByCate1(String cate1) {
 		return dao.selectCountProductsByCate1(cate1);
 	}
-	public void selectCountProductsByCate2(String cate2) {
+	public int selectCountProductsByCate2(String cate1, String cate2) {
+		return dao.selectCountProductsByCate2(cate1, cate2);
 	}
 	
 	

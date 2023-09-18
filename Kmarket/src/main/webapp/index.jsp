@@ -15,10 +15,10 @@
 	                    <i class="fas fa-angle-right"></i>
                     </a>
                     <ol>
-	                    <li><a href="#">남성의류</a></li>
-	                    <li><a href="#">여성의류</a></li>
-	                    <li><a href="#">잡화</a></li>
-	                    <li><a href="#">뷰티</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=10">남성의류</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=11">여성의류</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=12">잡화</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=13">뷰티</a></li>
                     </ol>
                 </li>
                 <li>
