@@ -16,6 +16,15 @@ public class CsDAO extends DBHelper {
 	// 기본 CRUD 메서드
 	public void insertBoard(CsDTO dto) {
 		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_BOARD);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("insertBoard() ERROR : " + e.getMessage());
+		}
 	}
 	
 	public CsDTO selectBoard(String no) {

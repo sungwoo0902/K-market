@@ -408,33 +408,33 @@ button[type=submit] {
     margin-bottom: 10px;
 }
 
-#admin-product-list > section > table  {
+#admin-product-list > section > form > table  {
     border-top: 2px solid #8798a3;
 }
-#admin-product-list > section > table  tr > th{
+#admin-product-list > section > form > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-product-list > section > table  tr > td {
+#admin-product-list > section > form >  table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-product-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-product-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-product-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-product-list > section > table  tr > td:nth-child(11) {width: 100px;}
+#admin-product-list > section > form > table  tr > td:nth-child(1) {width: 20px;}
+#admin-product-list > section > form > table  tr > td:nth-child(2) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(3) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-product-list > section > form > table  tr > td:nth-child(5) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(6) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(7) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(8) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(9) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(10) {width: 80px;}
+#admin-product-list > section > form > table  tr > td:nth-child(11) {width: 100px;}
 
-#admin-product-list > section > table img.thumb {width: 60px;}
+#admin-product-list > section > form > table img.thumb {width: 60px;}
 
-#admin-product-list > section input[type=button] {
+#admin-product-list > section > input[type=button] {
     float: left;
     width: 100px;
     margin-top: 10px;
