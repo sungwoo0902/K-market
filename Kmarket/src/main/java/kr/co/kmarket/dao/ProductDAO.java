@@ -55,15 +55,53 @@ public class ProductDAO extends DBHelper{
 	}
 	public ProductDTO selectProduct(String cate1, String cate2, String prodNo) {
 		
+		ProductDTO dto = null;
+		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCT);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			psmt.setString(3, prodNo);
+			rs = psmt.executeQuery();
 			
+			if(rs.next()) {
+				dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+			}
 			close();
 		} catch (Exception e) {
+			logger.error("selectProduct() error :"+e.getMessage());
 		}
-		
-		return null;
+		return dto;
 	}
 
 	public void updateProduct(ProductDTO dto) {}

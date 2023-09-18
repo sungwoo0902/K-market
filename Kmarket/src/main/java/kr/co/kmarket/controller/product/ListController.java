@@ -38,12 +38,7 @@ public class ListController extends HttpServlet{
 		int currentPage = prodService.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수
-		// 대분류만 볼 때와 소분류까지 볼 때를 구분
-		if(cate2 == null) {
-			total = prodService.selectCountProductsByCate1(cate1);
-		}else if(cate2 != null) {
-			total = prodService.selectCountProductsByCate2(cate1, cate2);
-		}
+		total = prodService.selectCountProductsByCate2(cate1, cate2);
 		
 		
 		logger.info("selectCoutProductsByCate1 total : "+ total);
@@ -63,14 +58,8 @@ public class ListController extends HttpServlet{
 		int start = prodService.getStartNum(currentPage);
 		
 		// 현재 페이지 게시물 조회
-		// 대분류만 볼 때와 소분류까지 볼 때를 구분
 		List<ProductDTO> products = new ArrayList<>();
-		if(cate2 == null) {
-			products = prodService.selectProductsByCate1(cate1, start);
-		}else if(cate2 != null) {
-			products = prodService.selectProductsByCate2(cate1, cate2, start);
-		}
-		
+		products = prodService.selectProductsByCate2(cate1, cate2, start);
 		
 		req.setAttribute("success", success);
 		req.setAttribute("products", products);

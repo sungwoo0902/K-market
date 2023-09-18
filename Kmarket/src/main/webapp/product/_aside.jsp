@@ -8,7 +8,7 @@
                 카테고리
             </li>
             <li>
-                <a href="${ctxPath}/product/list.do?cate1=10">
+                <a href="#">
                     <i class="fas fa-tshirt" aria-hidden="true">
                     </i>
                     패션·의류·뷰티
@@ -29,7 +29,7 @@
                 </ol>
             </li>
             <li>
-                <a href="${ctxPath}/product/list.do?cate1=11">
+                <a href="#">
                     <i class="fas fa-laptop" aria-hidden="true">
                     </i>
                     가전·디지털
@@ -50,7 +50,7 @@
                 </ol>
             </li>
             <li>
-                <a href="${ctxPath}/product/list.do?cate1=12">
+                <a href="#">
                     <i class="fas fa-utensils" aria-hidden="true">
                     </i>
                     식품·생필품
@@ -71,7 +71,7 @@
                 </ol>
             </li>
             <li>
-                <a href="${ctxPath}/product/list.do?cate1=13">
+                <a href="#">
                     <i class="fas fa-home" aria-hidden="true">
                     </i>
                     홈·문구·취미

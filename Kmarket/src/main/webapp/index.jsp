@@ -10,19 +10,19 @@
 	                	<i class="fa fa-bars" aria-hidden="true"></i>카테고리
 	                </li>
                 	<li>
-                    <a href="${ctxPath}/product/list.do?cate1=10">
+                    <a href="#">
 	                    <i class="fas fa-tshirt"></i>패션·의류·뷰티
 	                    <i class="fas fa-angle-right"></i>
                     </a>
                     <ol>
-	                    <li><a href="#">남성의류</a></li>
-	                    <li><a href="#">여성의류</a></li>
-	                    <li><a href="#">잡화</a></li>
-	                    <li><a href="#">뷰티</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=10">남성의류</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=11">여성의류</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=12">잡화</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=13">뷰티</a></li>
                     </ol>
                 </li>
                 <li>
-                    <a href="${ctxPath}/product/list.do?cate1=11">
+                    <a href="#">
 	                    <i class="fas fa-laptop"></i>가전·디지털
 	                    <i class="fas fa-angle-right"></i>
                     </a>
@@ -34,7 +34,7 @@
                     </ol>
                 </li>
                 <li>
-                    <a href="${ctxPath}/product/list.do?cate1=12">
+                    <a href="#">
 	                    <i class="fas fa-utensils"></i>식품·생필품
 	                    <i class="fas fa-angle-right"></i>
                     </a>
@@ -46,7 +46,7 @@
                     </ol>
                 </li>
                 <li>
-                    <a href="${ctxPath}/product/list.do?cate1=13">
+                    <a href="#">
 	                    <i class="fas fa-home"></i>홈·문구·취미
 	                    <i class="fas fa-angle-right"></i>
                     </a>
