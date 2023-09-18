@@ -1,15 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-<jsp:include page="../_asideQna.jsp"/>
+<jsp:include page="../_asideNotice.jsp"/>
 						<article>
 							<nav>
-								<h1>회원</h1>
-								<h2>회원관련 문의 내용입니다.</h2>
+								<h1>전체</h1>
+								<h2>공지사항 전체 내용입니다.</h2>
 							</nav>
 							<table>
 								<tr>
-									<td><a href="./view.html">[가입] 가입 문의내용</a></td>
-									<td>chh**</td>
+									<td><a href="#">[안내] 해외결제 사칭 문자 주의</a></td>
 									<td>2022.11.21</td>
 								</tr>
 							</table>
@@ -21,8 +20,6 @@
 							<a href="#" class="num">3</a>
 							<a href="#" class="next">다음</a>
 							</div>
-							
-							<a href="./qna_write.jsp" class="btnWrite">문의하기</a>
 						
 						</article>
 					</section>

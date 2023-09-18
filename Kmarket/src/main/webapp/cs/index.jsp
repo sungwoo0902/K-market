@@ -1,11 +1,10 @@
-<%@ include file="./_header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="./_header.jsp" %>
       <section id="cs">
         <div class="main">
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
-            <h1>공지사항<a href="./notice/list.jsp">전체보기</a></h1>
+            <h1>공지사항<a href="./cs/notice/list.do">전체보기</a></h1>
 	        <c:forEach var="board" items="${boards}"> 
 	        	<c:if test="${board.no == 11}">   
 		            <ul>
@@ -14,33 +13,33 @@
 	        			<li>${board.rDate}</li>
 		            </ul>
 	            </c:if>
-	        </c:forEach>   
+	        </c:forEach>
           </section>
         
           <section class="faq">
-            <h1>자주 묻는 질문<a href="./faq/faq_list.jsp">전체보기</a>
+            <h1>자주 묻는 질문<a href="./cs/faq/list.do">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="./faq/faq_list_member.jsp"><span>회원</span></a>
+                <a href="./cs/faq/list.do"><span>회원</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_coupon_event.jsp"><span>쿠폰/이벤트</span></a>
+                <a href="./cs/faq/list.do"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_order_payment.jsp"><span>주문/결제</span></a>
+                <a href="./cs/faq/list.do"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_delivery.jsp"><span>배송</span></a>
+                <a href="./cs/faq/list.do"><span>배송</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_cancel_return_exchange.jsp"><span>취소/반품/교환</span></a>
+                <a href="./cs/faq/list.do"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_travel_lodgment_airline.jsp"><span>여행/숙박/항공</span></a>
+                <a href="./cs/faq/list.do"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="./faq/faq_list_safe.jsp"><span>안전거래</span></a>
+                <a href="./cs/faq/list.do"><span>안전거래</span></a>
               </li>
             </ol>
           </section>
@@ -48,22 +47,22 @@
           <section class="qna">
             <h1>
               문의하기
-              <a href="./qna/qna_list_all.jsp">전체보기</a>
+              <a href="./cs/qna/list.do">전체보기</a>
             </h1>
             <c:forEach var="board" items="${boards}">
             	<c:if test="${board.no == 13}">
 		        	<ul>
 		            	<li>
-		                <a href="./qna/qna_list_all.jsp?no=${board.no}" class="title">${board.title}</a>
+		                <a href="./cs/qna/view.do" class="title">제목입니다.</a>
 		                	<p>
-		                  		<span class="uid">${board.uid}</span>
-		                  		<span class="date">${board.rDate}</span>
+		                  		<span class="uid">chh**</span>
+		                  		<span class="date">2023-09-17</span>
 		                	</p>
 		            	</li>
 		            </ul>
 	            </c:if>
             </c:forEach>
-            <a href="./qna/qna_writewrite/jsp" class="ask">문의글 작성 ></a>
+            <a href="./cs/qna/write.do" class="ask">문의글 작성 ></a>
           </section>
 
           <section class="tel">
