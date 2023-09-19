@@ -106,7 +106,7 @@ public class SQL {
 	public final static String SELECT_PRODUCTS_ALL 				= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 "
+																	+ "WHERE `stock` > 0 AND `seller`=? "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -121,15 +121,27 @@ public class SQL {
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
 																	+ "LIMIT ?, 10";
-	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//
 	//********************************************************************************************************//
-	
-	
+	public static final String INSERT_CART 						= "INSERT INTO `km_product_cart` SET "
+																	+ "`uid`=?,"
+																	+ "`prodNo`=?,"
+																	+ "`count`=?,"
+																	+ "`price`=?,"
+																	+ "`discount`=?,"
+																	+ "`point`=?,"
+																	+ "`delivery`=?,"
+																	+ "`total`=?,"
+																	+ "`rdate`=NOW()";
+	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodName, b.descript FROM "
+																	+ "`km_product_cart` AS a JOIN "
+																	+ "`km_product AS b ON a.prodNo=b.prodNo "
+																	+ "WHERE `uid`=?";
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate1 *********************************************//

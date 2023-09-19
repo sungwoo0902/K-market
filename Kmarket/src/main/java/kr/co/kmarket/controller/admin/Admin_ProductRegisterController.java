@@ -21,7 +21,7 @@ import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.ProductService;
 
 @WebServlet("/admin/product/register.do")
-public class ProductRegisterController extends HttpServlet{
+public class Admin_ProductRegisterController extends HttpServlet{
 
 	private static final long serialVersionUID = -8031409640344863676L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.service.CategoryService;
 @WebServlet("/category.do")
-public class CategoryController extends HttpServlet{
+public class Admin_CategoryController extends HttpServlet{
 
 	private static final long serialVersionUID = 43760110844428014L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

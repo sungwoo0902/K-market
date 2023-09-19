@@ -24,8 +24,8 @@ public enum CsService {
 		return dao.selectBoard(no);
 	}
 	
-	public List<CsDTO> selectBoards() {
-		return dao.selectBoards();
+	public List<CsDTO> selectBoards(String cate1, String cate2) {
+		return dao.selectBoards(cate1, cate2);
 	}
 	
 	public void updateBoard(CsDTO dto) {

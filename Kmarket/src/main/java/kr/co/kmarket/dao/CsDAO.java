@@ -37,6 +37,7 @@ public class CsDAO extends DBHelper {
 	
 	public CsDTO selectBoard(String no) {
 		CsDTO dto = null;
+
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_BOARD);
@@ -66,12 +67,11 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<CsDTO> selectBoards() {
+	public List<CsDTO> selectBoards(String cate1, String cate2) {
 		return null;
 	}
 	
 	public void updateBoard(CsDTO dto) {
-		
 	}
 	
 	public void deleteBoard(String no) {
@@ -146,9 +146,8 @@ public class CsDAO extends DBHelper {
 				cate3.add(cate);
 			}
 			close();
-			
 		} catch (Exception e) {
-			logger.error("selectCate3List()... : " + e.getMessage());
+			logger.error("selectCate2List()... : " + e.getMessage());
 		}
 		return cate3;
 	}

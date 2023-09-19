@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,14 +125,15 @@ public class ProductDAO extends DBHelper{
 	}
 	
 
-	public List<ProductDTO> selectProductsAll(int start) {
+	public List<ProductDTO> selectProductsAll(int start, String seller) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
-			psmt.setInt(1, start);
+			psmt.setString(1, seller);
+			psmt.setInt(2, start);		
 			
 			rs = psmt.executeQuery();
 			
@@ -287,13 +289,15 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	/************************* 상품 전체 불러오기 *************************/
-	public int selectCountProductsAll() {
+
+	public int selectCountProductsAll(String seller) {
 		int total = 0;
 		
 		try {
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ALL);
+			psmt.setString(1, seller);
+			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
 				total = rs.getInt(1);
