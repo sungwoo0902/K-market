@@ -91,6 +91,79 @@
 	    $.numberWithCommas = function (x) {
 	  	  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	  	}
+	    
+	  	//***********************************************//
+	    //***************** 장바구니 버튼 구현 *****************//
+	    //***********************************************//
+	    const formCart = $('#formCart');
+	    const ctxPath = $('#ctxPath');
+	    const uid = $('#uid').val();
+	  	
+	    const prodNo = $('#prodNo');
+	  	const point = $('#point');
+	  	const delivery = $('#delivery');
+	    
+	  	
+	    $('.cart').click(function(e){
+	    	e.preventDefault();
+	    	//alert('장바구니');
+	    	console.log(inputCount.val());
+	    	console.log(price);	    	
+	    	if(confirm('장바구니로 이동하시겠습니까?')){
+	    		const jsonData = {
+	      	    		"uid" : uid,
+	      	    		"prodNo" : prodNo.val(),
+	      	    		"inputCount" : inputCount.val(),
+	      	    		"price" : price,
+	      	    		"discount" : discount,
+	      	    		"point" : point.val(),
+	      	    		"delivery" : delivery.val(),
+	      	    		"totalPrice" : inputCount.val() * price
+	      	    	};
+	    		
+		    		$.ajax({
+	      	    		url: '/Kmarket/product/insertCart.do',
+	      	    		type: 'post',
+	      	    		data: jsonData,
+	      	    		dataType: 'json',
+	      	    		success: function(data){
+	      	    			console.log(data);
+	      	    		}
+	      	    	});
+	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
+	      	    	
+	      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+	    	}else{
+	    		const jsonData = {
+	    				"uid" : uid,
+	      	    		"prodNo" : prodNo.val(),
+	      	    		"inputCount" : inputCount.val(),
+	      	    		"price" : price,
+	      	    		"discount" : discount,
+	      	    		"point" : point.val(),
+	      	    		"delivery" : delivery.val(),
+	      	    		"totalPrice" : inputCount.val() * price
+	      	    	};
+	      	    	
+	      	    	console.log('jsonData :'+jsonData);
+	      	    	
+	      	    	$.ajax({
+	      	    		url: '/Kmarket/product/insertCart.do',
+	      	    		type: 'post',
+	      	    		data: jsonData,
+	      	    		dataType: 'json',
+	      	    		success: function(data){
+	      	    			console.log(data);
+	      	    		}
+	      	    	});
+	    		return;
+	    	}
+	    	
+  	    	
+	    	
+	    });
+	    
+	    
 	}); // end
 </script>
 
@@ -110,9 +183,6 @@
         </nav>
         <!-- 상품 전체 정보 내용 -->
         <article class="info">
-        <input type="hidden" id="discount" name="discount" value="${prod.discount}">
-        <input type="hidden" id="org_price" name="org_price" value="${prod.price}">
-        <input type="hidden" id="dis_price" name="dis_price" value="${prod.disPrice}">
             <div class="image">
                 <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.thumb3}" alt="상품이미지">
             </div>
@@ -195,6 +265,25 @@
                     </c:if>
                     <em>총 상품금액</em>
                 </div>
+                <form id="formCart" action="" method="post">
+                	<!-- 현재 테스트용 아이디 나중에 sessUser로 수정 -->
+	                <input type="hidden" id="uid" name="uid" value="a12345">
+	                <input type="hidden" id="thumb1" name="thumb1" value="${prod.thumb1}">
+	                <input type="hidden" id="prodNo" name="prodNo" value="${prod.prodNo}">
+	                <input type="hidden" id="prodName" name="prodName" value="${prod.prodName}">
+	                <input type="hidden" id="descript" name="descript" value="${prod.descript}">
+	                <input type="hidden" id="inputCount" name="inputCount" value="1">
+			        <input type="hidden" id="org_price" name="org_price" value="${prod.price}">
+			        <input type="hidden" id="dis_price" name="dis_price" value="${prod.disPrice}">
+			        <input type="hidden" id="discount" name="discount" value="${prod.discount}">
+			        <input type="hidden" id="point" name="point" value="${prod.point}">
+			        <input type="hidden" id="delivery" name="delivery" value="${prod.delivery}">
+			        <input type="hidden" id="totalPrice" name="totalPrice" value="${prod.price}">
+			        <input type="hidden" id="cate1" name="cate1" value="${cate1}">
+			        <input type="hidden" id="cate2" name="cate2" value="${cate2}">
+			        <input type="hidden" id="ctxPath" name="ctxPath" value="${ctxPath}">
+			        <input type="hidden" id="target" name="target" value="cart">
+		        </form>
                 <div class="button">
                     <input type="button" class="cart" value="장바구니">
                     <input type="button" class="order" value="구매하기">
