@@ -255,16 +255,6 @@ select {
     box-sizing: border-box;
 }
 
-textarea {
-    padding: 5px;
-    border: 1px solid #959595;
-    font-size: 13px;            
-    background-color: #eaeaea;
-    color: #333;
-    box-sizing: border-box;
-    resize: none;            
-}
-
 /* span {
     vertical-align: bottom;
     color: #bc2e13;
@@ -400,6 +390,16 @@ button[type=submit] {
     width: 100px;
 }
 
+#admin-product-register > textarea {
+    padding: 5px;
+    border: 1px solid #959595;
+    font-size: 13px;            
+    background-color: #eaeaea;
+    color: #333;
+    box-sizing: border-box;
+    resize: none;            
+}
+
 
 
 /* product-list */
@@ -477,6 +477,111 @@ button[type=submit] {
 #admin-product-list .paging > .num > a.on {
     color: #fe434c;
     font-weight: bold;
+}
+
+/* notice-list */
+#admin-notice-list {}
+#admin-notice-list > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-notice-list > section > form > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-notice-list > section > form > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-notice-list > section > form >  table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-notice-list > section > form > table  tr > td:nth-child(1) {width: 20px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(2) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(3) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(4) {width: 150px; text-align: center;}
+#admin-notice-list > section > form > table  tr > td:nth-child(5) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(6) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(7) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(8) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(9) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(10) {width: 80px;}
+#admin-notice-list > section > form > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-notice-list > section > form > table img.thumb {width: 60px;}
+
+#admin-notice-list > section > .noticeDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-notice-list > section > .noticeWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+    }
+
+#admin-notice-list .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-notice-list .paging > span > a {
+    color: #777;
+    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-notice-list .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-notice-list .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-notice-list .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+#admin-notice-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+}
+
+/* notice-register */
+
+#admin-notice-register {}
+#admin-notice-register input[type=submit] {
+    float: right;
+    width: 100px;
+}
+
+.noticeTitle {
+    padding: 5px;
+    font-size: 13px;                   
+    width: 700px; 
+    resize: none; 
+}
+.noticeArea {
+    padding: 5px;
+    font-size: 13px;                   
+    width: 700px;
+    height: 400px;
+    resize: none;   
 }
 
 /* config-banner */

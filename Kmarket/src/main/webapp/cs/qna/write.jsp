@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <jsp:include page="../_asideQna.jsp"/>
-<<script>
+<script>
 	$(function() {
 		
 		// 2차 상세 유형 불러오기

@@ -24,25 +24,51 @@ public class Admin_NoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1232344352L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = CsService.INSTANCE;
-	private CategoryService cateService = CategoryService.INSTANCE;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String pg = req.getParameter("pg");
+		String group = req.getParameter("group");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String cate3 = req.getParameter("cate3");
+
+		// 현재 페이지 번호
+		int currentPage = service.getCurrentPage(pg);
 		
-		List<CategoryDTO> cate1s = cateService.selectCate1s();
-		List<CategoryDTO> cate2s = cateService.selectCate2s(cate2);
-		List<CsDTO> notices = service.selectBoards(cate1, cate2, cate3, 3);
+		// 전체 게시물 갯수 
+		int total = service.selectCountBoard(group, cate1);
 		
-		req.setAttribute("cate1s", cate1s);
-		req.setAttribute("cate2s", cate2s);
+		// 마지막 페이지 번호
+		int lastPageNum = service.getLastPageNum(total);
+		
+		// 페이지 그룹 start, end 번호
+		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+		
+		// 페이지 시작번호
+		int pageStartNum = service.getPageStartNum(total, currentPage);
+		
+		// 시작 인덱스
+		int start = service.getStartNum(currentPage);
+
+		List<CsDTO> notices = service.selectBoards(group, cate1, cate2, start);
+		
+		req.setAttribute("group", group);
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
 		req.setAttribute("notices", notices);
 		
+		logger.debug("group : " + group);
+		logger.debug("cate1 : " + cate1);
+		logger.debug("cate2 : " + cate2);
+		logger.debug("notices : " + notices);
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("pageStartNum", pageStartNum+1);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group" + group + "&cate1" + cate1 + "cate2" + cate2 + "&pg" + pg);
 		dispatcher.forward(req, resp);
 	}
 	

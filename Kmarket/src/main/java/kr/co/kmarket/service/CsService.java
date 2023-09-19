@@ -39,8 +39,8 @@ public enum CsService {
 	
 	
 	// 리스트 페이징 구현 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public int selectCountBoard(String boardCate1, String boardCate2) {
-		return dao.selectCountBoard(boardCate1, boardCate2);
+	public int selectCountBoard(String group, String cate1) {
+		return dao.selectCountBoard(group, cate1);
 	}
 	
 	public int getLastPageNum(int total) {
@@ -70,6 +70,12 @@ public enum CsService {
 		return result;
 	}
 	
+	// 페이지 시작번호
+		public int getPageStartNum(int total, int currentPage) {
+			int start = (currentPage - 1) * 10;
+			return total - start;
+		}
+	
 	// 현재 페이지 번호
 	public int getCurrentPage(String pg) {
 		int currentPage = 1;
@@ -79,20 +85,26 @@ public enum CsService {
 		}
 		return currentPage;
 	}
+
 	
 	// Limit 시작번호
-	public int getStartNum(int currentPage) {
-		return (currentPage - 1) * 10;
-	}
+		public int getStartNum(int currentPage) {
+			return (currentPage - 1) * 10;
+		}
 
 	
 	
 	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public List<CsDTO> selectCate2ListWhenCate1Choose(String boardCate1) {
-		return dao.selectCate2ListWhenCate1Choose(boardCate1);
+	public List<CsDTO> selectGroupListWhenGroupChoose(String group) {
+		return dao.selectGroupListWhenGroupChoose(group);
 	}
 	
-	public List<CsDTO> selectCate3ListWhenCate2Choose(String boardCate2) {
-		return dao.selectCate3ListWhenCate2Choose(boardCate2);
+	public List<CsDTO> selectCate1ListWhenCate1Choose(String cate1) {
+		return dao.selectCate3ListWhenCate2Choose(cate1);
 	}
+	
+	public List<CsDTO> selectCate2ListWhenCate2Choose(String cate2) {
+		return dao.selectCate3ListWhenCate2Choose(cate2);
+	}
+
 }
