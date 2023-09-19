@@ -149,11 +149,12 @@ public class CsDAO extends DBHelper {
 	}
 	
 	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public List<CsDTO> selectGroupListWhenGroupChoose(String group) {
-		List<CsDTO> groups = new ArrayList<>();
+
+	public List<CsDTO> selectCate1ListWhenGroupChoose(String group) {
+		List<CsDTO> cate1List = new ArrayList<>();
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_GROUP_LIST_WHEN_GROUP_CHOOSE);
+			psmt = conn.prepareStatement(SQL.SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE);
 			psmt.setString(1, group);
 			rs = psmt.executeQuery();
 			
@@ -163,21 +164,21 @@ public class CsDAO extends DBHelper {
 				cate.setCate1(rs.getString(2));
 				cate.setCate1_name(rs.getString(3));
 				cate.setCate1_discription(rs.getString(4));
-				groups.add(cate);
+				cate1List.add(cate);
 			}
 			close();
 			
 		} catch (Exception e) {
-			logger.error("selectCate2List()... : " + e.getMessage());
+			logger.error("selectCate1List()... : " + e.getMessage());
 		}
-		return groups;
+		return cate1List;
 	}
 	
-	public List<CsDTO> selectCate3ListWhenCate1Choose(String cate1) {
-		List<CsDTO> cate1s = new ArrayList<>();
+	public List<CsDTO> selectCate2ListWhenCate1Choose(String cate1) {
+		List<CsDTO> cate2List = new ArrayList<>();
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CATE1_LIST_WHEN_CATE1_CHOOSE);
+			psmt = conn.prepareStatement(SQL.SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE);
 			psmt.setString(1, cate1);
 			rs = psmt.executeQuery();
 			
@@ -186,34 +187,12 @@ public class CsDAO extends DBHelper {
 				cate.setCate1(rs.getString(1));
 				cate.setCate2(rs.getString(2));
 				cate.setCate2_name(rs.getString(3));
-				cate1s.add(cate);
+				cate2List.add(cate);
 			}
 			close();
 		} catch (Exception e) {
 			logger.error("selectCate2List()... : " + e.getMessage());
 		}
-		return cate1s;
-	}
-	
-	public List<CsDTO> selectCate3ListWhenCate2Choose(String cate2) {
-		List<CsDTO> cate2s = new ArrayList<>();
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CATE2_LIST_WHEN_CATE2_CHOOSE);
-			psmt.setString(1, cate2);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				CsDTO cate = new CsDTO();
-				cate.setCate1(rs.getString(1));
-				cate.setCate2(rs.getString(2));
-				cate.setCate2_name(rs.getString(3));
-				cate2s.add(cate);
-			}
-			close();
-		} catch (Exception e) {
-			logger.error("selectCate2List()... : " + e.getMessage());
-		}
-		return cate2s;
+		return cate2List;
 	}
 }

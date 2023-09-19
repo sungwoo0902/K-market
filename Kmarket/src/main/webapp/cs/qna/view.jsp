@@ -3,16 +3,16 @@
 <jsp:include page="../_asideQna.jsp"/>
 						<article>
 							<nav>
-								<h2 class="title">[${qna.cate3_name}] ${qna.title}</h2>
+								<h2 class="title">[${qna.cate2_name}] ${qna.title}</h2>
 								<p>
-									<span>아이디 마스킹 처리해야함</span>
-									<span>${qna.rDate}</span>
+									<span>${qna.maskingUid}</span>
+									<span>${qna.rdate}</span>
 								</p>
 							</nav>
 							
 							<div class="content">
 								<p>
-									${qna.title}
+									${qna.content}
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>
@@ -23,6 +23,9 @@
 									감사합니다.<br/>
 								</p>
 							</div>
+							<c:if test="${qna.parent ne 0}">
+							
+							</c:if>
 							<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}" class="btnList">목록보기</a>
 						</article>
 					</section>

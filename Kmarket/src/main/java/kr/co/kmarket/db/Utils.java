@@ -20,7 +20,7 @@ public class Utils {
 	}
 	
 	public static String masking(String uid) {
-		String maskingId = uid.replaceAll("(?<=.{2})." , "*");
+		String maskingId = uid.replaceAll("(?<=.{3})." , "*");
 		return maskingId;
 	}
 }

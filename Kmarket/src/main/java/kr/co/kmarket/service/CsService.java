@@ -95,16 +95,12 @@ public enum CsService {
 	
 	
 	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public List<CsDTO> selectGroupListWhenGroupChoose(String group) {
-		return dao.selectGroupListWhenGroupChoose(group);
+	public List<CsDTO> selectCate1ListWhenGroupChoose(String group) {
+		return dao.selectCate1ListWhenGroupChoose(group);
 	}
 	
-	public List<CsDTO> selectCate1ListWhenCate1Choose(String cate1) {
-		return dao.selectCate3ListWhenCate2Choose(cate1);
-	}
-	
-	public List<CsDTO> selectCate2ListWhenCate2Choose(String cate2) {
-		return dao.selectCate3ListWhenCate2Choose(cate2);
+	public List<CsDTO> selectCate2ListWhenCate1Choose(String cate1) {
+		return dao.selectCate2ListWhenCate1Choose(cate1);
 	}
 
 }

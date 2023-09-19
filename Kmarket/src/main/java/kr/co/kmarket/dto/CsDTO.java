@@ -1,5 +1,7 @@
 package kr.co.kmarket.dto;
 
+import kr.co.kmarket.db.Utils;
+
 public class CsDTO {
 	private int no;
 	private int parent;
@@ -43,6 +45,9 @@ public class CsDTO {
 	public String getUid() {
 		return uid;
 	}
+	public String getMaskingUid() {
+		return Utils.masking(uid);
+	}
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
@@ -79,10 +84,12 @@ public class CsDTO {
 	public void setGroup(int group) {
 		this.group = group;
 	}
-	
 	public void setGroup(String group) {
 		this.group = Integer.parseInt(group);
 	}
+	
+	
+	
 	
 	public int getCate1() {
 		return cate1;
@@ -93,6 +100,9 @@ public class CsDTO {
 	public void setCate1(String cate1) {
 		this.cate1 = Integer.parseInt(cate1);
 	}
+	
+	
+	
 	public int getCate2() {
 		return cate2;
 	}
@@ -102,35 +112,60 @@ public class CsDTO {
 	public void setCate2(String cate2) {
 		this.cate2 = Integer.parseInt(cate2);
 	}
+	
+	
 	public String getRdate() {
-		return rdate;
+		return rdate.substring(2, 10);
+	}
+	public String getFullRdate() {
+		return rdate.substring(0, 10);
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
 	public String getGroup_name() {
 		return group_name;
 	}
 	public void setGroup_name(String group_name) {
 		this.group_name = group_name;
 	}
+	
+	
+	
 	public String getCate1_name() {
 		return cate1_name;
 	}
 	public void setCate1_name(String cate1_name) {
 		this.cate1_name = cate1_name;
 	}
+	
+	
+	
 	public String getCate1_discription() {
 		return cate1_discription;
 	}
 	public void setCate1_discription(String cate1_discription) {
 		this.cate1_discription = cate1_discription;
 	}
+	
+	
+	
 	public String getCate2_name() {
 		return cate2_name;
 	}
 	public void setCate2_name(String cate2_name) {
 		this.cate2_name = cate2_name;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "CsDTO [no=" + no + ", parent=" + parent + ", group=" + group + ", cate1=" + cate1 + ", cate2=" + cate2
+				+ ", uid=" + uid + ", title=" + title + ", content=" + content + ", rdate=" + rdate + ", group_name="
+				+ group_name + ", cate1_name=" + cate1_name + ", cate1_discription=" + cate1_discription
+				+ ", cate2_name=" + cate2_name + "]";
 	}
 	
 

@@ -161,6 +161,11 @@ public class SQL {
 	public static final String SELECT_CATE2 = "SELECT * FROM `km_product_cate2` WHERE `cate2`=?";
 	public static final String SELECT_CATE2S = "SELECT * FROM `km_product_cate2` WHERE `cate1`=? ORDER BY `cate2`";
 	
+	public static final String SELECT_ALL_CATE = "SELECT a.*, b.`cate2`, b.`c2Name` FROM `km_product_cate1` AS a	"
+												+ "JOIN `km_product_cate2` AS b "
+												+ "ON a.`cate1` = b.`cate1` "
+												+ "ORDER BY a.`cate1` AND b.`cate2`";
+	
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Order *********************************************//
@@ -241,9 +246,10 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
-	public static final String SELECT_GROUP_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_group` WHERE `group`=?";
-	public static final String SELECT_CATE1_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `cate1`=?";
-	public static final String SELECT_CATE2_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate2`=?";
+
+	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
+	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
+
 	
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `group`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=?";

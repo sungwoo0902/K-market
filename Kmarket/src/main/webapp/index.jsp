@@ -9,54 +9,19 @@
 	                <li>
 	                	<i class="fa fa-bars" aria-hidden="true"></i>카테고리
 	                </li>
+	                <c:forEach var="ct1" items="${category1}">
                 	<li>
-                    <a href="#">
-	                    <i class="fas fa-tshirt"></i>패션·의류·뷰티
-	                    <i class="fas fa-angle-right"></i>
-                    </a>
-                    <ol>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=10">남성의류</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=11">여성의류</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=12">잡화</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=13">뷰티</a></li>
-                    </ol>
-                </li>
-                <li>
-                    <a href="#">
-	                    <i class="fas fa-laptop"></i>가전·디지털
-	                    <i class="fas fa-angle-right"></i>
-                    </a>
-                    <ol>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=10">노트북/PC</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=11">가전</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=12">휴대폰</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=13">기타</a></li>
-                    </ol>
-                </li>
-                <li>
-                    <a href="#">
-	                    <i class="fas fa-utensils"></i>식품·생필품
-	                    <i class="fas fa-angle-right"></i>
-                    </a>
-                    <ol>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=10">신선식품</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=11">가공식품</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=12">건강식품</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=13">생필품</a></li>
-                    </ol>
-                </li>
-                <li>
-                    <a href="#">
-	                    <i class="fas fa-home"></i>홈·문구·취미
-	                    <i class="fas fa-angle-right"></i>
-                    </a>
-                    <ol>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=10">가구/DIY</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=11">침구·커튼</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=12">생활용품</a></li>
-	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=13">사무용품</a></li>
-                    </ol>
-                </li>
+	                    <a href="#">
+		                    <i class="${ct1.cate1Icon}"></i>${ct1.c1Name}
+		                    <i class="fas fa-angle-right"></i>
+	                    </a>
+	                    <ol>
+	                    	<c:forEach var="ctA" items="${allCate}">
+			                    <li><a href="${ctxPath}/product/list.do?cate1=10&cate2=10">${ctA.c2Name}</a></li>
+		                    </c:forEach>
+	                    </ol>
+	                </li>
+	                </c:forEach>
                 </ul>
 
                 <!-- 베스트상품 배너 -->

@@ -52,6 +52,7 @@ public class CategoryDAO extends DBHelper{
 				CategoryDTO dto = new CategoryDTO();
 				dto.setCate1No(rs.getString(1));
 				dto.setC1Name(rs.getString(2));
+				dto.setCate1Icon(rs.getString(3));
 				cate1s.add(dto);
 			}
 			close();
@@ -113,5 +114,30 @@ public class CategoryDAO extends DBHelper{
 			logger.error("selectCate2s() error : "+ e.getMessage());
 		}
 		return cate2s;
+	}
+	
+	
+	public List<CategoryDTO> selectAllCate() {
+		List<CategoryDTO> allCate = new ArrayList<>();
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_ALL_CATE);
+			
+			while(rs.next()) {
+				CategoryDTO dto = new CategoryDTO();
+				dto.setCate1No(rs.getString(1));
+				dto.setC1Name(rs.getString(2));
+				dto.setCate1Icon(rs.getString(3));
+				dto.setCate2No(rs.getString(4));
+				dto.setC2Name(rs.getString(5));
+				allCate.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectAllCate() error : " + e.getMessage());
+		}
+		return allCate;
 	}
 }

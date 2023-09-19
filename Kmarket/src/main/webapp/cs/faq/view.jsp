@@ -3,12 +3,12 @@
 <jsp:include page="../_asideFaq.jsp"/>
 						<article>
 							<nav>
-								<h2 class="title"><span>Q.</span>${qna.title}</a></h2>                
+								<h2 class="title"><span>Q.</span>${faq.title}</a></h2>                
 							</nav>
 							
 							<div class="content">
 								<p>
-									${qna.content}
+									${faq.content}
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>
@@ -19,7 +19,7 @@
 									감사합니다.<br/>
 								</p>
 							</div>
-							<a href="${ctxPath}/cs/faq/list.do?cate1=${cate}" class="btnList">목록보기</a>
+							<a href="${ctxPath}/cs/faq/list.do?cate1=${cate1}" class="btnList">목록보기</a>
 						</article>
 					</section>
 				</div>

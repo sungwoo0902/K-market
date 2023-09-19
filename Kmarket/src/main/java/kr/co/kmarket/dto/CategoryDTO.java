@@ -6,6 +6,7 @@ public class CategoryDTO {
 	private String c1Name;
 	private int cate2No;
 	private String c2Name;
+	private String cate1Icon;
 	
 	
 	public int getCate1No() {
@@ -40,6 +41,12 @@ public class CategoryDTO {
 	}
 	
 	
+	public String getCate1Icon() {
+		return cate1Icon;
+	}
+	public void setCate1Icon(String cate1Icon) {
+		this.cate1Icon = cate1Icon;
+	}
 	@Override
 	public String toString() {
 		return "CategoryDAO [cate1=" + cate1No + ", c1Name=" + c1Name + ", cate2=" + cate2No + ", c2Name=" + c2Name + "]";
