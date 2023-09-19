@@ -31,7 +31,7 @@
 	        }
 	        
 	        totalPrice.text($.numberWithCommas(parseInt(price * prevCount)));
-	    });
+	    }); // input end
 		
 	  	//***********************************************//
 	    //*** input focus, focusout할 때 input의 숫자 저장 ***//
@@ -96,14 +96,13 @@
 	    //***************** 장바구니 버튼 구현 *****************//
 	    //***********************************************//
 	    const formCart = $('#formCart');
-	    const ctxPath = $('#ctxPath');
+	    const ctxPath = $('#ctxPath').val();
 	    const uid = $('#uid').val();
 	  	
-	    const prodNo = $('#prodNo');
-	  	const point = $('#point');
+	    const prodNo = $('#prodNo').val();
+	  	const point = $('#point').val();
 	  	const delivery = $('#delivery');
 	    
-	  	
 	    $('.cart').click(function(e){
 	    	e.preventDefault();
 	    	//alert('장바구니');
@@ -112,11 +111,11 @@
 	    	if(confirm('장바구니로 이동하시겠습니까?')){
 	    		const jsonData = {
 	      	    		"uid" : uid,
-	      	    		"prodNo" : prodNo.val(),
+	      	    		"prodNo" : prodNo,
 	      	    		"inputCount" : inputCount.val(),
 	      	    		"price" : price,
 	      	    		"discount" : discount,
-	      	    		"point" : point.val(),
+	      	    		"point" : point,
 	      	    		"delivery" : delivery.val(),
 	      	    		"totalPrice" : inputCount.val() * price
 	      	    	};
@@ -136,11 +135,11 @@
 	    	}else{
 	    		const jsonData = {
 	    				"uid" : uid,
-	      	    		"prodNo" : prodNo.val(),
+	      	    		"prodNo" : prodNo,
 	      	    		"inputCount" : inputCount.val(),
 	      	    		"price" : price,
 	      	    		"discount" : discount,
-	      	    		"point" : point.val(),
+	      	    		"point" : point,
 	      	    		"delivery" : delivery.val(),
 	      	    		"totalPrice" : inputCount.val() * price
 	      	    	};
@@ -156,12 +155,10 @@
 	      	    			console.log(data);
 	      	    		}
 	      	    	});
+	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
 	    		return;
 	    	}
-	    	
-  	    	
-	    	
-	    });
+	    }); // cart click end
 	    
 	    
 	}); // end
