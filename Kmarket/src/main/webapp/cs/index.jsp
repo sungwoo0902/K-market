@@ -6,7 +6,7 @@
           <section class="notice">
             <h1>공지사항<a href="./cs/notice/list.do">전체보기</a></h1>
 	        <c:forEach var="board" items="${boards}"> 
-	        	<c:if test="${board.no == 11}">   
+	        	<c:if test="${board.boardCate1 == 1}">   
 		            <ul>
 		              	<li><a href="./notice/notice_list_all.do?no=${board.no}">${board.title}[${board.comment}]</a></li>
 	        		  	<li>${board.uid}</li>
@@ -50,7 +50,7 @@
               <a href="./cs/qna/list.do">전체보기</a>
             </h1>
             <c:forEach var="board" items="${boards}">
-            	<c:if test="${board.no == 13}">
+            	<c:if test="${board.boardCate1 == 3}">
 		        	<ul>
 		            	<li>
 		                <a href="./cs/qna/view.do" class="title">제목입니다.</a>

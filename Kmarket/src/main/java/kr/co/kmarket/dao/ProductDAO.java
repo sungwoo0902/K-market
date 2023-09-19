@@ -289,6 +289,7 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	/************************* 상품 전체 불러오기 *************************/
+
 	public int selectCountProductsAll(String seller) {
 		int total = 0;
 		
