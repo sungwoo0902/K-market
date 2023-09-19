@@ -6,7 +6,7 @@ public class CartDTO {
 	private String uid;
 	private int prodNo;
 	private int count;
-	private int price;
+	private int cartPrice;
 	private int discount;
 	private int point;
 	private int delivery;
@@ -19,6 +19,7 @@ public class CartDTO {
 	private int prodCate2;
 	private String prodName;
 	private String descript;
+	private int orgPrice;
 	
 	public String getThumb1() {
 		return thumb1;
@@ -60,6 +61,15 @@ public class CartDTO {
 	public void setDescript(String descript) {
 		this.descript = descript;
 	}
+	public int getOrgPrice() {
+		return orgPrice;
+	}
+	public void setOrgPrice(int orgPrice) {
+		this.orgPrice = orgPrice;
+	}
+	public void setOrgPrice(String orgPrice) {
+		this.orgPrice = Integer.parseInt(orgPrice);
+	}
 	
 	/////////////////////////////////////////////////
 	
@@ -96,14 +106,14 @@ public class CartDTO {
 	public void setCount(String count) {
 		this.count = Integer.parseInt(count);
 	}
-	public int getPrice() {
-		return price;
+	public int getCartPrice() {
+		return cartPrice;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setCartPrice(int cartPrice) {
+		this.cartPrice = cartPrice;
 	}
-	public void setPrice(String price) {
-		this.price = Integer.parseInt(price);
+	public void setCartPrice(String cartPrice) {
+		this.cartPrice = Integer.parseInt(cartPrice);
 	}
 	public int getDiscount() {
 		return discount;
@@ -149,11 +159,12 @@ public class CartDTO {
 	}
 	@Override
 	public String toString() {
-		return "CartDTO [cartNo=" + cartNo + ", uid=" + uid + ", prodNo=" + prodNo + ", count=" + count + ", price="
-				+ price + ", discount=" + discount + ", point=" + point + ", delivery=" + delivery + ", total=" + total
-				+ ", rdate=" + rdate + ", thumb1=" + thumb1 + ", prodCate1=" + prodCate1 + ", prodCate2=" + prodCate2
-				+ ", prodName=" + prodName + ", descript=" + descript + "]";
+		return "CartDTO [cartNo=" + cartNo + ", uid=" + uid + ", prodNo=" + prodNo + ", count=" + count + ", cartPrice="
+				+ cartPrice + ", discount=" + discount + ", point=" + point + ", delivery=" + delivery + ", total="
+				+ total + ", rdate=" + rdate + ", thumb1=" + thumb1 + ", prodCate1=" + prodCate1 + ", prodCate2="
+				+ prodCate2 + ", prodName=" + prodName + ", descript=" + descript + ", orgPrice=" + orgPrice + "]";
 	}
+	
 
 	
 	

@@ -107,54 +107,36 @@
 	    	e.preventDefault();
 	    	//alert('장바구니');
 	    	console.log(inputCount.val());
-	    	console.log(price);	    	
-	    	if(confirm('장바구니로 이동하시겠습니까?')){
-	    		const jsonData = {
-	      	    		"uid" : uid,
-	      	    		"prodNo" : prodNo,
-	      	    		"inputCount" : inputCount.val(),
-	      	    		"price" : price,
-	      	    		"discount" : discount,
-	      	    		"point" : point,
-	      	    		"delivery" : delivery.val(),
-	      	    		"totalPrice" : inputCount.val() * price
-	      	    	};
+	    	console.log(price);	    
+	    	
+	    	// 확인을 눌러도, 취소를 눌러도 json데이터를 보내서 장바구니에 입력한다.
+	    	const jsonData = {
+      	    		"uid" : uid,
+      	    		"prodNo" : prodNo,
+      	    		"inputCount" : inputCount.val(),
+      	    		"price" : price,
+      	    		"discount" : discount,
+      	    		"point" : point,
+      	    		"delivery" : delivery.val(),
+      	    		"totalPrice" : inputCount.val() * price
+      	    	};
+    		
+	    		$.ajax({
+      	    		url: '/Kmarket/product/insertCart.do',
+      	    		type: 'post',
+      	    		data: jsonData,
+      	    		dataType: 'json',
+      	    		success: function(data){
+      	    			console.log(data);
+      	    		}
+      	    	});
+	    	// 여기서 insertCart로 값을 넘기고 selectCart 	
 	    		
-		    		$.ajax({
-	      	    		url: '/Kmarket/product/insertCart.do',
-	      	    		type: 'post',
-	      	    		data: jsonData,
-	      	    		dataType: 'json',
-	      	    		success: function(data){
-	      	    			console.log(data);
-	      	    		}
-	      	    	});
+	    	// 확인을 누르면 장바구니로 이동, 아니라면 해당 페이지 그대로 유지
+	    	if(confirm('장바구니로 이동하시겠습니까?')){
 	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-	      	    	
 	      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
 	    	}else{
-	    		const jsonData = {
-	    				"uid" : uid,
-	      	    		"prodNo" : prodNo,
-	      	    		"inputCount" : inputCount.val(),
-	      	    		"price" : price,
-	      	    		"discount" : discount,
-	      	    		"point" : point,
-	      	    		"delivery" : delivery.val(),
-	      	    		"totalPrice" : inputCount.val() * price
-	      	    	};
-	      	    	
-	      	    	console.log('jsonData :'+jsonData);
-	      	    	
-	      	    	$.ajax({
-	      	    		url: '/Kmarket/product/insertCart.do',
-	      	    		type: 'post',
-	      	    		data: jsonData,
-	      	    		dataType: 'json',
-	      	    		success: function(data){
-	      	    			console.log(data);
-	      	    		}
-	      	    	});
 	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
 	    		return;
 	    	}
