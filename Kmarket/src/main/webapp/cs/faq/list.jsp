@@ -11,66 +11,41 @@
 			
 			if(displayStatus == 'none'){
 				item.slideDown(100);
-			  
+				$(this).text('간단히 보기');
 			}else{
 				item.slideUp(100);
+				$(this).text('더보기');
 			}
 		});
-	})
+		
+		// 스크롤링 기능 추가
+		$('h3 a').click(function(e){
+			e.preventDefault();
+			let targetId = $(this).attr('href');
+            let targetOffset = $(targetId).offset().top;
+            $('html, body').animate({ scrollTop: targetOffset }, 500);
+        });
+	});
 </script>
-		<article>
-			<c:forEach var="board1" items="${boards1}">              
-				<nav>
-					<h1>${board1.cate1_name}</h1>
-					<h2>${board1.cate1_discription}</h2>
-				</nav>
+	<article>
+		<c:forEach var="article_faq_list" items="${articles_faq_lists}">              
+			<nav>
+				<h1>${article_faq_list.cate1_name}</h1>
+				<h2>${article_faq_list.cate1_discription}</h2>
+			<c:forEach var = "article_faq_list" items="${articles_faq_lists}">
+			<div>
+				<h3>${article_faq_list.cate2_name}</h3>
+				<ul>
+					<li><a href="./view.do?no=${article_faq_list.no}"><span>Q.</span>${article_faq_list.title}</a></li>
+					<li class="more"><a href="#">더보기</a></li>
+				</ul>
+			</div>
 			</c:forEach>
-			<c:forEach var = "board2" items=${boards2}>
-				<c:if test="${board2.group == 2}">
-				<div>
-					<h3>${board2.cate2_name}</h3>
-					<ul>
-						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
-						<li class="more"><a href="#">더보기</a></li>
-					</ul>
-				</div>
-				</c:if>
-			</c:forEach>
-			<c:forEach var = "board2" items=${boards2}>
-				<c:if test="${board2.group == 2}">
-				<div>
-					<h3>${board2.cate2_name}</h3>
-					<ul>
-						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
-						<li class="more"><a href="#">더보기</a></li>
-					</ul>
-				</div>
-				</c:if>
-			</c:forEach>
-			<c:forEach var = "board2" items=${boards2}>
-				<c:if test="${board2.group == 2}">
-				<div>
-					<h3>${board2.cate2_name}</h3>
-					<ul>
-						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
-						<li class="more"><a href="#">더보기</a></li>
-					</ul>
-				</div>
-				</c:if>
-			</c:forEach>
-			<c:forEach var = "board2" items=${boards2}>
-				<c:if test="${board2.group == 2}">
-				<div>
-					<h3>${board2.cate2_name}</h3>
-					<ul>
-						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
-						<li class="more"><a href="#">더보기</a></li>
-					</ul>
-				</div>
-				</c:if>
-			</c:forEach>
-		</article>
-		</section>
-	</div>
+			</nav>
+		</c:forEach>
+	</article>
 </section>
+</div>
+</section>
+	
 <%@ include file = "../_footer.jsp" %>

@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +68,7 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
+
 	public List<CsDTO> selectBoards(String group, String cate2, String cate3, int start) {
 		
 			List<CsDTO> board = new ArrayList<>();

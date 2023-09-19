@@ -219,7 +219,7 @@ public class SQL {
 														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
 														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
-														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? "
+														+ "WHERE `parent`=0 AND a.`group`=? AND a.`cate1`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
@@ -232,7 +232,7 @@ public class SQL {
 														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
 														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
-														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? AND `cate2`=? "
+														+ "WHERE `parent`=0 AND a.`group`=? AND a.`cate1`=? AND a.`cate2`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
