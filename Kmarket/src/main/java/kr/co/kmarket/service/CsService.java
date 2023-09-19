@@ -16,17 +16,16 @@ public enum CsService {
 	private CsDAO dao = new CsDAO();
 	
 	
-	public void insertBoard(CsDTO dto) {
-		dao.insertBoard(dto);
+	public int insertBoard(CsDTO dto) {
+		return dao.insertBoard(dto);
 	}
 	
 	public CsDTO selectBoard(String no) {
 		return dao.selectBoard(no);
 	}
 	
-	public List<CsDTO> selectBoards() {
-
-		return dao.selectBoards();
+	public List<CsDTO> selectBoards(String cate1, String cate2) {
+		return dao.selectBoards(cate1, cate2);
 	}
 	
 	public void updateBoard(CsDTO dto) {
@@ -86,4 +85,14 @@ public enum CsService {
 		return (currentPage - 1) * 10;
 	}
 
+	
+	
+	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	public List<CsDTO> selectCate2ListWhenCate1Choose(String boardCate1) {
+		return dao.selectCate2ListWhenCate1Choose(boardCate1);
+	}
+	
+	public List<CsDTO> selectCate3ListWhenCate2Choose(String boardCate2) {
+		return dao.selectCate3ListWhenCate2Choose(boardCate2);
+	}
 }

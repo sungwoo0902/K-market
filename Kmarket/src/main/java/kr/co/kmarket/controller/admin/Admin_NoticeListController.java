@@ -33,11 +33,11 @@ public class Admin_NoticeListController extends HttpServlet {
 		
 		List<CategoryDTO> cate1s = cateService.selectCate1s();
 		List<CategoryDTO> cate2s = cateService.selectCate2s(boardCate2);
-		List<CsDTO> notices = service.selectBoards();
+		//List<CsDTO> notices = service.selectBoards();
 		
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
-		req.setAttribute("notices", notices);
+		//req.setAttribute("notices", notices);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp");

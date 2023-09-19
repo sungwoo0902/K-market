@@ -1,8 +1,6 @@
 package kr.co.kmarket.dao;
 
-
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -38,7 +36,7 @@ public class CsDAO extends DBHelper {
 	}
 	
 	public CsDTO selectBoard(String no) {
-		CsDTO board = null;
+		CsDTO dto = null;
 
 		try {
 			conn = getConnection();
@@ -47,23 +45,31 @@ public class CsDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				board = new CsDTO();
-				board.setNo(rs.getInt(1));
-				board.setBoardCate1(rs.getInt(2));
-				board.setBoardCate2(rs.getInt(3));
-				board.setBoardCate3(rs.getInt(4));
-				board.setUid(rs.getString(5));
-				board.setTitle(rs.getString(6));
-				board.setContent(rs.getString(7));
-				board.setrDate(rs.getString(8));
+				dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+				dto.setBoardCate1(rs.getString(3));
+				dto.setBoardCate2(rs.getString(4));
+				dto.setBoardCate3(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setrDate(rs.getString(9));
+				dto.setCate1_name(rs.getString(10));
+				dto.setCate2_name(rs.getString(11));
+				dto.setCate3_name(rs.getString(12));
 			}
 			close();
+			
 		} catch (Exception e) {
-			logger.error("selectBoard() - "+e.getMessage());
+			logger.error("selectBoard : " + e.getMessage());
 		}
-		return board;
+		return dto;
 	}
 	
+	public List<CsDTO> selectBoards(String cate1, String cate2) {
+		return null;
+	}
 	
 	public void updateBoard(CsDTO dto) {
 	}
@@ -100,24 +106,49 @@ public class CsDAO extends DBHelper {
 	}
 	
 	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public CsDTO selectCate2ListWhenCate1Choose(String boardCate1) {
-		CsDTO dto = null;
+	public List<CsDTO> selectCate2ListWhenCate1Choose(String boardCate1) {
+		List<CsDTO> cate2 = new ArrayList<>();
 		try {
 			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE);
+			psmt.setString(1, boardCate1);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsDTO cate = new CsDTO();
+				cate.setBoardCate1(rs.getString(1));
+				cate.setBoardCate2(rs.getString(2));
+				cate.setCate2_name(rs.getString(3));
+				cate.setCate2_discription(rs.getString(4));
+				cate2.add(cate);
+			}
+			close();
+			
 		} catch (Exception e) {
 			logger.error("selectCate2List()... : " + e.getMessage());
 		}
-		return dto;
+		return cate2;
 	}
 	
-	public CsDTO selectCate3ListWhenCate2Choose(String boardCate2) {
-		CsDTO dto = null;
+	public List<CsDTO> selectCate3ListWhenCate2Choose(String boardCate2) {
+		List<CsDTO> cate3 = new ArrayList<>();
 		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE);
+			psmt.setString(1, boardCate2);
+			rs = psmt.executeQuery();
 			
+			while(rs.next()) {
+				CsDTO cate = new CsDTO();
+				cate.setBoardCate2(rs.getString(1));
+				cate.setBoardCate3(rs.getString(2));
+				cate.setCate3_name(rs.getString(3));
+				cate3.add(cate);
+			}
+			close();
 		} catch (Exception e) {
-			logger.error("selectCate3List()... : " + e.getMessage());
+			logger.error("selectCate2List()... : " + e.getMessage());
 		}
-		return dto;
+		return cate3;
 	}
-
 }

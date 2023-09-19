@@ -23,11 +23,23 @@ public class ViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 824910349917258619L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private CsService service = CsService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doGet()...");
+		
+		String cate1 = req.getParameter("cate1");
+		String no    = req.getParameter("no");
+		logger.debug("cate1 : " + cate1);
+		logger.debug("no    : " + no);
+		
+		req.setAttribute("cate1", cate1);
 		req.setAttribute("board", "view");
+		
+		CsDTO dto = service.selectBoard(no);
+		logger.debug("dto : " + dto);
+		req.setAttribute("qna", dto);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 		dispatcher.forward(req, resp);

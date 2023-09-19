@@ -32,13 +32,14 @@ public class ListController extends HttpServlet {
 
 		// 데이터 수신
 		String pg = req.getParameter("pg");
-		String search = req.getParameter("search");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
 					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 					
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard(search);
+		int total = service.selectCountBoard(cate1, cate2);
 						
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -46,16 +47,16 @@ public class ListController extends HttpServlet {
 		// 페이지 그룹 start, end 번호
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 					
-		// 페이지 시작번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-						
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> articles = service.selectBoards(search);
+		List<CsDTO> articles = service.selectBoards(cate1, cate2);
 				
 		req.setAttribute("board", "list");
+		
+		String succcess = req.getParameter("success");
+		req.setAttribute("succcess", succcess);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
 		dispatcher.forward(req, resp);
