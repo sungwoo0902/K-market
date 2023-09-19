@@ -56,8 +56,11 @@ public enum ProductService {
 	}
 	
 	
-
 	
+	/************************* 베스트/히트/추천 상품 불러오기 *************************/
+	public List<ProductDTO> selectPopularProducts(String type) {
+		return dao.selectPopularProducts(type);
+	}
 
 	/**************************** File Upload ****************************/
 	// 업로드 경로 구하기

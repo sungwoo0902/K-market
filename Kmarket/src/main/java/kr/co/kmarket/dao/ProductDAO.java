@@ -348,4 +348,72 @@ public class ProductDAO extends DBHelper{
 		}
 		return total;
 	}
+	
+	
+	/************************* 베스트/히트/추천 상품 불러오기 *************************/
+	public List<ProductDTO> selectPopularProducts(String type) {
+		List<ProductDTO> popItem = new ArrayList<ProductDTO>();
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			
+			if(type.equals("best")) {
+				rs = stmt.executeQuery(SQL.SELECT_BEST_PRODUCT);
+				logger.debug("selectPopularProducts... BEST");
+				
+			}else if(type.equals("hit")) {
+				rs = stmt.executeQuery(SQL.SELECT_HIT_PRODUCT);
+				logger.debug("selectPopularProducts... HIT");
+				
+			}else if(type.equals("recommend")) {
+				rs = stmt.executeQuery(SQL.SELECT_RECOMMEND_PRODUCT);
+				logger.debug("selectPopularProducts... RECOMMEND");
+				
+			}else if(type.equals("current")) {
+				rs = stmt.executeQuery(SQL.SELECT_CURRENT_PRODUCT);
+				logger.debug("selectPopularProducts... CURRENT");
+				
+			}else if(type.equals("discount")) {
+				rs = stmt.executeQuery(SQL.SELECT_DISCOUNT_PRODUCT);
+				logger.debug("selectPopularProducts... DISCOUNT");
+			}
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString(1));
+				dto.setProdCate1(rs.getString(2));
+				dto.setProdCate2(rs.getString(3));
+				dto.setProdName(rs.getString(4));
+				dto.setDescript(rs.getString(5));
+				dto.setProdCompany(rs.getString(6));
+				dto.setSeller(rs.getString(7));
+				dto.setPrice(rs.getString(8));
+				dto.setDiscount(rs.getString(9));
+				dto.setPoint(rs.getString(10));
+				dto.setStock(rs.getString(11));
+				dto.setSold(rs.getString(12));
+				dto.setDelivery(rs.getString(13));
+				dto.setHit(rs.getString(14));
+				dto.setScore(rs.getString(15));
+				dto.setReview(rs.getString(16));
+				dto.setThumb1(rs.getString(17));
+				dto.setThumb2(rs.getString(18));
+				dto.setThumb3(rs.getString(19));
+				dto.setDetail(rs.getString(20));
+				dto.setStatus(rs.getString(21));
+				dto.setDuty(rs.getString(22));
+				dto.setReceipt(rs.getString(23));
+				dto.setBizType(rs.getString(24));
+				dto.setOrigin(rs.getString(25));
+				dto.setIp(rs.getString(26));
+				dto.setRdate(rs.getString(27));
+				popItem.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectPopularProducts : " + e.getMessage());
+		}
+		return popItem;
+	}
 }

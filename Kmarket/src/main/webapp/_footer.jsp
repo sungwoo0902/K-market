@@ -8,7 +8,7 @@
             </ul>
             <div>
                 <p>
-                    <img src="../images/footer_logo.png" alt="로고">
+                    <img src="${ctxPath}/images/footer_logo.png" alt="로고">
                 </p>
                 <p>
                     <strong>(주)KMARKET</strong>

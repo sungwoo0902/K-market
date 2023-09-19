@@ -3,6 +3,8 @@ package kr.co.kmarket.dto;
 import java.io.File;
 import java.util.UUID;
 
+import kr.co.kmarket.db.Utils;
+
 public class ProductDTO {
 
 	private int prodNo;
@@ -276,6 +278,17 @@ public class ProductDTO {
 		this.rdate = rdate;
 	}
 	
+	/************** Value With Comma *************************************/
+	public String getPriceWithComma() {
+		return Utils.comma(price);
+	}
+	public String getDeliveryWithComma() {
+		return Utils.comma(delivery);
+	}
+	public String getDisPriceWithComma() {
+		return Utils.comma(this.price - ((this.price/100) * this.discount));
+	}
+	
 	
 	public String fileRename(String thumb) {
 		
@@ -292,6 +305,18 @@ public class ProductDTO {
 		f1.renameTo(f2);
 		
 		return sName;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductDTO [prodNo=" + prodNo + ", prodCate1=" + prodCate1 + ", prodCate2=" + prodCate2 + ", prodName="
+				+ prodName + ", descript=" + descript + ", prodCompany=" + prodCompany + ", seller=" + seller
+				+ ", price=" + price + ", discount=" + discount + ", point=" + point + ", stock=" + stock + ", sold="
+				+ sold + ", delivery=" + delivery + ", hit=" + hit + ", score=" + score + ", review=" + review
+				+ ", thumb1=" + thumb1 + ", thumb2=" + thumb2 + ", thumb3=" + thumb3 + ", detail=" + detail
+				+ ", status=" + status + ", duty=" + duty + ", receipt=" + receipt + ", bizType=" + bizType
+				+ ", origin=" + origin + ", ip=" + ip + ", rdate=" + rdate + ", path=" + path + ", level=" + level
+				+ ", company=" + company + "]";
 	}
 	
 	
