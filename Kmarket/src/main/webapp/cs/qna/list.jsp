@@ -4,13 +4,13 @@
 						<article>
 						<c:forEach var="board1" items="${boards1}">
 							<nav>
-								<h1>${board1.cate2_name}</h1>
-								<h2>${board1.cate2_discription}</h2>
+								<h1>${board1.cate1_name}</h1>
+								<h2>${board1.cate1_discription}</h2>
 							</nav>
 						<table>
 						</c:forEach>
 						<c:forEach var="board2" items=${boards2}>
-							<c:if test="${board2.boardCate == 3}">
+							<c:if test="${board2.group == 3}">
 								<tr>
 									<td><a href="./view.do?no=${board2.no}">${board2.title}</a></td>
 									<td>${board2.uid}</td>

@@ -18,77 +18,59 @@
 		});
 	})
 </script>
-						<article>              
-							<nav>
-								<h1>회원</h1>
-								<h2>가장 자주 묻는 질문입니다.</h2>
-							</nav>
-							<div>
-								<h3>가입</h3>
-								<ul>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 1</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 2</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 3</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 4</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 5</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 6</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 7</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 8</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 9</a></li>
-									<li><a href="./view.jsp"><span>Q.</span>개인회원과 법인회원에 차이가 있나요? 10</a></li>
-									<li class="more"><a href="#">더보기</a></li>
-								</ul>
-							</div>
-							<div>
-								<h3>탈퇴</h3>
-								<ul>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 1</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 2</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 3</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 4</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 5</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 6</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 7</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 8</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 9</a></li>
-									<li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요? 10</a></li>
-									<li class="more"><a href="#">더보기</a></li>
-								</ul>
-							</div>
-							<div>
-								<h3>회원정보</h3>
-								<ul>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 1</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 2</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 3</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 4</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 5</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 6</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 7</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 8</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 9</a></li>
-									<li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요. 10</a></li>
-									<li class="more"><a href="#">더보기</a></li>
-								</ul>
-							</div>
-							<div>
-								<h3>로그인</h3>
-								<ul>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 1</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 2</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 3</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 4</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 5</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 6</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 7</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 8</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 9</a></li>
-									<li><a href="#"><span>Q.</span>로그인에 문제가 있어요. 10</a></li>
-									<li class="more"><a href="#">더보기</a></li>
-								</ul>
-							</div>
-						</article>
-					</section>
+		<article>
+			<c:forEach var="board1" items="${boards1}">              
+				<nav>
+					<h1>${board1.cate1_name}</h1>
+					<h2>${board1.cate1_discription}</h2>
+				</nav>
+			</c:forEach>
+			<c:forEach var = "board2" items=${boards2}>
+				<c:if test="${board2.group == 2}">
+				<div>
+					<h3>${board2.cate2_name}</h3>
+					<ul>
+						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
+						<li class="more"><a href="#">더보기</a></li>
+					</ul>
 				</div>
-			</section>
+				</c:if>
+			</c:forEach>
+			<c:forEach var = "board2" items=${boards2}>
+				<c:if test="${board2.group == 2}">
+				<div>
+					<h3>${board2.cate2_name}</h3>
+					<ul>
+						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
+						<li class="more"><a href="#">더보기</a></li>
+					</ul>
+				</div>
+				</c:if>
+			</c:forEach>
+			<c:forEach var = "board2" items=${boards2}>
+				<c:if test="${board2.group == 2}">
+				<div>
+					<h3>${board2.cate2_name}</h3>
+					<ul>
+						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
+						<li class="more"><a href="#">더보기</a></li>
+					</ul>
+				</div>
+				</c:if>
+			</c:forEach>
+			<c:forEach var = "board2" items=${boards2}>
+				<c:if test="${board2.group == 2}">
+				<div>
+					<h3>${board2.cate2_name}</h3>
+					<ul>
+						<li><a href="./view.do?no=${board2.no}"><span>Q.</span>${board2.title}</a></li>
+						<li class="more"><a href="#">더보기</a></li>
+					</ul>
+				</div>
+				</c:if>
+			</c:forEach>
+		</article>
+		</section>
+	</div>
+</section>
 <%@ include file = "../_footer.jsp" %>
