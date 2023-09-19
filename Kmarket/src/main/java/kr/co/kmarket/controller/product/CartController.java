@@ -35,6 +35,13 @@ public class CartController extends HttpServlet{
 		
 		String uid = req.getParameter("uid");
 		
+		
+		/*
+		if(sessUser.uid.equal) {
+			
+		}
+		*/
+		
 		carts = cartService.selectCarts(uid);
 		
 		req.setAttribute("carts", carts);
