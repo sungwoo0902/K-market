@@ -40,6 +40,7 @@ public class IndexController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		String cate3 = req.getParameter("cate3");
 					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -57,7 +58,7 @@ public class IndexController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> articles = service.selectBoards(cate1, cate2);
+		List<CsDTO> articles = service.selectBoards(cate1, cate2, cate3, 3);
 				
 		req.setAttribute("board", "list");
 		

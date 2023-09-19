@@ -34,6 +34,9 @@ public class ListController extends HttpServlet {
 		String pg = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		
+		logger.debug("cate1 : " + cate1);
+		logger.debug("cate2 : " + cate2);
 					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -51,7 +54,7 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> articles = service.selectBoards(cate1, cate2);
+		List<CsDTO> articles = service.selectBoards(cate1, cate2 , "홍", 3);
 				
 		req.setAttribute("board", "list");
 		

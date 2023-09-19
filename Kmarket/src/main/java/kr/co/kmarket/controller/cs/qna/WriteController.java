@@ -90,9 +90,9 @@ public class WriteController extends HttpServlet {
 				logger.debug("content    : " + content);
 				
 				CsDTO dto = new CsDTO();
-				dto.setBoardCate1(3);
-				dto.setBoardCate2(boardCate2);
-				dto.setBoardCate3(boardCate3);
+				dto.setGroup(3);
+				dto.setCate1(boardCate2);
+				dto.setCate2(boardCate3);
 				dto.setUid(uid);
 				dto.setTitle(title);
 				dto.setContent(content);

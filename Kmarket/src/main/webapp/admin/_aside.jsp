@@ -10,7 +10,7 @@
                     <li><a href="${ctxPath}/admin/config/banner.jsp">배너관리</a></li>
                 </ol>
             </li>
-
+			<c:if test="${sessUser.type eq 2}">
             <li>
                 <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
                 <ol>
@@ -18,7 +18,8 @@
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
-            
+            </c:if>
+            <c:if test="${sessUser.type eq 3}">
             <li>
                 <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
                 <ol>
@@ -28,15 +29,15 @@
                     <li><a href="#">접속자집계</a></li>
                 </ol>
             </li>
-            
+            </c:if>
+            <c:if test="${sessUser.type eq 2}">
             <li>
                 <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol id="menu">
                     <li><a href="${ctxPath}/admin/product/list.do?seller=${sessUser.uid}">상품현황</a></li>
                     <li><a href="${ctxPath}/admin/product/register.do">상품등록</a></li>
                 </ol>
-            </li>
-            
+            </li>          
             <li>
                 <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
                 <ol>
@@ -46,13 +47,14 @@
                     <li><a href="#">배송관리</a></li>
                 </ol>
             </li>
+            </c:if>
             <c:if test="${sessUser.type eq 3}">
             <li>
                 <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                 <ol>
-                    <li><a href="${ctxPath}/admin/notice/list.do">공지사항</a></li>
-                    <li><a href="#">자주묻는질문</a></li>
-                    <li><a href="#">고객문의</a></li>
+                    <li><a href="${ctxPath}/admin/notice/list.do?cate1=1">공지사항</a></li>
+                    <li><a href="${ctxPath}/admin/notice/list.do?cate1=2">자주묻는질문</a></li>
+                    <li><a href="${ctxPath}/admin/notice/list.do?cate1=3">고객문의</a></li>
                 </ol>
             </li>
             </c:if>

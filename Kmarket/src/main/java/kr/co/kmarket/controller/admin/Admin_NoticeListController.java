@@ -29,15 +29,17 @@ public class Admin_NoticeListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String boardCate2 = req.getParameter("boardCate2");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		String cate3 = req.getParameter("cate3");
 		
 		List<CategoryDTO> cate1s = cateService.selectCate1s();
-		List<CategoryDTO> cate2s = cateService.selectCate2s(boardCate2);
-		//List<CsDTO> notices = service.selectBoards();
+		List<CategoryDTO> cate2s = cateService.selectCate2s(cate2);
+		List<CsDTO> notices = service.selectBoards(cate1, cate2, cate3, 3);
 		
 		req.setAttribute("cate1s", cate1s);
 		req.setAttribute("cate2s", cate2s);
-		//req.setAttribute("notices", notices);
+		req.setAttribute("notices", notices);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp");
