@@ -9,10 +9,11 @@
 							</nav>
 						<table>
 						</c:forEach>
-						<c:forEach var="board2" items=${boards2}>
+						<c:forEach var="board2" items="${boards2}">
 							<c:if test="${board2.group == 3}">
 								<tr>
 									<td><a href="./view.do?no=${board2.no}">${board2.title}</a></td>
+									<td></td>
 									<td>${board2.uid}</td>
 									<td>${board2.rDate}</td>
 								</tr>
