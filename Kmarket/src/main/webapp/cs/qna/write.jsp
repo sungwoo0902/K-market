@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <jsp:include page="../_asideQna.jsp"/>
-<<script>
+<script>
 	$(function() {
 		
 		// 2차 상세 유형 불러오기
@@ -39,8 +39,8 @@
 						console.log('category : ' + category);
 						
 						cate3.append($('<option>', {
-							value: category.boardCate3,
-							text: category.cate3_name
+							value: category.cate2,
+							text: category.cate2_name
 						}));
 					}
 				}
@@ -59,11 +59,13 @@
 				alert('2차 상세유형을 선택해주세요.');
 				return false;
 			}
+			
+			$('#qna_write_submit').submit();
 		})
 	});
 </script>
 						<article class="wrt">
-							<form action="#" method="post">
+							<form action="#" method="post" id="qna_write_submit">
 								<input type="hidden" name="type" value="write"/>
 								<input type="hidden" name="uid" value="${sessUser.uid}"/>
 								<table>
@@ -73,15 +75,15 @@
 											<!-- type1은 회원게시판에서 클릭했을 시 회원으로 설정되게끔. -->
 											<select name="boardCate2" id="boardCate2">
 												<option value="0">1차 선택</option>
-												<c:forEach var="cate" items="${cate2}">
-													<option value="${cate.boardCate2}" ${cate1 eq cate.boardCate2?'selected':''}>${cate.cate2_name}</option>
+												<c:forEach var="main_cate" items="${cate1List}">
+													<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
 												</c:forEach>
 											</select>
 											<!--  type2는 jsonData로 받아와서 동적처리. -->
 											<select name="boardCate3" id="boardCate3">
 												<option value="0">2차 선택</option>
-												<c:forEach var="sub_cate" items="${sub_cate}">
-													<option value="${sub_cate.boardCate3}">${sub_cate.cate3_name}</option>
+												<c:forEach var="sub_cate" items="${cate2List}">
+													<option value="${sub_cate.cate2}">${sub_cate.cate2_name}</option>
 												</c:forEach>
 											</select>
 										</td>

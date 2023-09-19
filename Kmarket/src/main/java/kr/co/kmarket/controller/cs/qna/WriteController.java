@@ -37,14 +37,14 @@ public class WriteController extends HttpServlet {
 		req.setAttribute("board", "write");
 		
 		// 글 작성시 대분류 리스트 가져오기.
-		List<CsDTO> cate2 = service.selectCate2ListWhenCate1Choose("3");
-		logger.debug("List_cate2 : " + cate2);
-		req.setAttribute("cate2", cate2);
+		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose("3");
+		logger.debug("cate1List : " + cate1List.toString());
+		req.setAttribute("cate1List", cate1List);
 		
 		// 소분류 리스트 가져오기
-		List<CsDTO> cate3 = service.selectCate3ListWhenCate2Choose(cate1);
-		logger.debug("List_cate3 : " + cate3);
-		req.setAttribute("sub_cate", cate3);
+		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
+		logger.debug("cate2List : " + cate2List);
+		req.setAttribute("cate2List", cate2List);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);
@@ -61,7 +61,7 @@ public class WriteController extends HttpServlet {
 			case "json": 
 				// 대분류 선택시 소분류 가져오기.
 				String jsonCate2 = req.getParameter("jsonCate2");
-				List<CsDTO> jsonCate3 = service.selectCate3ListWhenCate2Choose(jsonCate2);
+				List<CsDTO> jsonCate3 = service.selectCate2ListWhenCate1Choose(jsonCate2);
 				logger.debug("jsonCate2 : " + jsonCate2);
 				logger.debug("jsonCate3 : " + jsonCate3.toString());
 				
@@ -102,10 +102,10 @@ public class WriteController extends HttpServlet {
 				int result = service.insertBoard(dto);
 				
 				if(result > 0) {
-					resp.sendRedirect("./list.do?cate1="+boardCate2+"success=200");
+					resp.sendRedirect("./list.do?cate1="+boardCate2+"&success=200");
 					
 				}else {
-					resp.sendRedirect("./list.do?cate1="+boardCate2+"success=100");
+					resp.sendRedirect("./list.do?cate1="+boardCate2+"&success=100");
 				}
 		}
 	}

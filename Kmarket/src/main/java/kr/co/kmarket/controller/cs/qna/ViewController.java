@@ -41,7 +41,12 @@ public class ViewController extends HttpServlet {
 		logger.debug("dto : " + dto);
 		req.setAttribute("qna", dto);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
-		dispatcher.forward(req, resp);
+		if(dto.getGroup() == 3) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
+			dispatcher.forward(req, resp);
+			
+		}else {
+			resp.sendRedirect("./cs/notice/list.do?cate1="+cate1+"&success=101");
+		}
 	}
 }
