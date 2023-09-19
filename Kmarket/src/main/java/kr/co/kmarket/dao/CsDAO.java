@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,26 +68,27 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<CsDTO> selectBoards(String cate1, String cate2, String cate3, int start) {
+
+	public List<CsDTO> selectBoards(String group, String cate2, String cate3, int start) {
 		
 			List<CsDTO> board = new ArrayList<>();
 		
 		try {
-			
+				conn =getConnection();
 			if(cate3 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
-				psmt.setString(1, cate1);
+				psmt.setString(1, group);
 				psmt.setString(2, cate2);
 				psmt.setString(3, cate3);	
 				psmt.setInt(4, start);	
 			}else if(cate2 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
-				psmt.setString(1, cate1);
+				psmt.setString(1, group);
 				psmt.setString(2, cate2);
 				psmt.setInt(3, start);	
-			}else if(cate1 != null) {
+			}else{
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
-				psmt.setString(1, cate1);
+				psmt.setString(1, group);
 				psmt.setInt(2, start);	
 			}
 			rs = psmt.executeQuery();
@@ -147,6 +149,7 @@ public class CsDAO extends DBHelper {
 	}
 	
 	// 카테고리 상세 선택 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 	public List<CsDTO> selectCate1ListWhenGroupChoose(String group) {
 		List<CsDTO> cate1List = new ArrayList<>();
 		try {

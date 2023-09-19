@@ -138,10 +138,15 @@ public class SQL {
 																	+ "`delivery`=?,"
 																	+ "`total`=?,"
 																	+ "`rdate`=NOW()";
-	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript FROM "
+	public static final String SELECT_CART						= "SELECT COUNT(*) FROM `km_product_cart` WHERE `uid`=? AND `prodNo`=?";
+	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript, b.price FROM "
 																	+ "`km_product_cart` AS a JOIN "
 																	+ "`km_product` AS b ON a.prodNo=b.prodNo "
 																	+ "WHERE `uid`=?";
+	public static final String UPDATE_CART						= "UPDATE `km_product_cart` "
+																	+ "SET `count`= `count`+?, "
+																	+ "`total`= `total`+? "
+																	+ "WHERE `uid`=? AND `prodNo`=?";
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate1 *********************************************//
@@ -211,7 +216,7 @@ public class SQL {
 														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
 														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
-														+ "WHERE `parent`=0 AND `group`=? "
+														+ "WHERE `parent`=0 AND a.`group`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
@@ -224,7 +229,7 @@ public class SQL {
 														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
 														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
-														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? "
+														+ "WHERE `parent`=0 AND a.`group`=? AND a.`cate1`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
@@ -237,12 +242,14 @@ public class SQL {
 														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
 														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
-														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? AND `cate2`=? "
+														+ "WHERE `parent`=0 AND a.`group`=? AND a.`cate1`=? AND a.`cate2`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
+
 	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
 	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
+
 	
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `group`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=?";

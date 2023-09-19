@@ -78,12 +78,6 @@ public class CsDTO {
 	private String cate1_discription;
 	private String cate2_name;
 
-
-
-
-
-
-
 	public int getGroup() {
 		return group;
 	}

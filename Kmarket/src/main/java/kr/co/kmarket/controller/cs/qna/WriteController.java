@@ -45,7 +45,7 @@ public class WriteController extends HttpServlet {
 		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
 		logger.debug("cate2List : " + cate2List);
 		req.setAttribute("cate2List", cate2List);
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/write.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -61,7 +61,9 @@ public class WriteController extends HttpServlet {
 			case "json": 
 				// 대분류 선택시 소분류 가져오기.
 				String jsonCate2 = req.getParameter("jsonCate2");
+
 				List<CsDTO> jsonCate3 = service.selectCate2ListWhenCate1Choose(jsonCate2);
+
 				logger.debug("jsonCate2 : " + jsonCate2);
 				logger.debug("jsonCate3 : " + jsonCate3.toString());
 				

@@ -4,16 +4,15 @@
         <div class="main">
           <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
           <section class="notice">
-            <h1>공지사항<a href="./cs/notice/list.do">전체보기</a></h1>
-	        <c:forEach var="board" items="${boards}"> 
-	        	<c:if test="${board.boardCate1 == 1}">   
-		            <ul>
-		              	<li><a href="./notice/notice_list_all.do?no=${board.no}">${board.title}[${board.comment}]</a></li>
-	        		  	<li>${board.uid}</li>
-	        			<li>${board.rDate}</li>
-		            </ul>
-	            </c:if>
-	        </c:forEach>
+            <h1>공지사항<a href="./notice/list.do">전체보기</a></h1>
+            <ul>
+            <c:forEach var="article_notice_list" items="${articles_notice_lists}">
+              	<li>
+              		<a href="./notice/notice_list_all.do?no=${article_notice_list.no}" class="title">${article_notice_list.title}</a>
+              		<span class="date">${article_notice_list.rdate}</span>
+              	</li>
+            </c:forEach>
+            </ul>
           </section>
         
           <section class="faq">
@@ -45,23 +44,18 @@
           </section>
         
           <section class="qna">
-            <h1>
-              문의하기
-              <a href="./cs/qna/list.do">전체보기</a>
-            </h1>
-            <c:forEach var="board" items="${boards}">
-            	<c:if test="${board.boardCate1 == 3}">
-		        	<ul>
-		            	<li>
-		                <a href="./cs/qna/view.do" class="title">제목입니다.</a>
-		                	<p>
-		                  		<span class="uid">chh**</span>
-		                  		<span class="date">2023-09-17</span>
-		                	</p>
-		            	</li>
-		            </ul>
-	            </c:if>
+            <h1>문의하기<a href="./qna/list.do">전체보기</a></h1>
+            <ul>
+            <c:forEach var="article_qna_list" items="${articles_qna_lists}">
+            	<li>
+                	<a href="./qna/view.do?no=${article_qna_list.no}" class="title">${article_qna_list.title}</a>
+                	<p>
+                  		<span class="uid">${article_qna_list.uid}</span>
+                  		<span class="date">${article_qna_list.rdate}</span>
+                	</p>
+            	</li>
             </c:forEach>
+            </ul>
             <a href="./cs/qna/write.do" class="ask">문의글 작성 ></a>
           </section>
 

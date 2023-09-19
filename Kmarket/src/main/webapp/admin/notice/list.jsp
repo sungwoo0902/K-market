@@ -17,16 +17,21 @@ $(function(){
 		
 	});	
 	
-	$('.productDelete').click(function(){
-		$('#formCheck').submit();
+	$('.noticeDelete').click(function(){
+		$('#formNotice').submit();
 	});
+	
+	 $('.noticeWrite').click(function(){
+		 
+	    window.location.href = "/Kmarket/admin/notice/write.do?group=1"; 
+	 });
 });
 
 </script>
 
 <main>
     <%@ include file="../_aside.jsp" %>
-    <section id="admin-product-list">
+    <section id="admin-notice-list">
         <nav>
             <h3>상품목록</h3>
             <p>
@@ -44,27 +49,28 @@ $(function(){
                 </select>
                 <input type="text" name="search">
             </div>
-            <form id="formCheck" action="${ctxPath}/admin/notice/delete.do" method="get">
+            <form id="formNotice" action="#" method="get">
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
                     <th>번호</th>
                     <th>유형</th>
                     <th>제목</th>
-                    <th>조회</th>
                     <th>날짜</th>
                     <th>관리</th>
                 </tr>
 				<c:forEach var="notice" items="${notices}">
 				<tr>
                     <td><input type="checkbox" name="chk"></td>
-                    <th>${notices.no}</th>
-                    <th>${notices.cate2}</th>
-                    <th>${notices.title}</th>
-                    <th>${notices.hit}</th>
-                    <th>${notices.rDate}</th>
+                    <td>${notice.no}</td>
+                    <td>${notice.cate1}</td>
+                    <td>${notice.title}</td>
+                   	<td>
+                   	<fmt:parseDate var="parsedDate" value="${notice.rdate}" pattern="yyyy-MM-dd HH:mm:ss" />
+					<fmt:formatDate value="${parsedDate}" pattern="yyyy년 MM월 dd일" />
+					</td>
                     <td>
-                        <a href="${ctxPath}/admin/notice/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
+                        <a href="#">[삭제]</a>
                         <a href="#">[수정]</a>
                     </td>                   
                 </tr>
@@ -72,22 +78,23 @@ $(function(){
             </table>
             </form>
             
-            <input type="button" value="선택 삭제" class="productDelete"/>
+            <input type="button" value="선택 삭제" class="noticeDelete"/>
+            <input type="button" value="공지 작성" class="noticeWrite"/>
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
                 <span class="prev">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupStart - 1}&seller=${sessUser.uid}"><&nbsp;이전</a>
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
                 </span>
             </c:if>  
             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
                 <span class="num">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${i}&seller=${sessUser.uid}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${i}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
                 </span>
             </c:forEach>  
             <c:if test="${pageGroupEnd < lastPageNum}">   
                 <span class="next">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupEnd + 1}&seller=${sessUser.uid}">다음&nbsp;></a>
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
                 </span>
             </c:if>    
             </div>
