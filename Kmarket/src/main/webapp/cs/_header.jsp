@@ -20,11 +20,25 @@
 				<div class="top">
 					<div>
 						<p>
-							<a href="${ctxPath}/member/login.do">로그인</a>
-							<a href="${ctxPath}/member/register.do">회원가입</a>
-							<a href="#">마이페이지</a>
-							<a href="#">
-							<i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+							<c:choose>
+                  <c:when test="${sessUser eq null}">
+                  <a href="${ctxPath}/index.do">홈</a>
+                  <a href="${ctxPath}/member/login.do">로그인</a>
+                  <a href="${ctxPath}/member/join.do">회원가입</a>
+                  </c:when>
+                  <c:otherwise>
+                  <c:if test="${sessUser.type eq 2 or sessUser.type eq 3}">
+                  <a href="${ctxPath}/admin/index.do">관리자</a>
+                  </c:if>
+
+                  <a href="${ctxPath}/member/logout.do">로그아웃</a>
+                  <c:if test="${sessUser.type eq 1}">
+                  <a href="#" class="unready">마이페이지</a>
+                  <a href="${ctxPath}/product/cart.do"><i class="fa fa-shopping-cart" aria-hidden="true">
+                  </i>&nbsp;장바구니</a>
+                  </c:if>
+                  </c:otherwise>
+                </c:choose>
 						</p>
 					</div>
 				</div>

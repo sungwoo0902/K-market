@@ -106,7 +106,7 @@ public class SQL {
 	public final static String SELECT_PRODUCTS_ALL 				= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 "
+																	+ "WHERE `stock` > 0 AND `seller`=? "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -121,7 +121,7 @@ public class SQL {
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
 																	+ "LIMIT ?, 10";
-	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
@@ -185,11 +185,6 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
 												+ "WHERE `no`=?";
 	
-	public static final String SELECT_BOARDS = "";
-												 
-	public static final String SELECT_BOARDS_FOR_SEARCH = "SELECT";
-												
-	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 														+ "a.*, "
 														+ "b.`cate1_name`, "
@@ -229,9 +224,9 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
-	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHEN `cate1`=?";
-	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate3` WHEN `cate2`=?";
-	
+
+	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
+	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate3` WHERE `cate2`=?";
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=?";
 	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=?";

@@ -20,11 +20,12 @@ public enum CsService {
 		dao.insertBoard(dto);
 	}
 	
-	public int selectBoard(int no) {
+	public CsDTO selectBoard(String no) {
 		return dao.selectBoard(no);
 	}
 	
-	public List<CsDTO> selectBoards(String search) {
+	public List<CsDTO> selectBoards() {
+
 		return dao.selectBoards();
 	}
 	
@@ -83,15 +84,6 @@ public enum CsService {
 	// Limit 시작번호
 	public int getStartNum(int currentPage) {
 		return (currentPage - 1) * 10;
-	}
-
-	public int selectCountBoard(String search) {
-		return dao.selectCountBoard(search, search);
-	}
-
-	public int getPageStartNum(int total, int currentPage) {
-		int start = (currentPage - 1) * 10;
-		return total - start;
 	}
 
 }

@@ -22,9 +22,9 @@
             <div>
                 <a href="${ctxPath}/admin/index.do" class="logo"><img src="${ctxPath}/admin/images/admin_logo.png" alt="admin_logo"/></a>
                 <p>
-                    <span>홍길동님 반갑습니다.</span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
+                    <span>${sessUser.name}님 반갑습니다.</span>
+                    <a href="${ctxPath}/admin/index.do">HOME |</a>
+                    <a href="${ctxPath}/member/logout.do">로그아웃 |</a>
                     <a href="#">고객센터</a>
                 </p>
             </div>

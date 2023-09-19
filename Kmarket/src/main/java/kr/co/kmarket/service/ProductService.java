@@ -36,8 +36,8 @@ public enum ProductService {
 	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start) {
 		return dao.selectProductsByCate2(cate1, cate2, start);
 	}
-	public List<ProductDTO> selectProductsAll(int start) {
-		return dao.selectProductsAll(start);
+	public List<ProductDTO> selectProductsAll(int start, String seller) {
+		return dao.selectProductsAll(start, seller);
 	}
 	public void updateProduct(ProductDTO dto) {
 		dao.updateProduct(dto);
@@ -45,8 +45,8 @@ public enum ProductService {
 	public void deleteProduct(String uid, String no) {
 		dao.deleteProduct(uid, no);
 	}
-	public int selectCountProductsAll() {
-		return dao.selectCountProductsAll();
+	public int selectCountProductsAll(String seller) {
+		return dao.selectCountProductsAll(seller);
 	}
 	public int selectCountProductsByCate1(String cate1) {
 		return dao.selectCountProductsByCate1(cate1);

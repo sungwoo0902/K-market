@@ -14,7 +14,7 @@ $(function(){
 			// 전체해제
 			$('input[name=chk]').prop('checked', false);
 		}
-
+		
 	});	
 	
 	$('.productDelete').click(function(){
@@ -36,45 +36,37 @@ $(function(){
         <section>
             <div>
                 <select name="search">
-                    <option value="search1">상품명</option>
-                    <option value="search1">상품코드</option>
-                    <option value="search1">제조사</option>
-                    <option value="search1">판매자</option>
+                    <option value="search1">전체</option>
+                    <option value="search2">고객서비스</option>
+                    <option value="search3">안전거래</option>
+                    <option value="search4">위해상품</option>
+                    <option value="search5">이벤트당첨</option>
                 </select>
                 <input type="text" name="search">
             </div>
-            <form id="formCheck" action="${ctxPath}/admin/product/delete.do" method="get">
+            <form id="formCheck" action="${ctxPath}/admin/notice/delete.do" method="get">
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
-                    <th>이미지</th>
-                    <th>상품명</th>
-                    <th style="width: 50px">판매가격</th>
-                    <th>할인율</th>
-                    <th>포인트</th>
-                    <th>재고</th>
-                    <th>판매자</th>
+                    <th>번호</th>
+                    <th>유형</th>
+                    <th>제목</th>
                     <th>조회</th>
+                    <th>날짜</th>
                     <th>관리</th>
                 </tr>
-				<c:forEach var="product" items="${products}">
-					<input type="hidden" name="uid" value="${product.seller}"/>
-                	<input type="hidden" name="no" value="${product.prodNo}"/>
-                <tr>
+				<c:forEach var="notice" items="${notices}">
+				<tr>
                     <td><input type="checkbox" name="chk"></td>
-                    <td><img src="${ctxPath}/thumb/${product.thumb1}" class="thumb"></td>
-                    <td>${product.prodName}</td>
-                    <td style="text-align: center;">${product.price}</td>
-                    <td>${product.discount}</td>
-                    <td>${product.point}</td>
-                    <td>${product.stock}</td>
-                    <td>${product.seller}</td>
-                    <td>${product.hit}</td>
+                    <th>${notices.no}</th>
+                    <th>${notices.cate2}</th>
+                    <th>${notices.title}</th>
+                    <th>${notices.hit}</th>
+                    <th>${notices.rDate}</th>
                     <td>
-                        <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
+                        <a href="${ctxPath}/admin/notice/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
                         <a href="#">[수정]</a>
-                    </td>
-                    
+                    </td>                   
                 </tr>
                 </c:forEach>
             </table>
@@ -100,11 +92,6 @@ $(function(){
             </c:if>    
             </div>
         </section>
-
-        <p class="ico info">
-            <strong>Tip!</strong>
-            전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 총 35개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 있습니다.
-        </p>
     </section>
 </main>
 <%@ include file="../_footer.jsp" %>

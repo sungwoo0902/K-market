@@ -53,10 +53,10 @@
             	<c:if test="${board.boardCate1 == 3}">
 		        	<ul>
 		            	<li>
-		                <a href="./cs/qna/index.do?no=${board.no}" class="title">${board.title}</a>
+		                <a href="./cs/qna/view.do" class="title">제목입니다.</a>
 		                	<p>
-		                  		<span class="uid">${board.uid}</span>
-		                  		<span class="date">${board.rDate}</span>
+		                  		<span class="uid">chh**</span>
+		                  		<span class="date">2023-09-17</span>
 		                	</p>
 		            	</li>
 		            </ul>

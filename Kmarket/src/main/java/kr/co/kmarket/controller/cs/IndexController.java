@@ -15,6 +15,7 @@ import org.apache.catalina.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.service.CsService;
@@ -25,6 +26,7 @@ public class IndexController extends HttpServlet{
 	private static final long serialVersionUID = 7250034913434587988L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = CsService.INSTANCE; 
+
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

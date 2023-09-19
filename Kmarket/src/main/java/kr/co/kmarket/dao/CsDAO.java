@@ -1,6 +1,8 @@
 package kr.co.kmarket.dao;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -62,48 +64,8 @@ public class CsDAO extends DBHelper {
 		return board;
 	}
 	
-	public List<CsDTO> selectBoards(int start, String search) {
-		
-		List<CsDTO> boards = new ArrayList<>();
-		
-		try {
-			conn = getConnection();
-			if(search == null) {
-				psmt = conn.prepareStatement(SQL.SELECT_BOARDS);
-				psmt.setInt(1, start);
-			}else {
-				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_FOR_SEARCH);
-				psmt.setString(1, "%"+search+"%");
-				psmt.setInt(2, start);
-			}
-			
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				CsDTO board = new CsDTO();
-				board.setNo(rs.getInt(1));
-				board.setBoardCate1(rs.getInt(2));
-				board.setBoardCate2(rs.getInt(3));
-				board.setBoardCate3(rs.getInt(4));
-				board.setUid(rs.getString(5));
-				board.setTitle(rs.getString(6));
-				board.setContent(rs.getString(7));
-				board.setrDate(rs.getString(8));
-			}
-			close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return boards;
-	}
 	
 	public void updateBoard(CsDTO dto) {
-		try {
-			conn = getConnection();
-		} catch (Exception e) {
-			
-		}
-		
 	}
 	
 	public void deleteBoard(String no) {
@@ -157,4 +119,5 @@ public class CsDAO extends DBHelper {
 		}
 		return dto;
 	}
+
 }

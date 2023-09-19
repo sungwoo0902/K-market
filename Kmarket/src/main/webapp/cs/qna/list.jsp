@@ -34,4 +34,7 @@
 						</div>
 							<a href="./qna_write.do" class="btnWrite">문의하기</a>
 						</article>
+					</section>
+				</div>
+			</section>
 <%@ include file = "../_footer.jsp" %>

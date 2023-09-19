@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.cs.notice;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,10 +23,12 @@ public class ListController extends HttpServlet {
 	private static final long serialVersionUID = -479618598042292094L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = CsService.INSTANCE;
+
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doGet()...");
+
 		// 데이터 수신
 		String pg = req.getParameter("pg");
 		String search = req.getParameter("search");
@@ -50,7 +53,7 @@ public class ListController extends HttpServlet {
 			
 		// 글 조회
 		List<CsDTO> articles = service.selectBoards(search);
-		
+
 		req.setAttribute("board", "list");
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");
