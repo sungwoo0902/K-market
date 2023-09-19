@@ -138,9 +138,9 @@ public class SQL {
 																	+ "`delivery`=?,"
 																	+ "`total`=?,"
 																	+ "`rdate`=NOW()";
-	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodName, b.descript FROM "
+	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript FROM "
 																	+ "`km_product_cart` AS a JOIN "
-																	+ "`km_product AS b ON a.prodNo=b.prodNo "
+																	+ "`km_product` AS b ON a.prodNo=b.prodNo "
 																	+ "WHERE `uid`=?";
 	
 	//*********************************************************************************************************//

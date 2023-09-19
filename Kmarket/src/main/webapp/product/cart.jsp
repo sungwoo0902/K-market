@@ -51,58 +51,19 @@
                                 </div>
                             </article>
                         </td>
-                        <td>${cart.count}</td>
-                        <td>${cart.price}</td>
+                        <td><fmt:formatNumber value="${cart.count}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${cart.price}" pattern="#,###" /></td>
                         <td>${cart.discount}%</td>
-                        <td>${cart.point}</td>
-                        <td>${cart.delivery}</td>
-                        <td>${cart.total}</td>
+                        <td><fmt:formatNumber value="${cart.point}" pattern="#,###" /></td>
+                        <c:if test="${cart.delivery ne 0}">
+                        <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                        </c:if>
+                        <c:if test="${cart.delivery eq 0}">
+                        <td class="free-delivery"></td>
+                        </c:if>
+                        <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
                     </tr>
                     </c:forEach>
-                    <tr>
-                        <td><input type="checkbox" name></td>
-                        <td>
-                            <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
-                                </a>
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>5%</td>
-                        <td>270</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name></td>
-                        <td>
-                            <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
-                                </a>
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>5%</td>
-                        <td>270</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
-                    </tr>
                 </tbody>
             </table>
             <input type="button" name="del" value="선택삭제">
@@ -113,11 +74,11 @@
                     <tbody>
                         <tr>
                             <td>상품수</td>
-                            <td>1</td>
+                            <td class="selectTotalCount">1</td>
                         </tr>
                         <tr>
                             <td>상품금액</td>
-                            <td>27000</td>
+                            <td class="selectTotal">27000</td>
                         </tr>
                         <tr>
                             <td>할인금액</td>

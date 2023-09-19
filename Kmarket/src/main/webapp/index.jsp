@@ -27,10 +27,10 @@
 	                    <i class="fas fa-angle-right"></i>
                     </a>
                     <ol>
-	                    <li><a href="#">노트북/PC</a></li>
-	                    <li><a href="#">가전</a></li>
-	                    <li><a href="#">휴대폰</a></li>
-	                    <li><a href="#">기타</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=10">노트북/PC</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=11">가전</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=12">휴대폰</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=11&cate2=13">기타</a></li>
                     </ol>
                 </li>
                 <li>
@@ -39,10 +39,10 @@
 	                    <i class="fas fa-angle-right"></i>
                     </a>
                     <ol>
-	                    <li><a href="#">신선식품</a></li>
-	                    <li><a href="#">가공식품</a></li>
-	                    <li><a href="#">건강식품</a></li>
-	                    <li><a href="#">생필품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=10">신선식품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=11">가공식품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=12">건강식품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=12&cate2=13">생필품</a></li>
                     </ol>
                 </li>
                 <li>
@@ -51,10 +51,10 @@
 	                    <i class="fas fa-angle-right"></i>
                     </a>
                     <ol>
-	                    <li><a href="#">가구/DIY</a></li>
-	                    <li><a href="#">침구·커튼</a></li>
-	                    <li><a href="#">생활용품</a></li>
-	                    <li><a href="#">사무용품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=10">가구/DIY</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=11">침구·커튼</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=12">생활용품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?cate1=13&cate2=13">사무용품</a></li>
                     </ol>
                 </li>
                 </ul>
