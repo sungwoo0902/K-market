@@ -156,6 +156,11 @@ public class SQL {
 	public static final String SELECT_CATE2 = "SELECT * FROM `km_product_cate2` WHERE `cate2`=?";
 	public static final String SELECT_CATE2S = "SELECT * FROM `km_product_cate2` WHERE `cate1`=? ORDER BY `cate2`";
 	
+	public static final String SELECT_ALL_CATE = "SELECT a.*, b.`cate2`, b.`c2Name` FROM `km_product_cate1` AS a	"
+												+ "JOIN `km_product_cate2` AS b "
+												+ "ON a.`cate1` = b.`cate1` "
+												+ "ORDER BY a.`cate1` AND b.`cate2`";
+	
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Order *********************************************//

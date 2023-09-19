@@ -23,6 +23,9 @@
 									감사합니다.<br/>
 								</p>
 							</div>
+							<c:if test="${qna.parent ne 0}">
+							
+							</c:if>
 							<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}" class="btnList">목록보기</a>
 						</article>
 					</section>
