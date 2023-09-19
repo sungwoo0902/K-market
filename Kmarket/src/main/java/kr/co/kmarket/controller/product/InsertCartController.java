@@ -11,22 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
 
 import kr.co.kmarket.dto.CartDTO;
 import kr.co.kmarket.service.CartService;
-import kr.co.kmarket.service.ProductService;
 
 @WebServlet("/product/insertCart.do")
 public class InsertCartController extends HttpServlet{
 
-	private ProductService prodService = ProductService.INSTANCE;
+	private static final long serialVersionUID = 3658446645325437045L;
 	private CartService cartService = CartService.INSTANCE;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		int result = 0;
 		CartDTO dto = new CartDTO();
 		
 		String uid = req.getParameter("uid");
@@ -37,22 +35,31 @@ public class InsertCartController extends HttpServlet{
 		String point = req.getParameter("point");
 		String delivery = req.getParameter("delivery");
 		String totalPrice = req.getParameter("totalPrice");
-		String target = req.getParameter("target");
+		//String target = req.getParameter("target");
 		
+		result = cartService.selectCart(uid, prodNo);
+		
+		logger.debug("prodNo : " + prodNo);
 		logger.debug("uid : " + uid);
 		
 		dto.setUid(uid);
 		dto.setProdNo(prodNo);
 		dto.setCount(inputCount);
-		dto.setPrice(price);
+		dto.setCartPrice(price);
 		dto.setDiscount(discount);
 		dto.setPoint(point);
 		dto.setDelivery(delivery);
 		dto.setTotal(totalPrice);
 		
-		logger.debug(dto.toString());
+		System.out.println("result :"+result);
 		
-		cartService.insertCart(dto);
+		logger.debug(dto.toString());
+		if(result == 0) {
+			cartService.insertCart(dto);
+		}else if(result == 1) {
+			cartService.updateCart(dto);
+			
+		}
 		
 	}
 }

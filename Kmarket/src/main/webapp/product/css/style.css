@@ -804,6 +804,7 @@
 	background-image: url('../images/ico_free_delivery.gif');
 	background-repeat: no-repeat;
 	background-position: center center;
+	color: transparent;
 }
 
 #product > .cart > form > table td > article > div > h2 {

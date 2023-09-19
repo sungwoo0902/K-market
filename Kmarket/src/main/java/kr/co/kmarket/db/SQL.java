@@ -138,10 +138,15 @@ public class SQL {
 																	+ "`delivery`=?,"
 																	+ "`total`=?,"
 																	+ "`rdate`=NOW()";
-	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript FROM "
+	public static final String SELECT_CART						= "SELECT COUNT(*) FROM `km_product_cart` WHERE `uid`=? AND `prodNo`=?";
+	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript, b.price FROM "
 																	+ "`km_product_cart` AS a JOIN "
 																	+ "`km_product` AS b ON a.prodNo=b.prodNo "
 																	+ "WHERE `uid`=?";
+	public static final String UPDATE_CART						= "UPDATE `km_product_cart` "
+																	+ "SET `count`= `count`+?, "
+																	+ "`total`= `total`+? "
+																	+ "WHERE `uid`=? AND `prodNo`=?";
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate1 *********************************************//
