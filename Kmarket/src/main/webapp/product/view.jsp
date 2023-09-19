@@ -108,8 +108,8 @@
 	    	//alert('장바구니');
 	    	console.log(inputCount.val());
 	    	console.log(price);	    
-	    	
-	    	// 확인을 눌러도, 취소를 눌러도 json데이터를 보내서 장바구니에 입력한다.
+			
+	    	// jsonData 초기화
 	    	const jsonData = {
       	    		"uid" : uid,
       	    		"prodNo" : prodNo,
@@ -120,7 +120,7 @@
       	    		"delivery" : delivery.val(),
       	    		"totalPrice" : inputCount.val() * price
       	    	};
-    		
+    			// 위의 jsonData를 insertCartController로 보낸다
 	    		$.ajax({
       	    		url: '/Kmarket/product/insertCart.do',
       	    		type: 'post',
@@ -128,20 +128,74 @@
       	    		dataType: 'json',
       	    		success: function(data){
       	    			console.log(data);
-      	    		}
-      	    	});
-	    	// 여기서 insertCart로 값을 넘기고 selectCart 	
-	    		
-	    	// 확인을 누르면 장바구니로 이동, 아니라면 해당 페이지 그대로 유지
-	    	if(confirm('장바구니로 이동하시겠습니까?')){
-	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-	      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
-	    	}else{
-	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-	    		return;
-	    	}
+      	    			console.log(data.result);
+      	    			
+      	    			// (해당 상품이 장바구니에 있는 경우)
+      	    			// 만약 insertCartController에서 받아온 result 값이 1이라면 아래를 실행
+      	    			if(data.result == 1){
+      	    				
+      	    				// 해당 상품을 또 장바구니에 추가할건지 확인받는다.
+      	    				if(confirm('해당 상품이 이미 장바구니에 있습니다. 추가하시겠습니까?')){
+      	    					// 장바구니에 또 추가할거라면 cartResult 값을 1으로 설정하여 보낸다.
+      	    					const commitData = Object.assign({},jsonData,{"cartResult":1});
+      	    					
+      	    					$.ajax({
+      	    						url: '/Kmarket/product/insertCart.do',
+      	    	      	    		type: 'post',
+      	    	      	    		data: commitData,
+      	    	      	    		dataType: 'json',
+      	    	      	    		success: function(data){
+      	    	      	    			console.log('commitData');
+      	    	      	    			console.log(data.cartresult);
+      	    	      	    		}
+      	    					}); // ajax end
+      	    					if(confirm('장바구니에 추가되었습니다. 지금 장바구니로 이동하시겠습니까?')){
+      	    		      	    	console.log('jsonData :'+JSON.stringify(jsonData));
+      	    		      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+	      	    		    	}else{
+	      	    		      	    	console.log('jsonData :'+JSON.stringify(jsonData));
+	      	    		    		return;
+	      	    		    	}
+      	    				// 해당 상품이 장바구니에 이미 있기 때문에 취소한다.
+      	    				}else{
+      	    					// 장바구니에 추가하지 않는다면 cartResult 값을 0으로 설정하여 보낸다.
+      	    					const passData = Object.assign({},jsonData,{"cartResult":0});
+      	    					
+      	    					$.ajax({
+      	    						url: '/Kmarket/product/insertCart.do',
+      	    	      	    		type: 'post',
+      	    	      	    		data: passData,
+      	    	      	    		dataType: 'json',
+      	    	      	    		success: function(data){
+      	    	      	    			console.log('passData');
+      	    	      	    			console.log(data.cartResult);
+      	    	      	    		}
+      	    					}); // ajax end
+      	    				}
+      	    				
+      	    			// (해당 상품이 장바구니에 없는 경우)
+      	    			// 만약 insertCartController에서 받아온 result 값이 0이라면 아래를 실행
+      	    			}else if(data.result == 0){
+      	    				$.ajax({
+      	        	    		url: '/Kmarket/product/insertCart.do',
+      	        	    		type: 'post',
+      	        	    		data: jsonData,
+      	        	    		dataType: 'json',
+      	        	    		success: function(data){
+      	        	    			
+      	        	    		}
+      	    				}); // ajax end
+      	    				if(confirm('장바구니에 추가되었습니다. 지금 장바구니로 이동하시겠습니까?')){
+	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
+	      	  	      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+		      	  	    	}else{
+	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
+		      	  	    		return;
+		      	  	    	}
+      	    			}
+      	    		} // 전체 ajax success end
+      	    	}); // 전체 ajax end
 	    }); // cart click end
-	    
 	    
 	}); // end
 </script>
