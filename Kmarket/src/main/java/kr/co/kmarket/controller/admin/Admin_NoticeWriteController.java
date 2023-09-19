@@ -53,9 +53,9 @@ public class Admin_NoticeWriteController extends HttpServlet {
 		String content = req.getParameter("content");
 		
 		CsDTO cdto = new CsDTO();
-		cdto.setBoardCate1(boardCate1);
-		cdto.setBoardCate2(boardCate2);
-		cdto.setBoardCate3(boardCate3);
+		cdto.setGroup(boardCate1);
+		cdto.setCate1(boardCate2);
+		cdto.setCate2(boardCate3);
 		cdto.setUid(uid);
 		cdto.setTitle(title);
 		cdto.setContent(content);

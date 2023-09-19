@@ -20,9 +20,9 @@ public class CsDAO extends DBHelper {
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_BOARD);
-			psmt.setInt(1, dto.getBoardCate1());
-			psmt.setInt(2, dto.getBoardCate2());
-			psmt.setInt(3, dto.getBoardCate3());
+			psmt.setInt(1, dto.getGroup());
+			psmt.setInt(2, dto.getCate1());
+			psmt.setInt(3, dto.getCate2());
 			psmt.setString(4, dto.getUid());
 			psmt.setString(5, dto.getTitle());
 			psmt.setString(6, dto.getContent());
@@ -48,16 +48,16 @@ public class CsDAO extends DBHelper {
 				dto = new CsDTO();
 				dto.setNo(rs.getString(1));
 				dto.setParent(rs.getString(2));
-				dto.setBoardCate1(rs.getString(3));
-				dto.setBoardCate2(rs.getString(4));
-				dto.setBoardCate3(rs.getString(5));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
 				dto.setUid(rs.getString(6));
 				dto.setTitle(rs.getString(7));
 				dto.setContent(rs.getString(8));
-				dto.setrDate(rs.getString(9));
-				dto.setCate1_name(rs.getString(10));
-				dto.setCate2_name(rs.getString(11));
-				dto.setCate3_name(rs.getString(12));
+				dto.setRdate(rs.getString(9));
+				dto.setGroup_name(rs.getString(10));
+				dto.setCate1_name(rs.getString(11));
+				dto.setCate2_name(rs.getString(12));
 			}
 			close();
 			
@@ -67,8 +67,49 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<CsDTO> selectBoards(String cate1, String cate2) {
-		return null;
+	public List<CsDTO> selectBoards(String cate1, String cate2, String cate3, int start) {
+		
+			List<CsDTO> board = new ArrayList<>();
+		
+		try {
+			
+			if(cate3 != null) {
+				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setString(3, cate3);	
+				psmt.setInt(4, start);	
+			}else if(cate2 != null) {
+				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
+				psmt.setString(1, cate1);
+				psmt.setString(2, cate2);
+				psmt.setInt(3, start);	
+			}else if(cate1 != null) {
+				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
+				psmt.setString(1, cate1);
+				psmt.setInt(2, start);	
+			}
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsDTO dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setRdate(rs.getString(9));
+				board.add(dto);	
+			}
+				close();
+			
+		} catch (Exception e) {
+			logger.error("selectBoards() ERROR : " + e.getMessage());
+		}
+		return board;
 	}
 	
 	public void updateBoard(CsDTO dto) {
@@ -79,19 +120,19 @@ public class CsDAO extends DBHelper {
 	}
 	
 	// 페이징을 위한 메서드
-	public int selectCountBoard(String boardCate1, String boardCate2) {
+	public int selectCountBoard(String group, String cate1) {
 		int total = 0;
 		try {
 			conn = getConnection();
 			
-			if(boardCate2 == null) {
+			if(group != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MAIN_CATE);
-				psmt.setString(1, boardCate1);
+				psmt.setString(1, group);
 			
 			}else {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MIDDLE_CATE);
-				psmt.setString(1, boardCate1);
-				psmt.setString(2, boardCate2);
+				psmt.setString(1, group);
+				psmt.setString(2, cate1);
 			}
 			rs = psmt.executeQuery();
 			if(rs.next()) {
@@ -116,10 +157,10 @@ public class CsDAO extends DBHelper {
 			
 			while(rs.next()) {
 				CsDTO cate = new CsDTO();
-				cate.setBoardCate1(rs.getString(1));
-				cate.setBoardCate2(rs.getString(2));
-				cate.setCate2_name(rs.getString(3));
-				cate.setCate2_discription(rs.getString(4));
+				cate.setGroup(rs.getString(1));
+				cate.setCate1(rs.getString(2));
+				cate.setCate1_name(rs.getString(3));
+				cate.setCate1_discription(rs.getString(4));
 				cate2.add(cate);
 			}
 			close();
@@ -140,9 +181,9 @@ public class CsDAO extends DBHelper {
 			
 			while(rs.next()) {
 				CsDTO cate = new CsDTO();
-				cate.setBoardCate2(rs.getString(1));
-				cate.setBoardCate3(rs.getString(2));
-				cate.setCate3_name(rs.getString(3));
+				cate.setCate1(rs.getString(1));
+				cate.setCate2(rs.getString(2));
+				cate.setCate2_name(rs.getString(3));
 				cate3.add(cate);
 			}
 			close();

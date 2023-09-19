@@ -178,68 +178,68 @@ public class SQL {
 	//**************************************************************************************************//
 
 	public static final String INSERT_BOARD = "INSERT INTO `km_board` SET "
-												+ "`boardCate1`=?, "
-												+ "`boardCate2`=?, "
-												+ "`boardCate3`=?, "
+												+ "`group`=?, "
+												+ "`cate1`=?, "
+												+ "`cate2`=?, "
 												+ "`uid`=?, "
 												+ "`title`=?, "
 												+ "`content`=?, "
-												+ "`rDate`=NOW()";
+												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_BOARD = "SELECT "
 												+ "a.*, "
-												+ "b.`cate1_name`, "
-												+ "c.`cate2_name`, "
-												+ "d.`cate3_name` "
+												+ "b.`group_name`, "
+												+ "c.`cate1_name`, "
+												+ "d.`cate2_name` "
 												+ "FROM `km_board` AS a "
-												+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
-												+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
-												+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
+												+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
+												+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
+												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
 	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 														+ "a.*, "
-														+ "b.`cate1_name`, "
-														+ "c.`cate2_name`, "
-														+ "d.`cate3_name` "
+														+ "b.`group_name`, "
+														+ "c.`cate1_name`, "
+														+ "d.`cate2_name` "
 														+ "FROM `km_board` AS a "
-														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
-														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
-														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
-														+ "WHERE `parent`=0 AND `boardCate1`=? "
+														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
+														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
+														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
+														+ "WHERE `parent`=0 AND `group`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
 	public static final String SELECT_BOARDS_MIDDLE_CATE = "SELECT "
 														+ "a.*, "
-														+ "b.`cate1_name`, "
-														+ "c.`cate2_name`, "
-														+ "d.`cate3_name` "
+														+ "b.`group_name`, "
+														+ "c.`cate1_name`, "
+														+ "d.`cate2_name` "
 														+ "FROM `km_board` AS a "
-														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
-														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
-														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
-														+ "WHERE `parent`=0 AND `boardCate1`=? AND `boardCate2`=? "
+														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
+														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
+														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
+														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
 	public static final String SELECT_BOARDS_SUB_CATE = "SELECT "
 														+ "a.*, "
-														+ "b.`cate1_name`, "
-														+ "c.`cate2_name`, "
-														+ "d.`cate3_name` "
+														+ "b.`group_name`, "
+														+ "c.`cate1_name`, "
+														+ "d.`cate2_name` "
 														+ "FROM `km_board` AS a "
-														+ "LEFT JOIN `km_board_cate1` AS b ON a.`boardCate1` = b.`cate1` "
-														+ "LEFT JOIN `km_board_cate2` AS c ON a.`boardCate2` = c.`cate2` AND a.`boardCate1` = c.`cate1` "
-														+ "LEFT JOIN `km_board_cate3` AS d ON a.`boardCate3` = d.`cate3` AND a.`boardCate2` = d.`cate2` "
-														+ "WHERE `parent`=0 AND `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=? "
+														+ "LEFT JOIN `km_board_group` AS b ON a.`group` = b.`group` "
+														+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
+														+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
+														+ "WHERE `parent`=0 AND `group`=? AND `cate1`=? AND `cate2`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
-	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
-	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate3` WHERE `cate2`=?";
+	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_group` WHERE `group`=?";
+	public static final String SELECT_CATE3_LIST_WHEN_CATE2_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `cate1`=?";
 	
-	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=?";
-	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=?";
-	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `boardCate1`=? AND `boardCate2`=? AND `boardCate3`=?";
+	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `group`=?";
+	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=?";
+	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=? AND `cate2`=?";
 }

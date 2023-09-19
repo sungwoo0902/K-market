@@ -50,7 +50,7 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> articles = service.selectBoards(cate1, cate2);
+		List<CsDTO> articles = service.selectBoards(cate1, cate2 , "홍", 3);
 				
 		req.setAttribute("board", "list");
 		
