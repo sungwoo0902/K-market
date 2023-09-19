@@ -40,7 +40,7 @@ public class IndexController extends HttpServlet{
 		String pg = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String cate3 = req.getParameter("cate3");
+		String group = req.getParameter("group");
 					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -58,12 +58,18 @@ public class IndexController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> articles = service.selectBoards(cate1, cate2, cate3, 3);
-				
+		List<CsDTO> article_notice_list = service.selectBoards("1", null, null, start);
+		List<CsDTO> article_faq_list = service.selectBoards("2", null, null, start);
+		List<CsDTO> article_qna_list = service.selectBoards("3", null, null, start);
+		logger.debug("123 :" +article_notice_list.toString());
 		req.setAttribute("board", "list");
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
+		req.setAttribute("articles_notice_lists", article_notice_list);
+		req.setAttribute("articles_faq_lists", article_faq_list);
+		req.setAttribute("articles_qna_lists", article_qna_list);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");
 		dispatcher.forward(req, resp);

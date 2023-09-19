@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,49 +68,53 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<CsDTO> selectBoards(String cate1, String cate2, String cate3, int start) {
-		
-			List<CsDTO> board = new ArrayList<>();
-		
-		try {
-			
-			if(cate3 != null) {
-				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
-				psmt.setString(1, cate1);
-				psmt.setString(2, cate2);
-				psmt.setString(3, cate3);	
-				psmt.setInt(4, start);	
-			}else if(cate2 != null) {
-				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
-				psmt.setString(1, cate1);
-				psmt.setString(2, cate2);
-				psmt.setInt(3, start);	
-			}else if(cate1 != null) {
-				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
-				psmt.setString(1, cate1);
-				psmt.setInt(2, start);	
-			}
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				CsDTO dto = new CsDTO();
-				dto.setNo(rs.getString(1));
-				dto.setParent(rs.getString(2));
-				dto.setGroup(rs.getString(3));
-				dto.setCate1(rs.getString(4));
-				dto.setCate2(rs.getString(5));
-				dto.setUid(rs.getString(6));
-				dto.setTitle(rs.getString(7));
-				dto.setContent(rs.getString(8));
-				dto.setRdate(rs.getString(9));
-				board.add(dto);	
-			}
-				close();
-			
-		} catch (Exception e) {
-			logger.error("selectBoards() ERROR : " + e.getMessage());
-		}
-		return board;
+	public List<CsDTO> selectBoards(String group, String cate1, String cate2, int start) {
+	    List<CsDTO> board = new ArrayList<>();
+
+	    try {
+	    	conn = getConnection();
+	        if (cate2 != null) {
+	            psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
+	            psmt.setString(1, group);
+	            psmt.setString(2, cate1);
+	            psmt.setString(3, cate2);
+	            psmt.setInt(4, start);
+	        } else if (cate1 != null) {
+	            psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
+	            psmt.setString(1, group);
+	            psmt.setString(2, cate1);
+	            psmt.setInt(3, start);
+	        } else if (group != null) {
+	            psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
+	            psmt.setString(1, group);
+	            psmt.setInt(2, start);
+	        }
+	        rs = psmt.executeQuery();
+
+	        while (rs.next()) {
+	            CsDTO dto = new CsDTO();
+	            dto.setNo(rs.getString(1));
+	            dto.setParent(rs.getString(2));
+	            dto.setGroup(rs.getString(3));
+	            dto.setCate1(rs.getString(4));
+	            dto.setCate2(rs.getString(5));
+	            dto.setUid(rs.getString(6));
+	            dto.setTitle(rs.getString(7));
+	            dto.setContent(rs.getString(8));
+	            dto.setRdate(rs.getString(9));
+	            board.add(dto);
+	        }
+	        close();
+	    } catch (SQLException sqlException) {
+	        // SQL 예외 처리
+	        logger.error("SQL 예외 발생", sqlException);
+	        // 추가적인 SQL 예외 처리 로직을 여기에 추가
+	    } catch (Exception e) {
+	        // 일반 예외 처리
+	        logger.error("일반 예외 발생", e);
+	        // 추가적인 일반 예외 처리 로직을 여기에 추가
+	    }
+	    return board;
 	}
 	
 	public void updateBoard(CsDTO dto) {

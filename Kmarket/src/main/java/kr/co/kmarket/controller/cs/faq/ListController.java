@@ -1,6 +1,7 @@
 package kr.co.kmarket.controller.cs.faq;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
 
 @WebServlet("/cs/faq/list.do")
@@ -45,6 +47,18 @@ public class ListController extends HttpServlet {
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
 		
+		// 글 조회
+		List<CsDTO> article_notice_list = service.selectBoards("1", null, null, start);
+		List<CsDTO> article_faq_list = service.selectBoards("2", null, null, start);
+		List<CsDTO> article_qna_list = service.selectBoards("3", null, null, start);
+		logger.debug("123 :" +article_notice_list.toString());
+		req.setAttribute("board", "list");
+		
+		String succcess = req.getParameter("success");
+		req.setAttribute("succcess", succcess);
+		req.setAttribute("articles_notice_lists", article_notice_list);
+		req.setAttribute("articles_faq_lists", article_faq_list);
+		req.setAttribute("articles_qna_lists", article_qna_list);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");
 		dispatcher.forward(req, resp);
