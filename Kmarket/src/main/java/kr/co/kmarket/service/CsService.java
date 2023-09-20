@@ -23,6 +23,10 @@ public enum CsService {
 	public CsDTO selectBoard(String no) {
 		return dao.selectBoard(no);
 	}
+
+	public CsDTO selectBoard_list(String group, String cate1) {
+		return dao.selectBoard_list(group, cate1);
+	}
 	
 	public List<CsDTO> selectBoards(String group, String cate1, String cate2, int start) {
 		return dao.selectBoards(group, cate1, cate2, start);

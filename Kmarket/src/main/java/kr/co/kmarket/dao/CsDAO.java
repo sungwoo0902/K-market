@@ -74,7 +74,7 @@ public class CsDAO extends DBHelper {
 			List<CsDTO> board = new ArrayList<>();
 		
 		try {
-				conn =getConnection();
+				conn = getConnection();
 			if(cate3 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
 				psmt.setString(1, group);
@@ -114,6 +114,33 @@ public class CsDAO extends DBHelper {
 		return board;
 	}
 	
+	// cate1 이름, 설명 출력
+	public CsDTO selectBoard_list(String group, String cate1) {
+		
+		CsDTO dto = null;	
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_BOARD_CATE1_NAME_DISCRIPTION);
+			psmt.setString(1, group);
+			psmt.setString(2, cate1);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CsDTO();
+				dto.setGroup(rs.getString(1));
+				dto.setCate1(rs.getString(2));
+				dto.setCate1_name(rs.getString(3));
+				dto.setCate1_discription(rs.getString(4));
+			}
+		close();
+		
+		} catch (Exception e) {
+			logger.error("selectBoards() ERROR : " + e.getMessage());
+		}
+	return dto;
+}
+	
 	public void updateBoard(CsDTO dto) {
 	}
 	
@@ -130,15 +157,18 @@ public class CsDAO extends DBHelper {
 			if(group != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MAIN_CATE);
 				psmt.setString(1, group);
+				logger.debug("here1  : ");
 			
 			}else {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MIDDLE_CATE);
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
+				logger.debug("here2 : ");
 			}
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
+				logger.debug("total : " +total);
 			}
 			close();	
 			
