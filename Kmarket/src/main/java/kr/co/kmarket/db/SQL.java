@@ -214,6 +214,8 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
 	
+	public static final String SELECT_BOARD_CATE1_NAME_DISCRIPTION = "SELECT * FROM `km_board_cate1` WHERE `group`=? AND `cate1`=?";
+	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 														+ "a.*, "
 														+ "b.`group_name`, "
@@ -253,7 +255,6 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
-
 	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
 	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
 
@@ -261,4 +262,5 @@ public class SQL {
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `group`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=?";
 	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=? AND `cate2`=?";
+	
 }
