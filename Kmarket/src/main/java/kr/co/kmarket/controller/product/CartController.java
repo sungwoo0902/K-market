@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.dto.CartDTO;
 import kr.co.kmarket.dto.ProductDTO;
 import kr.co.kmarket.service.CartService;
@@ -53,8 +55,28 @@ public class CartController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		int deleteResult = 0;
+		
+		String[] selectedCartNos = req.getParameterValues("selectedCartNos");
+		logger.debug("cart here1...");
+		String uid = req.getParameter("uid");
+		for(String no : selectedCartNos) {
+			System.out.println(no);
+		}
 		
 		
+		if(selectedCartNos != null && selectedCartNos.length > 0) {
+			int deleteLength = selectedCartNos.length;
+			logger.debug("cart here2...");
+			cartService.deleteCart(uid, selectedCartNos, deleteLength);
+			deleteResult = 1;
+		}
+		
+		JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("deleteResult", deleteResult);
+		resp.getWriter().print(jsonObject);
+		
+		logger.debug("cart here5...");
 	}
 	
 }

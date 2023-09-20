@@ -196,7 +196,6 @@
       	    		} // 전체 ajax success end
       	    	}); // 전체 ajax end
 	    }); // cart click end
-	    
 	}); // end
 </script>
 

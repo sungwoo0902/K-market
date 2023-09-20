@@ -14,8 +14,11 @@ public enum CartService {
 	public void insertCart(CartDTO dto) {
 		dao.insertCart(dto);
 	}
-	public int selectCart(String uid, String prodNo) {
-		return dao.selectCart(uid, prodNo);
+	public CartDTO selectedCart(String uid, String cartNo) {
+		return dao.selectedCart(uid, cartNo);
+	}
+	public int selectCountCart(String uid, String prodNo) {
+		return dao.selectCountCart(uid, prodNo);
 	}
 	public List<CartDTO> selectCarts(String uid) {
 		return dao.selectCarts(uid);
@@ -23,5 +26,10 @@ public enum CartService {
 	public void updateCart(CartDTO dto) {
 		dao.updateCart(dto);
 	}
-	public void deleteCart(String cartNo) {}
+	public void deleteCart(String uid, String[] selectedCartNos, int deleteLength) {
+		
+		for(int i = 0; i < deleteLength; i++) {
+			dao.deleteCart(uid, selectedCartNos[i]);
+		}
+	}
 }
