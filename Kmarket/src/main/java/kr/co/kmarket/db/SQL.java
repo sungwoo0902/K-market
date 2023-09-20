@@ -125,6 +125,13 @@ public class SQL {
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
+	public static final String SELECT_BEST_PRODUCT      = "SELECT * FROM `km_product` ORDER BY `sold` DESC LIMIT 5";
+	public static final String SELECT_HIT_PRODUCT       = "SELECT * FROM `km_product` ORDER BY `hit` DESC LIMIT 8";
+	public static final String SELECT_RECOMMEND_PRODUCT = "SELECT * FROM `km_product` ORDER BY `score` DESC LIMIT 8";
+	public static final String SELECT_CURRENT_PRODUCT   = "SELECT * FROM `km_product` ORDER BY `rdate` DESC LIMIT 8";
+	public static final String SELECT_DISCOUNT_PRODUCT  = "SELECT * FROM `km_product` ORDER BY `discount` DESC LIMIT 8";
+	
+	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//
 	//********************************************************************************************************//

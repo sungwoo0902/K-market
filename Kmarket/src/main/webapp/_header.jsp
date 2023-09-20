@@ -97,8 +97,6 @@
                     </c:if>
                     </c:otherwise>
                     </c:choose>
-                    
-                    
                 </div>
             </div>
             <div class="logo">
@@ -118,10 +116,10 @@
                     <li><a href="#">할인상품</a></li>
                   </ul>
                   <ul>
-                    <li><a href="${ctxPath}/cs/notice/list.do">공지사항</a></li>
-                    <li><a href="${ctxPath}/cs/faq/list.do">자주묻는질문</a></li>
-                    <li><a href="${ctxPath}/cs/qna/list.do">문의하기</a></li>
-                    <li><a href="${ctxPath}/cs/index.do">고객센터</a></li>
+                    <li><a href="${ctxPath}/cs/notice/list.do?cate1=1">공지사항</a></li>
+                    <li><a href="${ctxPath}/cs/faq/list.do?cate1=1">자주묻는질문</a></li>
+                    <li><a href="${ctxPath}/cs/qna/list.do?cate1=1">문의하기</a></li>
+                    <li><a href="${ctxPath}/cs">고객센터</a></li>
                   </ul>
                 </div>
               </div>
