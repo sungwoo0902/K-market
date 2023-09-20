@@ -28,25 +28,32 @@
                     <tr class="empty">
                         <td colspan="7">장바구니에 상품이 없습니다.</td>
                     </tr>
+                    <c:forEach var="cart" items="${carts}">
                     <tr>
                         <td>
                             <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
+                                <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">
+                                    <img src="${ctxPath}/thumb/${cart.prodCate1}/${cart.prodCate2}/${cart.thumb1}" alt="">
                                 </a>
                                 <div>
                                     <h2>
-                                        <a href="#">상품명</a>
+                                        <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a>
                                     </h2>
-                                    <p>상품설명</p>
+                                    <p>상품설명:${cart.descript}</p>
                                 </div>
                             </article>
                         </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
+                        <td><fmt:formatNumber value="${cart.count}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${cart.orgPrice}" pattern="#,###" /></td>
+                        <c:if test="${cart.delivery ne 0}">
+                        <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                        </c:if>
+                        <c:if test="${cart.delivery eq 0}">
+                        <td class="free-delivery">${cart.delivery}</td>
+                        </c:if>
+                        <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
                     </tr>
+                    </c:forEach>
                     <tr>
                         <td>
                             <article>

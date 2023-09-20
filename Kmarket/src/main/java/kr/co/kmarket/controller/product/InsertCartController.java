@@ -50,7 +50,7 @@ public class InsertCartController extends HttpServlet{
 		dto.setDelivery(delivery);
 		dto.setTotal(totalPrice);
 		
-		result = cartService.selectCart(uid, prodNo);
+		result = cartService.selectCountCart(uid, prodNo);
 		
 		// cartResult는 view.jsp에서 보내는 값. 최초로 실행할 때는 null로 설정됨
 		// selectCart를 실행하여 나온 값을 result라는 json 데이터로 설정하여 view.jsp로 보냄

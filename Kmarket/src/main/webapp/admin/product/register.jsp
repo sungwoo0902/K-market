@@ -9,7 +9,7 @@
 		let selectCate = null;
 		
 		$(cate1).change(function(){
-			const selectedCate = $(this).val();
+			const selectedCate1 = $(this).val();
 			
 			console.log(selectedCate1);
 			

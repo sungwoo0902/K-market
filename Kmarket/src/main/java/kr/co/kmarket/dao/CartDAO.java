@@ -34,23 +34,56 @@ public class CartDAO extends DBHelper{
 			logger.error("insertCart() error :"+e.getMessage());
 		}
 	}
-	public int selectCart(String uid, String prodNo) {
+	public CartDTO selectedCart(String uid, String cartNo) {
+		
+		CartDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_SELECTED_CART);
+			psmt.setString(1, uid);
+			psmt.setString(2, cartNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CartDTO();
+				dto.setCartNo(rs.getString(1));
+				dto.setUid(rs.getString(2));
+				dto.setProdNo(rs.getString(3));
+				dto.setCount(rs.getString(4));
+				dto.setCartPrice(rs.getString(5));
+				dto.setDiscount(rs.getString(6));
+				dto.setPoint(rs.getString(7));
+				dto.setDelivery(rs.getString(8));
+				dto.setTotal(rs.getString(9));
+				dto.setRdate(rs.getString(10));
+				dto.setThumb1(rs.getString(11));
+				dto.setProdCate1(rs.getString(12));
+				dto.setProdCate2(rs.getString(13));
+				dto.setProdName(rs.getString(14));
+				dto.setDescript(rs.getString(15));
+				dto.setOrgPrice(rs.getString(16));
+			}
+			close();
+			logger.debug("selectedCart() complete");
+		} catch (Exception e) {
+			logger.error("selectedCart() error :"+e.getMessage());
+		}
+		return dto;
+	}
+	
+	public int selectCountCart(String uid, String prodNo) {
 		int result = 0;
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_CART);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_CART);
 			psmt.setString(1, uid);
-			logger.debug("here....1()");
 			psmt.setString(2, prodNo);
-			logger.debug("here....2()");
 			rs = psmt.executeQuery();
-			logger.debug("here....3()");
 			if(rs.next()) {
 				result = rs.getInt(1);
 			}
-			logger.debug("here....4()");
-			System.out.println("selectCart result : "+result);
 			close();
 		} catch (Exception e) {
 			logger.error("selectCart() error :"+e.getMessage());
@@ -109,6 +142,22 @@ public class CartDAO extends DBHelper{
 			logger.error("updateCart() error :"+e.getMessage());
 		}
 	}
-	public void deleteCart(String cartNo) {}
+	public void deleteCart(String uid, String cartNo) {
+		
+		try {
+			logger.debug("deleteCart uid:"+uid);
+			logger.debug("deleteCart prodNo:"+cartNo);
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_CART);
+			psmt.setString(1, uid);
+			psmt.setString(2, cartNo);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("deleteCart() error :"+e.getMessage());
+		}
+		
+	}
 	
 }
