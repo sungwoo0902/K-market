@@ -11,30 +11,30 @@
             <!-- 처리해야됨 -->
             <p>
                 HOME > 
-                <span>패션·의류·뷰티</span>
+                <span>${cate.c1Name}</span>
                 > 
-                <strong>남성의류</strong>
+                <strong>${cate.c2Name}</strong>
             </p>
         </nav>
         <!-- 정렬 메뉴 -->
         <ul class="sort">
             <li>
-                <a href="#" class="on">판매많은순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=1" class="${type eq '1'?'on':'off'}">판매많은순</a>
             </li>
             <li>
-                <a href="#">낮은가격순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=2" class="${type eq '2'?'on':'off'}">낮은가격순</a>
             </li>
             <li>
-                <a href="#">높은가격순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=3" class="${type eq '3'?'on':'off'}">높은가격순</a>
             </li>
             <li>
-                <a href="#">평점높은순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=4" class="${type eq '4'?'on':'off'}">평점높은순</a>
             </li>
             <li>
-                <a href="#">후기많은순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=5" class="${type eq '5'?'on':'off'}">후기많은순</a>
             </li>
             <li>
-                <a href="#">최근등록순</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=6" class="${type eq '6'?'on':'off'}">최근등록순</a>
             </li>
         </ul>
         <!-- 상품목록 -->
@@ -90,7 +90,7 @@
                         </h4>
                         <!-- 나중에 등급별로 다르게 나오게끔 수정 예정 -->
                         <h5 class="badge power">${prod.level}</h5>
-                        <h6 class="rating star1">${prod.score}</h6>
+                        <h6 class="rating star${prod.score}">상품평${(prod.score eq 0)?'이 없습니다.':''}</h6>
                     </td>
                 </tr>
                 </c:forEach>

@@ -14,14 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.dto.ProductDTO;
+import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.ProductService;
 
 @WebServlet("/product/list.do")
 public class ListController extends HttpServlet{
 
 	private static final long serialVersionUID = -2740152939344565075L;
-	private ProductService prodService = ProductService.INSTANCE;
+	private ProductService  prodService = ProductService.INSTANCE;
+	private CategoryService cateService = CategoryService.INSTANCE;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -59,13 +62,18 @@ public class ListController extends HttpServlet{
 		
 		// 현재 페이지 게시물 조회
 		List<ProductDTO> products = new ArrayList<>();
-		products = prodService.selectProductsByCate2(cate1, cate2, start);
+		products = prodService.selectProductsByCate2(cate1, cate2, start, type);
+		
+		// 현재 페이지 카테고리
+		CategoryDTO cate = cateService.selectCate(cate1, cate2);
+		req.setAttribute("cate", cate);
 		
 		req.setAttribute("success", success);
 		req.setAttribute("products", products);
 		req.setAttribute("total", total);
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
+		req.setAttribute("type", type);
 		
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);

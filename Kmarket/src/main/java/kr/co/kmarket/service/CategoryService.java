@@ -30,4 +30,8 @@ public enum CategoryService {
 	public List<CategoryDTO> selectAllCate(){
 		return dao.selectAllCate();
 	}
+	
+	public CategoryDTO selectCate(String cate1, String cate2) {
+		return dao.selectCate(cate1, cate2);
+	}
 }

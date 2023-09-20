@@ -1,6 +1,5 @@
 package kr.co.kmarket.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +63,34 @@ public class CsDAO extends DBHelper {
 			
 		} catch (Exception e) {
 			logger.error("selectBoard : " + e.getMessage());
+		}
+		return dto;
+	}
+	
+	public CsDTO selectAnswer(String no) {
+		CsDTO dto = null;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ANSWER);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setRdate(rs.getString(9));
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectAnswer : " + e.getMessage());
 		}
 		return dto;
 	}

@@ -30,14 +30,14 @@
     font-size: 11px;
     background-image: url('../images/ico_rating_star.png');
     background-repeat: no-repeat;
-    background-position: 36px 0px;
-    background-size: auto 100%;
+    background-position: 36px -201px;
 }
 
-#product h6.rating.star1 {width: 55px;}
+#product h6.rating.star0 {width: 95px; background-position: 0px 20px;}
+#product h6.rating.star1 {width: 53px;}
 #product h6.rating.star2 {width: 70px;}
-#product h6.rating.star3 {width: 85px;}
-#product h6.rating.star4 {width: 100px;}
+#product h6.rating.star3 {width: 87px;}
+#product h6.rating.star4 {width: 104px;}
 #product h6.rating.star5 {width: 120px;}
 
 #product h5.rating{
@@ -50,6 +50,7 @@
     text-indent: 86px;
 }
 
+#product h5.rating.star0 {background-position: 0 -0px;}
 #product h5.rating.star1 {background-position: 0 -40px;}
 #product h5.rating.star2 {background-position: 0 -80px;}
 #product h5.rating.star3 {background-position: 0 -120px;}
@@ -118,14 +119,17 @@
 #product > .list > table tr > td:nth-child(3) {width: 20%;}
 #product > .list > table tr > td:nth-child(4) {width: 20%;}
 
-#product > .list > table .thumb{
+#product > .list > table .thumb {
     display: block;
-    width: 100%;
+    width: 120px;
     height: 100%;
 }
 
 #product > .list > table .thumb > img{
-    width: 120px;
+	display: block;
+    max-width: 120px;
+    max-height: 120px; 
+    margin: 0 auto;
 }
 
 #product > .list > table .name > a{
@@ -625,6 +629,7 @@
 }
 
 #product > .view > .detail {}
+#product > .view > .detail > img {width: 100%; height: auto;}
 #product > .view > .notice {}
 #product > .view > .notice > table {
     width: 100%;

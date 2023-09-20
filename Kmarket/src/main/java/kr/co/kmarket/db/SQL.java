@@ -121,6 +121,54 @@ public class SQL {
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
 																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_SOLD_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `sold` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_PRICE_ASC= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `price` ASC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_PRICE_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `price` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_SCORE_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `score` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_REVIEW_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `review` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE2_LATELY= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "AND `prodCate2`=? "
+																	+ "ORDER BY `rdate` DESC "
+																	+ "LIMIT ?, 10";
 	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
@@ -173,6 +221,7 @@ public class SQL {
 												+ "ON a.`cate1` = b.`cate1` "
 												+ "ORDER BY a.`cate1` AND b.`cate2`";
 	
+	public static final String SELECT_CATE = "SELECT a.*, b.cate2, b.c2Name FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b WHERE a.`cate1`=? AND b.`cate2`=?";
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Order *********************************************//
@@ -189,6 +238,8 @@ public class SQL {
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
 	//**********************************************************************************************************//
+	public static final String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE a.`prodNo`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+	public static final String SELECT_REVIEW_COUNT = "SELECT COUNT(*) FROM `km_product_review` WHERE `prodNo`=?";
 	
 	//**************************************************************************************************//
 	//********************************************* CS *************************************************//
@@ -213,6 +264,8 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
+	
+	public static final String SELECT_ANSWER = "SELECT * FROM `km_board` WHERE `parent`=?";
 	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 														+ "a.*, "

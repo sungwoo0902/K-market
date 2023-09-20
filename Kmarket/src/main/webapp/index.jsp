@@ -86,8 +86,10 @@
 	                    <h2>${item.prodName}</h2>
 	                    <p>${item.descript}</p>
 	                    <div class="org_price">
+	                    	<c:if test="${item.discount ne 0 }">
 	                        <del>${item.priceWithComma}</del>
 	                        <span>${item.discount}%</span>
+	                        </c:if>
 	                    </div>
 	                    <div class="dis_price">
 	                        <ins>${item.disPriceWithComma}</ins>
@@ -116,8 +118,10 @@
 	                    <h2>${item.prodName}</h2>
 	                    <p>${item.descript}</p>
 	                    <div class="org_price">
+	                        <c:if test="${item.discount ne 0 }">
 	                        <del>${item.priceWithComma}</del>
 	                        <span>${item.discount}%</span>
+	                        </c:if>
 	                    </div>
 	                    <div class="dis_price">
 	                        <ins>${item.disPriceWithComma}</ins>
@@ -148,8 +152,10 @@
 	                    <h2>${item.prodName}</h2>
 	                    <p>${item.descript}</p>
 	                    <div class="org_price">
+	                        <c:if test="${item.discount ne 0 }">
 	                        <del>${item.priceWithComma}</del>
 	                        <span>${item.discount}%</span>
+	                        </c:if>
 	                    </div>
 	                    <div class="dis_price">
 	                        <ins>${item.disPriceWithComma}</ins>
@@ -178,8 +184,10 @@
 	                    <h2>${item.prodName}</h2>
 	                    <p>${item.descript}</p>
 	                    <div class="org_price">
+	                        <c:if test="${item.discount ne 0 }">
 	                        <del>${item.priceWithComma}</del>
 	                        <span>${item.discount}%</span>
+	                        </c:if>
 	                    </div>
 	                    <div class="dis_price">
 	                        <ins>${item.disPriceWithComma}</ins>

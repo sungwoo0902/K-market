@@ -140,4 +140,29 @@ public class CategoryDAO extends DBHelper{
 		}
 		return allCate;
 	}
+	
+	public CategoryDTO selectCate(String cate1, String cate2) {
+		CategoryDTO dto = null;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_CATE);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CategoryDTO();
+				dto.setCate1No(rs.getString(1));
+				dto.setC1Name(rs.getString(2));
+				dto.setCate1Icon(rs.getString(3));
+				dto.setCate2No(rs.getString(4));
+				dto.setC2Name(rs.getString(5));
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCate : " + e.getMessage());
+		}
+		return dto;
+	}
 }
