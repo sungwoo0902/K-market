@@ -55,8 +55,6 @@ public class Admin_NoticeWriteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		logger.info("doPost()...");
-		
-		String pg = req.getParameter("pg");
 		String type = req.getParameter("type");
 		logger.debug("type : " + type);
 		
@@ -104,7 +102,7 @@ public class Admin_NoticeWriteController extends HttpServlet {
 				// 작성한 글 DB 등록
 				service.insertBoard(dto);
 				
-				resp.sendRedirect("/Kmarket/admin/notice/list.do?group=1&pg="+ pg);
+				resp.sendRedirect("/Kmarket/admin/notice/list.do?group=1");
 		
 			}
 	}

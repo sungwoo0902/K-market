@@ -56,7 +56,7 @@
             	</li>
             </c:forEach>
             </ul>
-            <a href="./cs/qna/write.do" class="ask">문의글 작성 ></a>
+            <a href="./qna/write.do" class="ask">문의글 작성 ></a>
           </section>
 
           <section class="tel">

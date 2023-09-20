@@ -224,6 +224,7 @@
 				behavior: 'smooth',
 			});
 		}
+
 	}); // end
 </script>
 

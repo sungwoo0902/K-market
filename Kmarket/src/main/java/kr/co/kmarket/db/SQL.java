@@ -193,16 +193,20 @@ public class SQL {
 																	+ "`delivery`=?,"
 																	+ "`total`=?,"
 																	+ "`rdate`=NOW()";
-	public static final String SELECT_CART						= "SELECT COUNT(*) FROM `km_product_cart` WHERE `uid`=? AND `prodNo`=?";
+	public static final String SELECT_COUNT_CART				= "SELECT COUNT(*) FROM `km_product_cart` WHERE `uid`=? AND `prodNo`=?";
 	public static final String SELECT_CARTS						= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript, b.price FROM "
 																	+ "`km_product_cart` AS a JOIN "
 																	+ "`km_product` AS b ON a.prodNo=b.prodNo "
 																	+ "WHERE `uid`=?";
+	public static final String SELECT_SELECTED_CART				= "SELECT a.*, b.thumb1, b.prodCate1, b.prodCate2, b.prodName, b.descript, b.price FROM"
+																	+ "`km_product_cart` AS a JOIN "
+																	+ "`km_product` AS b ON a.prodNo=b.prodNo "
+																	+ "WHERE `uid`=? AND `cartNo`=?";
 	public static final String UPDATE_CART						= "UPDATE `km_product_cart` "
 																	+ "SET `count`= `count`+?, "
 																	+ "`total`= `total`+? "
 																	+ "WHERE `uid`=? AND `prodNo`=?";
-	
+	public static final String DELETE_CART						= "DELETE FROM `km_product_cart` WHERE `uid`=? AND `cartNo`=?";
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate1 *********************************************//
 	//*********************************************************************************************************//
@@ -266,6 +270,8 @@ public class SQL {
 												+ "WHERE `no`=?";
 	
 	public static final String SELECT_ANSWER = "SELECT * FROM `km_board` WHERE `parent`=?";
+	public static final String SELECT_BOARD_CATE1_NAME_DISCRIPTION = "SELECT * FROM `km_board_cate1` WHERE `group`=? AND `cate1`=?";
+
 	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 														+ "a.*, "
@@ -306,7 +312,6 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 	
-
 	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
 	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";
 
@@ -314,4 +319,5 @@ public class SQL {
 	public static final String SELECT_COUNT_MAIN_CATE   = "SELECT COUNT(*) FROM `km_board` WHERE `group`=?";
 	public static final String SELECT_COUNT_MIDDLE_CATE = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=?";
 	public static final String SELECT_COUNT_SUB_CATE    = "SELECT COUNT(*) FROM `km_board` WHERE `group`=? AND `cate1`=? AND `cate2`=?";
+	
 }

@@ -9,7 +9,7 @@
 		let selectCate = null;
 		
 		$(cate1).change(function(){
-			const selectedCate = $(this).val();
+			const selectedCate1 = $(this).val();
 			
 			console.log(selectedCate1);
 			
@@ -110,7 +110,10 @@
                             <td>2차 분류</td>
                             <td>
                                 <select id="category2" name="prodCate2">
-                                    <option value="cate0">2차 분류 선택</option>
+                                <option value="cate0">2차 분류 선택</option>
+                                		<c:forEach var="cate2" items="${cate2s}">
+	                                    <option value="${cate2.cate2No}">${cate2.c2Name}</option>
+                                		</c:forEach>
                                 </select>
                             </td>
                         </tr>

@@ -29,14 +29,16 @@ public class ListController extends HttpServlet {
 		req.setAttribute("board", "list");
 		
 		String pg   = req.getParameter("pg");
-		String boardCate1 = req.getParameter("boardCate1");
-		String boardCate2 = req.getParameter("boardCate2");
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		logger.debug("cate1");
+		
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard(boardCate1, boardCate2);
+		int total = service.selectCountBoard(cate1, cate2);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -48,17 +50,19 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		// 글 조회
-		List<CsDTO> article_notice_list = service.selectBoards("1", null, null, start);
 		List<CsDTO> article_faq_list = service.selectBoards("2", null, null, start);
-		List<CsDTO> article_qna_list = service.selectBoards("3", null, null, start);
-		logger.debug("123 :" +article_notice_list.toString());
+		logger.debug("faq_list :" +article_faq_list.toString());
+		
+		// cate1 이름, 설명 조회
+		CsDTO faq_name_dis = service.selectBoard_list("2", cate1);
+		logger.debug("faq_name_dis :" +faq_name_dis.toString());
+		
 		req.setAttribute("board", "list");
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
-		req.setAttribute("articles_notice_lists", article_notice_list);
 		req.setAttribute("articles_faq_lists", article_faq_list);
-		req.setAttribute("articles_qna_lists", article_qna_list);
+		req.setAttribute("faq_name_dis", faq_name_dis);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");
 		dispatcher.forward(req, resp);

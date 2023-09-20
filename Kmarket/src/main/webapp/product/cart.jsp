@@ -108,11 +108,94 @@
 	        $('#totalPointAmount').text(totalPointAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	    });
 	  	//*******************************************************//
-		//******************** 개별 체크박스 클릭 **********************//
+		//********************** 선택삭제 클릭 ************************//
 		//*******************************************************//
+		const ctxPath = $('#ctxPath').val();
+		const selectedCartNos = [];
+		const uid = 'a12345';
 		
 		
+		$('#del').click(function(e){
+			e.preventDefault();
+			// 체크돼있는 prodNo를 배열로 만들어 넣음
+			$('input[name^="cartNo"]:checked').each(function(){
+				
+				selectedCartNos.push($(this).val());
+			});
+			// 체크돼있는 prodNo를 배열이 없다면 돌려보냄.
+			if(selectedCartNos.length === 0){
+				alert('선택된 상품이 없습니다.');
+				return;
+			}
+			// 체크된 prodNo 전체와 uid를 jsonData로 만듬
+			const jsonData ={
+					"uid" : uid,
+					"selectedCartNos" : selectedCartNos
+			};
+			// jsonData를 전송
+			// traditional: true는 배열을 ajax로 보낼때 있어야됨.
+			$.ajax({
+				url: '/Kmarket/product/cart.do',
+				type: 'post',
+				data: jsonData,
+				traditional: true,
+				dataType: 'json',
+				success: function(data){
+					// 삭제가 성공적으로 됐을때 알림 띄워주고 창 새로고침
+					if(data.deleteResult == 1){
+						alert('장바구니에서 삭제되었습니다.');
+						window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+					}else{
+						return;
+					}
+				}
+			})
+		}); // 선택삭제 click end
 		
+		$('input[name="order"]').click(function(e){
+			e.preventDefault();
+			alert('order click');
+			
+			// 체크돼있는 prodNo를 배열로 만들어 넣음
+			$('input[name^="cartNo"]:checked').each(function(){
+				
+				selectedCartNos.push($(this).val());
+			});
+			if(selectedCartNos.length === 0){
+				alert('주문할 상품을 선택해주세요.');
+				return;
+			}
+			
+			$.ajax({
+				url: '/Kmarket/product/order.do',
+				type: 'post',
+				data: {"selectedCartNos": selectedCartNos,
+					   "uid": uid
+						},
+				traditional: true,
+				dataType: 'json',
+				success: function(data){
+					/*
+					if(data.result == 1){
+						window.location.href = ctxPath+'/product/order.do';
+					}
+					*/
+				}
+			})
+		})
+		
+		//*******************************************************//
+		//******************** 장바구니 비었을때 **********************//
+		//*******************************************************//
+		var isCartsEmpty = ${empty carts};
+		
+		if(isCartsEmpty){
+			$('tr.empty').css('display', 'table-row');
+		}// isCartsEmpty end
+		
+		//*******************************************************//
+		//******************* 선택된 상품 order *********************//
+		//*******************************************************//
 		
 	});// end
 </script>
@@ -130,7 +213,7 @@
                  <strong>장바구니</strong>
             </p>
         </nav>
-        <form action="#">
+        <form action="${ctxPath}/product/order.do?uid=a12345">
             <!-- 장바구니 목록 -->
             <table>
                 <thead>
@@ -153,7 +236,11 @@
                     </tr>
                     <c:forEach var="cart" items="${carts}">
                     <tr>
-                        <td><input type="checkbox" name="cartNo" value="${cart.cartNo}"></td>
+                        <td>
+                        	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
+                        	<input type="hidden" name="prodNo" value="${cart.prodNo}">
+                        	<input type="hidden" name="ctxPath" id="ctxPath" value="${ctxPath}">
+                        </td>
                         <td>
                             <article>
                                 <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">
@@ -182,7 +269,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <input type="button" name="del" value="선택삭제">
+            <input type="button" name="del" id="del" value="선택삭제">
             <!-- 장바구니 전체합계 -->
             <div class="total">
                 <h2>전체합계</h2>
@@ -214,7 +301,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" name value="주문하기">
+                <input type="submit" name="order" value="주문하기">
             </div>
         </form>
     </section>

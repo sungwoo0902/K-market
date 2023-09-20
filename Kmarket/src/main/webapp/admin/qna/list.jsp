@@ -17,9 +17,6 @@ $(function(){
 		
 	});	
 	
-	$('.productDelete').click(function(){
-		$('#formCheck').submit();
-	});
 });
 
 </script>
@@ -43,7 +40,6 @@ $(function(){
                 </select>
                 <input type="text" name="search">
             </div>
-            <form id="formCheck" action="${ctxPath}/admin/product/delete.do" method="get">
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
@@ -73,12 +69,10 @@ $(function(){
                     <td>
                         <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
                         <a href="#">[수정]</a>
-                    </td>
-                    
+                    </td>                
                 </tr>
                 </c:forEach>
             </table>
-            </form>
             
             <input type="button" value="선택 삭제" class="productDelete"/>
 			

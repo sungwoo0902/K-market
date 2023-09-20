@@ -30,7 +30,7 @@ public class Admin_ProductRegisterController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		List<CategoryDTO> cate1s = cateService.selectCate1s();
 		
 		req.setAttribute("cate1s", cate1s);

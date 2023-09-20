@@ -106,6 +106,7 @@ public class ProductDAO extends DBHelper{
 	}
 
 	public void updateProduct(ProductDTO dto) {}
+	
 	public void deleteProduct(String uid, String no) {
 		
 		try {
