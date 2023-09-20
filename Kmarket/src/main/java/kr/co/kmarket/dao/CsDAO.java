@@ -104,6 +104,7 @@ public class CsDAO extends DBHelper {
 				dto.setTitle(rs.getString(7));
 				dto.setContent(rs.getString(8));
 				dto.setRdate(rs.getString(9));
+				dto.setCate1_name(rs.getString(10));
 				board.add(dto);	
 			}
 				close();

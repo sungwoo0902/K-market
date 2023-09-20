@@ -51,17 +51,17 @@ public class Admin_FaqListController extends HttpServlet {
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
 
-		List<CsDTO> notices = service.selectBoards(group, cate1, cate2, start);
+		List<CsDTO> faqs = service.selectBoards(group, cate1, cate2, start);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
-		req.setAttribute("notices", notices);
+		req.setAttribute("faqs", faqs);
 		
 		logger.debug("group : " + group);
 		logger.debug("cate1 : " + cate1);
 		logger.debug("cate2 : " + cate2);
-		logger.debug("notices : " + notices);
+		logger.debug("faqs : " + faqs);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);

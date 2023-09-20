@@ -23,7 +23,6 @@ $(function(){
 	});
 	
 	 $('.noticeWrite').click(function(){
-		 
 	    window.location.href = "/Kmarket/admin/notice/write.do?group=1"; 
 	 });
 });
@@ -64,8 +63,8 @@ $(function(){
 				<tr>
                     <td><input type="checkbox" name="chk"></td>
                     <td>${notice.no}</td>
-                    <td>${notice.cate1}</td>
-                    <td>${notice.title}</td>
+                    <td>${notice.cate1_name}</td>
+                    <td><a href="${ctxPath}/admin/notice/view.do?group=1&no=${notice.no}">${notice.title}</a></td>
                    	<td>${notice.rdate}</td>
                     <td>
                         <a href="#">[삭제]</a>

@@ -30,6 +30,7 @@ public class CategoryDAO extends DBHelper{
 				dto = new CategoryDTO();
 				dto.setCate1No(rs.getString(1));
 				dto.setC1Name(rs.getString(2));
+				dto.setCate1Icon(rs.getString(3));
 			}
 			close();
 			
