@@ -236,12 +236,41 @@ public class ProductDAO extends DBHelper{
 	}
 	
 	/************************* 소분류 상품 불러오기 *************************/
-	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start) {
+	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start, String type) {
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2);
+			
+			if(type == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2);
+				logger.debug("selectProductsByCate2... ALL");
+				
+			}else if(type.equals("1")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_SOLD_DESC);
+				logger.debug("selectProductsByCate2... SOLD DESC");
+				
+			}else if(type.equals("2")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_PRICE_ASC);
+				logger.debug("selectProductsByCate2... PRICE ASC");
+				
+			}else if(type.equals("3")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_PRICE_DESC);
+				logger.debug("selectProductsByCate2... PRICE DESC");
+				
+			}else if(type.equals("4")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_SCORE_DESC);
+				logger.debug("selectProductsByCate2... SCORE DESC");
+				
+			}else if(type.equals("5")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_REVIEW_DESC);
+				logger.debug("selectProductsByCate2... REVIEW DESC");
+				
+			}else if(type.equals("6")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE2_LATELY);
+				logger.debug("selectProductsByCate2... LATELY");
+			}
+			
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
 			psmt.setInt(3, start);
@@ -285,7 +314,7 @@ public class ProductDAO extends DBHelper{
 			}
 			close();
 		} catch (Exception e) {
-			logger.error("selectProductsByCate1() error :"+e.getMessage());
+			logger.error("selectProductsByCate2() error :"+e.getMessage());
 		}
 		return products;
 	}

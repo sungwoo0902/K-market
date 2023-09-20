@@ -23,8 +23,13 @@
 									감사합니다.<br/>
 								</p>
 							</div>
-							<c:if test="${qna.parent ne 0}">
-							
+							<c:if test="${ans ne null}">
+							<div class="answer">
+								<h2 class="title">☞ [답변] ${ans.title}</h2>
+								<p>
+									${ans.content}
+								</p>
+							</div>
 							</c:if>
 							<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}" class="btnList">목록보기</a>
 						</article>

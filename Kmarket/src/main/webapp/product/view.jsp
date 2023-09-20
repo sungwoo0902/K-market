@@ -196,6 +196,35 @@
       	    		} // 전체 ajax success end
       	    	}); // 전체 ajax end
 	    }); // cart click end
+	    
+	    
+	    
+		//***********************************************//
+		//***************** 상품평 이동 ******************//
+		//***********************************************//
+		// 상품평보기 클릭시 자동 스크롤
+	    $('.goToReview').click(function(e) {
+	    	e.preventDefault();
+	    	
+	    	const review = document.querySelector('.yes'); // querySelector 사용
+	        if(review) {
+	            review.scrollIntoView({ behavior: 'smooth' }); // 'smooth' 오타 수정
+	        }else {
+	        	alert('등록된 리뷰가 없습니다.');
+	        }
+		}); // go to review End....
+		
+		// 리뷰페이지 이동시 자동 스크롤
+		if(${pg ne null}) {
+			const review = document.querySelector('.review');
+			const reviewPos = review.getBoundingClientRect().top;
+			
+			window.scrollTo({
+				top: window.scrollY + reviewPos,
+				behavior: 'smooth',
+			});
+		}
+
 	}); // end
 </script>
 
@@ -208,9 +237,9 @@
             <h1>상품보기</h1>
             <p>
                 HOME > 
-                <span>패션·의류·뷰티</span>
+                <span>${cate.c1Name}</span>
                 > 
-                <strong>남성의류</strong>
+                <strong>${cate.c2Name}</strong>
             </p>
         </nav>
         <!-- 상품 전체 정보 내용 -->
@@ -231,8 +260,8 @@
                     <!-- 상품 설명 없으면 다르게 출력되게 해야함 -->
                     <p>상품설명 : ${prod.descript}</p>
                     <!-- 별점 처리 해야함 -->
-                    <h5 class="rating star4">
-                    <a href="#">상품평보기</a>
+                    <h5 class="rating star${prod.score}">
+                    <a href="#" class="goToReview">상품평보기</a>
                     </h5>
                 </nav>
                 <nav>
@@ -329,8 +358,8 @@
             </nav>
             <!-- 상품상세페이지 이미지 -->
             <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.detail}" alt="상세페이지1">
-            <img src="./images/860x460.png" alt="상세페이지2">
-            <img src="./images/860x460.png" alt="상세페이지3">
+            <!-- <img src="./images/860x460.png" alt="상세페이지2"> -->
+            <!-- <img src="./images/860x460.png" alt="상세페이지3"> -->
         </article>
         <!-- 상품 정보 제공 고시 내용 -->
         <article class="notice">
@@ -431,88 +460,44 @@
             </p>
         </article>
         <!-- 상품 리뷰 내용 -->
-        <article class="review">
+        <article class="review ${(prod.review ne 0)?'yes':'no'}">
             <nav>
                 <h1>상품리뷰</h1>
             </nav>
             <ul>
+            
+            	<c:forEach var="re" items="${review}">
                 <li>
                     <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo****** 2018-07-10</span>
+                        <h5 class="rating star${re.rating}">${re.prodName}</h5>
+                        <span>${re.maskingUid} ${re.rdate}</span>
                     </div>
-                    <h3>상품명1/BLUE/L</h3>
+                    <h3>${re.prodName}</h3>
                     <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요. 아주 약간 루즈한정도...?그래도 이만
-                        한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는 제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바
-                        래요 ~ ~ ~
+                        ${re.content}
                     </p>
                 </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo****** 2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요. 아주 약간 루즈한정도...?그래도 이만
-                        한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는 제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바
-                        래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo****** 2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요. 아주 약간 루즈한정도...?그래도 이만
-                        한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는 제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바
-                        래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo****** 2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요. 아주 약간 루즈한정도...?그래도 이만
-                        한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는 제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바
-                        래요 ~ ~ ~
-                    </p>
-                </li>
-                <li>
-                    <div>
-                        <h5 class="rating star4">상품평</h5>
-                        <span>seo****** 2018-07-10</span>
-                    </div>
-                    <h3>상품명1/BLUE/L</h3>
-                    <p>
-                        가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요. 아주 약간 루즈한정도...?그래도 이만
-                        한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는 제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바
-                        래요 ~ ~ ~
-                    </p>
-                </li>
+                </c:forEach>
+                
             </ul>
             <div class="paging">
+            	<c:if test="${pageGroupStart > 1}">
                 <span class="prev">
-                    <a href="#">〈&nbsp;이전</a>
+                    <a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}&pg=${pageGroupStart - 1}">〈&nbsp;이전</a>
                 </span>
+                </c:if>
+                
+                <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
                 <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
+                    <a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}&pg=${i}" class="${currentPage == i?'on':'off'}">${i}</a>
                 </span>
+                </c:forEach>
+                
+                <c:if test="${pageGroupEnd < lastPageNum}">
                 <span class="next">
-                    <a href="#">다음&nbsp;〉</a>
+                    <a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}&pg=${pageGroupEnd + 1}">다음&nbsp;〉</a>
                 </span>
+                </c:if>
             </div>
         </article>
     </section>

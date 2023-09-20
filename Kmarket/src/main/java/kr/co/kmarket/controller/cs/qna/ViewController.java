@@ -37,11 +37,14 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("board", "view");
 		
-		CsDTO dto = service.selectBoard(no);
-		logger.debug("dto : " + dto);
-		req.setAttribute("qna", dto);
+		CsDTO qna = service.selectBoard(no);
+		CsDTO ans = service.selectAnswer(no);
+		logger.debug("qna : " + qna);
+		logger.debug("ans : " + ans);
+		req.setAttribute("qna", qna);
+		req.setAttribute("ans", ans);
 		
-		if(dto.getGroup() == 3) {
+		if(qna.getGroup() == 3) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/view.jsp");
 			dispatcher.forward(req, resp);
 			
