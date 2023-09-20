@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../_header.jsp" %>
 <script>
 $(function(){
@@ -65,10 +66,7 @@ $(function(){
                     <td>${notice.no}</td>
                     <td>${notice.cate1}</td>
                     <td>${notice.title}</td>
-                   	<td>
-                   	<fmt:parseDate var="parsedDate" value="${notice.rdate}" pattern="yyyy-MM-dd HH:mm:ss" />
-					<fmt:formatDate value="${parsedDate}" pattern="yyyy년 MM월 dd일" />
-					</td>
+                   	<td>${notice.rdate}</td>
                     <td>
                         <a href="#">[삭제]</a>
                         <a href="#">[수정]</a>

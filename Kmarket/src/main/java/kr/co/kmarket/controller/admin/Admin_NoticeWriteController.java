@@ -31,21 +31,21 @@ public class Admin_NoticeWriteController extends HttpServlet {
 		
 		logger.info("doGet()...");
 		
-		String group = req.getParameter("group");
-		logger.debug("cate1 : " + group);
+		String cate1 = req.getParameter("cate1");
+		logger.debug("cate1 : " + cate1);
 		
-		req.setAttribute("cate1", group);
+		req.setAttribute("cate1", cate1);
 		req.setAttribute("board", "write");
 		
 		// 글 작성시 대분류 리스트 가져오기.
-		List<CsDTO> cate1 = service.selectGroupListWhenGroupChoose("1");
-		logger.debug("List_cate1 : " + cate1);
-		req.setAttribute("cate1", cate1);
+		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose("1");
+		logger.debug("cate1List : " + cate1List.toString());
+		req.setAttribute("cate1List", cate1List);
 		
 		// 소분류 리스트 가져오기
-		List<CsDTO> cate2 = service.selectCate1ListWhenCate1Choose(group);
-		logger.debug("List_cate2 : " + cate2);
-		req.setAttribute("cate2", cate2);
+		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
+		logger.debug("cate2List : " + cate2List);
+		req.setAttribute("cate2List", cate2List);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/write.jsp");
 		dispatcher.forward(req, resp);
@@ -54,8 +54,9 @@ public class Admin_NoticeWriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-logger.info("doPost()...");
+		logger.info("doPost()...");
 		
+		String pg = req.getParameter("pg");
 		String type = req.getParameter("type");
 		logger.debug("type : " + type);
 		
@@ -63,7 +64,7 @@ logger.info("doPost()...");
 			case "json": 
 				// 대분류 선택시 소분류 가져오기.
 				String jsonCate2 = req.getParameter("jsonCate2");
-				List<CsDTO> jsonCate3 = service.selectCate2ListWhenCate2Choose(jsonCate2);
+				List<CsDTO> jsonCate3 = service.selectCate2ListWhenCate1Choose(jsonCate2);
 				logger.debug("jsonCate2 : " + jsonCate2);
 				logger.debug("jsonCate3 : " + jsonCate3.toString());
 				
@@ -80,35 +81,30 @@ logger.info("doPost()...");
 				break;
 				
 			case "write":
-				String boardCate1 = req.getParameter("boardCate1");
 				String boardCate2 = req.getParameter("boardCate2");
+				String boardCate3 = req.getParameter("boardCate3");
 				String uid        = req.getParameter("uid");
 				String title      = req.getParameter("title");
 				String content    = req.getParameter("content");
-				logger.debug("boardCate1 : " + boardCate1);
 				logger.debug("boardCate2 : " + boardCate2);
+				logger.debug("boardCate3 : " + boardCate3);
 				logger.debug("uid        : " + uid);
 				logger.debug("title      : " + title);
 				logger.debug("content    : " + content);
 				
 				CsDTO dto = new CsDTO();
-				dto.setGroup(3);
-				dto.setCate1(boardCate1);
-				dto.setCate2(boardCate2);
+				dto.setGroup(1);
+				dto.setCate1(boardCate2);
+				dto.setCate2(boardCate3);
 				dto.setUid(uid);
 				dto.setTitle(title);
 				dto.setContent(content);
 				logger.debug("dto : " + dto);
 				
 				// 작성한 글 DB 등록
-				int result = service.insertBoard(dto);
+				service.insertBoard(dto);
 				
-				if(result > 0) {
-					resp.sendRedirect("./list.do?cate1="+boardCate2+"success=200");
-					
-				}else {
-					resp.sendRedirect("./list.do?cate1="+boardCate2+"success=100");
-				}
+				resp.sendRedirect("/Kmarket/admin/notice/list.do?group=1&pg="+ pg);
 		
 			}
 	}
