@@ -213,7 +213,7 @@
                  <strong>장바구니</strong>
             </p>
         </nav>
-        <form action="${ctxPath}/product/order.do?uid=a12345">
+        <form action="${ctxPath}/product/order.do?uid=${sessUser.uid}">
             <!-- 장바구니 목록 -->
             <table>
                 <thead>

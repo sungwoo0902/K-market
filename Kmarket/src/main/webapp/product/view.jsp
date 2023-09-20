@@ -328,7 +328,7 @@
                 </div>
                 <form id="formCart" action="" method="post">
                 	<!-- 현재 테스트용 아이디 나중에 sessUser로 수정 -->
-	                <input type="hidden" id="uid" name="uid" value="a12345">
+	                <input type="hidden" id="uid" name="uid" value="${sessUser.uid}">
 	                <input type="hidden" id="thumb1" name="thumb1" value="${prod.thumb1}">
 	                <input type="hidden" id="prodNo" name="prodNo" value="${prod.prodNo}">
 	                <input type="hidden" id="prodName" name="prodName" value="${prod.prodName}">
