@@ -1,5 +1,6 @@
 package kr.co.kmarket.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,19 +54,56 @@ public class OrderDAO extends DBHelper{
 			logger.error("insertOrder() error :"+e.getMessage());
 		}
 	}
-	
-	public String selectOrdNo(String uid) {
-		
-		String ordNo = null;
+	public OrderDTO selectOrder(int ordNo, String uid) {
+		OrderDTO order = null;
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ORDER);
+			psmt.setInt(1, ordNo);
+			psmt.setString(2, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				order = new OrderDTO();
+				order.setOrdNo(rs.getString(1));
+				order.setOrdUid(rs.getString(2));
+				order.setOrdCount(rs.getString(3));
+				order.setOrdPrice(rs.getString(4));
+				order.setOrdDiscount(rs.getString(5));
+				order.setOrdDelivery(rs.getString(6));
+				order.setSavePoint(rs.getString(7));
+				order.setUsedPoint(rs.getString(8));
+				order.setOrdTotPrice(rs.getString(9));
+				order.setRecipName(rs.getString(10));
+				order.setRecipHp(rs.getString(11));
+				order.setRecipZip(rs.getString(12));
+				order.setRecipAddr1(rs.getString(13));
+				order.setRecipAddr2(rs.getString(14));
+				order.setOrdPayment(rs.getString(15));
+				order.setOrdComplete(rs.getString(16));
+				order.setOrdDate(rs.getString(17));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectOrder() error :"+e.getMessage());
+		}
+		return order;
+	}
+	
+	
+	public int selectLastOrdNo(String uid) {
+		
+		int ordNo = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LAST_ORDNO);
 			psmt.setString(1, uid);
 			rs = psmt.executeQuery();
 				
 			if(rs.next()) {
-				ordNo = rs.getString(1);
+				ordNo = rs.getInt(1);
 			}
 			
 			close();
@@ -81,28 +119,40 @@ public class OrderDAO extends DBHelper{
 	
 	/////////////////////////////////////////////////
 	
-	public void insertOrderItem(CartDTO orderItem, String ordNo) {
+	public void insertOrderItem(CartDTO orderItem, int ordNo) {
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, ordNo);
+			psmt.setInt(2, orderItem.getProdNo());
+			psmt.setInt(3, orderItem.getCount());
+			psmt.setInt(4, orderItem.getOrgPrice());
+			psmt.setInt(5, orderItem.getDiscount());
+			psmt.setInt(6, orderItem.getPoint());
+			psmt.setInt(7, orderItem.getDelivery());
+			psmt.setInt(8, orderItem.getTotal());
 			
+			psmt.executeUpdate();
 			
+			close();
 		} catch (Exception e) {
 			logger.error("insertOrderItem() error :"+e.getMessage());
 		}
 	}
-	public List<OrderItemDTO> selectOrderItems(String ordNo) {
+	public OrderItemDTO selectOrderItem(int ordNo){
 		
-		List<OrderItemDTO> items = new ArrayList<>();
+		OrderItemDTO dto = null;
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEMS);
-			psmt.setString(1, ordNo);
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEM);
+			psmt.setInt(1, ordNo);
 			
-			while(rs.next()) {
-				OrderItemDTO dto = new OrderItemDTO();
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new OrderItemDTO();
 				dto.setOrdNo(rs.getString(1));
 				dto.setProdNo(rs.getString(2));
 				dto.setCount(rs.getString(3));
@@ -116,14 +166,12 @@ public class OrderDAO extends DBHelper{
 				dto.setProdName(rs.getString(12));
 				dto.setDescript(rs.getString(13));
 				
-				items.add(dto);
 			}
 			close();
 		} catch (Exception e) {
-			logger.error("selectOrderItems() error :"+e.getMessage());
+			logger.error("selectOrderItem() error :"+e.getMessage());
 		}
-		
-		return items;
+		return dto;
 	}
 	
 }
