@@ -50,8 +50,8 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		// 글 조회
-		List<CsDTO> article_faq_list = service.selectBoards("2", null, null, start);
-		logger.debug("faq_list :" +article_faq_list.toString());
+		List<CsDTO> faq_list = service.selectBoards("2", null, null, start);
+		logger.debug("faq_list :" +faq_list.toString());
 		
 		// cate1 이름, 설명 조회
 		CsDTO faq_name_dis = service.selectBoard_list("2", cate1);
@@ -61,7 +61,7 @@ public class ListController extends HttpServlet {
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
-		req.setAttribute("articles_faq_lists", article_faq_list);
+		req.setAttribute("faq_lists", faq_list);
 		req.setAttribute("faq_name_dis", faq_name_dis);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");

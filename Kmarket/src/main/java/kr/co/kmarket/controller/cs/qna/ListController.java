@@ -35,6 +35,7 @@ public class ListController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		String parent = req.getParameter("parent");
 		
 		logger.debug("cate1 : " + cate1);
 		logger.debug("cate2 : " + cate2);
@@ -59,18 +60,23 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> article_qna_list = service.selectBoards("3", null, null, start);
-		logger.debug("qna_list :" +article_qna_list.toString());
+		List<CsDTO> qna_list = service.selectBoards("3", null, null, start);
+		logger.debug("qna_list :" + qna_list.toString());
 		
 		// cate1 이름, 설명 조회
 		CsDTO qna_name_dis = service.selectBoard_list("3", cate1);
-		logger.debug("qna_list_name_dis :" +qna_name_dis.toString());
+		logger.debug("qna_name_dis :" +qna_name_dis.toString());
+		
+		// 답변 유무 조회
+		CsDTO qna_parent = service.selectBoard_parent(parent);
+		logger.debug("qna_parent : " +qna_parent.toString());
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
 		req.setAttribute("board", "list");
-		req.setAttribute("articles_qna_lists", article_qna_list);
+		req.setAttribute("qna_lists", qna_list);
 		req.setAttribute("qna_name_dis", qna_name_dis);
+		req.setAttribute("qna_parent", qna_parent);
 		
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);

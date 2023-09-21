@@ -320,6 +320,8 @@ public class SQL {
 														+ "WHERE `parent`=0 AND a.`group`=? AND a.`cate1`=? AND a.`cate2`=? "
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
+
+	public static final String SELECT_QNA_PARENT = "SELSECT * FROM `km_board` WHERE `parent`=?";
 	
 	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
 	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";

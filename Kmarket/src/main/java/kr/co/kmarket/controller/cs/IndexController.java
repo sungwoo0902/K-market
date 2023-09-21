@@ -58,17 +58,18 @@ public class IndexController extends HttpServlet{
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> article_notice_list = service.selectBoards("1", null, null, start);
-		List<CsDTO> article_faq_list = service.selectBoards("2", null, null, start);
-		List<CsDTO> article_qna_list = service.selectBoards("3", null, null, start);
-		logger.debug("123 :" +article_notice_list.toString());
+		List<CsDTO> notice_list = service.selectBoards("1", null, null, start);
+		List<CsDTO> faq_list = service.selectBoards("2", null, null, start);
+		List<CsDTO> qna_list = service.selectBoards("3", null, null, start);
+		logger.debug("notice_list :" +notice_list.toString());
 		req.setAttribute("board", "list");
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
-		req.setAttribute("articles_notice_lists", article_notice_list);
-		req.setAttribute("articles_faq_lists", article_faq_list);
-		req.setAttribute("articles_qna_lists", article_qna_list);
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("notice_lists", notice_list);
+		req.setAttribute("faq_lists", faq_list);
+		req.setAttribute("qna_lists", qna_list);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/index.jsp");

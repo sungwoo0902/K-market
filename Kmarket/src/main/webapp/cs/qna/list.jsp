@@ -7,12 +7,20 @@
 									<h2>${qna_name_dis.cate1_discription}</h2>
 								</nav>
 						<table>
-						<c:forEach var="article_qna_list" items="${articles_qna_lists}">
-							<c:if test="${article_qna_list.group == 3}">
+						<c:forEach var="qna_list" items="${qna_lists}">
+							<c:if test="${qna_list.group == 3}">
 								<tr>
-									<td><a href="./view.do?no=${article_qna_list.no}">${article_qna_list.title}</a></td>
-									<td>${article_qna_list.maskingUid}</td>
-									<td>${article_qna_list.rdate}</td>
+									<td><a href="./view.do?no=${qna_list.no}">${qna_list.title}</a></td>
+									<c:choose>
+										<c:when test="${qna_parent.parent == 0}">
+											<td>검토중</td>
+										</c:when>
+										<c:otherwise>
+											<td>검토완료</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${qna_list.maskingUid}</td>
+									<td>${qna_list.rdate}</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -21,16 +29,16 @@
 						
 						<div class="page">
 							<c:if test="${pageGroupStart > 1}">
-								<a href="/Kmarket/qna/list.do?cate1=${cate1}&pg=${pageGroupStart - 1}&search=${search}" class="prev">이전</a>
+								<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}&pg=${pageGroupStart - 1}" class="prev">이전</a>
 							</c:if>
-							<c:forEach var="i" begin="${pageGorupStart}" end="${pageGroupEnd}">
-								<a href="/Kmarket/qna/list.do?cate1=${cate1}&pg=${i}&${search}" class="num on ${currentPage == i?'current':'off'}">${i}</a>
+							<c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+								<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}&pg=${i}&search=${search}" class="num on ${currentPage == i ?'on current':''}">${i}</a>
 							</c:forEach>
-							<c:if test="${pageGorupEnd < lastPageNum}">
-								<a href="/Kmarket/qna/list.do?cate1=${cate1}&pg=${pageGroupEnd + 1}&search=${search}" class="next">다음</a>
+							<c:if test="${pageGroupEnd < lastPageNum}">
+								<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}&pg=${pageGroupEnd + 1}" class="next">다음</a>
 							</c:if>
-						</div>
-							<a href="./qna_write.do" class="btnWrite">문의하기</a>
+							</div>
+							<a href="${ctxPath}/cs/qna/write.do" class="btnWrite">문의하기</a>
 						</article>
 					</section>
 				</div>
