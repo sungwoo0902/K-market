@@ -172,26 +172,40 @@ public class CsDAO extends DBHelper {
 	}
 	
 	// 공지 답변 유무 출력
-	public CsDTO selectBoard_parent(String no) {
+	public CsDTO selectBoard_parent(String group, String cate1, int start) {
+		
 		CsDTO dto = null;
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_QNA_PARENT);
-			psmt.setString(1, no);
+			psmt.setString(1, group);
+			psmt.setString(2, group);
+			psmt.setInt(3, start);
 			rs = psmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				dto = new CsDTO();
 				dto.setNo(rs.getString(1));
 				dto.setParent(rs.getString(2));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setRdate(rs.getString(9));
+				dto.setGroup_name(rs.getString(10));
+				dto.setCate1_name(rs.getString(11));
+				dto.setCate2_name(rs.getString(12));
+				dto.setAnswer(rs.getString(13));
 			}
 			close();
 		}catch (Exception e) {
 			logger.error("selectBoard_parent() ERROR : " +e.getMessage());
 		}
 		
-		return dto;
+		return null;
 		
 	}
 	
