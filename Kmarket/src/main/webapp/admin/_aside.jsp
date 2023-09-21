@@ -10,7 +10,6 @@
                     <li><a href="${ctxPath}/admin/config/banner.jsp">배너관리</a></li>
                 </ol>
             </li>
-			<c:if test="${sessUser.type eq 2}">
             <li>
                 <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
                 <ol>
@@ -18,8 +17,7 @@
                     <li><a href="#">재고관리</a></li>
                 </ol>
             </li>
-            </c:if>
-            <c:if test="${sessUser.type eq 3}">
+            <c:if test="${sessUser.level eq 7}">
             <li>
                 <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
                 <ol>
@@ -30,7 +28,6 @@
                 </ol>
             </li>
             </c:if>
-            <c:if test="${sessUser.type eq 2}">
             <li>
                 <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
                 <ol id="menu">
@@ -47,8 +44,7 @@
                     <li><a href="#">배송관리</a></li>
                 </ol>
             </li>
-            </c:if>
-            <c:if test="${sessUser.type eq 3}">
+            <c:if test="${sessUser.level eq 7}">
             <li>
                 <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                 <ol>

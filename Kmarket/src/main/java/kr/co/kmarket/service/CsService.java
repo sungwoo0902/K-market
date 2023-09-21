@@ -47,8 +47,8 @@ public enum CsService {
 	
 	
 	// 리스트 페이징 구현 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	public int selectCountBoard(String group, String cate1) {
-		return dao.selectCountBoard(group, cate1);
+	public int selectCountBoard(String group, String cate1, String cate2) {
+		return dao.selectCountBoard(group, cate1, cate2);
 	}
 	
 	public int getLastPageNum(int total) {

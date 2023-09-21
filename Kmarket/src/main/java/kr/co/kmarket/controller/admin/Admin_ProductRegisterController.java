@@ -121,6 +121,6 @@ public class Admin_ProductRegisterController extends HttpServlet{
 		
 		prodService.insertProduct(dto);
 		
-		resp.sendRedirect("/Kmarket/admin/product/list.do?success=501");
+		resp.sendRedirect("./register.do");
 	}
 }

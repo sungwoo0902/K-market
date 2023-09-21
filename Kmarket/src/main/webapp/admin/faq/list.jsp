@@ -17,6 +17,88 @@ $(function(){
 		
 	});	
 	
+	$('.faqDelete').click(function() {
+        var checkBoxArr = [];
+        
+        // 체크된 체크박스를 순회하면서 데이터 추출
+        $('input[name=chk]:checked').each(function() {
+            var $row = $(this).closest('tr'); // 현재 체크박스가 속한 행
+
+            var prodNoValue = $row.find('td:eq(1)').text(); // 3번째 열의 데이터 (상품코드)
+
+            checkBoxArr.push(prodNoValue);
+        });
+
+        console.log(checkBoxArr);
+		
+        var confirmDelete = confirm("선택한 게시글을 삭제하시겠습니까?");
+        
+	    $.ajax({
+	        type: "GET",
+	        url: "/Kmarket/admin/faq/delete.do",
+	        traditional: true,
+	        data: {
+	            checkBoxArr: checkBoxArr
+	        },
+	        success: function(result) {
+	            console.log(result);
+	        },
+	        error: function(xhr, status, error) {
+	            alert(error);
+	        }
+	    });
+	});
+	
+	$('.faqWrite').click(function(){
+		window.location.href = "/Kmarket/admin/faq/write.do?group=2"; 
+	});
+	
+	const cate1 = $('#category1');
+	const cate2 = $('#category2');
+	let selectCate = null;
+	
+	$(cate1).change(function(){
+		const selectedCate1 = $(this).val();
+		
+		console.log(selectedCate1);
+		
+		$.ajax({
+			url: '/Kmarket/category.do',
+			type: 'post',
+			data: {category1: selectedCate1},
+			dataType: 'json',
+			success: function(data){
+				console.log(data);
+				
+				// 기존 옵션 제거
+			    cate2.empty();
+				
+			    console.log('empty complete'+data);
+			    
+			    // "2차 분류 선택" 옵션 추가
+			    cate2.append($('<option>', {
+			        value: 'cate0',
+			        text: '2차 분류 선택'
+			    }));
+				
+			    console.log('append complete'+data);
+			 	// 받아온 JSON 데이터를 기반으로 2차 분류 옵션 추가
+			    for (let i = 0; i < data.cate2s.length; i++) {
+			        const category = data.cate2s[i];
+			        cate2.append($('<option>', {
+			            value: category.cate2No,
+			            text: category.c2Name
+			        }));
+			    }
+			},
+			error: function(error){
+				console.error('Error:',error);
+			}
+		});
+		
+	});// cate1 click end
+	
+	
 });
 
 </script>
@@ -25,20 +107,27 @@ $(function(){
     <%@ include file="../_aside.jsp" %>
     <section id="admin-faq-list">
         <nav>
-            <h3>상품목록</h3>
+            <h3>자주묻는 질문</h3>
             <p>
-                HOME > 상품관리 > <strong>상품목록</strong>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
             </p>
         </nav>
         <section>
             <div>
                 <select name="search">
+                	<option value="search1">전체</option>
                     <option value="search1">상품명</option>
                     <option value="search1">상품코드</option>
                     <option value="search1">제조사</option>
                     <option value="search1">판매자</option>
                 </select>
-                <input type="text" name="search">
+                <select name="search">
+                	<option value="search1">전체</option>
+                    <option value="search1">상품명</option>
+                    <option value="search1">상품코드</option>
+                    <option value="search1">제조사</option>
+                    <option value="search1">판매자</option>
+                </select>
             </div>
             <table>
                 <tr>
@@ -67,6 +156,7 @@ $(function(){
             </table>
             
             <input type="button" value="선택 삭제" class="faqDelete"/>
+            <input type="button" value="글 작성" class="faqWrite"/>
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
@@ -86,11 +176,6 @@ $(function(){
             </c:if>    
             </div>
         </section>
-
-        <p class="ico info">
-            <strong>Tip!</strong>
-            전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 총 35개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 있습니다.
-        </p>
     </section>
 </main>
 <%@ include file="../_footer.jsp" %>

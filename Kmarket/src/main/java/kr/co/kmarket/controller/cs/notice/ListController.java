@@ -39,7 +39,7 @@ public class ListController extends HttpServlet {
 		logger.debug("currentPage :" +currentPage);			
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard("1", cate1);
+		int total = service.selectCountBoard("1", cate1, cate2);
 		logger.debug("total :" +total);
 		
 		// 마지막 페이지 번호

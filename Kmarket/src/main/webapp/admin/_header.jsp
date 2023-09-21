@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>케이마켓::관리자</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>    
@@ -27,7 +27,7 @@
                     <span>${sessUser.name}님 반갑습니다.</span>
                     <a href="${ctxPath}">HOME |</a>
                     <a href="${ctxPath}/member/logout.do">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <a href="${ctxPath}/cs/index.do">고객센터</a>
                 </p>
             </div>
         </header>

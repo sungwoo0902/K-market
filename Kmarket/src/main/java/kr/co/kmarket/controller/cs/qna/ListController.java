@@ -43,7 +43,7 @@ public class ListController extends HttpServlet {
 		int currentPage = service.getCurrentPage(pg);
 					
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard("3", cate1);
+		int total = service.selectCountBoard("3", cate1, cate2);
 						
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);

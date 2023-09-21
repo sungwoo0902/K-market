@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
 
-@WebServlet("/admin/notice/view.do")
-public class Admin_NoticeViewController extends HttpServlet {
+@WebServlet("/admin/qna/view.do")
+public class Admin_QnaViewController extends HttpServlet {
 
 	private static final long serialVersionUID = 824910349917258619L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -40,10 +40,10 @@ public class Admin_NoticeViewController extends HttpServlet {
 		
 		CsDTO dto = service.selectBoard(no);
 		logger.debug("dto : " + dto);
-		req.setAttribute("notice", dto);
+		req.setAttribute("qna", dto);
 		
-		if(dto.getGroup() == 1) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/view.jsp");
+		if(dto.getGroup() == 3) {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/qna/view.jsp");
 			dispatcher.forward(req, resp);
 			
 		}else {

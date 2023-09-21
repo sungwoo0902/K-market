@@ -96,22 +96,22 @@ public class CsDAO extends DBHelper {
 	}
 	
 
-	public List<CsDTO> selectBoards(String group, String cate2, String cate3, int start) {
+	public List<CsDTO> selectBoards(String group, String cate1, String cate2, int start) {
 		
 			List<CsDTO> board = new ArrayList<>();
 		
 		try {
 				conn = getConnection();
-			if(cate3 != null) {
+			if(cate2 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
 				psmt.setString(1, group);
-				psmt.setString(2, cate2);
-				psmt.setString(3, cate3);	
+				psmt.setString(2, cate1);
+				psmt.setString(3, cate2);	
 				psmt.setInt(4, start);	
-			}else if(cate2 != null) {
+			}else if(cate1 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
 				psmt.setString(1, group);
-				psmt.setString(2, cate2);
+				psmt.setString(2, cate1);
 				psmt.setInt(3, start);	
 			}else{
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
@@ -131,7 +131,9 @@ public class CsDAO extends DBHelper {
 				dto.setTitle(rs.getString(7));
 				dto.setContent(rs.getString(8));
 				dto.setRdate(rs.getString(9));
-				dto.setCate1_name(rs.getString(10));
+				dto.setGroup_name(rs.getString(10));
+				dto.setCate1_name(rs.getString(11));
+				dto.setCate2_name(rs.getString(12));
 				board.add(dto);	
 			}
 				close();
@@ -174,23 +176,40 @@ public class CsDAO extends DBHelper {
 	
 	public void deleteBoard(String no) {
 		
+		try {
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_BOARD);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			
+			close();
+	
+		} catch (Exception e) {
+			logger.error("deleteBoard() ERROR : " + e.getMessage());
+		}
 	}
 	
 	// 페이징을 위한 메서드
-	public int selectCountBoard(String group, String cate1) {
+	public int selectCountBoard(String group, String cate1, String cate2) {
 		int total = 0;
 		try {
 			conn = getConnection();
 			
-			if(group != null) {
-				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MAIN_CATE);
+			if(cate2 != null) {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_SUB_CATE);
 				psmt.setString(1, group);
-				logger.debug("here1  : ");
-			
-			}else {
+				psmt.setString(2, cate1);
+				psmt.setString(3, cate2);
+				logger.debug("here1  : ");	
+			}else if(cate1 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MIDDLE_CATE);
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
+				logger.debug("here2 : ");
+			}else if(group != null) {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MAIN_CATE);
+				psmt.setString(1, group);
 				logger.debug("here2 : ");
 			}
 			rs = psmt.executeQuery();
