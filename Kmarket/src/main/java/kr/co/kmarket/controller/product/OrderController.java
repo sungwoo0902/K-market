@@ -20,6 +20,7 @@ import kr.co.kmarket.dao.MemberDAO;
 import kr.co.kmarket.dto.CartDTO;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.dto.OrderDTO;
+import kr.co.kmarket.dto.OrderItemDTO;
 import kr.co.kmarket.service.CartService;
 import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.service.OrderService;
@@ -63,7 +64,7 @@ public class OrderController extends HttpServlet{
 		
 		// 배송지 정보 불러와서 orderDTO에 같이 넣어준다.
 		member = memService.selectMemRecip(uid);
-		
+		// order창에 띄워줄 현재 보유 포인트
 		int point = member.getPoint(); 
 		
 		order.setOrdUid(uid);
@@ -81,23 +82,30 @@ public class OrderController extends HttpServlet{
 		order.setRecipAddr2(member.getAddr2());
 		order.setOrdPayment(ordPayment);
 		
+		// cart창에서 선택한 목록만 불러와서 carts리스트에 담는다.
 		for(int i = 0; i < selectedCartNos.length; i++) {
 			CartDTO dto = cartService.selectedCart(uid, selectedCartNos[i]);
 			carts.add(dto);
 		}
-		logger.debug(uid);
-		req.setAttribute("carts", carts);
 		
 		// insertOrder로 uid, count, price, discount, delivery, point, total을 입력한다.
+		// order에 입력한다.
 		ordService.insertOrder(order);
 		// 방금 넣은 order의 ordNo를 가져온다.
 		String ordNo = ordService.selectOrdNo(uid);
 		// 위의 carts를 orderNo에 매치하여 orderItems에 하나씩 반복하여 넣어준다.
 		ordService.insertOrderItems(carts, ordNo);
-		// 최종적으로 selectOrder를 실행하여 주문서 출력
-		// ordService.selectOrder();
+		// 현재 보유중인 point 출력
+		req.setAttribute("point", point);
+		// 해당 order의 상품들도 가져온다.
+		List<OrderItemDTO> orderItems = ordService.selectOrderItems(ordNo);
 		
-		resp.sendRedirect("/Kmarket/product/order.do");
+		// 현재 주문서
+		req.setAttribute("order", order);
+		// 현재 주문서의 상품들
+		req.setAttribute("orderItems", orderItems);
+		
+		//resp.sendRedirect("/Kmarket/product/order.do");
 		logger.debug("redirect complete");
 		/*
 		result = 1;

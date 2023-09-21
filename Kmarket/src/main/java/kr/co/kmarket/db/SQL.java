@@ -246,7 +246,7 @@ public class SQL {
 												+ "`recipAddr2`=?,"
 												+ "`ordPayment`=?,"
 												+ "`ordDate`=NOW()";
-	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `uid`=?";
+	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordUid`=?";
 	
 	//**************************************************************************************************************//
 	//********************************************* Product_Order_Item *********************************************//
@@ -260,7 +260,17 @@ public class SQL {
 													+ "`point`=?,"
 													+ "`delivery`=?,"
 													+ "`total`=?";
-	
+	public static final String SELECT_ORDER_ITEMS = "SELECT "
+													+ "a.*, "
+													+ "b.thumb1, "
+													+ "b.prodCate1, "
+													+ "b.prodCate2, "
+													+ "b.prodName, "
+													+ "b.descript "
+													+ "FROM `km_product_order_item` AS a JOIN "
+													+ "`km_product` AS b "
+													+ "ON a.ordNo=b.prodNo "
+													+ "WHERE `ordNo`=?";
 	
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
