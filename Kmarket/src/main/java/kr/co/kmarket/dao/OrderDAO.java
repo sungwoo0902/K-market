@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.db.DBHelper;
 import kr.co.kmarket.db.SQL;
+import kr.co.kmarket.dto.CartDTO;
 import kr.co.kmarket.dto.OrderDTO;
+import kr.co.kmarket.dto.OrderItemDTO;
 
 public class OrderDAO extends DBHelper{
 
@@ -35,6 +37,12 @@ public class OrderDAO extends DBHelper{
 			psmt.setInt(6, order.getSavePoint());
 			psmt.setInt(7, order.getOrdTotPrice());
 			psmt.setInt(8, order.getOrdComplete());
+			psmt.setString(9, order.getRecipName());
+			psmt.setString(10, order.getRecipHp());
+			psmt.setString(11, order.getRecipZip());
+			psmt.setString(12, order.getRecipAddr1());
+			psmt.setString(13, order.getRecipAddr2());
+			psmt.setInt(14, order.getOrdPayment());
 			psmt.executeUpdate();
 			
 			close();
@@ -42,8 +50,43 @@ public class OrderDAO extends DBHelper{
 			logger.error("insertOrder() error :"+e.getMessage());
 		}
 	}
-	public void selectOrder() {}
+	public String selectOrdNo(String uid) {
+		
+		String ordNo = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+				
+			if(rs.next()) {
+				ordNo = rs.getString(1);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectOrder() error :"+e.getMessage());
+		}
+		return ordNo;
+	}
 	public void selectOrders() {}
 	public void updateOrder() {}
 	public void deleteOrder() {}
+	
+	
+	/////////////////////////////////////////////////
+	
+	public void insertOrderItem(CartDTO orderItem, String ordNo) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_ORDER_ITEM);
+			
+			
+		} catch (Exception e) {
+			logger.error("insertOrderItem() error :"+e.getMessage());
+		}
+		
+	}
 }

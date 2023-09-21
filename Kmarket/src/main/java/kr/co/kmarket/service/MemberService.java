@@ -40,6 +40,10 @@ public enum MemberService {
 		dao.deleteMember(uid);
 	}
 	
+	public MemberDTO selectMemRecip(String uid) {
+		return dao.selectMemRecip(uid);
+	}
+	
 	
 	// 회원가입 시 중복체크 메서드
 	public int selectCheckUid(String uid) {

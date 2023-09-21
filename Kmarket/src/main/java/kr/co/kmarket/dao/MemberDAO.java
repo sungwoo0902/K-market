@@ -139,6 +139,31 @@ public class MemberDAO extends DBHelper {
 		
 	}
 	
+	public MemberDTO selectMemRecip(String uid) {
+		
+		MemberDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_MEMBER_RECEIPT);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new MemberDTO();
+				dto.setName(rs.getString(1));
+				dto.setHp(rs.getString(2));
+				dto.setZip(rs.getString(3));
+				dto.setAddr1(rs.getString(4));
+				dto.setAddr2(rs.getString(5));
+				dto.setPoint(rs.getString(6));
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectMemRecip() error:"+e.getMessage());
+		}
+		return dto;
+	}
 	
 	
 	// 회원가입시 중복체크 메서드
