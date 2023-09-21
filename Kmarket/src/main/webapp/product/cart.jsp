@@ -112,7 +112,7 @@
 		//*******************************************************//
 		const ctxPath = $('#ctxPath').val();
 		const selectedCartNos = [];
-		const uid = 'a12345';
+		const uid = $('#uid').val();
 		
 		
 		$('#del').click(function(e){
@@ -151,10 +151,13 @@
 				}
 			})
 		}); // 선택삭제 click end
-		
+
+		//*******************************************************//
+		//******************* 선택된 상품 order *********************//
+		//*******************************************************//
 		$('input[name="order"]').click(function(e){
 			e.preventDefault();
-			alert('order click');
+			//alert('order click');
 			
 			// 체크돼있는 prodNo를 배열로 만들어 넣음
 			$('input[name^="cartNo"]:checked').each(function(){
@@ -166,12 +169,38 @@
 				return;
 			}
 			
+	        var ordTotPrice = parseFloat($('#totalOrderAmount').text().replace(/,/g, ''));
+	        var ordCount = parseFloat($('#totalCountAmount').text().replace(/,/g, ''));;
+	        var ordPrice = parseFloat($('#totalOrgPriceAmount').text().replace(/,/g, ''));;
+	        var ordDiscount = parseFloat($('#totalDiscountAmount').text().replace(/,/g, ''));;
+	        if($('#totalDeliveryAmount').text() != '무료'){
+	        	var ordDelivery = parseFloat($('#totalDeliveryAmount').text().replace(/,/g, ''));;
+	        }else{
+	        	var ordDelivery = 0;
+	        }
+	        var savePoint = parseFloat($('#totalPointAmount').text().replace(/,/g, ''));;
+            
+            console.log('ordCount'+ordCount);
+            console.log('ordPrice'+ordPrice);
+            console.log('ordDiscount'+ordDiscount);
+            console.log('ordDelivery'+ordDelivery);
+            console.log('savePoint'+savePoint);
+            console.log('ordTotPrice'+ordTotPrice);
+            
+			const jsonData = {"selectedCartNos": selectedCartNos,
+					   		  "uid": uid,
+					   		  "ordTotPrice": ordTotPrice,
+					   		  "ordCount": ordCount,
+					   		  "ordPrice": ordPrice,
+					   		  "ordDiscount": ordDiscount,
+					   		  "ordDelivery": ordDelivery,
+					   		  "savePoint": savePoint
+							}
+			
 			$.ajax({
 				url: '/Kmarket/product/order.do',
 				type: 'post',
-				data: {"selectedCartNos": selectedCartNos,
-					   "uid": uid
-						},
+				data: jsonData,
 				traditional: true,
 				dataType: 'json',
 				success: function(data){
@@ -182,7 +211,7 @@
 					*/
 				}
 			})
-		})
+		}); // order click end
 		
 		//*******************************************************//
 		//******************** 장바구니 비었을때 **********************//
@@ -193,9 +222,6 @@
 			$('tr.empty').css('display', 'table-row');
 		}// isCartsEmpty end
 		
-		//*******************************************************//
-		//******************* 선택된 상품 order *********************//
-		//*******************************************************//
 		
 	});// end
 </script>
@@ -240,6 +266,7 @@
                         	<input type="checkbox" name="cartNo" value="${cart.cartNo}">
                         	<input type="hidden" name="prodNo" value="${cart.prodNo}">
                         	<input type="hidden" name="ctxPath" id="ctxPath" value="${ctxPath}">
+                        	<input type="hidden" name="uid" id="uid" value="${sessUser.uid}">
                         </td>
                         <td>
                             <article>
