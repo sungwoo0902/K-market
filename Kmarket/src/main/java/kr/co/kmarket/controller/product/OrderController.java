@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,23 @@ public class OrderController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
+		
+		int ordNo = ordService.selectLastOrdNo(uid);
+		
+		logger.debug("uid :"+uid);
+		logger.debug("ordNo :"+ordNo);
+		
+		OrderDTO order = ordService.selectOrder(ordNo, uid);
+		// 해당 order의 상품들도 가져온다.
+		List<OrderItemDTO> orderItems = ordService.selectOrderItems(ordNo);
+		// 현재 주문서의 상품들
+		req.setAttribute("orderItems", orderItems);
+		// 주문서
+		req.setAttribute("order", order);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");
@@ -64,8 +82,6 @@ public class OrderController extends HttpServlet{
 		
 		// 배송지 정보 불러와서 orderDTO에 같이 넣어준다.
 		member = memService.selectMemRecip(uid);
-		// order창에 띄워줄 현재 보유 포인트
-		int point = member.getPoint(); 
 		
 		order.setOrdUid(uid);
 		order.setOrdTotPrice(ordTotPrice);
@@ -92,26 +108,17 @@ public class OrderController extends HttpServlet{
 		// order에 입력한다.
 		ordService.insertOrder(order);
 		// 방금 넣은 order의 ordNo를 가져온다.
-		String ordNo = ordService.selectOrdNo(uid);
+		int ordNo = ordService.selectLastOrdNo(uid);
 		// 위의 carts를 orderNo에 매치하여 orderItems에 하나씩 반복하여 넣어준다.
 		ordService.insertOrderItems(carts, ordNo);
-		// 현재 보유중인 point 출력
-		req.setAttribute("point", point);
-		// 해당 order의 상품들도 가져온다.
-		List<OrderItemDTO> orderItems = ordService.selectOrderItems(ordNo);
 		
-		// 현재 주문서
-		req.setAttribute("order", order);
-		// 현재 주문서의 상품들
-		req.setAttribute("orderItems", orderItems);
-		
-		//resp.sendRedirect("/Kmarket/product/order.do");
 		logger.debug("redirect complete");
-		/*
+		
 		result = 1;
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("result", result);
+		jsonObject.addProperty("ordNo", ordNo);
 		resp.getWriter().print(jsonObject);
-		*/
+		
 	}
 }

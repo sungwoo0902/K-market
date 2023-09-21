@@ -44,7 +44,7 @@
                             </article>
                         </td>
                         <td><fmt:formatNumber value="${item.count}" pattern="#,###" /></td>
-                        <td><fmt:formatNumber value="${item.orgPrice}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.price}" pattern="#,###" /></td>
                         <c:if test="${item.delivery ne 0}">
                         <td><fmt:formatNumber value="${item.delivery}" pattern="#,###" /></td>
                         </c:if>

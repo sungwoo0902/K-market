@@ -204,11 +204,10 @@
 				traditional: true,
 				dataType: 'json',
 				success: function(data){
-					/*
+					
 					if(data.result == 1){
 						window.location.href = ctxPath+'/product/order.do';
 					}
-					*/
 				}
 			})
 		}); // order click end

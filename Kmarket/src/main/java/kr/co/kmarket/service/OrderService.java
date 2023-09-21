@@ -1,5 +1,6 @@
 package kr.co.kmarket.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.kmarket.dao.OrderDAO;
@@ -15,21 +16,29 @@ public enum OrderService {
 	public void insertOrder(OrderDTO order) {
 		dao.insertOrder(order);
 	}
-	
-	public String selectOrdNo(String uid) {
-		return dao.selectOrdNo(uid);
+	public OrderDTO selectOrder(int ordNo, String uid) {
+		return dao.selectOrder(ordNo, uid);
+	}
+	public int selectLastOrdNo(String uid) {
+		return dao.selectLastOrdNo(uid);
 	}
 	public void selectOrders() {}
 	public void updateOrder() {}
 	public void deleteOrder() {}
 	
 	
-	public void insertOrderItems(List<CartDTO> carts, String ordNo) {
+	public void insertOrderItems(List<CartDTO> carts, int ordNo) {
 		for(CartDTO orderItem : carts) {
 			dao.insertOrderItem(orderItem, ordNo);
 		}
 	}
-	public List<OrderItemDTO> selectOrderItems(String ordNo) {
-		return dao.selectOrderItems(ordNo);
+	public List<OrderItemDTO> selectOrderItems(int ordNo) {
+		
+		List<OrderItemDTO> items = new ArrayList<>();
+		for(int i = 0; i < ordNo; i++) {
+			OrderItemDTO dto = dao.selectOrderItem(ordNo);
+			items.add(dto);
+		}
+		return items;
 	}
 }
