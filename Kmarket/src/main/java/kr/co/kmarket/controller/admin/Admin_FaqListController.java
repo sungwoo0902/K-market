@@ -71,5 +71,4 @@ public class Admin_FaqListController extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/list.jsp?group" + group + "&cate1" + cate1 + "cate2" + cate2 + "&pg" + pg);
 		dispatcher.forward(req, resp);
 	}
-	
 }

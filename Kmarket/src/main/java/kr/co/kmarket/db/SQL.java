@@ -275,7 +275,7 @@ public class SQL {
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
 	//**********************************************************************************************************//
-	public static final String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE a.`prodNo`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+	public static final String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE a.`prodNo`=? ORDER BY `rdate` DESC LIMIT ?, 5";
 	public static final String SELECT_REVIEW_COUNT = "SELECT COUNT(*) FROM `km_product_review` WHERE `prodNo`=?";
 	
 	//**************************************************************************************************//
