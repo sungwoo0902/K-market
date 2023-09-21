@@ -28,24 +28,21 @@ public class ListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("board", "list");
 		logger.info("doGet()...");
+		String group = "3";
 
 		// 데이터 수신
-		String pg = req.getParameter("pg");
-		String group = req.getParameter("group");
+		String pg    = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String parent = req.getParameter("parent");
-		String answer = req.getParameter("answer");
+		req.setAttribute("cate1", cate1);
 		
-		logger.debug("cate1 : " + cate1);
-		logger.debug("cate2 : " + cate2);
-					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 					
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard("3", cate1, cate2);
+		int total = service.selectCountBoard(group, cate1, cate2);
 						
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -53,19 +50,14 @@ public class ListController extends HttpServlet {
 		// 페이지 그룹 start, end 번호
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 		
-		// 페이지 시작번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-		logger.debug("pageStartNum :" +pageStartNum);
-					
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> qna_list = service.selectBoards("3", null, null, start);
-		logger.debug("qna_list :" + qna_list.toString());
+		List<CsDTO> qna_list = service.selectBoards(group, cate1, cate2, start);
 		
 		// cate1 이름, 설명 조회
-		CsDTO qna_name_dis = service.selectBoard_list("3", cate1);
+		CsDTO qna_name_dis = service.selectBoard_list(group, cate1);
 		
 		// 답변 유무 조회
 		CsDTO qna_parent = service.selectBoard_parent(group, cate1, start);
@@ -73,7 +65,6 @@ public class ListController extends HttpServlet {
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
-		req.setAttribute("board", "list");
 		req.setAttribute("qna_lists", qna_list);
 		req.setAttribute("qna_name_dis", qna_name_dis);
 		req.setAttribute("qna_parent", qna_parent);
@@ -82,7 +73,6 @@ public class ListController extends HttpServlet {
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum+1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
 		dispatcher.forward(req, resp);

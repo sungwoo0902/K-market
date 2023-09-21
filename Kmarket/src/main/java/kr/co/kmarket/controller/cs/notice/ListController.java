@@ -23,49 +23,40 @@ public class ListController extends HttpServlet {
 	private static final long serialVersionUID = -479618598042292094L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private CsService service = CsService.INSTANCE;
-
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("board", "list");
+		logger.info("doGet()...");
+		String group = "1";
 
 		// 데이터 수신
-		String pg = req.getParameter("pg");
-		String group = req.getParameter("group");
+		String pg    = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
+		
+		req.setAttribute("cate1", cate1);
 					
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
-		logger.debug("currentPage :" +currentPage);			
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard("1", cate1, cate2);
-		logger.debug("total :" +total);
+		int total = service.selectCountBoard(group, cate1, cate2);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
-		logger.debug("lastPageNum :" +lastPageNum);
 				
 		// 페이지 그룹 start, end 번호
 		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
-		logger.debug("start :" +result[0]);
-		logger.debug("result :" +result[1]);
 		
-		// 페이지 시작번호
-		int pageStartNum = service.getPageStartNum(total, currentPage);
-		logger.debug("pageStartNum :" +pageStartNum);
-					
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
-		logger.debug("start :" + start);
 		
 		// 글 조회
-		List<CsDTO> notice_list = service.selectBoards("1", null, null, start);
+		List<CsDTO> notice_list = service.selectBoards(group, cate1.equals("1")?null:cate1, cate2, start);
 		
 		// cate1 이름, 설명 조회
-		CsDTO name_dis = service.selectBoard_list("1", cate1);
-		
-		req.setAttribute("board", "list");
+		CsDTO name_dis = service.selectBoard_list(group, cate1);
 		
 		String success = req.getParameter("success");
 		req.setAttribute("success", success);
@@ -77,7 +68,6 @@ public class ListController extends HttpServlet {
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum+1);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/notice/list.jsp");

@@ -89,7 +89,7 @@
                             &nbsp;${prod.company}
                         </h4>
                         <!-- 나중에 등급별로 다르게 나오게끔 수정 예정 -->
-                        <h5 class="badge power">${prod.level}</h5>
+                        <h5 class="badge ${prod.level eq 4 ? 'power':(prod.level eq 5?'great':(prod.level eq 6 ?'power great':''))}">배경지키기</h5>
                         <h6 class="rating star${prod.score}">상품평${(prod.score eq 0)?'이 없습니다.':''}</h6>
                     </td>
                 </tr>
