@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/Kmarket/js/zipcode.js"></script>
-<script src="/Kmarket/js/autoHyphen.js"></script>
-<script src="/Kmarket/js/validation.js"></script>
-<script src="/Kmarket/js/duplication.js"></script>
+<script src="../js/zipcode.js"></script>
+<script src="../js/autoHyphen.js"></script>
+<script src="../js/validation.js"></script>
+<script src="../js/duplication.js"></script>
 <script>
-	if(${!(location >= 0 && location <= 1) && location eq null}) {
-		location.href = '/Kmarket/member/login.do?success=102';
+	if(${(location > 1) || (location < 0) || (location eq null)}){
+		location.href = './login.do?success=102';
 	}
 </script>
         <main id="member">

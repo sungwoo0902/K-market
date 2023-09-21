@@ -86,9 +86,9 @@ public class RegisterSellerController extends HttpServlet {
 		int result = service.insertSeller(dto);
 		
 		if(result > 0) {
-			resp.sendRedirect("/Kmarket/member/login.do?success=200");
+			resp.sendRedirect("./login.do?success=200");
 		}else {
-			resp.sendRedirect("/Kmarket/member/login.do?success=100");
+			resp.sendRedirect("./login.do?success=100");
 		}
 	}
 }

@@ -42,13 +42,13 @@
 			
 			if(${type eq "normal"}) {
 				if(ag4.checked){
-					location.href = '/Kmarket/member/register.do?lc=1';
+					location.href = './register.do?lc=1';
 				}else {
-					location.href = '/Kmarket/member/register.do?lc=0';
+					location.href = './register.do?lc=0';
 				}
 				
 			}else {
-				location.href = '/Kmarket/member/registerSeller.do';
+				location.href = './registerSeller.do';
 			}
 		});
 	}

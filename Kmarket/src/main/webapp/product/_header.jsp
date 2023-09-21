@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="stylesheet" href="./css/style.css"/>
+    <script>
+		$(function() {
+			// 구현되지 않은 서비스 및 2차 개발 예정인 서비스 알림
+			$('.unready').click(function() {
+				alert('아직 준비 중인 서비스입니다.\n불편을 끼쳐드려 죄송합니다.');
+			});
+		});
+	</script>
 </head>
 <body>
     <div id="wrapper">
@@ -63,36 +71,36 @@
                 <div>
                     <ul>
                         <li>
-                            <a href="#">히트상품</a>
+                            <a href="#" class="unready">히트상품</a>
                         </li>
                         <li>
-                            <a href="#">추천상품</a>
+                            <a href="#" class="unready">추천상품</a>
                         </li>
                         <li>
-                            <a href="#">최신상품</a>
+                            <a href="#" class="unready">최신상품</a>
                         </li>
                         <li>
-                            <a href="#">인기상품</a>
+                            <a href="#" class="unready">인기상품</a>
                         </li>
                         <li>
-                            <a href="#">할인상품</a>
+                            <a href="#" class="unready">할인상품</a>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <a href="#">쿠폰존</a>
+                            <a href="#" class="unready">쿠폰존</a>
                         </li>
                         <li>
-                            <a href="#">사용후기</a>
+                            <a href="#" class="unready">사용후기</a>
                         </li>
                         <li>
-                            <a href="#">개인결제</a>
+                            <a href="#" class="unready">개인결제</a>
                         </li>
                         <li>
-                            <a href="#">고객센터</a>
+                            <a href="${ctxPath}/cs">고객센터</a>
                         </li>
                         <li>
-                            <a href="#">FAQ</a>
+                            <a href="${ctxPath}/cs/faq/list.do?cate1=1">FAQ</a>
                         </li>
                     </ul>
                 </div>

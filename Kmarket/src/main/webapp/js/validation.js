@@ -159,11 +159,11 @@ $(document).ready(function() {
 		const name = $(this).val();
 		
 		if(name.match(reComNo)){
-			$('.msgOnline').css('color', 'black').text('예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011');
+			$('.msgOnline').css('color', 'black').text('- 표시 포함 예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011');
 			isComNoOk = true;
 			
 		}else if(name == ''){
-			$('.msgOnline').css('color', 'black').text('예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011');
+			$('.msgOnline').css('color', 'black').text('- 표시 포함 예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011');
 			isComNoOk = false;
 		
 		}else {

@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/Kmarket/js/zipcode.js"></script>
-<script src="/Kmarket/js/autoHyphen.js"></script>
-<script src="/Kmarket/js/validation.js"></script>
-<script src="/Kmarket/js/duplication.js"></script>
+<script src="../js/zipcode.js"></script>
+<script src="../js/autoHyphen.js"></script>
+<script src="../js/validation.js"></script>
+<script src="../js/duplication.js"></script>
         <main id="member">
             <div class="registerSeller">
                 <nav><h1>판매자 회원가입</h1></nav>

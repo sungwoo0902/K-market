@@ -51,12 +51,10 @@ public class LoginController extends HttpServlet {
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("sessUser", member);
-			resp.sendRedirect("/Kmarket/");
+			resp.sendRedirect("../");
 		}else {
 			logger.info("LOGIN FAILED : " + " (regip : " + req.getRemoteAddr() + ")");
-			resp.sendRedirect("/Kmarket/member/login.do?success=101");
+			resp.sendRedirect("./login.do?success=101");
 		}
-		
 	}
-
 }

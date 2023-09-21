@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,6 @@ public class LogoutController extends HttpServlet {
 		logger.info("LOGOUT SUCCESS : " + sessUser + " (regip : " + req.getRemoteAddr() + ")");
 		session.invalidate();
 		
-		resp.sendRedirect("/Kmarket");
+		resp.sendRedirect(req.getContextPath());
 	}
 }

@@ -381,7 +381,7 @@ main > section > section > h3 > span{
 main > section > section > article > a{
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     padding: 10px;
     box-sizing: border-box;
 }
@@ -431,6 +431,9 @@ main > section > section > article .org_price > span::after{
 }
 main > section > section > article .dis_price{
     margin-top: 4px;
+}
+main > section > section > article .dis_price > span {
+	color: grey;
 }
 main > section > section > article .dis_price > ins{
     font-size: 14px;
