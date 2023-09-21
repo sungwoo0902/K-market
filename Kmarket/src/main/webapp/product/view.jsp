@@ -107,7 +107,7 @@
 	    	e.preventDefault();
 	    	//alert('장바구니');
 	    	console.log(inputCount.val());
-	    	console.log(price);	    
+	    	console.log(price);	   
 			
 	    	// jsonData 초기화
 	    	const jsonData = {
@@ -122,7 +122,7 @@
       	    	};
     			// 위의 jsonData를 insertCartController로 보낸다
 	    		$.ajax({
-      	    		url: '/Kmarket/product/insertCart.do',
+      	    		url: '${ctxPath}/product/insertCart.do',
       	    		type: 'post',
       	    		data: jsonData,
       	    		dataType: 'json',
@@ -140,7 +140,7 @@
       	    					const commitData = Object.assign({},jsonData,{"cartResult":1});
       	    					
       	    					$.ajax({
-      	    						url: '/Kmarket/product/insertCart.do',
+      	    						url: '${ctxPath}/product/insertCart.do',
       	    	      	    		type: 'post',
       	    	      	    		data: commitData,
       	    	      	    		dataType: 'json',
@@ -162,7 +162,7 @@
       	    					const passData = Object.assign({},jsonData,{"cartResult":0});
       	    					
       	    					$.ajax({
-      	    						url: '/Kmarket/product/insertCart.do',
+      	    						url: '${ctxPath}/product/insertCart.do',
       	    	      	    		type: 'post',
       	    	      	    		data: passData,
       	    	      	    		dataType: 'json',
@@ -177,7 +177,7 @@
       	    			// 만약 insertCartController에서 받아온 result 값이 0이라면 아래를 실행
       	    			}else if(data.result == 0){
       	    				$.ajax({
-      	        	    		url: '/Kmarket/product/insertCart.do',
+      	        	    		url: '${ctxPath}/product/insertCart.do',
       	        	    		type: 'post',
       	        	    		data: jsonData,
       	        	    		dataType: 'json',
@@ -187,7 +187,7 @@
       	    				}); // ajax end
       	    				if(confirm('장바구니에 추가되었습니다. 지금 장바구니로 이동하시겠습니까?')){
 	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-	      	  	      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+	      	  	      	    	window.location.href = '${ctxPath}/product/cart.do?uid='+uid;
 		      	  	    	}else{
 	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
 		      	  	    		return;
@@ -258,7 +258,12 @@
                 <nav>
                     <h3>${prod.prodName}</h3>
                     <!-- 상품 설명 없으면 다르게 출력되게 해야함 -->
-                    <p>상품설명 : ${prod.descript}</p>
+                    <p>상품설명 : 
+                    <c:choose>
+                    	<c:when test="${prod.descript == null || prod.descript.equals('')}">상세페이지 참고</c:when>
+                    	<c:otherwise>${prod.descript}</c:otherwise>
+                    </c:choose>
+                    </p>
                     <!-- 별점 처리 해야함 -->
                     <h5 class="rating star${prod.score}">
                     <a href="#" class="goToReview">상품평보기</a>
@@ -291,7 +296,7 @@
                 	<c:if test="${prod.delivery ne 0}">
                     	<span class="delivery">배송비 <fmt:formatNumber value="${prod.delivery}" pattern="#,###" />원</span>
                     </c:if>
-                    <span class="arrival">모레(금) 7/8 도착예정</span>
+                    <span class="arrival">모레(${week}) ${day} 도착예정</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>

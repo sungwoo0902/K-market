@@ -1,7 +1,14 @@
 package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,38 +44,65 @@ public class ViewController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String pg     = req.getParameter("pg");
 		
+		
+		// 페이징 처리 영역 *************************************************
 		int total = 0;
 		
 		// 현재 페이지 번호
-		int currentPage = prodService.getCurrentPage(pg);
+		int currentPage = reviewService.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수
 		total = reviewService.selectReivewCount(prodNo);
 		
 		// 마지막 페이지 번호
-		int lastPageNum = prodService.getLastPageNum(total);
+		int lastPageNum = reviewService.getLastPageNum(total);
 		
 		// 페이지 그룹 start, end 번호
-		int[] result = prodService.getPageGroupNum(currentPage, lastPageNum);
+		int[] result = reviewService.getPageGroupNum(currentPage, lastPageNum);
 		
 		// 페이지 시작번호
-		int pageStartNum = prodService.getPageStartNum(total, currentPage);
+		int pageStartNum = reviewService.getPageStartNum(total, currentPage);
 		
 		// 시작 인덱스
-		int start = prodService.getStartNum(currentPage);
+		int start = reviewService.getStartNum(currentPage);
 		
-		
-		// 선택한 상품 불러오기 / 선택한 상품 카테고리 NAV 설정
+		// 선택한 상품 불러오기 / 선택한 상품 카테고리 NAV 설정 ****************
 		ProductDTO  prod = prodService.selectProduct(cate1, cate2, prodNo);
 		CategoryDTO cate = cateService.selectCate(cate1, cate2);
 		logger.debug("prod : " + prod);
 		logger.debug("cate : " + cate);
 		
-		// 선택 상품 리뷰 불러오기
+		
+		// 선택 상품 리뷰 불러오기 *******************************************
 		List<ReviewDTO> review = reviewService.selectReviews(prodNo, start);
 		logger.debug("review : " + review);
 		logger.debug("currentPage : " + currentPage);
 		
+		
+		// 현재 날짜 불러오기 ************************************************
+		// 현재 날짜
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+        // 현재 날짜+2
+        calendar.add(Calendar.DAY_OF_MONTH, 2);
+        Date twoDaysLater = calendar.getTime();
+
+        // SimpleDateFormat(MM/dd)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+        String twoDaysLaterFormatted = dateFormat.format(twoDaysLater);
+
+        // SimpleDateFormat(E)
+        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("E");
+        String twoDaysLaterDayOfWeek = dayOfWeekFormat.format(twoDaysLater);
+        logger.debug("이틀 날짜 : " + twoDaysLaterFormatted);
+        logger.debug("이틀 요일 : " + twoDaysLaterDayOfWeek);
+        
+        
+        // req.setAttribute 영역 ********************************************
+        req.setAttribute("day", twoDaysLaterFormatted);
+        req.setAttribute("week", twoDaysLaterDayOfWeek);
+        
 		req.setAttribute("cate1", cate1);
 		req.setAttribute("cate2", cate2);
 		req.setAttribute("no", prod.getProdNo());
@@ -86,11 +120,5 @@ public class ViewController extends HttpServlet{
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
 	}
 }

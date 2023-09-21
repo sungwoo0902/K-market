@@ -16,7 +16,9 @@
     <script>
         $(document).ready(function () {
             $(".slider > ul").bxSlider({
-            easing: "linear",
+            	easing: "linear",
+            	auto: true, 
+                pause: 5000,
             });
         });
 
@@ -24,17 +26,22 @@
             var best = $("aside > .best");
 
             $(window).scroll(function () {
-            var t = $(this).scrollTop();
-
-            if (t > 620) {
-                best.css({
-                position: "fixed",
-                top: "0",
-                });
-            } else {
-                best.css({ position: "static" });
-            }
+	            var t = $(this).scrollTop();
+	
+	            if (t > 620) {
+	                best.css({
+	                position: "fixed",
+	                top: "0",
+	                });
+	            } else {
+	                best.css({ position: "static" });
+	            }
             });
+            
+         	// 구현되지 않은 서비스 및 2차 개발 예정인 서비스 알림
+			$('.unready').click(function() {
+				alert('아직 준비 중인 서비스입니다.\n불편을 끼쳐드려 죄송합니다.');
+			});
         });
     </script>
     <style>
@@ -109,11 +116,11 @@
             <div class="menu">
                 <div>
                   <ul>
-                    <li><a href="#">히트상품</a></li>
-                    <li><a href="#">추천상품</a></li>
-                    <li><a href="#">최신상품</a></li>
-                    <li><a href="#">인기상품</a></li>
-                    <li><a href="#">할인상품</a></li>
+                    <li><a href="#" class="unready">히트상품</a></li>
+                    <li><a href="#" class="unready">추천상품</a></li>
+                    <li><a href="#" class="unready">최신상품</a></li>
+                    <li><a href="#" class="unready">인기상품</a></li>
+                    <li><a href="#" class="unready">할인상품</a></li>
                   </ul>
                   <ul>
                     <li><a href="${ctxPath}/cs/notice/list.do?cate1=1">공지사항</a></li>
