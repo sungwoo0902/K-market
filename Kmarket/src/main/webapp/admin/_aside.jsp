@@ -53,8 +53,8 @@
                 <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>고객센터</a>
                 <ol>
                     <li><a href="${ctxPath}/admin/notice/list.do?group=1&pg=1">공지사항</a></li>
-                    <li><a href="${ctxPath}/admin/notice/list.do?group=2&pg=1">자주묻는질문</a></li>
-                    <li><a href="${ctxPath}/admin/notice/list.do?group=3&pg=1">고객문의</a></li>
+                    <li><a href="${ctxPath}/admin/faq/list.do?group=2&pg=1">자주묻는질문</a></li>
+                    <li><a href="${ctxPath}/admin/qna/list.do?group=3&pg=1">고객문의</a></li>
                 </ol>
             </li>
             </c:if>
