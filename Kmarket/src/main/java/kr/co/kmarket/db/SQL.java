@@ -246,7 +246,7 @@ public class SQL {
 												+ "`recipAddr2`=?,"
 												+ "`ordPayment`=?,"
 												+ "`ordDate`=NOW()";
-	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `uid`=?";
+	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordUid`=?";
 	
 	//**************************************************************************************************************//
 	//********************************************* Product_Order_Item *********************************************//
@@ -260,12 +260,22 @@ public class SQL {
 													+ "`point`=?,"
 													+ "`delivery`=?,"
 													+ "`total`=?";
-	
+	public static final String SELECT_ORDER_ITEMS = "SELECT "
+													+ "a.*, "
+													+ "b.thumb1, "
+													+ "b.prodCate1, "
+													+ "b.prodCate2, "
+													+ "b.prodName, "
+													+ "b.descript "
+													+ "FROM `km_product_order_item` AS a JOIN "
+													+ "`km_product` AS b "
+													+ "ON a.ordNo=b.prodNo "
+													+ "WHERE `ordNo`=?";
 	
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//
 	//**********************************************************************************************************//
-	public static final String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE a.`prodNo`=? ORDER BY `rdate` DESC LIMIT ?, 10";
+	public static final String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo` WHERE a.`prodNo`=? ORDER BY `rdate` DESC LIMIT ?, 5";
 	public static final String SELECT_REVIEW_COUNT = "SELECT COUNT(*) FROM `km_product_review` WHERE `prodNo`=?";
 	
 	//**************************************************************************************************//
@@ -295,6 +305,7 @@ public class SQL {
 	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE no=?";
 	
 	public static final String SELECT_ANSWER = "SELECT * FROM `km_board` WHERE `parent`=?";
+	
 	public static final String SELECT_BOARD_CATE1_NAME_DISCRIPTION = "SELECT * FROM `km_board_cate1` WHERE `group`=? AND `cate1`=?";
 
 	
@@ -337,7 +348,21 @@ public class SQL {
 														+ "ORDER BY `no` DESC "
 														+ "LIMIT ?, 10";
 
-	public static final String SELECT_QNA_PARENT = "SELSECT * FROM `km_board` WHERE `parent`=?";
+	public static final String SELECT_QNA_PARENT = "SELECT "
+													+ "a.*, "
+													+ "b.group_name, "
+													+ "c.cate1_name, "
+													+ "d.cate2_name, "
+													+ "COUNT(e.no) AS answer "
+													+ "FROM km_board AS a "
+													+ "LEFT JOIN km_board_group AS b ON a.group = b.group "
+													+ "LEFT JOIN km_board_cate1 AS c ON a.cate1 = c.cate1 AND a.group = c.group "
+													+ "LEFT JOIN km_board_cate2 AS d ON a.cate2 = d.cate2 AND a.cate1 = d.cate1 "
+													+ "LEFT JOIN km_board AS e ON a.no = e.parent "
+													+ "WHERE a.parent=0 AND a.group=? AND a.cate1=? "
+													+ "GROUP BY a.no, a.group, a.cate1, a.cate2, b.group_name, c.cate1_name, d.cate2_name "
+													+ "ORDER BY no DESC "
+													+ "LIMIT ?, 10;";
 	
 	public static final String SELECT_CATE1_LIST_WHEN_GROUP_CHOOSE = "SELECT * FROM `km_board_cate1` WHERE `group`=?";
 	public static final String SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE = "SELECT * FROM `km_board_cate2` WHERE `cate1`=?";

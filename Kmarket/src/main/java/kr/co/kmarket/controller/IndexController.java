@@ -31,6 +31,8 @@ public class IndexController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doGet()...");
+		String success = req.getParameter("success");
+		req.setAttribute("success", success);
 		
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");

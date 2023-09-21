@@ -60,9 +60,6 @@ public class ViewController extends HttpServlet{
 		// 페이지 그룹 start, end 번호
 		int[] result = reviewService.getPageGroupNum(currentPage, lastPageNum);
 		
-		// 페이지 시작번호
-		int pageStartNum = reviewService.getPageStartNum(total, currentPage);
-		
 		// 시작 인덱스
 		int start = reviewService.getStartNum(currentPage);
 		
@@ -81,20 +78,33 @@ public class ViewController extends HttpServlet{
 		
 		// 현재 날짜 불러오기 ************************************************
 		// 현재 날짜
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate = calendar.getTime();
+		boolean rolex = true;
+		int time = 2;
+		String twoDaysLaterFormatted = null;
+		String twoDaysLaterDayOfWeek = null;
+		while(rolex) {
+			Calendar calendar = Calendar.getInstance();
+	        Date currentDate = calendar.getTime();
 
-        // 현재 날짜+2
-        calendar.add(Calendar.DAY_OF_MONTH, 2);
-        Date twoDaysLater = calendar.getTime();
+	        // 현재 날짜+2
+	        calendar.add(Calendar.DAY_OF_MONTH, time);
+	        Date twoDaysLater = calendar.getTime();
 
-        // SimpleDateFormat(MM/dd)
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
-        String twoDaysLaterFormatted = dateFormat.format(twoDaysLater);
+	        // SimpleDateFormat(MM/dd)
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd");
+	        twoDaysLaterFormatted = dateFormat.format(twoDaysLater);
 
-        // SimpleDateFormat(E)
-        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("E");
-        String twoDaysLaterDayOfWeek = dayOfWeekFormat.format(twoDaysLater);
+	        // SimpleDateFormat(E)
+	        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("E");
+	        twoDaysLaterDayOfWeek = dayOfWeekFormat.format(twoDaysLater);
+	        
+	        // 도착일이 일요일이면 하루 지연
+	        if(twoDaysLaterDayOfWeek.equals("일")) {
+	        	time++;
+	        }else {
+	        	rolex = false;
+	        }
+		}
         logger.debug("이틀 날짜 : " + twoDaysLaterFormatted);
         logger.debug("이틀 요일 : " + twoDaysLaterDayOfWeek);
         
@@ -116,7 +126,6 @@ public class ViewController extends HttpServlet{
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
-		req.setAttribute("pageStartNum", pageStartNum+1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);

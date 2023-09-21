@@ -104,6 +104,11 @@
 	  	const delivery = $('#delivery');
 	    
 	    $('.cart').click(function(e){
+	    	if(${sussUser == null}){
+	    		alert('로그인 후 이용 가능합니다.');
+	    		return false;
+	    	}
+	    	
 	    	e.preventDefault();
 	    	//alert('장바구니');
 	    	console.log(inputCount.val());
@@ -196,6 +201,40 @@
       	    		} // 전체 ajax success end
       	    	}); // 전체 ajax end
 	    }); // cart click end
+	    
+	  	//***********************************************//
+		//***************** 즉시 구매 ********************//
+		//***********************************************//
+		$('.order').click(function(e) {
+			e.prevenDefault();
+			
+	    	const jsonData = {
+      	    		"uid" : uid,
+      	    		"prodNo" : prodNo,
+      	    		"inputCount" : inputCount.val(),
+      	    		"price" : price,
+      	    		"discount" : discount,
+      	    		"point" : point,
+      	    		"delivery" : delivery.val(),
+      	    		"totalPrice" : inputCount.val() * price, 
+      	    		"orderType" : "buyNow" 
+      	    	};
+			
+	    		$.ajax({
+      	    		url: '${ctxPath}/product/insertCart.do',
+      	    		type: 'post',
+      	    		data: jsonData,
+      	    		dataType: 'json',
+      	    		success: function(data){
+      	    			
+      	    			/* 
+      	    				session 처리해서 결제페이지로 넘어가기. 
+      	    				결제 안 할 시, session 비우기
+      	    			*/
+      	    			
+      	    		}
+    	    	}); // buyNow ajax end..
+    	}); // order click end..
 	    
 	    
 	    
@@ -296,7 +335,7 @@
                 	<c:if test="${prod.delivery ne 0}">
                     	<span class="delivery">배송비 <fmt:formatNumber value="${prod.delivery}" pattern="#,###" />원</span>
                     </c:if>
-                    <span class="arrival">모레(${week}) ${day} 도착예정</span>
+                    <span class="arrival">${week.equals('월')?'글피':'모레'}(${week}) ${day} 도착예정</span>
                     <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                 </nav>
                 <nav>
@@ -408,43 +447,43 @@
                 <tbody>
                     <tr>
                         <td>제품소개</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>색상</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>치수</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>제조자/수입국</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>제조국</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>취급시 주의사항</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>제조연월</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>품질보증기준</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>A/S 책임자와 전화번호</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td>주문후 예상 배송기간</td>
-                        <td>상세정보 직접입력</td>
+                        <td>상세페이지 참고</td>
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -483,6 +522,11 @@
                     </p>
                 </li>
                 </c:forEach>
+                <c:if test="${review.size() < 1}">
+                    <p style="font-size: 14px; text-align: center; margin: 30px 0">
+                        작성된 리뷰가 없습니다.
+                    </p>
+                </c:if>
                 
             </ul>
             <div class="paging">

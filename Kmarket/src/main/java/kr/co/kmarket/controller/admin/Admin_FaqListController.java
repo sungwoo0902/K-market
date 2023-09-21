@@ -90,6 +90,7 @@ public class Admin_FaqListController extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/list.jsp?group=" + group + "&pg=" + pg);
 		dispatcher.forward(req, resp);
 	}
+
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -114,3 +115,4 @@ public class Admin_FaqListController extends HttpServlet {
 			resp.getWriter().write(jsonObject.toString());
 	}
 }
+

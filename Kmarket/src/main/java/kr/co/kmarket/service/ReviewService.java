@@ -25,6 +25,7 @@ public enum ReviewService {
 	
 	
 	/* page ************************************************************/
+	// 마지막 페이지 번호
 	public int getLastPageNum(int total) {
 		
 		int lastPageNum = 0;
@@ -40,9 +41,9 @@ public enum ReviewService {
 	
 	// 페이지 그룹
 	public int[] getPageGroupNum(int currentPage, int lastPageNum) {
-		int currentPageGroup = (int)Math.ceil(currentPage / 5.0);
-		int pageGroupStart = (currentPageGroup - 1) * 5 + 1;
-		int pageGroupEnd = currentPageGroup * 5;
+		int currentPageGroup = (int)Math.ceil(currentPage / 10.0);
+		int pageGroupStart = (currentPageGroup - 1) * 10 + 1;
+		int pageGroupEnd = currentPageGroup * 10;
 		
 		if(pageGroupEnd > lastPageNum){
 			pageGroupEnd = lastPageNum;
@@ -51,12 +52,6 @@ public enum ReviewService {
 		int[] result = {pageGroupStart, pageGroupEnd};
 		
 		return result;
-	}
-	
-	// 페이지 시작번호
-	public int getPageStartNum(int total, int currentPage) {
-		int start = (currentPage - 1) * 5;
-		return total - start;
 	}
 	
 	// 현재 페이지 번호

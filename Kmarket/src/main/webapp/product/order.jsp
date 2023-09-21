@@ -28,30 +28,30 @@
                     <tr class="empty">
                         <td colspan="7">장바구니에 상품이 없습니다.</td>
                     </tr>
-                    <c:forEach var="cart" items="${carts}">
+                    <c:forEach var="item" items="${orderItems}">
                     <tr>
                         <td>
                             <article>
-                                <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">
-                                    <img src="${ctxPath}/thumb/${cart.prodCate1}/${cart.prodCate2}/${cart.thumb1}" alt="">
+                                <a href="${ctxPath}/product/view.do?cate1=${item.prodCate1}&cate2=${item.prodCate2}&prodNo=${item.prodNo}">
+                                    <img src="${ctxPath}/thumb/${item.prodCate1}/${item.prodCate2}/${item.thumb1}" alt="">
                                 </a>
                                 <div>
                                     <h2>
-                                        <a href="${ctxPath}/product/view.do?cate1=${cart.prodCate1}&cate2=${cart.prodCate2}&prodNo=${cart.prodNo}">${cart.prodName}</a>
+                                        <a href="${ctxPath}/product/view.do?cate1=${item.prodCate1}&cate2=${item.prodCate2}&prodNo=${item.prodNo}">${cart.prodName}</a>
                                     </h2>
-                                    <p>상품설명:${cart.descript}</p>
+                                    <p>상품설명:${item.descript}</p>
                                 </div>
                             </article>
                         </td>
-                        <td><fmt:formatNumber value="${cart.count}" pattern="#,###" /></td>
-                        <td><fmt:formatNumber value="${cart.orgPrice}" pattern="#,###" /></td>
-                        <c:if test="${cart.delivery ne 0}">
-                        <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.count}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.orgPrice}" pattern="#,###" /></td>
+                        <c:if test="${item.delivery ne 0}">
+                        <td><fmt:formatNumber value="${item.delivery}" pattern="#,###" /></td>
                         </c:if>
-                        <c:if test="${cart.delivery eq 0}">
-                        <td class="free-delivery">${cart.delivery}</td>
+                        <c:if test="${item.delivery eq 0}">
+                        <td class="free-delivery">${item.delivery}</td>
                         </c:if>
-                        <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.total}" pattern="#,###" /></td>
                     </tr>
                     </c:forEach>
                     <tr>

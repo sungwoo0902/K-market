@@ -12,7 +12,7 @@
 				<h2>공지사항</h2>
 				<ul>
 					<li class="${(cate1 eq 1)?'on':'off'}"><a href="./list.do?cate1=1">전체</a></li>
-					<li class="${(cate1 eq 2)?'on':'off'}"><a href="./list.do?cate1=2">고객서비스</a></li>
+					<li class="${(cate1 eq 2)?'on':'off'}"><a href="./list.do?group=1&cate1=2">고객서비스</a></li>
 					<li class="${(cate1 eq 3)?'on':'off'}"><a href="./list.do?cate1=3">안전거래</a></li>
 					<li class="${(cate1 eq 4)?'on':'off'}"><a href="./list.do?cate1=4">위해상품</a></li>
 					<li class="${(cate1 eq 5)?'on':'off'}"><a href="./list.do?cate1=5">이벤트당첨</a></li>

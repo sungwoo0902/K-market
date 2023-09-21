@@ -28,6 +28,6 @@ public class LogoutController extends HttpServlet {
 		logger.info("LOGOUT SUCCESS : " + sessUser + " (regip : " + req.getRemoteAddr() + ")");
 		session.invalidate();
 		
-		resp.sendRedirect(req.getContextPath());
+		resp.sendRedirect(req.getContextPath() + "?success=200");
 	}
 }
