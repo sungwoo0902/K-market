@@ -23,7 +23,7 @@ $(function(){
 
 <main>
     <%@ include file="../_aside.jsp" %>
-    <section id="admin-product-list">
+    <section id="admin-faq-list">
         <nav>
             <h3>상품목록</h3>
             <p>
@@ -40,7 +40,6 @@ $(function(){
                 </select>
                 <input type="text" name="search">
             </div>
-            <form id="formCheck" action="${ctxPath}/admin/faq/delete.do" method="get">
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
@@ -57,18 +56,15 @@ $(function(){
                     <td>${faq.no}</td>
                     <td>${faq.cate1_name}</td>
                     <td>${faq.cate2_name}</td>
-                    <td>${faq.discount}</td>
                     <td><a href="${ctxPath}/admin/faq/view.do?group=2&no=${faq.no}">${faq.title}</a></td>
                     <td>${faq.rdate}</td>
                     <td>
                         <a href="${ctxPath}/admin/faq/delete.do?no=${faq.no}">[삭제]</a>
                         <a href="${ctxPath}/admin/faq/modify.do?no=${faq.no}">[수정]</a>
-                    </td>
-                    
+                    </td>                  
                 </tr>
                 </c:forEach>
             </table>
-            </form>
             
             <input type="button" value="선택 삭제" class="faqDelete"/>
 			
