@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
@@ -50,7 +53,11 @@ public class Admin_NoticeListController extends HttpServlet {
 		
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
-
+		
+		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose(group);
+		logger.debug("cate1List : " + cate1List.toString());
+		req.setAttribute("cate1List", cate1List);
+		
 		List<CsDTO> notices = service.selectBoards(group, cate1, cate2, start);
 		
 		req.setAttribute("group", group);
@@ -68,7 +75,7 @@ public class Admin_NoticeListController extends HttpServlet {
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group" + group + "&cate1" + cate1 + "cate2" + cate2 + "&pg" + pg);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group" + group + "&pg" + pg);
 		dispatcher.forward(req, resp);
 	}
 	

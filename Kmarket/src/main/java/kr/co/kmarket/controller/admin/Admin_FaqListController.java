@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
@@ -32,7 +35,15 @@ public class Admin_FaqListController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-
+		
+		req.setAttribute("group", group);
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate2", cate2);
+		
+		logger.debug("group : " + group);
+		logger.debug("cate1 : " + cate1);
+		logger.debug("cate2 : " + cate2);
+		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
@@ -51,25 +62,55 @@ public class Admin_FaqListController extends HttpServlet {
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
 
-		List<CsDTO> faqs = service.selectBoards(group, cate1, cate2, start);
-		
-		req.setAttribute("group", group);
-		req.setAttribute("cate1", cate1);
-		req.setAttribute("cate2", cate2);
-		req.setAttribute("faqs", faqs);
-		
-		logger.debug("group : " + group);
-		logger.debug("cate1 : " + cate1);
-		logger.debug("cate2 : " + cate2);
-		logger.debug("faqs : " + faqs);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
+
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/list.jsp?group" + group + "&cate1" + cate1 + "cate2" + cate2 + "&pg" + pg);
+		logger.debug("group : " + group);
+
+		
+		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose(group);
+		
+		logger.debug("cate1List : " + cate1List.toString());
+		req.setAttribute("cate1List", cate1List);
+		
+		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
+		
+		logger.debug("cate2List : " + cate2List);
+		req.setAttribute("cate2List", cate2List);
+	
+		List<CsDTO> faqs = service.selectBoards(group, cate1, cate2, start);
+		
+		req.setAttribute("faqs", faqs);
+		logger.debug("faqs : " + faqs);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/list.jsp?group=" + group + "&pg=" + pg);
 		dispatcher.forward(req, resp);
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		logger.info("doPost()...");
+
+			// 대분류 선택시 소분류 가져오기.
+			String jsonCate2 = req.getParameter("jsonCate2");
+
+			List<CsDTO> jsonCate3 = service.selectCate2ListWhenCate1Choose(jsonCate2);
+
+			logger.debug("jsonCate2 : " + jsonCate2);
+			logger.debug("jsonCate3 : " + jsonCate3.toString());
+			
+			Gson gson = new Gson();
+			String json = gson.toJson(jsonCate3);
+			
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.add("categorys", gson.toJsonTree(jsonCate3));
+			
+			resp.setContentType("application/json; charset=UTF-8");
+			
+			resp.getWriter().write(jsonObject.toString());
+	}
 }
