@@ -1,6 +1,9 @@
 package kr.co.kmarket.service;
 
+import java.util.List;
+
 import kr.co.kmarket.dao.OrderDAO;
+import kr.co.kmarket.dto.CartDTO;
 import kr.co.kmarket.dto.OrderDTO;
 
 public enum OrderService {
@@ -11,8 +14,17 @@ public enum OrderService {
 	public void insertOrder(OrderDTO order) {
 		dao.insertOrder(order);
 	}
-	public void selectOrder() {}
+	public String selectOrdNo(String uid) {
+		return dao.selectOrdNo(uid);
+	}
 	public void selectOrders() {}
 	public void updateOrder() {}
 	public void deleteOrder() {}
+	
+	
+	public void insertOrderItems(List<CartDTO> carts, String ordNo) {
+		for(CartDTO orderItem : carts) {
+			dao.insertOrderItem(orderItem, ordNo);
+		}
+	}
 }

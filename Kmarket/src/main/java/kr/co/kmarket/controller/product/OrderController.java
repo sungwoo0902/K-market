@@ -49,6 +49,7 @@ public class OrderController extends HttpServlet{
 		OrderDTO order = new OrderDTO();
 		MemberDTO member = new MemberDTO();
 		
+		
 		String uid = req.getParameter("uid");
 		String[] selectedCartNos = req.getParameterValues("selectedCartNos");
 		String ordTotPrice= req.getParameter("ordTotPrice");
@@ -58,6 +59,12 @@ public class OrderController extends HttpServlet{
 		String ordDelivery= req.getParameter("ordDelivery");
 		String savePoint= req.getParameter("savePoint");
 		int ordComplete = 0;
+		int ordPayment = 101;
+		
+		// 배송지 정보 불러와서 orderDTO에 같이 넣어준다.
+		member = memService.selectMemRecip(uid);
+		
+		int point = member.getPoint(); 
 		
 		order.setOrdUid(uid);
 		order.setOrdTotPrice(ordTotPrice);
@@ -67,6 +74,12 @@ public class OrderController extends HttpServlet{
 		order.setOrdDelivery(ordDelivery);
 		order.setSavePoint(savePoint);
 		order.setOrdComplete(ordComplete);
+		order.setRecipName(member.getName());
+		order.setRecipHp(member.getHp());
+		order.setRecipZip(member.getZip());
+		order.setRecipAddr1(member.getAddr1());
+		order.setRecipAddr2(member.getAddr2());
+		order.setOrdPayment(ordPayment);
 		
 		for(int i = 0; i < selectedCartNos.length; i++) {
 			CartDTO dto = cartService.selectedCart(uid, selectedCartNos[i]);
@@ -77,13 +90,12 @@ public class OrderController extends HttpServlet{
 		
 		// insertOrder로 uid, count, price, discount, delivery, point, total을 입력한다.
 		ordService.insertOrder(order);
-		
-		/*  2023/09/21 01:00 현재 recipName default Value 오류. 배송지 정보까지 넣어야됨  */
-		
-		// insertOrder를 할 때 complete 값을 넣어 결제 상태를 표시해준다.
+		// 방금 넣은 order의 ordNo를 가져온다.
+		String ordNo = ordService.selectOrdNo(uid);
 		// 위의 carts를 orderNo에 매치하여 orderItems에 하나씩 반복하여 넣어준다.
+		ordService.insertOrderItems(carts, ordNo);
 		// 최종적으로 selectOrder를 실행하여 주문서 출력
-		
+		// ordService.selectOrder();
 		
 		resp.sendRedirect("/Kmarket/product/order.do");
 		logger.debug("redirect complete");

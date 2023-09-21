@@ -44,8 +44,8 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
-
-	
+	public static final String SELECT_MEMBER_RECEIPT = "SELECT `name`,`hp`,`zip`,`addr1`,`addr2`,`point` FROM `km_member` "
+														+ "WHERE `uid`=?";
 	// 사용자 중복체크
 	public static final String DUPLICATION_CHECK_UID        = "SELECT COUNT(*) FROM `km_member` WHERE `uid`=?";
 	public static final String DUPLICATION_CHECK_HP         = "SELECT COUNT(*) FROM `km_member` WHERE `hp`=?";
@@ -239,13 +239,27 @@ public class SQL {
 												+ "`savePoint`=?,"
 												+ "`ordTotPrice`=?,"
 												+ "`ordComplete`=?,"
+												+ "`recipName`=?,"
+												+ "`recipHp`=?,"
+												+ "`recipZip`=?,"
+												+ "`recipAddr1`=?,"
+												+ "`recipAddr2`=?,"
+												+ "`ordPayment`=?,"
 												+ "`ordDate`=NOW()";
-	
+	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `uid`=?";
 	
 	//**************************************************************************************************************//
 	//********************************************* Product_Order_Item *********************************************//
 	//**************************************************************************************************************//
-	
+	public static final String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` SET "
+													+ "`ordNo`=?,"
+													+ "`prodNo`=?,"
+													+ "`count`=?,"
+													+ "`price`=?,"
+													+ "`discount`=?,"
+													+ "`point`=?,"
+													+ "`delivery`=?,"
+													+ "`total`=?";
 	
 	
 	//**********************************************************************************************************//
