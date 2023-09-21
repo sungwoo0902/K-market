@@ -12,12 +12,22 @@ public class CsDTO {
 	private String title;
 	private String content;
 	private String rdate;
-	
+	private int answer;
 
 	
 	
 	
 	
+	
+	public int getAnswer() {
+		return answer;
+	}
+	public void setAnswer(int answer) {
+		this.answer = answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = Integer.parseInt(answer);
+	}
 	
 	public int getNo() {
 		return no;

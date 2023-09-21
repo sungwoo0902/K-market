@@ -46,7 +46,7 @@
           </section>
         
           <section class="qna">
-            <h1>문의하기<a href="./cs/qna/list.do?group=3&cate1=1">전체보기</a></h1>
+            <h1>문의하기<a href="./cs/qna/list.do?cate1=1">전체보기</a></h1>
             <ul>
             <c:forEach var="qna_list" items="${qna_lists}" varStatus="loop">
             	<c:if test="${loop.index < 5}">

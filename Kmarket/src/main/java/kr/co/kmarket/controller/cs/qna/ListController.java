@@ -36,6 +36,7 @@ public class ListController extends HttpServlet {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
 		String parent = req.getParameter("parent");
+		String answer = req.getParameter("answer");
 		
 		logger.debug("cate1 : " + cate1);
 		logger.debug("cate2 : " + cate2);
@@ -65,11 +66,10 @@ public class ListController extends HttpServlet {
 		
 		// cate1 이름, 설명 조회
 		CsDTO qna_name_dis = service.selectBoard_list("3", cate1);
-		logger.debug("qna_name_dis :" +qna_name_dis.toString());
 		
 		// 답변 유무 조회
-		CsDTO qna_parent = service.selectBoard_parent(parent);
-		logger.debug("qna_parent : " +qna_parent.toString());
+		CsDTO qna_parent = service.selectBoard_parent(group, cate1, start);
+		
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
