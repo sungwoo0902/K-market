@@ -1,5 +1,8 @@
 package kr.co.kmarket.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +53,7 @@ public class OrderDAO extends DBHelper{
 			logger.error("insertOrder() error :"+e.getMessage());
 		}
 	}
+	
 	public String selectOrdNo(String uid) {
 		
 		String ordNo = null;
@@ -87,6 +91,39 @@ public class OrderDAO extends DBHelper{
 		} catch (Exception e) {
 			logger.error("insertOrderItem() error :"+e.getMessage());
 		}
-		
 	}
+	public List<OrderItemDTO> selectOrderItems(String ordNo) {
+		
+		List<OrderItemDTO> items = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEMS);
+			psmt.setString(1, ordNo);
+			
+			while(rs.next()) {
+				OrderItemDTO dto = new OrderItemDTO();
+				dto.setOrdNo(rs.getString(1));
+				dto.setProdNo(rs.getString(2));
+				dto.setCount(rs.getString(3));
+				dto.setPrice(rs.getString(4));
+				dto.setDiscount(rs.getString(5));
+				dto.setPoint(rs.getString(6));
+				dto.setDelivery(rs.getString(7));
+				dto.setThumb1(rs.getString(9));
+				dto.setProdCate1(rs.getString(10));
+				dto.setProdCate2(rs.getString(11));
+				dto.setProdName(rs.getString(12));
+				dto.setDescript(rs.getString(13));
+				
+				items.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectOrderItems() error :"+e.getMessage());
+		}
+		
+		return items;
+	}
+	
 }
