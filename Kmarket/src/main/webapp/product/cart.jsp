@@ -198,7 +198,7 @@
 							}
 			
 			$.ajax({
-				url: '/Kmarket/product/order.do',
+				url: '${ctxPath}/product/order.do',
 				type: 'post',
 				data: jsonData,
 				traditional: true,
