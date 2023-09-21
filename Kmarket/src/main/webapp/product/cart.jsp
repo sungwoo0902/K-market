@@ -39,7 +39,7 @@
 	            // 할인된 금액의 소계로 계산한 포인트
 	            pointTotal = (orderTotal/100) *  pointTotal;
 	            
-	            totalOrderAmount += orderTotal;
+	            totalOrderAmount += orderTotal+deliveryTotal;
 	            totalCountAmount += countTotal;
 	            totalOrgPriceAmount += orgPriceTotal;
 	            totalDiscountAmount += discountTotal;
@@ -87,7 +87,7 @@
 	            // 할인된 금액의 소계로 계산한 포인트
 	            pointTotal = (orderTotal/100) *  pointTotal;
 	            
-	            totalOrderAmount += orderTotal;
+	            totalOrderAmount += orderTotal+deliveryTotal;
 	            totalCountAmount += countTotal;
 	            totalOrgPriceAmount += orgPriceTotal;
 	            totalDiscountAmount += discountTotal;
@@ -250,7 +250,7 @@
                         <th>총수량</th>
                         <th>판매가</th>
                         <th>할인</th>
-                        <th>포인트</th>
+                        <th>포인트 적립</th>
                         <th>배송비</th>
                         <th>소계</th>
                     </tr>
@@ -282,13 +282,23 @@
                         </td>
                         <td><fmt:formatNumber value="${cart.count}" pattern="#,###" /></td>
                         <td><fmt:formatNumber value="${cart.orgPrice}" pattern="#,###" /></td>
-                        <td>${cart.discount}%</td>
-                        <td><fmt:formatNumber value="${cart.point}" pattern="#,###" /></td>
+                        <c:if test="${cart.discount ne 0}">
+                        	<td>${cart.discount}%</td>
+                        </c:if>
+                        <c:if test="${cart.discount eq 0}">
+                        	<td>0</td>
+                        </c:if>
+                        <c:if test="${cart.point ne 0}">
+                        	<td><fmt:formatNumber value="${cart.point}" pattern="#,###" />%</td>
+                        </c:if>
+                        <c:if test="${cart.point eq 0}">
+                        	<td>0</td>
+                        </c:if>
                         <c:if test="${cart.delivery ne 0}">
-                        <td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                        	<td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
                         </c:if>
                         <c:if test="${cart.delivery eq 0}">
-                        <td class="free-delivery">${cart.delivery}</td>
+                        	<td class="free-delivery">${cart.delivery}</td>
                         </c:if>
                         <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
                     </tr>

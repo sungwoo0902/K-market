@@ -261,17 +261,16 @@ public class SQL {
 													+ "`point`=?,"
 													+ "`delivery`=?,"
 													+ "`total`=? ";
-	public static final String SELECT_ORDER_ITEM = "SELECT "
-													+ "a.*, "
-													+ "b.thumb1, "
-													+ "b.prodCate1, "
-													+ "b.prodCate2, "
-													+ "b.prodName, "
-													+ "b.descript "
-													+ "FROM `km_product_order_item` AS a JOIN "
-													+ "`km_product` AS b "
-													+ "ON a.ordNo=b.prodNo "
-													+ "WHERE `ordNo`=?";
+	public static final String SELECT_ORDER_ITEMS = "SELECT b.*, c.thumb1, c.prodCate1, c.prodCate2, c.prodName, c.descript "
+													+ "FROM `km_product_order` AS a "
+													+ "JOIN "
+													+ "`km_product_order_item` AS b "
+													+ "ON a.ordNo=b.ordNo "
+													+ "JOIN "
+													+ "`km_product` AS c "
+													+ "ON b.prodNo=c.prodNo "
+													+ "WHERE b.ordNo=?";
+													
 	
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//

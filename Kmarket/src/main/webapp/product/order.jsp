@@ -37,7 +37,7 @@
                                 </a>
                                 <div>
                                     <h2>
-                                        <a href="${ctxPath}/product/view.do?cate1=${item.prodCate1}&cate2=${item.prodCate2}&prodNo=${item.prodNo}">${cart.prodName}</a>
+                                        <a href="${ctxPath}/product/view.do?cate1=${item.prodCate1}&cate2=${item.prodCate2}&prodNo=${item.prodNo}">${item.prodName}</a>
                                     </h2>
                                     <p>상품설명:${item.descript}</p>
                                 </div>
@@ -45,53 +45,15 @@
                         </td>
                         <td><fmt:formatNumber value="${item.count}" pattern="#,###" /></td>
                         <td><fmt:formatNumber value="${item.price}" pattern="#,###" /></td>
-                        <c:if test="${item.delivery ne 0}">
-                        <td><fmt:formatNumber value="${item.delivery}" pattern="#,###" /></td>
-                        </c:if>
                         <c:if test="${item.delivery eq 0}">
-                        <td class="free-delivery">${item.delivery}</td>
+                        	<td class="free-delivery">0</td>
+                        </c:if>
+                        <c:if test="${item.delivery ne 0}">
+                        	<td class="has-delivery"><fmt:formatNumber value="${item.delivery}" pattern="#,###" /></td>
                         </c:if>
                         <td><fmt:formatNumber value="${item.total}" pattern="#,###" /></td>
                     </tr>
                     </c:forEach>
-                    <tr>
-                        <td>
-                            <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
-                                </a>
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <article>
-                                <a href="#">
-                                    <img src="./images/80x80.png" alt="">
-                                </a>
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>1</td>
-                        <td>27000</td>
-                        <td>무료배송</td>
-                        <td>27000</td>
-                    </tr>
                 </tbody>
             </table>
             <!-- 최종 결제 정보 -->
@@ -101,27 +63,27 @@
                     <tbody>
                         <tr>
                             <td>총</td>
-                            <td>2 건</td>
+                            <td><fmt:formatNumber value="${order.ordCount}" pattern="#,###" /> 건</td>
                         </tr>
                         <tr>
                             <td>상품금액</td>
-                            <td>27000</td>
+                            <td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" /></td>
                         </tr>
                         <tr>
                             <td>할인금액</td>
-                            <td>-1000</td>
+                            <td><fmt:formatNumber value="${order.ordDiscount}" pattern="#,###" /></td>
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td>0</td>
+                            <td><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" /></td>
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
-                            <td>-1000</td>
+                            <td>0</td>
                         </tr>
                         <tr>
                             <td>전체주문금액</td>
-                            <td>25000</td>
+                            <td><fmt:formatNumber value="${order.ordTotPrice + order.ordDelivery}" pattern="#,###" /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,33 +97,33 @@
                         <tr>
                             <td>주문자</td>
                             <td>
-                                <input type="text" name="orderer">
+                                <input type="text" name="orderer" value="${member.name}">
                             </td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
                             <td>
-                                <input type="text" name="hp">
+                                <input type="text" name="hp" value="${member.hp}">
                                 <span>- 포함 입력</span>
                             </td>
                         </tr>
                         <tr>
                             <td>우편번호</td>
                             <td>
-                                <input type="text" name="zip">
+                                <input type="text" name="zip" value="${member.zip}">
                                 <input type="button" value="검색">
                             </td>
                         </tr>
                         <tr>
                             <td>기본주소</td>
                             <td>
-                                <input type="text" name="addr1">
+                                <input type="text" name="addr1" value="${member.addr1}">
                             </td>
                         </tr>
                         <tr>
                             <td>상세주소</td>
                             <td>
-                                <input type="text" name="addr2">
+                                <input type="text" name="addr2" value="${member.addr2}">
                             </td>
                         </tr>
                     </tbody>
@@ -173,7 +135,7 @@
                 <div>
                     <p>
                         현재 포인트 : 
-                        <span>7200</span>
+                        <span>${member.point}</span>
                         점
                     </p>
                     <label>
