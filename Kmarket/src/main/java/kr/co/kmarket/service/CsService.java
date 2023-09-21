@@ -28,6 +28,10 @@ public enum CsService {
 		return dao.selectBoard_list(group, cate1);
 	}
 	
+	public CsDTO selectBoard_parent(String no) {
+		return dao.selectBoard_parent(no);
+	}
+	
 	public CsDTO selectAnswer(String no) {
 		return dao.selectAnswer(no);
 	}

@@ -167,7 +167,31 @@ public class CsDAO extends DBHelper {
 			logger.error("selectBoards() ERROR : " + e.getMessage());
 		}
 	return dto;
-}
+	}
+	
+	// 공지 답변 유무 출력
+	public CsDTO selectBoard_parent(String no) {
+		CsDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_QNA_PARENT);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+			}
+			close();
+		}catch (Exception e) {
+			logger.error("selectBoard_parent() ERROR : " +e.getMessage());
+		}
+		
+		return dto;
+		
+	}
 	
 	public void updateBoard(CsDTO dto) {
 	}

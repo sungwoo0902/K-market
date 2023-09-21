@@ -3,14 +3,14 @@
 <jsp:include page="../_asideNotice.jsp"/>
 	<article>
 		<nav>
-			<h1>${notice_name_dis.cate1_name}</h1>
-			<h2>${notice_name_dis.cate1_discription}</h2>
+			<h1>${name_dis.cate1_name}</h1>
+			<h2>${name_dis.cate1_discription}</h2>
 		</nav>
 		<table>
-	<c:forEach var="article_notice_list" items="${articles_notice_lists}">
+	<c:forEach var="notice_list" items="${notice_lists}">
 			<tr>
-				<td><a href="./view.do?no=${article_notice_list.no}">${article_notice_list.title}</a></td>
-				<td>${article_notice_list.rdate}</td>
+				<td><a href="./view.do?no=${notice_list.no}">${notice_list.title}</a></td>
+				<td>${notice_list.rdate}</td>
 			</tr>
 	</c:forEach>
 		</table>

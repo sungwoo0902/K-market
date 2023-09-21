@@ -34,12 +34,14 @@
 				<h1>${faq_name_dis.cate1_name}</h1>
 				<h2>${faq_name_dis.cate1_discription}</h2>
 			</nav>
-			<c:forEach var = "article_faq_list" items="${articles_faq_lists}">
+			<c:forEach var="faq_list" items="${faq_lists}">
 			<div>
-				<h3>${article_faq_list.cate2_name}</h3>
+				<c:forEach var="faq_list" items="${faq_lists}">
+				<h3>${faq_list.cate2_name}</h3>
+				</c:forEach>
 				<ul>
-					<c:forEach var = "article_faq_list" items="${articles_faq_lists}">
-					<li><a href="./view.do?no=${article_faq_list.no}"><span>Q.</span>${article_faq_list.title}</a></li>
+					<c:forEach var = "faq_list" items="${faq_lists}">
+					<li><a href="./view.do?no=${faq_list.no}"><span>Q.</span>${faq_list.title}</a></li>
 					</c:forEach>
 					<li class="more"><a href="#">더보기</a></li>
 				</ul>

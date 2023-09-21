@@ -60,17 +60,17 @@ public class ListController extends HttpServlet {
 		logger.debug("start :" + start);
 		
 		// 글 조회
-		List<CsDTO> article_notice_list = service.selectBoards("1", null, null, start);
+		List<CsDTO> notice_list = service.selectBoards("1", null, null, start);
 		
 		// cate1 이름, 설명 조회
-		CsDTO notice_name_dis = service.selectBoard_list("1", cate1);
+		CsDTO name_dis = service.selectBoard_list("1", cate1);
 		
 		req.setAttribute("board", "list");
 		
 		String success = req.getParameter("success");
 		req.setAttribute("success", success);
-		req.setAttribute("articles_notice_lists", article_notice_list);
-		req.setAttribute("notice_name_dis", notice_name_dis);
+		req.setAttribute("notice_lists", notice_list);
+		req.setAttribute("name_dis", name_dis);
 		
 		
 		req.setAttribute("currentPage", currentPage);
