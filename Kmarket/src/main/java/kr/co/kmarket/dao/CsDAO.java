@@ -295,6 +295,7 @@ public class CsDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_CATE2_LIST_WHEN_CATE1_CHOOSE);
 			psmt.setString(1, cate1);
+			logger.debug("selectCate2.....() cate1 : " + cate1);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
