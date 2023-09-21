@@ -1,5 +1,43 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+	$(function(){
+		
+		// 포인트 사용 버튼 구현중
+		$('#applyDiscount').click(function(){
+			
+			var discountPoint = parseInt($('#discountPoint').val());
+			
+			var currentPoint = parseInt($("#currentPoint").text());
+			
+			if(!isNaN(discountPoint) & discountPoint > 0){
+				// 입력된 포인트 또는 현재 포인트 중 작은 값을 할인 금액으로 사용
+				var discountAmount = Math.min(discountPoint, currentPoint); 
+				// 입력 필드에 할인된 포인트 설정
+	            $("#discountPoint").val(discountAmount); 
+
+	            // 전체 주문 금액 업데이트
+	            // 주문 상품 금액
+	            var orderPrice = parseInt("${order.ordPrice}"); 
+	         	// 배송비
+	            var orderDelivery = parseInt("${order.ordDelivery}"); 
+	         	// 총 주문 금액
+	            var totalOrderPrice = orderPrice + orderDelivery; 
+	         	// 할인 후 총 주문 금액
+	            var updatedTotal = totalOrderPrice - discountAmount; 
+
+	            // 할인 금액 및 전체 주문 금액 업데이트
+	            $("#orderDiscount").text(discountAmount + "원");
+	            $("#totalOrderPrice").text(updatedTotal + "원");
+	        } else {
+	            alert("포인트는 5000점 이상이어야 합니다.");
+	        }
+		});// applyDiscount click end
+		
+	}); //end
+
+</script>
+
 <main id="product">
     <%@ include file="./_aside.jsp" %>
     <!-- 주문 페이지 시작 -->
@@ -43,15 +81,23 @@
                                 </div>
                             </article>
                         </td>
-                        <td><fmt:formatNumber value="${item.count}" pattern="#,###" /></td>
-                        <td><fmt:formatNumber value="${item.price}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.count}" pattern="#,###" />개</td>
+                        <c:if test="${item.discount ne 0}">
+                        	<td>
+						        <span class="throughPrice"><fmt:formatNumber value="${item.price * item.count}" pattern="#,###" />원</span>
+						        <fmt:formatNumber value="${item.total}" pattern="#,###" />원
+						    </td>
+                        </c:if>
+                        <c:if test="${item.discount eq 0}">
+                        	<td><fmt:formatNumber value="${item.price * item.count}" pattern="#,###" />원</td>
+                        </c:if>
                         <c:if test="${item.delivery eq 0}">
                         	<td class="free-delivery">0</td>
                         </c:if>
                         <c:if test="${item.delivery ne 0}">
-                        	<td class="has-delivery"><fmt:formatNumber value="${item.delivery}" pattern="#,###" /></td>
+                        	<td class="has-delivery"><fmt:formatNumber value="${item.delivery}" pattern="#,###" />원</td>
                         </c:if>
-                        <td><fmt:formatNumber value="${item.total}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${item.total+item.delivery}" pattern="#,###" />원</td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -67,15 +113,15 @@
                         </tr>
                         <tr>
                             <td>상품금액</td>
-                            <td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" /></td>
+                            <td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>할인금액</td>
-                            <td><fmt:formatNumber value="${order.ordDiscount}" pattern="#,###" /></td>
+                            <td><fmt:formatNumber value="${order.ordDiscount}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" /></td>
+                            <td><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
@@ -83,7 +129,7 @@
                         </tr>
                         <tr>
                             <td>전체주문금액</td>
-                            <td><fmt:formatNumber value="${order.ordTotPrice + order.ordDelivery}" pattern="#,###" /></td>
+                            <td><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###" />원</td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,13 +181,18 @@
                 <div>
                     <p>
                         현재 포인트 : 
-                        <span>${member.point}</span>
+                        <span id="currenPoint">${member.point}</span>
                         점
                     </p>
                     <label>
-                        <input type="text" name="point">
+                    	<c:if test="${member.point < 5000}">
+                        	<input type="text" id="discountPoint" name="point" readonly>
+                        </c:if>
+                    	<c:if test="${member.point >= 5000}">
+                        	<input type="text" id="discountPoint" name="point">
+                        </c:if>
                         점
-                        <input type="button" value="적용">
+                        <input type="button" id="applyDiscount" value="적용">
                     </label>
                     <span>포인트 5000점 이상이면 현금처럼 사용 가능합니다.</span>
                 </div>
@@ -153,7 +204,12 @@
                     <span>신용카드</span>
                     <p>
                         <label>
+                        	<c:if test="${order.ordPayment eq 101}">
+                            <input type="radio" name="payment" value="type1" checked>
+                            </c:if>
+                        	<c:if test="${order.ordPayment ne 101}">
                             <input type="radio" name="payment" value="type1">
+                            </c:if>
                             신용카드 결제
                         </label>
                         <label>

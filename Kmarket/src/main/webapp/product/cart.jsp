@@ -32,31 +32,27 @@
 	            var pointTotal = parseFloat($(this).closest('tr').find('td:eq(5)').text().replace(/,/g, ''));
 	            var deliveryTotal = parseFloat($(this).closest('tr').find('td:eq(6)').text().replace(/,/g, ''));
 	            
-	         	// 정가로 계산한 소계 값
-	            orgPriceTotal = orgPriceTotal * countTotal;
 	            // 할인된 금액과 정가의 차액 
-	            discountTotal = orderTotal - orgPriceTotal;
-	            // 할인된 금액의 소계로 계산한 포인트
-	            pointTotal = (orderTotal/100) *  pointTotal;
+	            discountTotal = orderTotal - orgPriceTotal - deliveryTotal;
 	            
-	            totalOrderAmount += orderTotal+deliveryTotal;
-	            totalCountAmount += countTotal;
+	            totalOrderAmount += orderTotal;
 	            totalOrgPriceAmount += orgPriceTotal;
 	            totalDiscountAmount += discountTotal;
 	            totalDeliveryAmount += deliveryTotal;
 	            totalPointAmount += pointTotal;
 	        });
 	     	// 합산된 값을 전체주문금액(td#totalOrderAmount)에 입력
-	        $('#totalOrderAmount').text(totalOrderAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalCountAmount').text(totalCountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalOrgPriceAmount').text(totalOrgPriceAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalDiscountAmount').text(totalDiscountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        $('#totalOrderAmount').text(totalOrderAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+	        $('#totalCountAmount').text($('input[name^="cartNo"]:checked').length + '개');
+	        $('#totalOrgPriceAmount').text(totalOrgPriceAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+	        $('#totalDiscountAmount').text(totalDiscountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+	        // 배송비 총합이 0이면 무료라고 입력
 	        if(totalDeliveryAmount == 0){
 	        	$('#totalDeliveryAmount').text('무료');
 	        }else{
-	        	$('#totalDeliveryAmount').text(totalDeliveryAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));	        	
+	        	$('#totalDeliveryAmount').text(totalDeliveryAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');	        	
 	        }
-	        $('#totalPointAmount').text(totalPointAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        $('#totalPointAmount').text(totalPointAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'점');
 		});
 		
 		//*******************************************************//
@@ -71,6 +67,7 @@
 	        var totalDeliveryAmount = 0;
 	        var totalPointAmount = 0;
 	        
+	        
 	        // 체크된 체크박스들의 cart.total 값을 합산
 	        $('input[name^="cartNo"]:checked').each(function() {
 	        	var orderTotal = parseFloat($(this).closest('tr').find('td:last').text().replace(/,/g, ''));
@@ -80,32 +77,27 @@
 	            var pointTotal = parseFloat($(this).closest('tr').find('td:eq(5)').text().replace(/,/g, ''));
 	            var deliveryTotal = parseFloat($(this).closest('tr').find('td:eq(6)').text().replace(/,/g, ''));
 	            
-	            // 정가로 계산한 소계 값
-	            orgPriceTotal = orgPriceTotal * countTotal;
 	            // 할인된 금액과 정가의 차액 
-	            discountTotal = orderTotal - orgPriceTotal;
-	            // 할인된 금액의 소계로 계산한 포인트
-	            pointTotal = (orderTotal/100) *  pointTotal;
+	            discountTotal = orderTotal - orgPriceTotal - deliveryTotal;
 	            
-	            totalOrderAmount += orderTotal+deliveryTotal;
-	            totalCountAmount += countTotal;
+	            totalOrderAmount += orderTotal;
 	            totalOrgPriceAmount += orgPriceTotal;
 	            totalDiscountAmount += discountTotal;
 	            totalDeliveryAmount += deliveryTotal;
 	            totalPointAmount += pointTotal;
 	        });
 	        // 합산된 값을 전체주문금액(td#totalOrderAmount)에 입력
-	        $('#totalOrderAmount').text(totalOrderAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalCountAmount').text(totalCountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalOrgPriceAmount').text(totalOrgPriceAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	        $('#totalDiscountAmount').text(totalDiscountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        $('#totalOrderAmount').text(totalOrderAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+	        $('#totalCountAmount').text($('input[name^="cartNo"]:checked').length + '개');
+	        $('#totalOrgPriceAmount').text(totalOrgPriceAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+	        $('#totalDiscountAmount').text(totalDiscountAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
 	        // 배송비 총합이 0이면 무료라고 입력
 	        if(totalDeliveryAmount == 0){
 	        	$('#totalDeliveryAmount').text('무료');
 	        }else{
-	        	$('#totalDeliveryAmount').text(totalDeliveryAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));	        	
+	        	$('#totalDeliveryAmount').text(totalDeliveryAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');	        	
 	        }
-	        $('#totalPointAmount').text(totalPointAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	        $('#totalPointAmount').text(totalPointAmount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'점');
 	    });
 	  	//*******************************************************//
 		//********************** 선택삭제 클릭 ************************//
@@ -280,8 +272,16 @@
                                 </div>
                             </article>
                         </td>
-                        <td><fmt:formatNumber value="${cart.count}" pattern="#,###" /></td>
-                        <td><fmt:formatNumber value="${cart.orgPrice}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${cart.count}" pattern="#,###" />개</td>
+                        <c:if test="${item.discount ne 0}">
+                        	<td>
+						        <span class="throughPrice"><fmt:formatNumber value="${cart.orgPrice * cart.count}" pattern="#,###" />원</span>
+						        <fmt:formatNumber value="${cart.total}" pattern="#,###" />원
+						    </td>
+                        </c:if>
+                        <c:if test="${item.discount eq 0}">
+                        	<td><fmt:formatNumber value="${cart.total}" pattern="#,###" />원</td>
+                        </c:if>
                         <c:if test="${cart.discount ne 0}">
                         	<td>${cart.discount}%</td>
                         </c:if>
@@ -289,18 +289,18 @@
                         	<td>0</td>
                         </c:if>
                         <c:if test="${cart.point ne 0}">
-                        	<td><fmt:formatNumber value="${cart.point}" pattern="#,###" />%</td>
+                        	<td><fmt:formatNumber value="${(cart.total/100) * cart.point}" pattern="#,###" />점</td>
                         </c:if>
                         <c:if test="${cart.point eq 0}">
                         	<td>0</td>
                         </c:if>
                         <c:if test="${cart.delivery ne 0}">
-                        	<td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" /></td>
+                        	<td><fmt:formatNumber value="${cart.delivery}" pattern="#,###" />원</td>
                         </c:if>
                         <c:if test="${cart.delivery eq 0}">
                         	<td class="free-delivery">${cart.delivery}</td>
                         </c:if>
-                        <td><fmt:formatNumber value="${cart.total}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${cart.total+cart.delivery}" pattern="#,###" />원</td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -313,15 +313,15 @@
                     <tbody>
                         <tr>
                             <td>상품수</td>
-                            <td id="totalCountAmount">0</td>
+                            <td id="totalCountAmount">0개</td>
                         </tr>
                         <tr>
                             <td>상품금액</td>
-                            <td id="totalOrgPriceAmount">0</td>
+                            <td id="totalOrgPriceAmount">0원</td>
                         </tr>
                         <tr>
                             <td>할인금액</td>
-                            <td id="totalDiscountAmount">0</td>
+                            <td id="totalDiscountAmount">0원</td>
                         </tr>
                         <tr>
                             <td>배송비</td>
@@ -329,11 +329,11 @@
                         </tr>
                         <tr>
                             <td>적립 포인트</td>
-                            <td id="totalPointAmount">0</td>
+                            <td id="totalPointAmount">0점</td>
                         </tr>
                         <tr>
                             <td>전체주문금액</td>
-                            <td id="totalOrderAmount">0</td>
+                            <td id="totalOrderAmount">0원</td>
                         </tr>
                     </tbody>
                 </table>

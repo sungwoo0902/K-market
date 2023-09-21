@@ -269,7 +269,7 @@ public class SQL {
 													+ "JOIN "
 													+ "`km_product` AS c "
 													+ "ON b.prodNo=c.prodNo "
-													+ "WHERE b.ordNo=?";
+													+ "WHERE a.ordUid=? AND b.ordNo=?";
 													
 	
 	//**********************************************************************************************************//

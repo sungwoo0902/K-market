@@ -140,14 +140,15 @@ public class OrderDAO extends DBHelper{
 			logger.error("insertOrderItem() error :"+e.getMessage());
 		}
 	}
-	public List<OrderItemDTO> selectOrderItems(int ordNo){
+	public List<OrderItemDTO> selectOrderItems(String uid, int ordNo){
 		
 		List<OrderItemDTO> items = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEMS);
-			psmt.setInt(1, ordNo);
+			psmt.setString(1, uid);
+			psmt.setInt(2, ordNo);
 			
 			rs = psmt.executeQuery();
 			
