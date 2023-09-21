@@ -67,13 +67,13 @@ $(function() {
 	<%@ include file="../_aside.jsp" %>
     <section id="admin-notice-register">
         <nav>
-            <h3>공지사항</h3>
+            <h3>자주묻는 질문</h3>
             <p>
-                HOME > 고객센터 > <strong>공지사항</strong>
+                HOME > 고객센터 > <strong>자주묻는 질문</strong>
             </p>
         </nav>
         <article>
-            <form action="${ctxPath}/admin/notice/write.do" method="post">
+            <form action="${ctxPath}/admin/faq/write.do" method="post">
             <input type="hidden" name="type" value="write"/>
 			<input type="hidden" name="uid" value="${sessUser.uid}"/>
                 <section>

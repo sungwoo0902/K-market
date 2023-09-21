@@ -19,7 +19,7 @@ import com.google.gson.JsonObject;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
 
-@WebServlet("/admin/faq/Write.do")
+@WebServlet("/admin/faq/write.do")
 public class Admin_FaqWriteController extends HttpServlet {
 	
 	private static final long serialVersionUID = 4487506858897269883L;
@@ -47,7 +47,7 @@ public class Admin_FaqWriteController extends HttpServlet {
 		logger.debug("cate2List : " + cate2List);
 		req.setAttribute("cate2List", cate2List);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/qna/write.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/write.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
@@ -104,7 +104,7 @@ public class Admin_FaqWriteController extends HttpServlet {
 				// 작성한 글 DB 등록
 				service.insertBoard(dto);
 				
-				resp.sendRedirect("/Kmarket/admin/faq/list.do?group=1&pg="+ pg);
+				resp.sendRedirect("/Kmarket/admin/faq/list.do?group=2");
 		
 			}
 	}

@@ -149,17 +149,14 @@
                             <td>할인율</td>
                             <td>
                                 <span>0을 입력하면 할인율 없음</span>
-                                <input type="text" name="discount" id="percent" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">원
-                                <input type="radio" name="discountType" id="percentRadio" value="percent" checked>
-                                <input type="text" name="discount"  id="absolute" required readonly oninput="this.value = Math.min(99, Math.max(0, this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')));">%
-                                <input type="radio" name="discountType" id="absoluteRadio" value="absolute">
+                                <input type="text" name="discount"  id="absolute" oninput="this.value = Math.min(99, Math.max(0, this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')));">%                  
                             </td>
                         </tr>
                         <tr>
                             <td>포인트</td>
                             <td>
                                 <span>0을 입력하면 포인트 없음</span>
-                                <input type="text" name="point" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">%
+                                <input type="text" name="point" value="1" required oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">%
                             </td>
                         </tr>
                         <tr>

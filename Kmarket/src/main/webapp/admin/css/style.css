@@ -485,31 +485,31 @@ button[type=submit] {
     margin-bottom: 10px;
 }
 
-#admin-notice-list > section > form > table  {
+#admin-notice-list > section > table  {
     border-top: 2px solid #8798a3;
 }
-#admin-notice-list > section > form > table  tr > th{
+#admin-notice-list > section > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-notice-list > section > form >  table  tr > td {
+#admin-notice-list > section >  table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-notice-list > section > form > table  tr > td:nth-child(1) {width: 20px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(2) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(3) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(4) {width: 150px; text-align: center;}
-#admin-notice-list > section > form > table  tr > td:nth-child(5) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(6) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(7) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(8) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(9) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(10) {width: 80px;}
-#admin-notice-list > section > form > table  tr > td:nth-child(11) {width: 100px;}
+#admin-notice-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-notice-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(4) {width: 150px; text-align: center;}
+#admin-notice-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-notice-list > section > table  tr > td:nth-child(11) {width: 100px;}
 
-#admin-notice-list > section > form > table img.thumb {width: 60px;}
+#admin-notice-list > section > table img.thumb {width: 60px;}
 
 #admin-notice-list > section > .noticeDelete {
     float: left;
@@ -521,7 +521,7 @@ button[type=submit] {
     float: right;
     width: 100px;
     margin-top: 10px;
-    }
+}
 
 #admin-notice-list .paging {
     width: 100%;
@@ -582,75 +582,6 @@ button[type=submit] {
     width: 700px;
     height: 400px;
     resize: none;   
-}
-
-/* config-banner */
-#admin-config-banner {}
-#admin-config-banner > article > section {
-    overflow: hidden;
-}
-#admin-config-banner > section > div  {
-    margin-bottom: 10px;
-}
-
-#admin-config-banner section > table  {
-    border-top: 2px solid #8798a3;
-}
-#admin-config-banner section > table  tr > th{
-    padding: 10px 0;
-    background: #f6f6f6;
-}
-#admin-config-banner section > table  tr > td {
-    background: #fff;
-    text-align: center;
-    box-sizing: border-box;
-}
-#admin-config-banner section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-config-banner section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
-#admin-config-banner section > table  tr > td:nth-child(5) {width: 240px;}
-#admin-config-banner section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-config-banner section > table  tr > td:nth-child(11) {width: 100px;}
-
-#admin-config-banner section > table img.thumb {width: 60px;}
-#admin-config-banner section > table ul > li {line-height: 19px;}
-
-#admin-config-banner section input[type=button] {
-    width: 100px;
-    margin-top: 10px;
-}
-
-#admin-config-banner .btnPositive {
-    float: right;
-    width: 100px;
-    padding: 6px;
-    margin-top: 10px;
-    border: 1px solid #8798a3;
-    font-size: 13px;
-    background-color: #fefefe;
-    color: #333;
-    vertical-align: middle;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-#admin-config-banner .btnNegative {
-    float: left;
-    width: 100px;
-    padding: 6px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-    background-color: #eaeaea;
-    color: #333;
-    vertical-align: middle;
-    box-sizing: border-box;
-    cursor: pointer;
 }
 
 /* notice - 글보기 영역 */
@@ -745,12 +676,6 @@ button[type=submit] {
 
 #admin-faq-list > section > table img.thumb {width: 60px;}
 
-#admin-faq-list > section > input[type=button] {
-    float: left;
-    width: 100px;
-    margin-top: 10px;
-}
-
 #admin-faq-list .paging {
     width: 100%;
     padding: 30px 0;
@@ -788,4 +713,273 @@ button[type=submit] {
 #admin-faq-list .paging > .num > a.on {
     color: #fe434c;
     font-weight: bold;
+}
+
+#admin-faq-list > section > .faqDelete {
+    float: left;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-faq-list > section > .faqWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+}
+
+/* faq-register */
+
+#admin-faq-register {}
+#admin-faq-register input[type=submit] {
+    float: right;
+    width: 100px;
+}
+
+.faqTitle {
+    padding: 5px;
+    font-size: 13px;                   
+    width: 700px; 
+    resize: none; 
+}
+.faqeArea {
+    padding: 5px;
+    font-size: 13px;                   
+    width: 700px;
+    height: 400px;
+    resize: none;   
+}
+
+/* faq - 글보기 영역 */
+#admin-faq-view {
+	float: right;
+    width: 1130px;
+    min-height: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+
+	}
+	
+#admin-faq-view > nav {
+  width: 100%;
+  height: auto;
+  padding: 26px;
+  border-top: 2px solid #111;
+  border-bottom: 1px solid #e9e9e9;
+  box-sizing: border-box;
+}
+#admin-faq-view > nav > .title {
+  margin-bottom: 6px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#admin-faq-view > nav > .date {        
+  font-size: 14px;
+  color: #777;        
+}
+
+#admin-faq-view > .content {
+  width: 100%;
+  height: 100%;        
+  border-bottom: 1px solid #e9e9e9;
+  padding: 26px;
+  box-sizing: border-box;
+}
+
+#admin-faq-view > .content > p {
+  font-size: 16px;
+  line-height: 32px;
+}
+
+
+/* qna-list */
+#admin-qna-list {}
+#admin-qna-list > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-qna-list > section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-qna-list > section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-qna-list > section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-qna-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-qna-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(4) {width: 80px; text-align: center;}
+#admin-qna-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-qna-list > section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-qna-list > section > table img.thumb {width: 60px;}
+
+#admin-qna-list .paging {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+
+#admin-qna-list .paging > span > a {
+    color: #777;
+    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
+    font-size: 11px;
+    letter-spacing: -1px;
+}
+  
+#admin-qna-list .paging > span > a:hover {
+    text-decoration: underline;
+}
+  
+#admin-qna-list .paging > .num > a {
+    display: inline-block;
+    min-width: 14px;
+    margin: 0 2px;
+    padding: 8px 9px;
+    border: 1px solid #c4c4c4;
+    background: url() 0 0 repeat-x;
+    color: #000;
+    font-family: Tahoma;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+#admin-qna-list .paging > .num > a:hover {
+    border: 1px solid #454c5f;
+    text-decoration: none;
+}
+
+#admin-qna-list .paging > .num > a.on {
+    color: #fe434c;
+    font-weight: bold;
+
+#admin-qna-list > section > .qnaWrite {
+    float: right;
+    width: 100px;
+    margin-top: 10px;
+}
+
+/* qna - 글보기 영역 */
+#admin-qna-view {
+	float: right;
+    width: 1130px;
+    min-height: 600px;
+    padding: 20px;
+    box-sizing: border-box;
+
+	}
+	
+#admin-qna-view > nav {
+  width: 100%;
+  height: auto;
+  padding: 26px;
+  border-top: 2px solid #111;
+  border-bottom: 1px solid #e9e9e9;
+  box-sizing: border-box;
+}
+#admin-qna-view > nav > .title {
+  margin-bottom: 6px;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+#admin-qna-view > nav > .date {        
+  font-size: 14px;
+  color: #777;        
+}
+
+#admin-qna-view > .content {
+  width: 100%;
+  height: 100%;        
+  border-bottom: 1px solid #e9e9e9;
+  padding: 26px;
+  box-sizing: border-box;
+}
+
+#admin-qna-view > .content > p {
+  font-size: 16px;
+  line-height: 32px;
+}
+
+
+
+/* config-banner */
+#admin-config-banner {}
+#admin-config-banner > article > section {
+    overflow: hidden;
+}
+#admin-config-banner > section > div  {
+    margin-bottom: 10px;
+}
+
+#admin-config-banner section > table  {
+    border-top: 2px solid #8798a3;
+}
+#admin-config-banner section > table  tr > th{
+    padding: 10px 0;
+    background: #f6f6f6;
+}
+#admin-config-banner section > table  tr > td {
+    background: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+#admin-config-banner section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-config-banner section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(4) {width: auto; text-align: left;}
+#admin-config-banner section > table  tr > td:nth-child(5) {width: 240px;}
+#admin-config-banner section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-config-banner section > table  tr > td:nth-child(11) {width: 100px;}
+
+#admin-config-banner section > table img.thumb {width: 60px;}
+#admin-config-banner section > table ul > li {line-height: 19px;}
+
+#admin-config-banner section input[type=button] {
+    width: 100px;
+    margin-top: 10px;
+}
+
+#admin-config-banner .btnPositive {
+    float: right;
+    width: 100px;
+    padding: 6px;
+    margin-top: 10px;
+    border: 1px solid #8798a3;
+    font-size: 13px;
+    background-color: #fefefe;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#admin-config-banner .btnNegative {
+    float: left;
+    width: 100px;
+    padding: 6px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    background-color: #eaeaea;
+    color: #333;
+    vertical-align: middle;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
 }

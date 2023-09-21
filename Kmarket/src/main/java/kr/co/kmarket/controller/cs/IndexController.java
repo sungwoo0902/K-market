@@ -46,7 +46,7 @@ public class IndexController extends HttpServlet{
 		int currentPage = service.getCurrentPage(pg);
 					
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard(cate1, cate2);
+		int total = service.selectCountBoard(group, cate1, cate2);
 						
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);

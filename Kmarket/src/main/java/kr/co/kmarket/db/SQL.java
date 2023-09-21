@@ -278,6 +278,8 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
 	
+	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE no=?";
+	
 	public static final String SELECT_ANSWER = "SELECT * FROM `km_board` WHERE `parent`=?";
 	public static final String SELECT_BOARD_CATE1_NAME_DISCRIPTION = "SELECT * FROM `km_board_cate1` WHERE `group`=? AND `cate1`=?";
 

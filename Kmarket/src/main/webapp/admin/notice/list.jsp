@@ -18,13 +18,40 @@ $(function(){
 		
 	});	
 	
-	$('.noticeDelete').click(function(){
-		$('#formNotice').submit();
+	$('.noticeDelete').click(function() {
+        var checkBoxArr = [];
+        
+        // 체크된 체크박스를 순회하면서 데이터 추출
+        $('input[name=chk]:checked').each(function() {
+            var $row = $(this).closest('tr'); // 현재 체크박스가 속한 행
+            var prodNoValue = $row.find('td:eq(1)').text(); // 3번째 열의 데이터 (상품코드)
+
+            checkBoxArr.push(prodNoValue);
+        });
+
+        console.log(checkBoxArr);
+		
+        var confirmDelete = confirm("선택한 게시글을 삭제하시겠습니까?");
+        
+	    $.ajax({
+	        type: "GET",
+	        url: "/Kmarket/admin/qna/delete.do",
+	        traditional: true,
+	        data: {
+	            checkBoxArr: checkBoxArr
+	        },
+	        success: function(result) {
+	            console.log(result);
+	        },
+	        error: function(xhr, status, error) {
+	            alert(error);
+	        }
+	    });
 	});
 	
-	 $('.noticeWrite').click(function(){
-	    window.location.href = "/Kmarket/admin/notice/write.do?group=1"; 
-	 });
+	$('.noticeWrite').click(function(){
+	   window.location.href = "/Kmarket/admin/notice/write.do?group=1"; 
+	});
 });
 
 </script>
@@ -33,9 +60,9 @@ $(function(){
     <%@ include file="../_aside.jsp" %>
     <section id="admin-notice-list">
         <nav>
-            <h3>상품목록</h3>
+            <h3>공지사항</h3>
             <p>
-                HOME > 상품관리 > <strong>상품목록</strong>
+                HOME > 고객센터 > <strong>공지사항</strong>
             </p>
         </nav>
         <section>
@@ -47,9 +74,7 @@ $(function(){
                     <option value="search4">위해상품</option>
                     <option value="search5">이벤트당첨</option>
                 </select>
-                <input type="text" name="search">
             </div>
-            <form id="formNotice" action="#" method="get">
             <table>
                 <tr>
                     <th><input type="checkbox" name="all"></th>
@@ -67,13 +92,12 @@ $(function(){
                     <td><a href="${ctxPath}/admin/notice/view.do?group=1&no=${notice.no}">${notice.title}</a></td>
                    	<td>${notice.rdate}</td>
                     <td>
-                        <a href="#">[삭제]</a>
-                        <a href="#">[수정]</a>
+                        <a href="${ctxPath}/admin/notice/delete?no=${notice.no}">[삭제]</a>
+                        <a href="${ctxPath}/admin/notice/modify?no=${notice.no}">[수정]</a>
                     </td>                   
                 </tr>
                 </c:forEach>
             </table>
-            </form>
             
             <input type="button" value="선택 삭제" class="noticeDelete"/>
             <input type="button" value="공지 작성" class="noticeWrite"/>
