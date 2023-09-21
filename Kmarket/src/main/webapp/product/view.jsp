@@ -104,7 +104,7 @@
 	  	const delivery = $('#delivery');
 	    
 	    $('.cart').click(function(e){
-	    	if(${sussUser == null}){
+	    	if(${sessUser == null}){
 	    		alert('로그인 후 이용 가능합니다.');
 	    		return false;
 	    	}

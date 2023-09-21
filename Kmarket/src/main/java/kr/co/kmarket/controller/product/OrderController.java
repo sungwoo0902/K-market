@@ -48,12 +48,15 @@ public class OrderController extends HttpServlet{
 		logger.debug("ordNo :"+ordNo);
 		
 		OrderDTO order = ordService.selectOrder(ordNo, uid);
+		MemberDTO member = memService.selectMemRecip(uid);
 		// 해당 order의 상품들도 가져온다.
 		List<OrderItemDTO> orderItems = ordService.selectOrderItems(ordNo);
 		// 현재 주문서의 상품들
 		req.setAttribute("orderItems", orderItems);
 		// 주문서
 		req.setAttribute("order", order);
+		// 멤버 정보
+		req.setAttribute("member", member);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/order.jsp");

@@ -33,12 +33,6 @@ public enum OrderService {
 		}
 	}
 	public List<OrderItemDTO> selectOrderItems(int ordNo) {
-		
-		List<OrderItemDTO> items = new ArrayList<>();
-		for(int i = 0; i < ordNo; i++) {
-			OrderItemDTO dto = dao.selectOrderItem(ordNo);
-			items.add(dto);
-		}
-		return items;
+		return dao.selectOrderItems(ordNo);
 	}
 }
