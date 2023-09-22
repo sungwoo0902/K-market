@@ -108,6 +108,11 @@ public class SQL {
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 AND `seller`=? "
 																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ALL_SEARCH 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `prodName` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "

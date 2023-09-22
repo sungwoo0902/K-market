@@ -113,11 +113,12 @@ public class CsDAO extends DBHelper {
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
 				psmt.setInt(3, start);	
-			}else{
+			}else if(group != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
 				psmt.setString(1, group);
 				psmt.setInt(2, start);	
 			}
+			
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {

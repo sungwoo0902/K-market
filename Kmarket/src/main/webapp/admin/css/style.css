@@ -440,6 +440,19 @@ button[type=submit] {
     margin-top: 10px;
 }
 
+#admin-product-list > section > div > input[type=text] {
+    position: absolute;
+    margin-left: 10px;
+    width: 200px;
+    height: 29px;
+}
+#admin-product-list > section > div > .btnSearch {
+    position: absolute;
+    margin-left: 220px;
+    width: 50px;
+    height: 29px;
+}
+
 #admin-product-list .paging {
     width: 100%;
     padding: 30px 0;

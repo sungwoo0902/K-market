@@ -126,17 +126,25 @@ public class ProductDAO extends DBHelper{
 	}
 	
 
-	public List<ProductDTO> selectProductsAll(int start, String seller) {
+	public List<ProductDTO> selectProductsAll(int start, String seller, String search) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
+			if(search == null) {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
 			psmt.setString(1, seller);
 			psmt.setInt(2, start);		
-			
 			rs = psmt.executeQuery();
+			} else {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH);
+			psmt.setString(1, seller);
+			psmt.setString(2, search);	
+			psmt.setInt(3, start);		
+			rs = psmt.executeQuery();	
+			}
 			
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();

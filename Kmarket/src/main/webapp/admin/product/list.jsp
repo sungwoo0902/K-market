@@ -49,6 +49,14 @@ $(function(){
 	        }
 	    });
 	});
+	
+	$('.btnSearch').click(function() {
+		
+		var seller = $('td:eq(8)').text();
+		var search= $('input[name=search]').val();
+		
+		window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller;
+	});
 		
 });
 
@@ -72,6 +80,7 @@ $(function(){
                     <option value="search1">판매자</option>
                 </select>
                 <input type="text" name="search">
+                <input type="button" value="검색" class="btnSearch">
             </div>
             <table>
                 <tr>
