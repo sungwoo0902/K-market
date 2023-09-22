@@ -97,26 +97,31 @@ public class CsDAO extends DBHelper {
 	
 
 	public List<CsDTO> selectBoards(String group, String cate1, String cate2, int start) {
-		
 			List<CsDTO> board = new ArrayList<>();
 		
-		try {
+			try {
 				conn = getConnection();
+				
 			if(cate2 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_SUB_CATE);
+				logger.debug("selectBoards SUB");
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
 				psmt.setString(3, cate2);	
-				psmt.setInt(4, start);	
+				psmt.setInt(4, start);
+				
 			}else if(cate1 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE);
+				logger.debug("selectBoards MIDDLE");
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
-				psmt.setInt(3, start);	
+				psmt.setInt(3, start);
+				
 			}else{
 				psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MAIN_CATE);
+				logger.debug("selectBoards MAIN");
 				psmt.setString(1, group);
-				psmt.setInt(2, start);	
+				psmt.setInt(2, start);
 			}
 			rs = psmt.executeQuery();
 			
@@ -134,9 +139,48 @@ public class CsDAO extends DBHelper {
 				dto.setGroup_name(rs.getString(10));
 				dto.setCate1_name(rs.getString(11));
 				dto.setCate2_name(rs.getString(12));
+				dto.setAnswer(rs.getString(13));
 				board.add(dto);	
 			}
-				close();
+
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectBoards() ERROR : " + e.getMessage());
+		}
+		return board;
+	}
+	
+	public List<CsDTO> selectBoardsAll(String group, String cate1) {
+		List<CsDTO> board = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_BOARDS_MIDDLE_CATE_ALL);
+			logger.debug("selectBoards MIDDLE");
+			psmt.setString(1, group);
+			psmt.setString(2, cate1);
+
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsDTO dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setRdate(rs.getString(9));
+				dto.setGroup_name(rs.getString(10));
+				dto.setCate1_name(rs.getString(11));
+				dto.setCate2_name(rs.getString(12));
+				dto.setAnswer(rs.getString(13));
+				board.add(dto);	
+			}
+			close();
 			
 		} catch (Exception e) {
 			logger.error("selectBoards() ERROR : " + e.getMessage());
@@ -239,18 +283,19 @@ public class CsDAO extends DBHelper {
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
 				psmt.setString(3, cate2);
-				logger.debug("here1  : ");	
+				
 			}else if(cate1 != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MIDDLE_CATE);
 				psmt.setString(1, group);
 				psmt.setString(2, cate1);
-				logger.debug("here2 : ");
+				
 			}else if(group != null) {
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_MAIN_CATE);
 				psmt.setString(1, group);
-				logger.debug("here2 : ");
 			}
+			
 			rs = psmt.executeQuery();
+			
 			if(rs.next()) {
 				total = rs.getInt(1);
 				logger.debug("total : " +total);

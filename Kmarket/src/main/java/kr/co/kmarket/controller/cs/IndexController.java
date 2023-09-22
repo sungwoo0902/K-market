@@ -35,38 +35,14 @@ public class IndexController extends HttpServlet{
 		// 현재 세션 가져오기
 		HttpSession session = req.getSession();
 		MemberDTO sessMember = (MemberDTO) session.getAttribute("sessUser");
-	
-		// 데이터 수신
-		String pg = req.getParameter("pg");
-		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
-		String group = req.getParameter("group");
-					
-		// 현재 페이지 번호
-		int currentPage = service.getCurrentPage(pg);
-					
-		// 전체 게시물 갯수 
-		int total = service.selectCountBoard(group, cate1, cate2);
-						
-		// 마지막 페이지 번호
-		int lastPageNum = service.getLastPageNum(total);
-				
-		// 페이지 그룹 start, end 번호
-		int[] result = service.getPageGroupNum(currentPage, lastPageNum);
-					
-		// 시작 인덱스
-		int start = service.getStartNum(currentPage);
 						
 		// 글 조회
-		List<CsDTO> notice_list = service.selectBoards("1", null, null, start);
-		List<CsDTO> faq_list = service.selectBoards("2", null, null, start);
-		List<CsDTO> qna_list = service.selectBoards("3", null, null, start);
-		logger.debug("notice_list :" +notice_list.toString());
-		req.setAttribute("board", "list");
-		
+		List<CsDTO> notice_list = service.selectBoards("1", null, null, 0);
+		List<CsDTO> faq_list = service.selectBoards("2", null, null, 0);
+		List<CsDTO> qna_list = service.selectBoards("3", null, null, 0);
+		logger.debug("notice_list : " + notice_list);
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
-		req.setAttribute("cate1", cate1);
 		req.setAttribute("notice_lists", notice_list);
 		req.setAttribute("faq_lists", faq_list);
 		req.setAttribute("qna_lists", qna_list);

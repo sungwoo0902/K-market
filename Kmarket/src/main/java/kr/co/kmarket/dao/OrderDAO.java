@@ -140,19 +140,20 @@ public class OrderDAO extends DBHelper{
 			logger.error("insertOrderItem() error :"+e.getMessage());
 		}
 	}
-	public OrderItemDTO selectOrderItem(int ordNo){
+	public List<OrderItemDTO> selectOrderItems(String uid, int ordNo){
 		
-		OrderItemDTO dto = null;
+		List<OrderItemDTO> items = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEM);
-			psmt.setInt(1, ordNo);
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER_ITEMS);
+			psmt.setString(1, uid);
+			psmt.setInt(2, ordNo);
 			
 			rs = psmt.executeQuery();
 			
-			if(rs.next()) {
-				dto = new OrderItemDTO();
+			while(rs.next()) {
+				OrderItemDTO dto = new OrderItemDTO();
 				dto.setOrdNo(rs.getString(1));
 				dto.setProdNo(rs.getString(2));
 				dto.setCount(rs.getString(3));
@@ -160,18 +161,19 @@ public class OrderDAO extends DBHelper{
 				dto.setDiscount(rs.getString(5));
 				dto.setPoint(rs.getString(6));
 				dto.setDelivery(rs.getString(7));
+				dto.setTotal(rs.getString(8));
 				dto.setThumb1(rs.getString(9));
 				dto.setProdCate1(rs.getString(10));
 				dto.setProdCate2(rs.getString(11));
 				dto.setProdName(rs.getString(12));
 				dto.setDescript(rs.getString(13));
-				
+				items.add(dto);
 			}
 			close();
 		} catch (Exception e) {
-			logger.error("selectOrderItem() error :"+e.getMessage());
+			logger.error("selectOrderItems() error :"+e.getMessage());
 		}
-		return dto;
+		return items;
 	}
 	
 }

@@ -781,6 +781,12 @@
 #product > .cart > form > table td {
   text-align: center;
 }
+#product > .cart > form > table td:nth-child(4) {
+  padding:10px;
+}
+#product > .cart > form > table td:nth-child(6) {
+  padding:10px;
+}
 #product > .cart > form > table th:first-child {
   width: 60px;
 }
@@ -804,6 +810,9 @@
   float: left;
   margin-left: 10px;
   width: 440px;
+}
+#product > .cart > form > table td:nth-child(7){
+	width: 70px;
 }
 #product > .cart > form > table .free-delivery{
 	background-image: url('../images/ico_free_delivery.gif');
@@ -919,6 +928,23 @@
 #product > .order > form > table td {
   text-align: center;
 }
+.throughPrice {
+    text-decoration: line-through; /* 텍스트에 줄 긋기 스타일 적용 */
+    display: block; /* 줄을 긋는 텍스트를 블록 요소로 설정하여 줄을 아래로 내림 */
+}
+#product > .order > form > table td:nth-child(4) {
+	width: 70px;
+}
+#product > .order > form > table .free-delivery{
+    color: transparent;
+    background: url('../images/ico_free_delivery.gif') no-repeat;
+    background-position: center;
+}
+
+#product > .order > form > table .has-delivery {
+    background-image: none; /* 배경 이미지 제거 */
+}
+
 #product > .order > form > table td:last-child {
   color:#ff006c;
   font-weight: bold;

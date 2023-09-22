@@ -49,7 +49,7 @@ public class ViewController extends HttpServlet {
 			dispatcher.forward(req, resp);
 			
 		}else {
-			resp.sendRedirect("./cs/notice/list.do?cate1="+cate1+"&success=101");
+			resp.sendRedirect("./list.do?cate1="+cate1+"&success=101");
 		}
 	}
 }

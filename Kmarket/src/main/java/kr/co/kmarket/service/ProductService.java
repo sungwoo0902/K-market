@@ -36,8 +36,8 @@ public enum ProductService {
 	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start, String type) {
 		return dao.selectProductsByCate2(cate1, cate2, start, type);
 	}
-	public List<ProductDTO> selectProductsAll(int start, String seller) {
-		return dao.selectProductsAll(start, seller);
+	public List<ProductDTO> selectProductsAll(int start, String seller, String search) {
+		return dao.selectProductsAll(start, seller, search);
 	}
 	public void updateProduct(ProductDTO dto) {
 		dao.updateProduct(dto);

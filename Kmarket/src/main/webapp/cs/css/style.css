@@ -500,6 +500,8 @@ footer p > strong {
   padding: 16px;
   border-bottom: 1px solid #ccc;
 }
+#cs > .notice > .list > article > table td:nth-child(1) {width: 80%;}
+#cs > .notice > .list > article > table td:nth-child(2) {width: 20%;}
 #cs > .notice > .list > article > table td:last-child {
   text-align: center;
   font-size: 14px;
@@ -702,6 +704,7 @@ footer p > strong {
   border-bottom: none;
   text-align: center;
 }
+
             
 /* faq - 뷰 영역 */
 #cs > .faq > .view > article > nav {
@@ -842,6 +845,11 @@ footer p > strong {
   padding: 16px;
   border-bottom: 1px solid #ccc;
 }
+#cs > .qna > .list > article > table td:nth-child(1) {width: 50%;}
+#cs > .qna > .list > article > table td:nth-child(2) {width: 10%; text-align: center;}
+#cs > .qna > .list > article > table td:nth-child(3) {width: 10%; text-align: center;}
+#cs > .qna > .list > article > table td:nth-child(4) {width: 20%; text-align: center;}
+	
 #cs > .qna > .list > article > table td:last-child {
   text-align: center;
   font-size: 14px;
