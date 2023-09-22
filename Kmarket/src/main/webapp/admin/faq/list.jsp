@@ -17,6 +17,10 @@ $(function(){
 		
 	});	
 	
+	$('.faqWrite').click(function(){
+		   window.location.href = "/Kmarket/admin/faq/write.do?group=2"; 
+	});
+	
 	$('.faqDelete').click(function() {
         var checkBoxArr = [];
         

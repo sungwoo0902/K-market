@@ -101,7 +101,6 @@ $(function(){
                     <td>${product.hit}</td>
                     <td>
                         <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
-                        <a href="#">[수정]</a>
                     </td>
                     
                 </tr>
