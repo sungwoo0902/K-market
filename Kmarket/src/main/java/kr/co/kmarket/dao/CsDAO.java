@@ -142,6 +142,7 @@ public class CsDAO extends DBHelper {
 				dto.setAnswer(rs.getString(13));
 				board.add(dto);	
 			}
+
 			close();
 			
 		} catch (Exception e) {
@@ -159,6 +160,7 @@ public class CsDAO extends DBHelper {
 			logger.debug("selectBoards MIDDLE");
 			psmt.setString(1, group);
 			psmt.setString(2, cate1);
+
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
