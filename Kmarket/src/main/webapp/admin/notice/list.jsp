@@ -18,7 +18,7 @@ $(function(){
 		
 	});	
 	
-	$('.noticeDelete').click(function() {
+	$('.csDelete').click(function() {
         var checkBoxArr = [];
         
         // 체크된 체크박스를 순회하면서 데이터 추출
@@ -35,7 +35,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "/Kmarket/admin/qna/delete.do",
+	        url: "${ctxPath}/admin/qna/delete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
@@ -49,8 +49,8 @@ $(function(){
 	    });
 	});
 	
-	$('.noticeWrite').click(function(){
-	   window.location.href = "/Kmarket/admin/notice/write.do?group=1"; 
+	$('.csWrite').click(function(){
+	   window.location.href = "${ctxPath}/admin/notice/write.do?group=1"; 
 	});
 	
 	// 2차 상세 유형 불러오기
@@ -118,7 +118,7 @@ $(function(){
 
 <main>
     <%@ include file="../_aside.jsp" %>
-    <section id="admin-notice-list">
+    <section id="admin-cs-list">
         <nav>
             <h3>공지사항</h3>
             <p>
@@ -159,8 +159,8 @@ $(function(){
                 </c:forEach>
             </table>
             
-            <input type="button" value="선택 삭제" class="noticeDelete"/>
-            <input type="button" value="공지 작성" class="noticeWrite"/>
+            <input type="button" value="선택 삭제" class="csDelete"/>
+            <input type="button" value="공지 작성" class="csWrite"/>
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">

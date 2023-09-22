@@ -14,7 +14,7 @@
 			console.log(selectedCate1);
 			
 			$.ajax({
-				url: '/Kmarket/category.do',
+				url: '${ctxPath}/category.do',
 				type: 'post',
 				data: {category1: selectedCate1},
 				dataType: 'json',

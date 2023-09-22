@@ -17,7 +17,7 @@ $(function(){
 		
 	});	
 	
-	$('.qnaDelete').click(function() {
+	$('.csDelete').click(function() {
         var checkBoxArr = [];
         
         // 체크된 체크박스를 순회하면서 데이터 추출
@@ -112,7 +112,7 @@ $(function(){
 
 <main>
     <%@ include file="../_aside.jsp" %>
-    <section id="admin-qna-list">
+    <section id="admin-cs-list">
         <nav>
             <h3>문의사항</h3>
             <p>
@@ -163,7 +163,7 @@ $(function(){
                 </c:forEach>
             </table>
             
-            <input type="button" value="선택 삭제" class="qnaDelete"/>
+            <input type="button" value="선택 삭제" class="csDelete"/>
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">

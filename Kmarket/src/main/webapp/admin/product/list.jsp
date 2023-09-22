@@ -36,7 +36,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "/Kmarket/admin/product/delete.do",
+	        url: "${ctxPath}/admin/product/delete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr

@@ -19,7 +19,7 @@ $(function() {
 		}
 		
 		$.ajax({
-			url: '/Kmarket/admin/faq/write.do',
+			url: '${ctxPath}/admin/faq/write.do',
 			type: 'POST',
 			data: jsonData,
 			dataType: 'json',
