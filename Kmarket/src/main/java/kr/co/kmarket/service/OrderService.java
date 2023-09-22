@@ -32,7 +32,7 @@ public enum OrderService {
 			dao.insertOrderItem(orderItem, ordNo);
 		}
 	}
-	public List<OrderItemDTO> selectOrderItems(int ordNo) {
-		return dao.selectOrderItems(ordNo);
+	public List<OrderItemDTO> selectOrderItems(String uid, int ordNo) {
+		return dao.selectOrderItems(uid, ordNo);
 	}
 }
