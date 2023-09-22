@@ -184,6 +184,7 @@ public class SQL {
 	public static final String SELECT_CURRENT_PRODUCT   = "SELECT * FROM `km_product` ORDER BY `rdate` DESC LIMIT 8";
 	public static final String SELECT_DISCOUNT_PRODUCT  = "SELECT * FROM `km_product` ORDER BY `discount` DESC LIMIT 8";
 	
+	public static final String UPDATE_PRODUCT_HIT = "UPDATE `km_product` SET `hit`=`hit`+1 WHERE `prodNo`=?";
 	
 	//********************************************************************************************************//
 	//********************************************* Product_Cart *********************************************//

@@ -44,6 +44,9 @@ public class ViewController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String pg     = req.getParameter("pg");
 		
+		// 조회수 count++ **************************************************
+		prodService.updateProductHit(prodNo);
+		
 		
 		// 페이징 처리 영역 *************************************************
 		int total = 0;
@@ -62,6 +65,7 @@ public class ViewController extends HttpServlet{
 		
 		// 시작 인덱스
 		int start = reviewService.getStartNum(currentPage);
+		
 		
 		// 선택한 상품 불러오기 / 선택한 상품 카테고리 NAV 설정 ****************
 		ProductDTO  prod = prodService.selectProduct(cate1, cate2, prodNo);
@@ -95,7 +99,7 @@ public class ViewController extends HttpServlet{
 	        twoDaysLaterFormatted = dateFormat.format(twoDaysLater);
 
 	        // SimpleDateFormat(E)
-	        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("E");
+	        SimpleDateFormat dayOfWeekFormat = new SimpleDateFormat("E", Locale.KOREAN);
 	        twoDaysLaterDayOfWeek = dayOfWeekFormat.format(twoDaysLater);
 	        
 	        // 도착일이 일요일이면 하루 지연

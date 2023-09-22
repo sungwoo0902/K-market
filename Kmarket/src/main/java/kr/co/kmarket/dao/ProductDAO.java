@@ -189,6 +189,20 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	
+	
+	public void updateProductHit(String prodNo) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_PRODUCT_HIT);
+			psmt.setString(1, prodNo);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			 logger.debug("updateProductHit : " + e.getMessage());
+		}
+	}
+	
 	/************************* 대분류 상품 불러오기 *************************/
 	public List<ProductDTO> selectProductsByCate1(String cate1, int start) {
 		List<ProductDTO> products = new ArrayList<>();
