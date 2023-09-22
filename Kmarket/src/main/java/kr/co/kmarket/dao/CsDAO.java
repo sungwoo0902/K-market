@@ -215,6 +215,7 @@ public class CsDAO extends DBHelper {
 	return dto;
 	}
 	
+	
 	// 공지 답변 유무 출력
 	public CsDTO selectBoard_parent(String group, String cate1, int start) {
 		
