@@ -17,7 +17,11 @@ $(function(){
 		
 	});	
 	
-	$('.faqDelete').click(function() {
+	$('.csWrite').click(function(){
+		   window.location.href = "${ctxPath}/admin/faq/write.do?group=2"; 
+	});
+	
+	$('.csDelete').click(function() {
         var checkBoxArr = [];
         
         // 체크된 체크박스를 순회하면서 데이터 추출
@@ -35,7 +39,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "/Kmarket/admin/faq/delete.do",
+	        url: "${ctxPath}/admin/faq/delete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
@@ -111,7 +115,7 @@ $(function(){
 
 <main>
     <%@ include file="../_aside.jsp" %>
-    <section id="admin-faq-list">
+    <section id="admin-cs-list">
         <nav>
             <h3>자주묻는 질문</h3>
             <p>
@@ -161,8 +165,8 @@ $(function(){
                 </c:forEach>
             </table>
             
-            <input type="button" value="선택 삭제" class="faqDelete"/>
-            <input type="button" value="글 작성" class="faqWrite"/>
+            <input type="button" value="선택 삭제" class="csDelete"/>
+            <input type="button" value="글 작성" class="csWrite"/>
 			
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">

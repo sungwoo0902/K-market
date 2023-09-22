@@ -492,68 +492,68 @@ button[type=submit] {
     font-weight: bold;
 }
 
-/* notice-list */
-#admin-notice-list {}
-#admin-notice-list > section > div  {
+/* cs-list */
+#admin-cs-list {}
+#admin-cs-list > section > div  {
     margin-bottom: 10px;
 }
 
-#admin-notice-list > section > table  {
+#admin-cs-list > section > table  {
     border-top: 2px solid #8798a3;
 }
-#admin-notice-list > section > table  tr > th{
+#admin-cs-list > section > table  tr > th{
     padding: 10px 0;
     background: #f6f6f6;
 }
-#admin-notice-list > section >  table  tr > td {
+#admin-cs-list > section >  table  tr > td {
     background: #fff;
     text-align: center;
     box-sizing: border-box;
 }
-#admin-notice-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-notice-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(4) {width: 150px; text-align: center;}
-#admin-notice-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-notice-list > section > table  tr > td:nth-child(11) {width: 100px;}
+#admin-cs-list > section > table  tr > td:nth-child(1) {width: 20px;}
+#admin-cs-list > section > table  tr > td:nth-child(2) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(3) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(4) {width: 150px; text-align: center;}
+#admin-cs-list > section > table  tr > td:nth-child(5) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(6) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(7) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(8) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(9) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(10) {width: 80px;}
+#admin-cs-list > section > table  tr > td:nth-child(11) {width: 100px;}
 
-#admin-notice-list > section > table img.thumb {width: 60px;}
+#admin-cs-list > section > table img.thumb {width: 60px;}
 
-#admin-notice-list > section > .noticeDelete {
+#admin-cs-list > section > .csDelete {
     float: left;
     width: 100px;
     margin-top: 10px;
 }
 
-#admin-notice-list > section > .noticeWrite {
+#admin-cs-list > section > .csWrite {
     float: right;
     width: 100px;
     margin-top: 10px;
 }
 
-#admin-notice-list .paging {
+#admin-cs-list .paging {
     width: 100%;
     padding: 30px 0;
     text-align: center;
 }
 
-#admin-notice-list .paging > span > a {
+#admin-cs-list .paging > span > a {
     color: #777;
     font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
     font-size: 11px;
     letter-spacing: -1px;
 }
   
-#admin-notice-list .paging > span > a:hover {
+#admin-cs-list .paging > span > a:hover {
     text-decoration: underline;
 }
   
-#admin-notice-list .paging > .num > a {
+#admin-cs-list .paging > .num > a {
     display: inline-block;
     min-width: 14px;
     margin: 0 2px;
@@ -566,30 +566,30 @@ button[type=submit] {
     text-align: center;
     text-decoration: none;
 }
-#admin-notice-list .paging > .num > a:hover {
+#admin-cs-list .paging > .num > a:hover {
     border: 1px solid #454c5f;
     text-decoration: none;
 }
-#admin-notice-list .paging > .num > a.on {
+#admin-cs-list .paging > .num > a.on {
     color: #fe434c;
     font-weight: bold;
 }
 
-/* notice-register */
+/* cs-register */
 
-#admin-notice-register {}
-#admin-notice-register input[type=submit] {
+#admin-cs-register {}
+#admin-cs-register input[type=submit] {
     float: right;
     width: 100px;
 }
 
-.noticeTitle {
+.csTitle {
     padding: 5px;
     font-size: 13px;                   
     width: 700px; 
     resize: none; 
 }
-.noticeArea {
+.csArea {
     padding: 5px;
     font-size: 13px;                   
     width: 700px;
@@ -597,8 +597,8 @@ button[type=submit] {
     resize: none;   
 }
 
-/* notice - 글보기 영역 */
-#admin-notice-view {
+/* cs - 글보기 영역 */
+#admin-cs-view {
 	float: right;
     width: 1130px;
     min-height: 600px;
@@ -606,8 +606,17 @@ button[type=submit] {
     box-sizing: border-box;
 
 	}
+
+#admin-cs-view > .content {
+    float: left;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 26px;
+    box-sizing: border-box;
+}
 	
-#admin-notice-view > nav {
+#admin-cs-view > nav {
   width: 100%;
   height: auto;
   padding: 26px;
@@ -615,18 +624,20 @@ button[type=submit] {
   border-bottom: 1px solid #e9e9e9;
   box-sizing: border-box;
 }
-#admin-notice-view > nav > .title {
+#admin-cs-view > nav > .title {
+  float: left;
   margin-bottom: 6px;
   font-size: 32px;
   font-weight: bold;
 }
 
-#admin-notice-view > nav > .date {        
+#admin-cs-view > nav > .date {       
   font-size: 14px;
   color: #777;        
 }
 
-#admin-notice-view > .content {
+#admin-cs-view > .content {
+  float: left;
   width: 100%;
   height: 100%;        
   border-bottom: 1px solid #e9e9e9;
@@ -634,9 +645,35 @@ button[type=submit] {
   box-sizing: border-box;
 }
 
-#admin-notice-view > .content > p {
+#admin-cs-view > .content > p {
+  float: left;
   font-size: 16px;
   line-height: 32px;
+}
+
+#admin-cs-view article > .cstable td {
+	width: 50px;
+	height: auto;
+	padding: 20px;
+	text-align: center;
+	font-size: 14px;
+}
+
+#admin-cs-view article > .cstable td:nth-child(1) {
+	width: 20%;
+
+}
+
+#admin-cs-view article > .cstable td:nth-child(2) {
+	width: 80%;
+	text-align: left;
+}
+
+#admin-cs-view article > table tr td input[name=answer] {
+	width: 700px;
+	height: 200px;
+	padding: 5px;
+	font-size: 14px;
 }
 
 .btnViewDelete {
@@ -655,273 +692,6 @@ button[type=submit] {
 	float: right;
     width: 100px;
     margin-top: 10px;
-}
-
-/* faq-list */
-#admin-faq-list {}
-#admin-faq-list > section > div  {
-    margin-bottom: 10px;
-}
-
-#admin-faq-list > section > table  {
-    border-top: 2px solid #8798a3;
-}
-#admin-faq-list > section > table  tr > th{
-    padding: 10px 0;
-    background: #f6f6f6;
-}
-#admin-faq-list > section > table  tr > td {
-    background: #fff;
-    text-align: center;
-    box-sizing: border-box;
-}
-#admin-faq-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-faq-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(4) {width: 80px; text-align: center;}
-#admin-faq-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-faq-list > section > table  tr > td:nth-child(11) {width: 100px;}
-
-#admin-faq-list > section > table img.thumb {width: 60px;}
-
-#admin-faq-list .paging {
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-}
-
-#admin-faq-list .paging > span > a {
-    color: #777;
-    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
-    font-size: 11px;
-    letter-spacing: -1px;
-}
-  
-#admin-faq-list .paging > span > a:hover {
-    text-decoration: underline;
-}
-  
-#admin-faq-list .paging > .num > a {
-    display: inline-block;
-    min-width: 14px;
-    margin: 0 2px;
-    padding: 8px 9px;
-    border: 1px solid #c4c4c4;
-    background: url() 0 0 repeat-x;
-    color: #000;
-    font-family: Tahoma;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-}
-#admin-faq-list .paging > .num > a:hover {
-    border: 1px solid #454c5f;
-    text-decoration: none;
-}
-#admin-faq-list .paging > .num > a.on {
-    color: #fe434c;
-    font-weight: bold;
-}
-
-#admin-faq-list > section > .faqDelete {
-    float: left;
-    width: 100px;
-    margin-top: 10px;
-}
-
-#admin-faq-list > section > .faqWrite {
-    float: right;
-    width: 100px;
-    margin-top: 10px;
-}
-
-/* faq-register */
-
-#admin-faq-register {}
-#admin-faq-register input[type=submit] {
-    float: right;
-    width: 100px;
-}
-
-.faqTitle {
-    padding: 5px;
-    font-size: 13px;                   
-    width: 700px; 
-    resize: none; 
-}
-.faqeArea {
-    padding: 5px;
-    font-size: 13px;                   
-    width: 700px;
-    height: 400px;
-    resize: none;   
-}
-
-/* faq - 글보기 영역 */
-#admin-faq-view {
-	float: right;
-    width: 1130px;
-    min-height: 600px;
-    padding: 20px;
-    box-sizing: border-box;
-
-	}
-	
-#admin-faq-view > nav {
-  width: 100%;
-  height: auto;
-  padding: 26px;
-  border-top: 2px solid #111;
-  border-bottom: 1px solid #e9e9e9;
-  box-sizing: border-box;
-}
-#admin-faq-view > nav > .title {
-  margin-bottom: 6px;
-  font-size: 32px;
-  font-weight: bold;
-}
-
-#admin-faq-view > nav > .date {        
-  font-size: 14px;
-  color: #777;        
-}
-
-#admin-faq-view > .content {
-  width: 100%;
-  height: 100%;        
-  border-bottom: 1px solid #e9e9e9;
-  padding: 26px;
-  box-sizing: border-box;
-}
-
-#admin-faq-view > .content > p {
-  font-size: 16px;
-  line-height: 32px;
-}
-
-
-/* qna-list */
-#admin-qna-list {}
-#admin-qna-list > section > div  {
-    margin-bottom: 10px;
-}
-
-#admin-qna-list > section > table  {
-    border-top: 2px solid #8798a3;
-}
-#admin-qna-list > section > table  tr > th{
-    padding: 10px 0;
-    background: #f6f6f6;
-}
-#admin-qna-list > section > table  tr > td {
-    background: #fff;
-    text-align: center;
-    box-sizing: border-box;
-}
-#admin-qna-list > section > table  tr > td:nth-child(1) {width: 20px;}
-#admin-qna-list > section > table  tr > td:nth-child(2) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(3) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(4) {width: 80px; text-align: center;}
-#admin-qna-list > section > table  tr > td:nth-child(5) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(6) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(7) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(8) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(9) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(10) {width: 80px;}
-#admin-qna-list > section > table  tr > td:nth-child(11) {width: 100px;}
-
-#admin-qna-list > section > table img.thumb {width: 60px;}
-
-#admin-qna-list .paging {
-    width: 100%;
-    padding: 30px 0;
-    text-align: center;
-}
-
-#admin-qna-list .paging > span > a {
-    color: #777;
-    font-family: "ë‹ì›€", Dotum, Tahoma, sans-serif;
-    font-size: 11px;
-    letter-spacing: -1px;
-}
-  
-#admin-qna-list .paging > span > a:hover {
-    text-decoration: underline;
-}
-  
-#admin-qna-list .paging > .num > a {
-    display: inline-block;
-    min-width: 14px;
-    margin: 0 2px;
-    padding: 8px 9px;
-    border: 1px solid #c4c4c4;
-    background: url() 0 0 repeat-x;
-    color: #000;
-    font-family: Tahoma;
-    font-size: 12px;
-    text-align: center;
-    text-decoration: none;
-}
-#admin-qna-list .paging > .num > a:hover {
-    border: 1px solid #454c5f;
-    text-decoration: none;
-}
-
-#admin-qna-list .paging > .num > a.on {
-    color: #fe434c;
-    font-weight: bold;
-
-#admin-qna-list > section > .qnaWrite {
-    float: right;
-    width: 100px;
-    margin-top: 10px;
-}
-
-/* qna - 글보기 영역 */
-#admin-qna-view {
-	float: right;
-    width: 1130px;
-    min-height: 600px;
-    padding: 20px;
-    box-sizing: border-box;
-
-	}
-	
-#admin-qna-view > nav {
-  width: 100%;
-  height: auto;
-  padding: 26px;
-  border-top: 2px solid #111;
-  border-bottom: 1px solid #e9e9e9;
-  box-sizing: border-box;
-}
-#admin-qna-view > nav > .title {
-  margin-bottom: 6px;
-  font-size: 32px;
-  font-weight: bold;
-}
-
-#admin-qna-view > nav > .date {        
-  font-size: 14px;
-  color: #777;        
-}
-
-#admin-qna-view > .content {
-  width: 100%;
-  height: 100%;        
-  border-bottom: 1px solid #e9e9e9;
-  padding: 26px;
-  box-sizing: border-box;
-}
-
-#admin-qna-view > .content > p {
-  font-size: 16px;
-  line-height: 32px;
 }
 
 
@@ -995,4 +765,13 @@ button[type=submit] {
     cursor: pointer;
 }
 
+#admin-cs-view > table {
+	width: 100%;
+	height: auto;
+	
+}
+#admin-cs-view > table td {
+	font-size: 16px;
+	padding: 10px;
+	
 }

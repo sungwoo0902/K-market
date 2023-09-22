@@ -36,7 +36,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "/Kmarket/admin/product/delete.do",
+	        url: "${ctxPath}/admin/product/delete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
@@ -110,7 +110,6 @@ $(function(){
                     <td>${product.hit}</td>
                     <td>
                         <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
-                        <a href="#">[수정]</a>
                     </td>
                     
                 </tr>

@@ -19,7 +19,7 @@ $(function() {
 		}
 		
 		$.ajax({
-			url: '/Kmarket/admin/faq/write.do',
+			url: '${ctxPath}/admin/faq/write.do',
 			type: 'POST',
 			data: jsonData,
 			dataType: 'json',
@@ -103,15 +103,15 @@ $(function() {
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><textarea class="faqTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
+                            <td><textarea class="noticeTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea class="faqArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
+                            <td><textarea class="noticeArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
                         </tr>
                     </table>
                 </section>
-                <input type="submit" value="등록하기" class="faqRegister">
+                <input type="submit" value="등록하기" class="noticeRegister">
             </form>
         </article>
     </section>
