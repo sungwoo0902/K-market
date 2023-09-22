@@ -36,6 +36,16 @@ public class ListController extends HttpServlet{
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		
+		// 사이드 카테고리(cate1) 불러오기
+		List<CategoryDTO> category1 = cateService.selectCate1s();
+		req.setAttribute("category1", category1);
+		
+		// 사이드 카테고리(cate2) 불러오기
+		List<CategoryDTO> allCate = cateService.selectAllCate();
+		req.setAttribute("allCate", allCate);
+		
+		
+		// 페이징 처리 영역 *************************************************
 		int total = 0;
 		// 현재 페이지 번호
 		int currentPage = prodService.getCurrentPage(pg);

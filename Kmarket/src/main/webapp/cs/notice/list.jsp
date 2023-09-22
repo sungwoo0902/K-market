@@ -3,8 +3,8 @@
 <jsp:include page="../_asideNotice.jsp"/>
 	<article>
 			<nav>
-				<h1>${name_dis.cate1_name}</h1>
-				<h2>${name_dis.cate1_discription}</h2>
+				<h1>${cate.cate1_name}</h1>
+				<h2>${cate.cate1_discription}</h2>
 			</nav>
 		<table>
 			<c:forEach var="notice_list" items="${notice_lists}">

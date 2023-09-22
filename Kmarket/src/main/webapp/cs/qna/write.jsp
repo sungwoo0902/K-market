@@ -60,12 +60,12 @@
 				return false;
 			}
 			
-			$('#qna_write_submit').submit();
+			$('#writeSubmit').submit();
 		})
 	});
 </script>
 						<article class="wrt">
-							<form action="#" method="post" id="qna_write_submit">
+							<form action="#" method="post" id="writeSubmit">
 								<input type="hidden" name="type" value="write"/>
 								<input type="hidden" name="uid" value="${sessUser.uid}"/>
 								<table>
@@ -98,8 +98,8 @@
 									</tr>
 								</table>
 								<div>
-									<a href="./list.do?cate1=${cate1}" class="btnList">취소하기</a>
 									<input type="submit" class="btnSubmit" value="등록하기"/>
+									<a href="./list.do?cate1=${cate1}" class="btnList">취소하기</a>
 								</div>
 							</form>
 						</article>

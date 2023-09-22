@@ -19,7 +19,9 @@
 									감사합니다.<br/>
 								</p>
 							</div>
-							<a href="${ctxPath}/cs/faq/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+							<div>
+								<a href="${ctxPath}/cs/faq/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+							</div>
 						</article>
 					</section>
 				</div>

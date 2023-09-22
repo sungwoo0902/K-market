@@ -229,7 +229,7 @@ public class SQL {
 	//********************************************* Product_Cate1 *********************************************//
 	//*********************************************************************************************************//
 	public static final String SELECT_CATE1 = "SELECT * FROM `km_product_cate1` WHERE `cate1`=?";
-	public static final String SELECT_CATE1S = "SELECT * FROM `km_product_cate1`";
+	public static final String SELECT_CATE1S = "SELECT * FROM `km_product_cate1` ORDER BY `cate1`";
 	
 	
 	//*********************************************************************************************************//
@@ -241,7 +241,7 @@ public class SQL {
 	public static final String SELECT_ALL_CATE = "SELECT a.*, b.`cate2`, b.`c2Name` FROM `km_product_cate1` AS a	"
 												+ "JOIN `km_product_cate2` AS b "
 												+ "ON a.`cate1` = b.`cate1` "
-												+ "ORDER BY a.`cate1` AND b.`cate2`";
+												+ "ORDER BY a.`cate1`, b.`cate2`";
 	
 	public static final String SELECT_CATE = "SELECT a.*, b.cate2, b.c2Name FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b WHERE a.`cate1`=? AND b.`cate2`=?";
 	
@@ -319,6 +319,8 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate1` AS c ON a.`cate1` = c.`cate1` AND a.`group` = c.`group` "
 												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
+	
+	public static final String UPDATE_BOARD = "UPDATE `km_board` SET `cate1`=?, `cate2`=?, `title`=?, `content`=? WHERE `no`=?";
 	
 	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE no=?";
 	

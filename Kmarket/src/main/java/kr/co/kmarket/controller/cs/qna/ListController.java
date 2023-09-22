@@ -57,22 +57,18 @@ public class ListController extends HttpServlet {
 		List<CsDTO> qna_list = service.selectBoards(group, cate1, cate2, start);
 		
 		// cate1 이름, 설명 조회
-		CsDTO qna_name_dis = service.selectBoard_list(group, cate1);
-		
-		// 답변 유무 조회
-		CsDTO qna_parent = service.selectBoard_parent(group, cate1, start);
-		
+		CsDTO cate = service.selectBoard_list(group, cate1);
 		
 		String succcess = req.getParameter("success");
 		req.setAttribute("succcess", succcess);
 		req.setAttribute("qna_lists", qna_list);
-		req.setAttribute("qna_name_dis", qna_name_dis);
-		req.setAttribute("qna_parent", qna_parent);
+		req.setAttribute("cate", cate);
 		
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/list.jsp");
 		dispatcher.forward(req, resp);

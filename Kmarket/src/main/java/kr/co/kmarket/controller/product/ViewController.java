@@ -44,6 +44,15 @@ public class ViewController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String pg     = req.getParameter("pg");
 		
+		// 사이드 카테고리(cate1) 불러오기
+		List<CategoryDTO> category1 = cateService.selectCate1s();
+		req.setAttribute("category1", category1);
+		
+		// 사이드 카테고리(cate2) 불러오기
+		List<CategoryDTO> allCate = cateService.selectAllCate();
+		req.setAttribute("allCate", allCate);
+		
+		
 		// 조회수 count++ **************************************************
 		prodService.updateProductHit(prodNo);
 		

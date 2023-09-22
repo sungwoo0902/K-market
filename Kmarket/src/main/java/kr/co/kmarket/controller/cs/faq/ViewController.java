@@ -28,11 +28,16 @@ public class ViewController extends HttpServlet {
 		
 		String cate1 = req.getParameter("cate1");
 		String no    = req.getParameter("no");
+		String group = "2";
 		logger.debug("cate1 : " + cate1);
 		logger.debug("no    : " + no);
 		
-		req.setAttribute("cate1", cate1);
+		// cate1_name 조회
+		CsDTO cate = service.selectBoard_list(group, cate1);
+
 		req.setAttribute("board", "view");
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate", cate);
 		
 		CsDTO dto = service.selectBoard(no);
 		logger.debug("dto : " + dto);

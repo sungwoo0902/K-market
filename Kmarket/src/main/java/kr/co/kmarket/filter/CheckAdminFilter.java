@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dto.MemberDTO;
 
-
 public class CheckAdminFilter implements Filter {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
