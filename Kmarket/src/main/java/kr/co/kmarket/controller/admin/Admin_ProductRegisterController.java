@@ -42,7 +42,14 @@ public class Admin_ProductRegisterController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		MultipartRequest mr = prodService.uploadFile(req);
+	
+		String cate1 = req.getParameter("cate1");
+		String cate2 = req.getParameter("cate2");
+		logger.debug("cate1 : " + cate1);
+		logger.debug("cate2 : " + cate2);
+
+		
+		MultipartRequest mr = prodService.uploadFile(req, cate1, cate2);
 		
 		String prodCate1	= mr.getParameter("prodCate1");
 		String prodCate2	= mr.getParameter("prodCate2");
@@ -66,6 +73,7 @@ public class Admin_ProductRegisterController extends HttpServlet{
 		String origin 		= mr.getParameter("origin");
 		String ip			= req.getRemoteAddr();
 		
+		
 		logger.info(prodCate1);
 		logger.info(prodCate2);
 		logger.info(prodName);
@@ -88,7 +96,7 @@ public class Admin_ProductRegisterController extends HttpServlet{
 		logger.info(origin);
 		logger.info(ip);
 		// 파일을 저장할 경로
-		String path 		= prodService.getFilePath(req);
+		String path 		= prodService.getFilePath(req,prodCate1,prodCate2);
 		
 		ProductDTO dto = new ProductDTO(path);
 		

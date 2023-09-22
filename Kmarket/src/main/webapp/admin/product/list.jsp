@@ -99,7 +99,7 @@ $(function(){
 				<c:forEach var="product" items="${products}">
                 <tr>
                     <td><input type="checkbox" name="chk"></td>
-                    <td><img src="${ctxPath}/thumb/${product.thumb1}" class="thumb"></td>
+                    <td><img src="${ctxPath}/thumb/${product.prodCate1}/${product.prodCate2}/${product.thumb1}" class="thumb"></td>
                     <td>${product.prodName}</td>
                     <td style="text-align: center;">${product.prodNo}</td>
                     <td style="text-align: center;">${product.price}</td>
