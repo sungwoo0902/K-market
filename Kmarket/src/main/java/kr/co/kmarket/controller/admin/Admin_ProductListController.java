@@ -27,24 +27,24 @@ public class Admin_ProductListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String search = req.getParameter("search");
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
-		String seller = sessUser.getUid();
-		String pg    = req.getParameter("pg");
 		
+		String seller = sessUser.getUid();
+		int level = sessUser.getLevel();
+		String pg    = req.getParameter("pg");
+		String search = req.getParameter("search");
+		String cate1 = req.getParameter("cate1");
+
+		req.setAttribute("sessUser", sessUser);
 		req.setAttribute("seller", seller);
 		req.setAttribute("search", search);
-		
-		logger.debug("search : " + search);
-		logger.debug("seller : " + seller);
-		logger.debug("pg : " + pg);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountProductsAll(seller);
+		int total = service.selectCountProductsAll(seller, level, search, cate1);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -57,19 +57,23 @@ public class Admin_ProductListController extends HttpServlet {
 		
 		// 시작 인덱스
 		int start = service.getStartNum(currentPage);
-	
+		logger.debug("here3");
 		// 현재 페이지 게시물 조회
-			List<ProductDTO> products = service.selectProductsAll(start, seller, search);
+		
+		List<ProductDTO> products = service.selectProductsAll(start, seller, search, level);
+		req.setAttribute("products", products);
 
-			req.setAttribute("products", products);
-			req.setAttribute("currentPage", currentPage);
-			req.setAttribute("lastPageNum", lastPageNum);
-			req.setAttribute("pageGroupStart", result[0]);
-			req.setAttribute("pageGroupEnd", result[1]);
-			req.setAttribute("pageStartNum", pageStartNum+1);
+		logger.debug("here4");
+		req.setAttribute("currentPage", currentPage);
+		req.setAttribute("lastPageNum", lastPageNum);
+		req.setAttribute("pageGroupStart", result[0]);
+		req.setAttribute("pageGroupEnd", result[1]);
+		req.setAttribute("pageStartNum", pageStartNum+1);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp?pg=" + pg);
 		dispatcher.forward(req, resp);
+		logger.debug("here5");
+		
 	}
 	
 }

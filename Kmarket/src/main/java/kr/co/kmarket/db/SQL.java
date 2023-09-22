@@ -96,6 +96,7 @@ public class SQL {
 												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
 	public final static String DELETE_PRODUCT 					= "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
+	
 	public final static String SELECT_PRODUCT 					= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
@@ -103,16 +104,25 @@ public class SQL {
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
 																	+ "AND `prodNo`=?";
+	
 	public final static String SELECT_PRODUCTS_ALL 				= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 AND `seller`=? "
 																	+ "LIMIT ?, 10";
+	
+	public final static String SELECT_PRODUCTS_ADMIN 		    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "LIMIT ?, 10";
+	
 	public final static String SELECT_PRODUCTS_ALL_SEARCH 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 AND `seller`=? AND `prodName` LIKE CONCAT('%', ?, '%') "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
+	
 	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
@@ -174,7 +184,9 @@ public class SQL {
 																	+ "AND `prodCate2`=? "
 																	+ "ORDER BY `rdate` DESC "
 																	+ "LIMIT ?, 10";
-	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
+	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
+	public static final String SELECT_COUNT_PRODUCTS_SELLER 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
+	public static final String SELECT_COUNT_PRODUCTS_SEARCH	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
