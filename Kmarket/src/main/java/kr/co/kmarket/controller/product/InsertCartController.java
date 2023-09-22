@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.dto.CartDTO;
+import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.service.CartService;
 
 @WebServlet("/product/insertCart.do")
@@ -28,7 +30,9 @@ public class InsertCartController extends HttpServlet{
 		int result = 0;
 		CartDTO dto = new CartDTO();
 		
-		String uid = req.getParameter("uid");
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
 		String prodNo = req.getParameter("prodNo");
 		String inputCount = req.getParameter("inputCount");
 		String price = req.getParameter("price");
