@@ -1,22 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script>
+	$(function() {
+		$('.regSelBtn').click(function(e) {
+			e.preventDefault();
+			if(confirm('판매자 회원가입 페이지로 이동하시겠습니까?')){
+				location.href = '${ctxPath}/member/signup.do?type=seller';
+			}else{
+				return false;
+			}
+		})
+	});
+</script>
       <section id="cs">
         <div class="main">
-          <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>              
+          <h1 class="title"><strong>케이마켓</strong>이 도와드릴게요!</h1>   
+          
+          
+          <!-- 공지사항 -->           
           <section class="notice">
             <h1>공지사항<a href="./cs/notice/list.do?cate1=1">전체보기</a></h1>
             <ul>
-            <c:forEach var="notice_list" items="${notice_lists}" varStatus="loop">            
-            	<c:if test="${loop.index < 5}">
-	             	<li>
-	             		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">${notice_list.title}</a>
-	             		<span class="date">${notice_list.rdate}</span>
-	             	</li>
-              	</c:if>
+            <c:forEach var="notice_list" items="${notice_lists}" begin="0" step="1" end="4">            
+            	<li>
+            		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">[${notice_list.cate1_name}] ${notice_list.title}</a>
+            		<span class="date">${notice_list.rdate}</span>
+            	</li>
             </c:forEach>
             </ul>
           </section>
         
+        
+          <!-- 자주 묻는 질문 --> 
           <section class="faq">
             <h1>자주 묻는 질문<a href="./cs/faq/list.do?group=2&cate1=1">전체보기</a>
             </h1>
@@ -45,19 +60,20 @@
             </ol>
           </section>
         
+        
+        
+		  <!-- 문의하기 --> 
           <section class="qna">
             <h1>문의하기<a href="./cs/qna/list.do?cate1=1">전체보기</a></h1>
             <ul>
-            <c:forEach var="qna_list" items="${qna_lists}" varStatus="loop">
-            	<c:if test="${loop.index < 5}">
-	            	<li>
-	                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">${qna_list.title}</a>
-	                	<p>
-	                  		<span class="uid">${qna_list.maskingUid}</span>
-	                  		<span class="date">${qna_list.rdate}</span>
-	                	</p>
-	            	</li>
-            	</c:if>
+            <c:forEach var="qna_list" items="${qna_lists}" begin="0" step="1" end="4">
+            	<li>
+                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">[${qna_list.cate1_name}] ${qna_list.title}</a>
+                	<p>
+                  		<span class="uid">${qna_list.maskingUid}</span>
+                  		<span class="date">${qna_list.rdate}</span>
+                	</p>
+            	</li>
             </c:forEach>
             </ul>
             <a href="./cs/qna/write.do?cate1=1" class="ask">문의글 작성 ></a>
@@ -89,7 +105,7 @@
                   <strong>1566-5700</strong><span>(평일 09:00 ~ 18:00)</span>
                 </p>
                 <p>
-                  <a href="#">판매자 가입 및 서류 접수 안내 〉</a>
+                  <a href="#" class="regSelBtn">판매자 가입 및 서류 접수 안내 〉</a>
                 </p>                
               </div>
             </article>

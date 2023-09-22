@@ -202,46 +202,25 @@
       	    	}); // 전체 ajax end
 	    }); // cart click end
 	    
-	  	//***********************************************//
-		//***************** 즉시 구매 ********************//
-		//***********************************************//
+	    
+	    
+		//***************** 즉시 구매 **************************************************//
 		$('.order').click(function(e) {
 			e.prevenDefault();
 			
-	    	const jsonData = {
-      	    		"uid" : uid,
-      	    		"prodNo" : prodNo,
-      	    		"inputCount" : inputCount.val(),
-      	    		"price" : price,
-      	    		"discount" : discount,
-      	    		"point" : point,
-      	    		"delivery" : delivery.val(),
-      	    		"totalPrice" : inputCount.val() * price, 
-      	    		"orderType" : "buyNow" 
-      	    	};
+			console.log("inputCount : " + inputCount.val());
+			console.log("price : " + price);
+			console.log("discount : " + discount);
+			console.log("point : " + point);
+			console.log("delivery : " + delivery);
+			console.log("totalPrice : " + totalPrice);
 			
-	    		$.ajax({
-      	    		url: '${ctxPath}/product/insertCart.do',
-      	    		type: 'post',
-      	    		data: jsonData,
-      	    		dataType: 'json',
-      	    		success: function(data){
-      	    			
-      	    			/* 
-      	    				session 처리해서 결제페이지로 넘어가기. 
-      	    				결제 안 할 시, session 비우기
-      	    			*/
-      	    			
-      	    		}
-    	    	}); // buyNow ajax end..
+			
     	}); // order click end..
 	    
 	    
 	    
-		//***********************************************//
-		//***************** 상품평 이동 ******************//
-		//***********************************************//
-		// 상품평보기 클릭시 자동 스크롤
+		// 상품평보기 클릭시 자동 스크롤 **************************************************//
 	    $('.goToReview').click(function(e) {
 	    	e.preventDefault();
 	    	

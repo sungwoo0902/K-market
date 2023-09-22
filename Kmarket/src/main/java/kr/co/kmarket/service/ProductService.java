@@ -55,7 +55,9 @@ public enum ProductService {
 		return dao.selectCountProductsByCate2(cate1, cate2);
 	}
 	
-	
+	public void updateProductHit(String prodNo) {
+		dao.updateProductHit(prodNo);
+	}
 	
 	/************************* 베스트/히트/추천 상품 불러오기 *************************/
 	public List<ProductDTO> selectPopularProducts(String type) {
