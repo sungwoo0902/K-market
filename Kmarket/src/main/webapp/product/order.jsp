@@ -2,17 +2,37 @@
 <%@ include file="./_header.jsp" %>
 <script>
 	$(function(){
+		let prevPoint = 1;
+		$('#discountPoint').focusout(function(){
+			var discountPoint = parseInt($(this).val());
+			var currentPoint = parseFloat($("#currentPoint").text());
+			// 현재 포인트 초과 입력시 현재 보유 포인트 값을 입력할거임
+			var discountAmount = Math.min(discountPoint, currentPoint);
+			
+			if(discountPoint > currentPoint){
+				$('#discountPoint').val(discountAmount);
+			}
+			
+			/*
+			prevPoint = discountAmount;
+			
+			// 숫자인 경우만 prevPoint 업데이트
+	        if (/^\d+$/.test(inputCount.val())) {
+	        	prevPoint = discountPoint;
+	        }
+			*/
+		});
 		
 		// 포인트 사용 버튼 구현중
 		$('#applyDiscount').click(function(){
 			
-			var discountPoint = parseInt($('#discountPoint').val());
-			
-			var currentPoint = parseInt($("#currentPoint").text());
+			if(discountPoint < 1){
+				alert('사용할 포인트를 입력해주세요');
+				return;
+			}
 			
 			if(!isNaN(discountPoint) & discountPoint > 0){
-				// 입력된 포인트 또는 현재 포인트 중 작은 값을 할인 금액으로 사용
-				var discountAmount = Math.min(discountPoint, currentPoint); 
+				 
 				// 입력 필드에 할인된 포인트 설정
 	            $("#discountPoint").val(discountAmount); 
 
@@ -156,7 +176,7 @@
                         <tr>
                             <td>우편번호</td>
                             <td>
-                                <input type="text" name="zip" value="${member.zip}">
+                                <input type="text" name="zip" value="${member.zip}" readonly>
                                 <input type="button" value="검색">
                             </td>
                         </tr>
@@ -181,7 +201,7 @@
                 <div>
                     <p>
                         현재 포인트 : 
-                        <span id="currenPoint">${member.point}</span>
+                        <span id="currentPoint">${member.point}</span>
                         점
                     </p>
                     <label>

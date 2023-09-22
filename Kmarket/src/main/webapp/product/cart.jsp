@@ -124,24 +124,28 @@
 					"uid" : uid,
 					"selectedCartNos" : selectedCartNos
 			};
-			// jsonData를 전송
-			// traditional: true는 배열을 ajax로 보낼때 있어야됨.
-			$.ajax({
-				url: '/Kmarket/product/cart.do',
-				type: 'post',
-				data: jsonData,
-				traditional: true,
-				dataType: 'json',
-				success: function(data){
-					// 삭제가 성공적으로 됐을때 알림 띄워주고 창 새로고침
-					if(data.deleteResult == 1){
-						alert('장바구니에서 삭제되었습니다.');
-						window.location.href = ctxPath+'/product/cart.do?uid='+uid;
-					}else{
-						return;
+			if(confirm('선택된 상품을 장바구니에서 삭제하시겠습니까?')){
+				// jsonData를 전송
+				// traditional: true는 배열을 ajax로 보낼때 있어야됨.
+				$.ajax({
+					url: '/Kmarket/product/cart.do',
+					type: 'post',
+					data: jsonData,
+					traditional: true,
+					dataType: 'json',
+					success: function(data){
+						// 삭제가 성공적으로 됐을때 알림 띄워주고 창 새로고침
+						if(data.deleteResult == 1){
+							alert('장바구니에서 삭제되었습니다.');
+							window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+						}else{
+							return;
+						}
 					}
-				}
-			})
+				})// ajax end
+			}else{
+				return;
+			}// 삭제 confirm end
 		}); // 선택삭제 click end
 
 		//*******************************************************//
