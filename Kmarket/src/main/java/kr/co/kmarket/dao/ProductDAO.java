@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.directory.SearchControls;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,19 +127,77 @@ public class ProductDAO extends DBHelper{
 		
 	}
 	
+	
 
-	public List<ProductDTO> selectProductsAll(int start, String seller, String search) {
+	public List<ProductDTO> selectProductsAdmin(int start, String search) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
-			if(search == null) {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
-			psmt.setString(1, seller);
-			psmt.setInt(2, start);		
-			rs = psmt.executeQuery();
-			} else {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
+				psmt.setInt(1, start);		
+				rs = psmt.executeQuery();
+	
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsAll(int start, String seller, String search, int level) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			if(search == null && level ==7 ) {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN);
+				psmt.setInt(1, start);		
+				rs = psmt.executeQuery();
+			}else if(search == null) {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
+				psmt.setString(1, seller);
+				psmt.setInt(2, start);		
+				rs = psmt.executeQuery();
+			}else {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH);
 			psmt.setString(1, seller);
@@ -328,14 +388,27 @@ public class ProductDAO extends DBHelper{
 	}
 	/************************* 상품 전체 불러오기 *************************/
 
-	public int selectCountProductsAll(String seller) {
+	public int selectCountProductsAll(String seller, int level , String search, String cate1) {
 		int total = 0;
 		
 		try {
+			if(search == null && level ==7 ) {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ALL);
+			stmt = conn.createStatement();
+			stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);			
+			} else if(search == null) {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SELLER);
 			psmt.setString(1, seller);
 			rs = psmt.executeQuery();
+			} else {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH);
+				psmt.setString(1, seller);
+				psmt.setString(2, cate1);
+				psmt.setString(3, search);
+				rs = psmt.executeQuery();
+			}
 			
 			if(rs.next()) {
 				total = rs.getInt(1);
