@@ -40,6 +40,10 @@ public enum CsService {
 		return dao.selectBoards(group, cate1, cate2, start);
 	}
 	
+	public List<CsDTO> selectBoardsAll(String group, String cate1) {
+		return dao.selectBoardsAll(group, cate1);
+	}
+	
 	public void updateBoard(CsDTO dto) {
 		dao.updateBoard(dto);
 	}

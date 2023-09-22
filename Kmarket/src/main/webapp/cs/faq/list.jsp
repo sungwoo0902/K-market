@@ -11,22 +11,12 @@
 			
 			if(displayStatus == 'none'){
 				item.slideDown(100);
-				$(this).text('간단히 보기');
+				$(this).find('a').text('간단히 보기');
 			}else{
 				item.slideUp(100);
-				$(this).text('더보기');
+				$(this).find('a').text('더보기');
 			}
 		});
-		
-		// 스크롤링 기능 추가
-		/*
-		$('h3 a').click(function(e){
-			e.preventDefault();
-			let targetId = $(this).attr('href');
-            let targetOffset = $(targetId).offset().top;
-            $('html, body').animate({ scrollTop: targetOffset }, 500);
-        });
-		*/
 	});
 </script>
 	<article>
@@ -34,17 +24,20 @@
 			<h1>${faq_name_dis.cate1_name}</h1>
 			<h2>${faq_name_dis.cate1_discription}</h2>
 		</nav>
-		<div>
-		<c:forEach var="faq_list" items="${faq_lists}">
-			<h3>${faq_list.cate2_name}</h3>
-			<ul>
-				<c:forEach var = "faq_list" items="${faq_lists}">
-				<li><a href="./view.do?no=${faq_list.no}"><span>Q.</span>${faq_list.title}</a></li>
-				</c:forEach>
-				<li class="more"><a href="#">더보기</a></li>
-			</ul>
+		<c:forEach var="cate" items="${cate2List}" varStatus="status">
+		    <div>
+		        <h3>${cate.cate2_name}</h3>
+		        <ul>
+		            <c:forEach var="faq" items="${faq_lists}">
+		                <c:if test="${faq.cate2 eq status.count}">
+		                    <li><a href="./view.do?cate1=${faq.cate1}&no=${faq.no}"><span>Q.</span>${faq.title}</a></li>
+		                </c:if>
+		            </c:forEach>
+		            <li class="more"><a href="#">더보기</a></li>
+		        </ul>
+		    </div>
 		</c:forEach>
-		</div>
+
 	</article>
 </section>
 </div>

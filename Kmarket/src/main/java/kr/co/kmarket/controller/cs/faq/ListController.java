@@ -25,15 +25,18 @@ public class ListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("doGet()...");
 		req.setAttribute("board", "list");
+		logger.info("doGet()...");
+		String group = "2";
 		
-		String pg   = req.getParameter("pg");
+		String succcess = req.getParameter("success");
+		req.setAttribute("succcess", succcess);
+		
+		// 데이터 수신
+		String pg    = req.getParameter("pg");
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String group = req.getParameter("group");
-		logger.debug("cate1");
-		
+		req.setAttribute("cate1", cate1);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -51,19 +54,22 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		// 글 조회
-		List<CsDTO> faq_list = service.selectBoards("2", null, null, start);
-		logger.debug("faq_list :" +faq_list.toString());
+		List<CsDTO> faq_list = service.selectBoardsAll(group, cate1);
 		
 		// cate1 이름, 설명 조회
-		CsDTO faq_name_dis = service.selectBoard_list("2", cate1);
-		logger.debug("faq_name_dis :" +faq_name_dis.toString());
+		CsDTO faq_name_dis = service.selectBoard_list(group, cate1);
+		
+		// cate2 목록 불러오기
+		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
 		
 		req.setAttribute("board", "list");
-		
-		String succcess = req.getParameter("success");
-		req.setAttribute("succcess", succcess);
+		req.setAttribute("cate2List", cate2List);
 		req.setAttribute("faq_lists", faq_list);
 		req.setAttribute("faq_name_dis", faq_name_dis);
+		
+		logger.debug("group ; " + group);
+		logger.debug("cate1 ; " + cate1);
+		logger.debug("cate2 ; " + cate2);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/faq/list.jsp");
 		dispatcher.forward(req, resp);

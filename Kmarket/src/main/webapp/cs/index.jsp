@@ -9,7 +9,7 @@
             <c:forEach var="notice_list" items="${notice_lists}" varStatus="loop">            
             	<c:if test="${loop.index < 5}">
 	             	<li>
-	             		<a href="./cs/notice/view.do?cate1=${notice_list_cate1}&no=${notice_list.no}" class="title">${notice_list.title}</a>
+	             		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">${notice_list.title}</a>
 	             		<span class="date">${notice_list.rdate}</span>
 	             	</li>
               	</c:if>
@@ -53,14 +53,14 @@
 	            	<li>
 	                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">${qna_list.title}</a>
 	                	<p>
-	                  		<span class="uid">${qna_list.uid}</span>
+	                  		<span class="uid">${qna_list.maskingUid}</span>
 	                  		<span class="date">${qna_list.rdate}</span>
 	                	</p>
 	            	</li>
             	</c:if>
             </c:forEach>
             </ul>
-            <a href="./qna/write.do" class="ask">문의글 작성 ></a>
+            <a href="./cs/qna/write.do?cate1=1" class="ask">문의글 작성 ></a>
           </section>
 
           <section class="tel">
