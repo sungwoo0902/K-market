@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.dto.CartDTO;
+import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.dto.ProductDTO;
 import kr.co.kmarket.service.CartService;
 import kr.co.kmarket.service.ProductService;
@@ -35,8 +37,9 @@ public class CartController extends HttpServlet{
 		
 		List<CartDTO> carts = new ArrayList<>();
 		
-		String uid = req.getParameter("uid");
-		
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
 		
 		/*
 		if(sessUser.uid.equal) {

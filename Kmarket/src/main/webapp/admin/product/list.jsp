@@ -57,7 +57,6 @@ $(function(){
 		
 		window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller;
 	});
-		
 });
 
 </script>
@@ -109,7 +108,7 @@ $(function(){
                     <td>${product.seller}</td>
                     <td>${product.hit}</td>
                     <td>
-                        <a href="${ctxPath}/admin/product/delete.do?uid=${product.seller}&no=${product.prodNo}">[삭제]</a>
+                        <a href="${ctxPath}/admin/product/delete.do?no=${product.prodNo}">[삭제]</a>
                     </td>
                     
                 </tr>
@@ -121,17 +120,17 @@ $(function(){
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
                 <span class="prev">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupStart - 1}&seller=${sessUser.uid}"><&nbsp;이전</a>
+                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupStart - 1}"><&nbsp;이전</a>
                 </span>
             </c:if>  
             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
                 <span class="num">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${i}&seller=${sessUser.uid}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+                    <a href="${ctxPath}/admin/product/list.do?pg=${i}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
                 </span>
             </c:forEach>  
             <c:if test="${pageGroupEnd < lastPageNum}">   
                 <span class="next">
-                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupEnd + 1}&seller=${sessUser.uid}">다음&nbsp;></a>
+                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupEnd + 1}">다음&nbsp;></a>
                 </span>
             </c:if>    
             </div>

@@ -28,7 +28,9 @@ public class Admin_ProductListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String search = req.getParameter("search");
-	    String seller = req.getParameter("seller");
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String seller = sessUser.getUid();
 		String pg    = req.getParameter("pg");
 		
 		req.setAttribute("seller", seller);

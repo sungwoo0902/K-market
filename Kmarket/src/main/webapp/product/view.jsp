@@ -116,7 +116,6 @@
 			
 	    	// jsonData 초기화
 	    	const jsonData = {
-      	    		"uid" : uid,
       	    		"prodNo" : prodNo,
       	    		"inputCount" : inputCount.val(),
       	    		"price" : price,
@@ -156,7 +155,7 @@
       	    					}); // ajax end
       	    					if(confirm('장바구니에 추가되었습니다. 지금 장바구니로 이동하시겠습니까?')){
       	    		      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-      	    		      	    	window.location.href = ctxPath+'/product/cart.do?uid='+uid;
+      	    		      	    	window.location.href = ctxPath+'/product/cart.do';
 	      	    		    	}else{
 	      	    		      	    	console.log('jsonData :'+JSON.stringify(jsonData));
 	      	    		    		return;
@@ -192,7 +191,7 @@
       	    				}); // ajax end
       	    				if(confirm('장바구니에 추가되었습니다. 지금 장바구니로 이동하시겠습니까?')){
 	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
-	      	  	      	    	window.location.href = '${ctxPath}/product/cart.do?uid='+uid;
+	      	  	      	    	window.location.href = '${ctxPath}/product/cart.do';
 		      	  	    	}else{
 	      	  	      	    	console.log('jsonData :'+JSON.stringify(jsonData));
 		      	  	    		return;
