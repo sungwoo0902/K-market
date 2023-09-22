@@ -931,6 +931,7 @@
 .throughPrice {
     text-decoration: line-through; /* 텍스트에 줄 긋기 스타일 적용 */
     display: block; /* 줄을 긋는 텍스트를 블록 요소로 설정하여 줄을 아래로 내림 */
+    color: gray;
 }
 #product > .order > form > table td:nth-child(4) {
 	width: 70px;
