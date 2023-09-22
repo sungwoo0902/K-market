@@ -64,17 +64,17 @@ public enum ProductService {
 
 	/**************************** File Upload ****************************/
 	// 업로드 경로 구하기
-	public String getFilePath(HttpServletRequest req) {
+	public String getFilePath(HttpServletRequest req, String cate1, String cate2) {
 		// 파일 업로드 경로 구하기 
 		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/thumb");
+		String path = ctx.getRealPath("/thumb/"+cate1+"/"+cate2+"/");
 		return path;
 	}
 	
 	// 파일명 수정
-	public String renameToFile(HttpServletRequest req, String oName) {
+	public String renameToFile(HttpServletRequest req, String oName , String cate1, String cate2) {
 		
-		String path = getFilePath(req);
+		String path = getFilePath(req, cate1, cate2);
 		
 		int i = oName.lastIndexOf(".");
 		String ext = oName.substring(i);
@@ -92,9 +92,9 @@ public enum ProductService {
 	
 	
 	// 파일 업로드
-	public MultipartRequest uploadFile(HttpServletRequest req) {
+	public MultipartRequest uploadFile(HttpServletRequest req, String cate1, String cate2) {
 		// 파일 경로 구하기
-		String path = getFilePath(req);
+		String path = getFilePath(req, cate1, cate2);
 		
 		// 최대 업로드 파일 크기
 		int maxSize = 1024 * 1024 * 10;

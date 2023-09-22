@@ -73,6 +73,17 @@
 		})
 		// radio 체크 end
 		
+		// 폼 action 변경
+		$('.btnGO').click(function(e) {
+			e.preventDefault();
+			
+			const cate1 = $('#category1').val();
+			const cate2 = $('#category2').val();
+			
+			$('#registerProduct').attr('action', '${ctxPath}/admin/product/register.do?cate1='+cate1+'&cate2='+cate2).submit();
+			
+		});
+		
 	});// end
 
 </script>
@@ -86,7 +97,7 @@
             </p>
         </nav>
         <article>
-            <form action="${ctxPath}/admin/product/register.do" method="post" enctype="multipart/form-data">
+            <form action="${ctxPath}/admin/product/register.do" method="post" enctype="multipart/form-data" id="registerProduct">
             	<!-- sessUser 설정 후 적용 -->
             	<input type="hidden" name="seller" value="a12345">
                 <section>
@@ -222,7 +233,7 @@
                     </table>
                 </section>
                 
-                <input type="submit" value="등록하기">
+                <input type="submit" value="등록하기" class="btnGO">
             </form>
         </article>
 
