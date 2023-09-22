@@ -4,7 +4,7 @@
 	<div class="notice">
 		<nav>
 			<div>
-				<p>홈<span>></span>공지사항</p>
+				<p>홈<span>></span>공지사항<span>></span>${name_dis.cate_name}</p>
 			</div>
 		</nav>
 		<section class="${board}">

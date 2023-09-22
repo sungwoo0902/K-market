@@ -4,7 +4,7 @@
 	<div class="faq">
 		<nav>
 			<div>
-				<p>홈<span>></span>자주묻는 질문</p>
+				<p>홈<span>></span>자주묻는 질문<span>></span>${faq_name_dis.cate1_name}</p>
 			</div>
 		</nav>
 		<section class="${board}">

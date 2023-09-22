@@ -313,6 +313,7 @@ public class SQL {
 	
 	public static final String SELECT_BOARD_CATE1_NAME_DISCRIPTION = "SELECT * FROM `km_board_cate1` WHERE `group`=? AND `cate1`=?";
 
+	public static final String SELECT_BOARD_CATE21_NAME = "SELECT * FROM `km_board_cate2` WHERE `cate1`=? AND `cate2`=?";
 	
 	public static final String SELECT_BOARDS_MAIN_CATE = "SELECT "
 															+ "a.*, "
