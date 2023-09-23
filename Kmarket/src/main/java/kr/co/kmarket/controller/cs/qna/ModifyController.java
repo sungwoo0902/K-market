@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.dto.CsDTO;
+import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.service.CsService;
 
 @WebServlet("/cs/qna/modify.do")
@@ -30,6 +32,7 @@ public class ModifyController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.debug("doGet()...");
 		
+		// 게시글 내용 가져오기
 		String no = req.getParameter("no");
 		CsDTO qna = service.selectBoard(no);
 		req.setAttribute("qna", qna);
@@ -38,6 +41,11 @@ public class ModifyController extends HttpServlet {
 		req.setAttribute("cate2", qna.getCate2());
 		req.setAttribute("board", "write");
 		
+		// 본인 게시글인지 확인
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
+		
 		// 글 작성시 대분류 리스트 가져오기.
 		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose("3");
 		req.setAttribute("cate1List", cate1List);
@@ -45,9 +53,15 @@ public class ModifyController extends HttpServlet {
 		// 소분류 리스트 가져오기
 		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(qna.getCate1()+"");
 		req.setAttribute("cate2List", cate2List);
-	
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/modify.jsp");
-		dispatcher.forward(req, resp);
+
+		if(!uid.equals(qna.getUid())) {
+			logger.info("sessUser ne uid : " + sessUser.getUid() + "(" + req.getRemoteAddr() + ")");
+			resp.sendRedirect("./list.do?cate1="+qna.getCate1()+"&success=102");
+			
+		}else {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/modify.jsp");
+			dispatcher.forward(req, resp);
+		}
 	}
 	
 	@Override

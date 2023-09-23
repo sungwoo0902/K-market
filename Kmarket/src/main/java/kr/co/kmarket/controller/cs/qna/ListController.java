@@ -33,10 +33,12 @@ public class ListController extends HttpServlet {
 		String group = "3";
 
 		// 데이터 수신
-		String pg    = req.getParameter("pg");
-		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
-		req.setAttribute("cate1", cate1);
+		String pg      = req.getParameter("pg");
+		String cate1   = req.getParameter("cate1");
+		String cate2   = req.getParameter("cate2");
+		String success = req.getParameter("success");
+		req.setAttribute("cate1",   cate1);
+		req.setAttribute("success", success);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);

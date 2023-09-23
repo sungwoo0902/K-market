@@ -44,6 +44,8 @@ public class ViewController extends HttpServlet{
 		String prodNo = req.getParameter("prodNo");
 		String pg     = req.getParameter("pg");
 		
+		
+		// 사이드바 영역 ****************************************************
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cateService.selectCate1s();
 		req.setAttribute("category1", category1);
@@ -77,8 +79,13 @@ public class ViewController extends HttpServlet{
 		
 		
 		// 선택한 상품 불러오기 / 선택한 상품 카테고리 NAV 설정 ****************
-		ProductDTO  prod = prodService.selectProduct(cate1, cate2, prodNo);
-		CategoryDTO cate = cateService.selectCate(cate1, cate2);
+		ProductDTO  prod = prodService.selectProduct(prodNo);
+		CategoryDTO cate = null;
+		if(cate2 == null || cate2.equals("")) {
+			cate = cateService.selectCate1(cate1);
+		}else {
+			cate = cateService.selectCate(cate1, cate2);
+		}
 		logger.debug("prod : " + prod);
 		logger.debug("cate : " + cate);
 		

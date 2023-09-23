@@ -36,6 +36,8 @@ public class ListController extends HttpServlet{
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		
+		
+		// 사이드바 영역 ****************************************************
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cateService.selectCate1s();
 		req.setAttribute("category1", category1);
@@ -47,19 +49,24 @@ public class ListController extends HttpServlet{
 		
 		// 페이징 처리 영역 *************************************************
 		int total = 0;
+		
 		// 현재 페이지 번호
 		int currentPage = prodService.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수
-		total = prodService.selectCountProductsByCate2(cate1, cate2);
-		
-		
-		logger.info("selectCoutProductsByCate1 total : "+ total);
+		if(cate1 == null || cate1.equals("")) {
+			total = prodService.selectCountProductsAll(null, 7, null, null);
+			logger.debug("total : " + total);
+			
+		}else if(cate2 == null || cate2.equals("")) {
+			total = prodService.selectCountProductsByCate1(cate1);
+			
+		}else {
+			total = prodService.selectCountProductsByCate2(cate1, cate2);
+		}
 		
 		// 마지막 페이지 번호
 		int lastPageNum = prodService.getLastPageNum(total);
-		
-		logger.info("selectCoutProductsByCate1 lastPageNum : "+ lastPageNum);
 		
 		// 페이지 그룹 start, end 번호
 		int[] result = prodService.getPageGroupNum(currentPage, lastPageNum);
@@ -70,14 +77,32 @@ public class ListController extends HttpServlet{
 		// 시작 인덱스
 		int start = prodService.getStartNum(currentPage);
 		
-		// 현재 페이지 게시물 조회
+		
+		// 현재 페이지 게시물 조회 ***********************************************
 		List<ProductDTO> products = new ArrayList<>();
-		products = prodService.selectProductsByCate2(cate1, cate2, start, type);
+		if(cate1 == null || cate1.equals("")) {
+			products = prodService.selectProductsAllWithType(type, start);
+			
+		}else if(cate2 == null || cate2.equals("")) {
+			products = prodService.selectProductsByCate1(cate1, start, type);
+			
+		}else {
+			products = prodService.selectProductsByCate2(cate1, cate2, start, type);
+		}
 		
-		// 현재 페이지 카테고리
-		CategoryDTO cate = cateService.selectCate(cate1, cate2);
+		
+		// 현재 페이지 카테고리 **************************************************
+		CategoryDTO cate = null;
+		if(cate2 == null || cate2.equals("")) {
+			cate = cateService.selectCate1(cate1);
+		}else {
+			cate = cateService.selectCate(cate1, cate2);
+		}
 		req.setAttribute("cate", cate);
+		logger.debug("cate : " + cate);
 		
+		
+		// ******************************************************************
 		req.setAttribute("success", success);
 		req.setAttribute("products", products);
 		req.setAttribute("total", total);

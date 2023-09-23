@@ -44,7 +44,9 @@
                     <a href="#" class="unready">마이페이지</a>
                     </c:otherwise>
                     </c:choose>
+                    <!-- 
                     <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">
+                     -->
                     </i>&nbsp;장바구니</a>
                 </div>
             </div>

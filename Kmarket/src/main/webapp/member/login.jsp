@@ -12,6 +12,12 @@
 		}else if(${success eq '102'}) {
 			alert('[경고] 비정상적인 접근을 통한 회원가입')
 			
+		}else if(${success eq '103'}) {
+			alert('로그인 후 이용할 수 있는 서비스입니다.')
+			
+		}else if(${success eq '104'}) {
+			alert('서비스 이용 권한이 없습니다.')
+			
 		}else if(${success eq '200'}) {
 			alert('성공적으로 회원가입 됐습니다.')
 		}

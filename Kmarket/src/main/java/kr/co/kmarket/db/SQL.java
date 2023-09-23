@@ -97,13 +97,17 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	public final static String DELETE_PRODUCT 					= "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
 	
-	public final static String SELECT_PRODUCT 					= "SELECT a.*, b.level, b.company FROM "
-																	+ "`km_product` AS a JOIN `km_member` AS b "
-																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 "
-																	+ "AND `prodCate1`=? "
-																	+ "AND `prodCate2`=? "
-																	+ "AND `prodNo`=?";
+	public final static String SELECT_PRODUCT 					= "SELECT "
+																+ "	a.*, "
+																+ "	b.`level`, "
+																+ "	b.`company`, "
+																+ "	c.c1Name, "
+																+ "	d.c2Name "
+																+ "FROM `km_product` AS a "
+																+ "JOIN `km_member` AS b ON a.`seller` = b.`uid` "
+																+ "JOIN `km_product_cate1` AS c ON a.`prodCate1`=c.`cate1` "
+																+ "JOIN `km_product_cate2` AS d ON a.`prodCate1`=d.`cate1` "
+																+ "WHERE a.`stock` > 0 AND a.`prodCate2`=d.`cate2` AND `prodNo`=?";
 	
 	public final static String SELECT_PRODUCTS_ALL 				= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -117,6 +121,43 @@ public class SQL {
 																	+ "WHERE `stock` > 0 "
 																	+ "LIMIT ?, 10";
 	
+	public final static String SELECT_PRODUCTS_SOLD_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `sold` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_PRICE_ASC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `price`*(100 - `discount`) ASC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_PRICE_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `price`*(100 - `discount`) DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_SCORE_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `score` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_REVIEW_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `review` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_LATELY	    = "SELECT a.*, b.level, b.company FROM "
+																+ "`km_product` AS a JOIN `km_member` AS b "
+																+ "ON a.seller=b.uid "
+																+ "WHERE `stock` > 0 "
+																+ "ORDER BY `rdate` DESC "
+																+ "LIMIT ?, 10";
+	
 	public final static String SELECT_PRODUCTS_ALL_SEARCH 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
@@ -128,6 +169,48 @@ public class SQL {
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 "
 																	+ "AND `prodCate1`=? "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_SOLD_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `sold` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_PRICE_ASC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `price`*(100 - `discount`) ASC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_PRICE_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `price`*(100 - `discount`) DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_SCORE_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `score` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_REVIEW_DESC = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `review` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_BY_CATE1_LATELY = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "AND `prodCate1`=? "
+																	+ "ORDER BY `rdate` DESC "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE2 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -150,7 +233,7 @@ public class SQL {
 																	+ "WHERE `stock` > 0 "
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
-																	+ "ORDER BY `price` ASC "
+																	+ "ORDER BY `price`*(100 - `discount`) ASC "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE2_PRICE_DESC = "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -158,7 +241,7 @@ public class SQL {
 																	+ "WHERE `stock` > 0 "
 																	+ "AND `prodCate1`=? "
 																	+ "AND `prodCate2`=? "
-																	+ "ORDER BY `price` DESC "
+																	+ "ORDER BY `price`*(100 - `discount`) DESC "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_BY_CATE2_SCORE_DESC = "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -176,7 +259,7 @@ public class SQL {
 																	+ "AND `prodCate2`=? "
 																	+ "ORDER BY `review` DESC "
 																	+ "LIMIT ?, 10";
-	public final static String SELECT_PRODUCTS_BY_CATE2_LATELY= "SELECT a.*, b.level, b.company FROM "
+	public final static String SELECT_PRODUCTS_BY_CATE2_LATELY = "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 "
@@ -243,7 +326,7 @@ public class SQL {
 												+ "ON a.`cate1` = b.`cate1` "
 												+ "ORDER BY a.`cate1`, b.`cate2`";
 	
-	public static final String SELECT_CATE = "SELECT a.*, b.cate2, b.c2Name FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b WHERE a.`cate1`=? AND b.`cate2`=?";
+	public static final String SELECT_CATE = "SELECT a.*, b.cate2, b.c2Name FROM `km_product_cate1` AS a JOIN `km_product_cate2` AS b WHERE a.`cate1`=? AND b.`cate1`=? AND b.`cate2`=?";
 	
 	//*********************************************************************************************************//
 	//********************************************* Product_Order *********************************************//

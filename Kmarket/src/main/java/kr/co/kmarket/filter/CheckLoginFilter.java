@@ -24,20 +24,18 @@ public class CheckLoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		logger.debug("doFilter...");
 		
-		// sessUser 불러오기
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpSession session = httpRequest.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
-		/*
+		String contextPath = ((HttpServletRequest) request).getContextPath();
+		
 		if(sessUser != null) {
-			logger.debug("sessUser nn...");
+			logger.debug("sessUser : " + sessUser.getUid());
 			chain.doFilter(request, response);
 			
 		}else {
-			// 다음 필터 호출, 필터 없으면 최종 자원 요청
 			logger.debug("sessUser is NULL");
-			((HttpServletResponse)response).sendRedirect("/Kmarket/member/login.do?success=");
+			((HttpServletResponse)response).sendRedirect(contextPath + "/member/login.do?success=103");
 		}
-		*/
 	}
 }
