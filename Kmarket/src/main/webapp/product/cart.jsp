@@ -121,7 +121,7 @@
 			}
 			// 체크된 prodNo 전체와 uid를 jsonData로 만듬
 			const jsonData ={
-					"uid" : uid,
+					"uid": uid,
 					"selectedCartNos" : selectedCartNos
 			};
 			if(confirm('선택된 상품을 장바구니에서 삭제하시겠습니까?')){
@@ -168,7 +168,8 @@
 	        var ordTotPrice = parseFloat($('#totalOrderAmount').text().replace(/,/g, ''));
 	        var ordCount = parseFloat($('#totalCountAmount').text().replace(/,/g, ''));;
 	        var ordPrice = parseFloat($('#totalOrgPriceAmount').text().replace(/,/g, ''));;
-	        var ordDiscount = parseFloat($('#totalDiscountAmount').text().replace(/,/g, ''));;
+	        var cleanedOrdDiscount = $('#totalDiscountAmount').text().replace(/[-,원]/g, ''); // '-'와 ',' 그리고 '원'을 모두 제거
+	        var ordDiscount = parseFloat(cleanedOrdDiscount);
 	        if($('#totalDeliveryAmount').text() != '무료'){
 	        	var ordDelivery = parseFloat($('#totalDeliveryAmount').text().replace(/,/g, ''));;
 	        }else{
@@ -184,7 +185,6 @@
             console.log('ordTotPrice'+ordTotPrice);
             
 			const jsonData = {"selectedCartNos": selectedCartNos,
-					   		  "uid": uid,
 					   		  "ordTotPrice": ordTotPrice,
 					   		  "ordCount": ordCount,
 					   		  "ordPrice": ordPrice,
@@ -234,7 +234,7 @@
                  <strong>장바구니</strong>
             </p>
         </nav>
-        <form action="${ctxPath}/product/order.do?uid=${sessUser.uid}">
+        <form action="#">
             <!-- 장바구니 목록 -->
             <table>
                 <thead>
@@ -277,13 +277,13 @@
                             </article>
                         </td>
                         <td><fmt:formatNumber value="${cart.count}" pattern="#,###" />개</td>
-                        <c:if test="${item.discount ne 0}">
+                        <c:if test="${cart.discount ne 0}">
                         	<td>
 						        <span class="throughPrice"><fmt:formatNumber value="${cart.orgPrice * cart.count}" pattern="#,###" />원</span>
-						        <fmt:formatNumber value="${cart.total}" pattern="#,###" />원
+						        <fmt:formatNumber value="${cart.total - cart.delivery}" pattern="#,###" />원
 						    </td>
                         </c:if>
-                        <c:if test="${item.discount eq 0}">
+                        <c:if test="${cart.discount eq 0}">
                         	<td><fmt:formatNumber value="${cart.total}" pattern="#,###" />원</td>
                         </c:if>
                         <c:if test="${cart.discount ne 0}">
@@ -304,7 +304,7 @@
                         <c:if test="${cart.delivery eq 0}">
                         	<td class="free-delivery">${cart.delivery}</td>
                         </c:if>
-                        <td><fmt:formatNumber value="${cart.total+cart.delivery}" pattern="#,###" />원</td>
+                        <td><fmt:formatNumber value="${cart.total}" pattern="#,###" />원</td>
                     </tr>
                     </c:forEach>
                 </tbody>

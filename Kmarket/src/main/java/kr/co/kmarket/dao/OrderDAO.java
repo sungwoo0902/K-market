@@ -1,6 +1,5 @@
 package kr.co.kmarket.dao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +16,26 @@ public class OrderDAO extends DBHelper{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void insertOrder(OrderDTO order) {
-		
+	public void insertOrder(OrderDTO order, String uid) {
+		logger.debug("here");
 		try {
 			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER_COUNT);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				logger.debug("here...2");
+				psmt = conn.prepareStatement(SQL.DELETE_BEFORE_ORDER_ITEMS);
+				psmt.setString(1, uid);
+				psmt.executeUpdate();
+				logger.debug("here...3");
+				psmt = conn.prepareStatement(SQL.DELETE_BEFORE_ORDER);
+				psmt.setString(1, uid);
+				psmt.executeUpdate();
+				logger.debug("here...4");
+			}
+			logger.debug("here...5");
 			psmt = conn.prepareStatement(SQL.INSERT_ORDER);
 			
 			System.out.println("1 : "+order.getOrdUid());
@@ -113,13 +128,69 @@ public class OrderDAO extends DBHelper{
 		return ordNo;
 	}
 	public void selectOrders() {}
-	public void updateOrder() {}
+	public void updateOrder(OrderDTO order, int ordNo) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ORDER);
+			psmt.setInt(1, order.getUsedPoint());
+			psmt.setInt(2, order.getOrdTotPrice());
+			psmt.setString(3, order.getRecipName());
+			psmt.setString(4, order.getRecipHp());
+			psmt.setString(5, order.getRecipZip());
+			psmt.setString(6, order.getRecipAddr1());
+			psmt.setString(7, order.getRecipAddr2());
+			psmt.setInt(8, order.getOrdPayment());
+			psmt.setInt(9, order.getOrdComplete());
+			psmt.setInt(10, ordNo);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.debug("updateOrder() error :"+e.getMessage());
+		}
+	}
 	public void deleteOrder() {}
+	public int selectOrderCount(String uid) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ORDER_COUNT);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				result = 1;
+			}
+			
+			logger.debug("result :"+result);
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectOrderCount() error :"+e.getMessage());
+		}
+		return result;
+	}
+	public void deleteBeforeOrder(String uid) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_BEFORE_ORDER);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectOrderCount() error :"+e.getMessage());
+		}
+	}
 	
 	
 	/////////////////////////////////////////////////
 	
-	public void insertOrderItem(CartDTO orderItem, int ordNo) {
+	public void insertOrderItems(CartDTO orderItem, int ordNo) {
 		
 		try {
 			conn = getConnection();
@@ -128,6 +199,27 @@ public class OrderDAO extends DBHelper{
 			psmt.setInt(2, orderItem.getProdNo());
 			psmt.setInt(3, orderItem.getCount());
 			psmt.setInt(4, orderItem.getOrgPrice());
+			psmt.setInt(5, orderItem.getDiscount());
+			psmt.setInt(6, orderItem.getPoint());
+			psmt.setInt(7, orderItem.getDelivery());
+			psmt.setInt(8, orderItem.getTotal());
+			
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("insertOrderItems() error :"+e.getMessage());
+		}
+	}
+	public void insertOrderItem(OrderItemDTO orderItem, int ordNo) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, ordNo);
+			psmt.setInt(2, orderItem.getProdNo());
+			psmt.setInt(3, orderItem.getCount());
+			psmt.setInt(4, orderItem.getPrice());
 			psmt.setInt(5, orderItem.getDiscount());
 			psmt.setInt(6, orderItem.getPoint());
 			psmt.setInt(7, orderItem.getDelivery());
@@ -174,6 +266,20 @@ public class OrderDAO extends DBHelper{
 			logger.error("selectOrderItems() error :"+e.getMessage());
 		}
 		return items;
+	}
+	public void deleteBeforeOrderItems(String uid) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_BEFORE_ORDER_ITEMS);
+			psmt.setString(1, uid);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("deleteBeforeOrderItems() error :"+e.getMessage());
+		}
+		
 	}
 	
 }

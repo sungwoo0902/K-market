@@ -327,7 +327,34 @@ public class MemberDAO extends DBHelper {
 		return result;
 	}
 	
-	
+	// 멤버 포인트 차감
+	public void minusMemberPoint(String usedPoint, String uid) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.MINUS_MEMBER_POINT);
+			psmt.setString(1, usedPoint);
+			psmt.setString(2, uid);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("minusMemberPoint() errror : "+e.getMessage());
+		}
+	}
+	// 멤버 포인트 적립
+	public void plusMemberPoint(int savePoint, String uid) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.PLUS_MEMBER_POINT);
+			psmt.setInt(1, savePoint);
+			psmt.setString(2, uid);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("plusMemberPoint() errror : "+e.getMessage());
+		}
+	}
 
 		
 

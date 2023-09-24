@@ -77,4 +77,15 @@ public enum MemberService {
 	public int selectCheckManagerHp(String managerHp) {
 		return dao.selectCheckManagerHp(managerHp);
 	}
+	
+	
+	
+	// 멤버 포인트 차감
+	public void minusMemberPoint(String usedPoint, String uid) {
+		dao.minusMemberPoint(usedPoint, uid);
+	}
+	// 멤버 포인트 적립
+	public void plusMemberPoint(int usedPoint, String uid) {
+		dao.plusMemberPoint(usedPoint, uid);
+	}
 }

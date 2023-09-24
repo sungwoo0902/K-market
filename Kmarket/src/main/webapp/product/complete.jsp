@@ -34,57 +34,31 @@
                         <th>수량</th>
                         <th>주문금액</th>
                     </tr>
+                    <c:forEach var="orderItem" items="${orderItems}">
                     <tr>
                         <td>
                             <article>
-                                <img src="./images/80x80.png" alt="">
+                                <img src="${ctxPath}/thumb/${orderItem.prodCate1}/${orderItem.prodCate2}/${orderItem.thumb1}" alt="">
                                 <div>
                                     <h2>
-                                        <a href="#">상품명</a>
+                                        <a href="${ctxPath}/product/view.do?cate1=${orderItem.prodCate1}&cate2=${orderItem.prodCate2}&prodNo=${orderItem.prodNo}">${orderItem.prodName}</a>
                                     </h2>
-                                    <p>상품설명</p>
+                                    <p>${orderItem.descript}</p>
                                 </div>
                             </article>
                         </td>
-                        <td>17000원</td>
-                        <td>1000원</td>
-                        <td>1</td>
-                        <td>16000원</td>
+                        <td><fmt:formatNumber value="${orderItem.price}" pattern="#,###" />원</td>
+                        <c:if test="${orderItem.discount ne 0}">
+                        	<td><fmt:formatNumber value="${(orderItem.price * orderItem.count)/100 * orderItem.discount}" pattern="#,###" />원</td>
+                        </c:if>
+                        <c:if test="${orderItem.discount eq 0}">
+                        	<td>-</td>
+                        </c:if>
+                        <td><fmt:formatNumber value="${orderItem.count}" pattern="#,###" /></td>
+                        <td><fmt:formatNumber value="${orderItem.total - orderItem.delivery}" pattern="#,###" />원</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <article>
-                                <img src="./images/80x80.png" alt="">
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>17000원</td>
-                        <td>1000원</td>
-                        <td>1</td>
-                        <td>16000원</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <article>
-                                <img src="./images/80x80.png" alt="">
-                                <div>
-                                    <h2>
-                                        <a href="#">상품명</a>
-                                    </h2>
-                                    <p>상품설명</p>
-                                </div>
-                            </article>
-                        </td>
-                        <td>17000원</td>
-                        <td>1000원</td>
-                        <td>1</td>
-                        <td>16000원</td>
-                    </tr>
+                    </c:forEach>
+                    
                     <tr class="total">
                         <td colspan="4"></td>
                         <td>
@@ -93,28 +67,28 @@
                                     <tr>
                                         <td>총 상품금액</td>
                                         <td>
-                                            <span>34000</span>
+                                            <span><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" /></span>
                                             원
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>총 할인금액</td>
                                         <td>
-                                            <span>-2000</span>
+                                            <span>-<fmt:formatNumber value="${order.ordDiscount + order.usedPoint}" pattern="#,###" /></span>
                                             원
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>배송비</td>
                                         <td>
-                                            <span>3000</span>
+                                            <span><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" /></span>
                                             원
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>총 결제금액</td>
                                         <td>
-                                            <span>35000</span>
+                                            <span><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###" /></span>
                                             원
                                         </td>
                                     </tr>
@@ -132,20 +106,20 @@
                 <tbody>
                     <tr>
                         <td>주문번호</td>
-                        <td>2008101324568</td>
+                        <td>${order.ordNo}</td>
                         <td rowspan="3">총 결제금액</td>
                         <td rowspan="3">
-                            <span>35000</span>
+                            <span><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###" /></span>
                             원
                         </td>
                     </tr>
                     <tr>
                         <td>결제방법</td>
-                        <td>신용카드</td>
+                        <td>${order.ordPaymentName}</td>
                     </tr>
                     <tr>
                         <td>주문자/연락처</td>
-                        <td>홍길동/010-1234-1234</td>
+                        <td>${sessUser.name}/${sessUser.hp}</td>
                     </tr>
                 </tbody>
             </table>
@@ -157,20 +131,20 @@
                 <tbody>
                     <tr>
                         <td>수취인</td>
-                        <td>홍길동</td>
+                        <td>${order.recipName}</td>
                         <td>주문자 정보</td>
                     </tr>
                     <tr>
                         <td>연락처</td>
-                        <td>010-1234-1234</td>
+                        <td>${order.recipHp}</td>
                         <td rowspan="2">
-                             홍길동<br>
-                              010-1234-1234
+                             ${sessUser.name}<br>
+                              ${sessUser.hp}
                         </td>
                     </tr>
                     <tr>
                         <td>배송지 주소</td>
-                        <td>부산광역시 강남구 대연동 123 10층</td>
+                        <td>${order.recipAddr1} ${order.recipAddr2}</td>
                     </tr>
                 </tbody>
             </table>

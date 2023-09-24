@@ -71,20 +71,32 @@ public class OrderController extends HttpServlet{
 		OrderDTO order = new OrderDTO();
 		MemberDTO member = new MemberDTO();
 		
-		
-		String uid = req.getParameter("uid");
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
 		String[] selectedCartNos = req.getParameterValues("selectedCartNos");
 		String ordTotPrice= req.getParameter("ordTotPrice");
 		String ordCount= req.getParameter("ordCount");
 		String ordPrice= req.getParameter("ordPrice");
 		String ordDiscount= req.getParameter("ordDiscount");
+		String discount= req.getParameter("discountPercent");
 		String ordDelivery= req.getParameter("ordDelivery");
 		String savePoint= req.getParameter("savePoint");
+		String prodNo = req.getParameter("prodNo");
 		int ordComplete = 0;
-		int ordPayment = 101;
+		int ordPayment = 11;
 		
 		// 배송지 정보 불러와서 orderDTO에 같이 넣어준다.
 		member = memService.selectMemRecip(uid);
+		
+		logger.debug("ordTotPrice :"+ordTotPrice);
+		logger.debug("ordCount :"+ordCount);
+		logger.debug("ordPrice :"+ordPrice);
+		logger.debug("ordDiscount :"+ordDiscount);
+		logger.debug("discount :"+discount);
+		logger.debug("ordDelivery :"+ordDelivery);
+		logger.debug("savePoint :"+savePoint);
+		logger.debug("prodNo :"+prodNo);
 		
 		order.setOrdUid(uid);
 		order.setOrdTotPrice(ordTotPrice);
@@ -101,27 +113,56 @@ public class OrderController extends HttpServlet{
 		order.setRecipAddr2(member.getAddr2());
 		order.setOrdPayment(ordPayment);
 		
-		// cart창에서 선택한 목록만 불러와서 carts리스트에 담는다.
-		for(int i = 0; i < selectedCartNos.length; i++) {
-			CartDTO dto = cartService.selectedCart(uid, selectedCartNos[i]);
-			carts.add(dto);
+		if(selectedCartNos != null) {
+			logger.debug("here...1");
+			// cart창에서 선택한 목록만 불러와서 carts리스트에 담는다.
+			for(int i = 0; i < selectedCartNos.length; i++) {
+				CartDTO dto = cartService.selectedCart(uid, selectedCartNos[i]);
+				carts.add(dto);
+				logger.debug("here...2");
+			}
+			logger.debug("here...3");
+			// insertOrder로 uid, count, price, discount, delivery, point, total을 입력한다.
+			// order에 입력한다.
+			ordService.insertOrder(order, uid);
+			// 방금 넣은 order의 ordNo를 가져온다.
+			int ordNo = ordService.selectLastOrdNo(uid);
+			// 위의 carts를 orderNo에 매치하여 orderItems에 하나씩 반복하여 넣어준다.
+			ordService.insertOrderItems(carts, ordNo);
+			
+			logger.debug("redirect complete");
+			
+			result = 1;
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("result", result);
+			resp.getWriter().print(jsonObject);
+		}else {
+			logger.debug("here...4");
+			// insertOrder로 uid, count, price, discount, delivery, point, total을 입력한다.
+			// order에 입력한다.
+			ordService.insertOrder(order, uid);
+			// 방금 넣은 order의 ordNo를 가져온다.
+			int ordNo = ordService.selectLastOrdNo(uid);
+			
+			OrderItemDTO orderItem = new OrderItemDTO();
+			
+			orderItem.setOrdNo(ordNo);
+			orderItem.setProdNo(prodNo);
+			orderItem.setCount(ordCount);
+			orderItem.setPrice(ordPrice);
+			orderItem.setDiscount(discount);
+			orderItem.setPoint(savePoint);
+			orderItem.setDelivery(ordDelivery);
+			orderItem.setTotal(ordTotPrice);
+			
+			ordService.insertOrderItem(orderItem, ordNo);
+			
+			result = 1;
+			JsonObject jsonObject = new JsonObject();
+			jsonObject.addProperty("result", result);
+			resp.getWriter().print(jsonObject);
+			logger.debug("here...5");
 		}
-		
-		// insertOrder로 uid, count, price, discount, delivery, point, total을 입력한다.
-		// order에 입력한다.
-		ordService.insertOrder(order);
-		// 방금 넣은 order의 ordNo를 가져온다.
-		int ordNo = ordService.selectLastOrdNo(uid);
-		// 위의 carts를 orderNo에 매치하여 orderItems에 하나씩 반복하여 넣어준다.
-		ordService.insertOrderItems(carts, ordNo);
-		
-		logger.debug("redirect complete");
-		
-		result = 1;
-		JsonObject jsonObject = new JsonObject();
-		jsonObject.addProperty("result", result);
-		jsonObject.addProperty("ordNo", ordNo);
-		resp.getWriter().print(jsonObject);
 		
 	}
 }

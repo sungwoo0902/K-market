@@ -2,58 +2,131 @@
 <%@ include file="./_header.jsp" %>
 <script>
 	$(function(){
-		let prevPoint = 1;
-		$('#discountPoint').focusout(function(){
-			var discountPoint = parseInt($(this).val());
-			var currentPoint = parseFloat($("#currentPoint").text());
+		let prevPoint = 0;
+		$('#usePoint').focusout(function(){
+			var usePoint = parseInt($(this).val());
+			var hasPoint = parseFloat($("#hasPoint").text());
 			// 현재 포인트 초과 입력시 현재 보유 포인트 값을 입력할거임
-			var discountAmount = Math.min(discountPoint, currentPoint);
+			var correctPoint = Math.min(usePoint, hasPoint);
 			
-			if(discountPoint > currentPoint){
-				$('#discountPoint').val(discountAmount);
-			}
-			
-			/*
-			prevPoint = discountAmount;
-			
-			// 숫자인 경우만 prevPoint 업데이트
-	        if (/^\d+$/.test(inputCount.val())) {
-	        	prevPoint = discountPoint;
+			// 입력된 값이 숫자가 아니면 이전 prevPoint 값으로 복원
+	        if (!/^\d+$/.test(usePoint)) {
+	            $(this).val(prevPoint);
 	        }
-			*/
+			
+			// 현재 보유 포인트와 비교하여 입력된 값이 더 크면 현재 보유 포인트 값으로 업데이트
+	        if (usePoint > hasPoint) {
+	            $(this).val(correctPoint);
+	        }
+			
+			console.log('prevPoint : '+prevPoint);
+			// 숫자인 경우만 prevPoint 업데이트
+	        if (/^\d+$/.test(correctPoint)) {
+	        	prevPoint = correctPoint;
+	        }
+		});
+		$('#usePoint').focus(function(){
+			prevCount = $(this).val();
 		});
 		
 		// 포인트 사용 버튼 구현중
+		const ordTotPrice = $('.ordTotPrice').val();
 		$('#applyDiscount').click(function(){
 			
-			if(discountPoint < 1){
+			if(prevPoint < 1){
 				alert('사용할 포인트를 입력해주세요');
+				$('.usePoint').text('0원');
+				$($('#ordTotPrice')).text($.numberWithCommas(ordTotPrice)+'원');
 				return;
 			}
 			
-			if(!isNaN(discountPoint) & discountPoint > 0){
+			var usePoint = $('#usePoint').val(); 
+			if(!isNaN(usePoint) & usePoint > 0){
 				 
-				// 입력 필드에 할인된 포인트 설정
-	            $("#discountPoint").val(discountAmount); 
-
-	            // 전체 주문 금액 업데이트
-	            // 주문 상품 금액
-	            var orderPrice = parseInt("${order.ordPrice}"); 
-	         	// 배송비
-	            var orderDelivery = parseInt("${order.ordDelivery}"); 
-	         	// 총 주문 금액
-	            var totalOrderPrice = orderPrice + orderDelivery; 
-	         	// 할인 후 총 주문 금액
-	            var updatedTotal = totalOrderPrice - discountAmount; 
-
-	            // 할인 금액 및 전체 주문 금액 업데이트
-	            $("#orderDiscount").text(discountAmount + "원");
-	            $("#totalOrderPrice").text(updatedTotal + "원");
+				$('.usePoint').text('-'+$.numberWithCommas(usePoint)+'원');
+				
+				const disOrdTotPrice = ordTotPrice - $('#usePoint').val();
+				
+				console.log('ordTotPrice :'+ordTotPrice);
+				console.log('usePoint :'+$('#usePoint').val());
+				console.log('disOrdTotPrice :'+disOrdTotPrice);
+				
+				$($('#ordTotPrice')).text($.numberWithCommas(disOrdTotPrice)+'원');
 	        } else {
 	            alert("포인트는 5000점 이상이어야 합니다.");
 	        }
 		});// applyDiscount click end
 		
+		//***********************************************//
+	    //*************** 숫자 3자리 콤마 함수 ***************//
+	    //***********************************************//
+	    $.numberWithCommas = function (x) {
+	  	  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	  	}
+		
+		
+	 	// 라디오 버튼이 변경될 때 이벤트 리스너를 추가합니다.
+	 	let ordPayment = 11;
+	    $("input[name='payment']").change(function() {
+	        // 선택된 라디오 버튼의 value 값을 가져온다.
+	        var selectedPayment = $("input[name='payment']:checked").val();
+
+	        ordPayment = selectedPayment;
+	        console.log(selectedPayment);
+	    });
+		
+	  	//***********************************************//
+	    //****************** 결제 하기 클릭 ******************//
+	    //***********************************************//
+	    $('#ordComplete').click(function(e){
+	    	e.preventDefault();
+			
+			const usedPoint = parseFloat($('.usePoint').text().replace(/[^0-9.]+/g, ''));
+			const completeTotPrice =  parseFloat($('#ordTotPrice').text().replace(/[^0-9.]+/g, ''));
+			const recipName = $('#orderer').val();
+			const recipHp = $('#hp').val();
+			const recipZip = $('#zip').val();
+			const recipAddr1 = $('#addr1').val();
+			const recipAddr2 = $('#addr2').val();
+			let ordCompletePayment = ordPayment;
+			console.log('ordCompletePayment : '+ordCompletePayment);
+			let ordComplete = 0;
+			if(ordCompletePayment == 21 || ordCompletePayment == 22){
+				ordComplete = 1;
+			}else{
+				ordComplete = 2;
+			}
+			
+			
+			
+			const jsonData = {
+					"usedPoint": usedPoint,
+					"completeTotPrice": completeTotPrice,
+					"recipName": recipName,
+					"recipHp": recipHp,
+					"recipZip": recipZip,
+					"recipAddr1": recipAddr1,
+					"recipAddr2": recipAddr2,
+					"ordCompletePayment": ordCompletePayment,
+					"ordComplete": ordComplete
+			};
+			
+			$.ajax({
+				url: '${ctxPath}/product/complete.do',
+				type: 'post',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data){
+					if(data.result == 1){
+						alert('주문이 완료되었습니다. 24시간 이내 미입금시 취소됩니다.');
+					}else if(data.result == 2){
+						alert('결제가 완료되었습니다.');
+					}
+					window.location.href = '${ctxPath}/product/complete.do';
+				}
+			});
+			
+	    });
 	}); //end
 
 </script>
@@ -105,11 +178,11 @@
                         <c:if test="${item.discount ne 0}">
                         	<td>
 						        <span class="throughPrice"><fmt:formatNumber value="${item.price * item.count}" pattern="#,###" />원</span>
-						        <fmt:formatNumber value="${item.total}" pattern="#,###" />원
+						        <fmt:formatNumber value="${item.total - item.delivery}" pattern="#,###" />원
 						    </td>
                         </c:if>
                         <c:if test="${item.discount eq 0}">
-                        	<td><fmt:formatNumber value="${item.price * item.count}" pattern="#,###" />원</td>
+                        	<td><fmt:formatNumber value="${item.total - item.delivery}" pattern="#,###" />원</td>
                         </c:if>
                         <c:if test="${item.delivery eq 0}">
                         	<td class="free-delivery">0</td>
@@ -117,7 +190,7 @@
                         <c:if test="${item.delivery ne 0}">
                         	<td class="has-delivery"><fmt:formatNumber value="${item.delivery}" pattern="#,###" />원</td>
                         </c:if>
-                        <td><fmt:formatNumber value="${item.total+item.delivery}" pattern="#,###" />원</td>
+                        <td><fmt:formatNumber value="${item.total}" pattern="#,###" />원</td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -125,6 +198,7 @@
             <!-- 최종 결제 정보 -->
             <div class="final">
                 <h2>최종결제 정보</h2>
+                <input class="ordTotPrice" type="hidden" value="${order.ordTotPrice}">
                 <table border="0">
                     <tbody>
                         <tr>
@@ -133,27 +207,27 @@
                         </tr>
                         <tr>
                             <td>상품금액</td>
-                            <td><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" />원</td>
+                            <td class="ordPrice"><fmt:formatNumber value="${order.ordPrice}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>할인금액</td>
-                            <td><fmt:formatNumber value="${order.ordDiscount}" pattern="#,###" />원</td>
+                            <td class="ordDiscount"><fmt:formatNumber value="-${order.ordDiscount}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>배송비</td>
-                            <td><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" />원</td>
+                            <td class="ordDelivery"><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
                             <td>포인트 할인</td>
-                            <td>0</td>
+                            <td class="usePoint">0원</td>
                         </tr>
                         <tr>
                             <td>전체주문금액</td>
-                            <td><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###" />원</td>
+                            <td id="ordTotPrice"><fmt:formatNumber value="${order.ordTotPrice}" pattern="#,###" />원</td>
                         </tr>
                     </tbody>
                 </table>
-                <input type="button" name value="결제하기">
+                <input type="button" id="ordComplete" value="결제하기">
             </div>
             <!-- 배송정보 -->
             <article class="delivery">
@@ -163,33 +237,33 @@
                         <tr>
                             <td>주문자</td>
                             <td>
-                                <input type="text" name="orderer" value="${member.name}">
+                                <input type="text" id="orderer" name="orderer" value="${member.name}">
                             </td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
                             <td>
-                                <input type="text" name="hp" value="${member.hp}">
+                                <input type="text" id="hp" name="hp" value="${member.hp}">
                                 <span>- 포함 입력</span>
                             </td>
                         </tr>
                         <tr>
                             <td>우편번호</td>
                             <td>
-                                <input type="text" name="zip" value="${member.zip}" readonly>
+                                <input type="text" id="zip" name="zip" value="${member.zip}" readonly>
                                 <input type="button" value="검색">
                             </td>
                         </tr>
                         <tr>
                             <td>기본주소</td>
                             <td>
-                                <input type="text" name="addr1" value="${member.addr1}">
+                                <input type="text"id="addr1"  name="addr1" value="${member.addr1}">
                             </td>
                         </tr>
                         <tr>
                             <td>상세주소</td>
                             <td>
-                                <input type="text" name="addr2" value="${member.addr2}">
+                                <input type="text" id="addr2" name="addr2" value="${member.addr2}">
                             </td>
                         </tr>
                     </tbody>
@@ -201,15 +275,15 @@
                 <div>
                     <p>
                         현재 포인트 : 
-                        <span id="currentPoint">${member.point}</span>
+                        <span id="hasPoint">${member.point}</span>
                         점
                     </p>
                     <label>
                     	<c:if test="${member.point < 5000}">
-                        	<input type="text" id="discountPoint" name="point" readonly>
+                        	<input type="text" id="usePoint" name="point" readonly>
                         </c:if>
                     	<c:if test="${member.point >= 5000}">
-                        	<input type="text" id="discountPoint" name="point">
+                        	<input type="text" id="usePoint" name="point">
                         </c:if>
                         점
                         <input type="button" id="applyDiscount" value="적용">
@@ -224,16 +298,16 @@
                     <span>신용카드</span>
                     <p>
                         <label>
-                        	<c:if test="${order.ordPayment eq 101}">
-                            <input type="radio" name="payment" value="type1" checked>
+                        	<c:if test="${order.ordPayment eq 11}">
+                            <input type="radio" name="payment" value="11" checked>
                             </c:if>
-                        	<c:if test="${order.ordPayment ne 101}">
-                            <input type="radio" name="payment" value="type1">
+                        	<c:if test="${order.ordPayment ne 11}">
+                            <input type="radio" name="payment" value="11">
                             </c:if>
                             신용카드 결제
                         </label>
                         <label>
-                            <input type="radio" name="payment" value="type2">
+                            <input type="radio" name="payment" value="12">
                             체크카드 결제
                         </label>
                     </p>
@@ -242,11 +316,11 @@
                     <span>계좌이체</span>
                     <p>
                         <label>
-                            <input type="radio" name="payment" value="type3">
+                            <input type="radio" name="payment" value="21">
                             실시간 계좌이체
                         </label>
                         <label>
-                            <input type="radio" name="payment" value="type4">
+                            <input type="radio" name="payment" value="22">
                             무통장 입금
                         </label>
                     </p>
@@ -255,11 +329,11 @@
                     <span>기타</span>
                     <p>
                         <label>
-                            <input type="radio" name="payment" value="type3">
+                            <input type="radio" name="payment" value="31">
                             휴대폰 결제
                         </label>
                         <label>
-                            <input type="radio" name="payment" value="type4">
+                            <input type="radio" name="payment" value="32">
                             카카오페이
                             <img src="./images/ico_kakaopay.gif" alt="카카오페이">
                         </label>

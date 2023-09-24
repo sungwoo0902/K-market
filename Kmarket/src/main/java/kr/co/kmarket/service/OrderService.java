@@ -13,8 +13,8 @@ public enum OrderService {
 	INSTANCE;
 	private OrderDAO dao = new OrderDAO();
 	
-	public void insertOrder(OrderDTO order) {
-		dao.insertOrder(order);
+	public void insertOrder(OrderDTO order, String uid) {
+		dao.insertOrder(order, uid);
 	}
 	public OrderDTO selectOrder(int ordNo, String uid) {
 		return dao.selectOrder(ordNo, uid);
@@ -23,16 +23,30 @@ public enum OrderService {
 		return dao.selectLastOrdNo(uid);
 	}
 	public void selectOrders() {}
-	public void updateOrder() {}
+	public void updateOrder(OrderDTO order, int ordNo) {
+		dao.updateOrder(order, ordNo);
+	}
 	public void deleteOrder() {}
+	public int selectOrderCount(String uid) {
+		return dao.selectOrderCount(uid);
+	}
+	public void deleteBeforeOrder(String uid) {
+		dao.deleteBeforeOrder(uid);
+	}
 	
 	
 	public void insertOrderItems(List<CartDTO> carts, int ordNo) {
 		for(CartDTO orderItem : carts) {
-			dao.insertOrderItem(orderItem, ordNo);
+			dao.insertOrderItems(orderItem, ordNo);
 		}
+	}
+	public void insertOrderItem(OrderItemDTO orderItem, int ordNo) {
+		dao.insertOrderItem(orderItem, ordNo);
 	}
 	public List<OrderItemDTO> selectOrderItems(String uid, int ordNo) {
 		return dao.selectOrderItems(uid, ordNo);
+	}
+	public void deleteBeforeOrderItems(String uid) {
+		dao.deleteBeforeOrder(uid);
 	}
 }
