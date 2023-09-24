@@ -20,6 +20,18 @@ import kr.co.kmarket.dto.ProductDTO;
 import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.ProductService;
 
+/**
+ *	작업시작일 : 2023/09/19
+ *	작업종료일 : 2023/09/24
+ *	작업자 : 한상민
+ *  내용 : 인덱스 페이지 구현
+ *   - 전체, cate1구분, cate2구분으로 하여 상품보기 구현
+ *   - 위 상품을 기준에 따라 8가지 방법으로 정렬하기 구현
+ *   - 별점 및 리뷰가 작성된 상품에 별점 구현
+ *   - 슬라이드 배너 설정(bxSilder) 및 일정 시간마다 자동 슬라이드
+ *   - 카테고리(view aside 및 list aside 포함) 영역 db를 기준으로 출력(아이콘 포함)
+ */
+
 @WebServlet(value= {"", "/index.do"})
 public class IndexController extends HttpServlet{
 
@@ -37,7 +49,6 @@ public class IndexController extends HttpServlet{
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 		req.setAttribute("sessUser", sessUser);
-		logger.debug("sessUser : " + sessUser);
 		
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cService.selectCate1s();
@@ -58,8 +69,6 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("rcmdItems",    rcmdItems);
 		req.setAttribute("currentItems", currentItems);
 		req.setAttribute("discntItems",  discntItems);
-		
-		logger.debug("bestItems : " + bestItems);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);

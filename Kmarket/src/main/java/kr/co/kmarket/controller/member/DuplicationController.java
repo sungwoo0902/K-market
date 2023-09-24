@@ -16,6 +16,13 @@ import com.google.gson.JsonObject;
 
 import kr.co.kmarket.service.MemberService;
 
+/**
+  *	작업시작일 : 2023/09/13
+  *	작업종료일 : 2023/09/15
+  *	작업자 : 한상민
+  * 내용 : register.do 및 registerSeller.do 페이지에서 데이터 입력시 중복체크
+  */
+
 @WebServlet("/member/duplication.do")
 public class DuplicationController extends HttpServlet {
 

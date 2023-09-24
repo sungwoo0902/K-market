@@ -56,12 +56,12 @@ public class ListController extends HttpServlet {
 		List<CsDTO> notice_list = service.selectBoards(group, cate1.equals("1")?null:cate1, cate2, start);
 		
 		// cate1 이름, 설명 조회
-		CsDTO name_dis = service.selectBoard_list(group, cate1);
+		CsDTO cate = service.selectBoard_list(group, cate1);
 		
 		String success = req.getParameter("success");
 		req.setAttribute("success", success);
 		req.setAttribute("notice_lists", notice_list);
-		req.setAttribute("name_dis", name_dis);
+		req.setAttribute("cate", cate);
 		
 		
 		req.setAttribute("currentPage", currentPage);

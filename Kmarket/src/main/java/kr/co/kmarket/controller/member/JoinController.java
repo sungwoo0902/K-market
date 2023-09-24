@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *	작업시작일 : 2023/09/13
+ *	작업종료일 : 2023/09/13
+ *	작업자 : 한상민
+ *  내용 : 회원가입시, 일반회원/판매자회원 구분 페이지
+ */
+
 @WebServlet("/member/join.do")
 public class JoinController extends HttpServlet {
 

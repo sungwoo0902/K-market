@@ -4,7 +4,13 @@
 	<div class="qna">
 		<nav>
 			<div>
-				<p>홈<span>></span>문의하기<span>></span>${qna_name_dis.cate1_name}</p>
+				<p>
+					홈
+					<span>></span>
+					문의하기
+					<span>></span>
+					<strong>${cate.cate1_name}</strong>
+				</p>
 			</div>
 		</nav>
 		<section class="${board}">

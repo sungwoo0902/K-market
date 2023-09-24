@@ -44,8 +44,8 @@ public enum CsService {
 		return dao.selectBoardsAll(group, cate1);
 	}
 	
-	public void updateBoard(CsDTO dto) {
-		dao.updateBoard(dto);
+	public int updateBoard(CsDTO dto) {
+		return dao.updateBoard(dto);
 	}
 	
 	public void deleteBoard(String no) {

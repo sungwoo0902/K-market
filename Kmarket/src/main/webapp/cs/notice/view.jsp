@@ -9,6 +9,7 @@
 							
 							<div class="content">
 								<p>
+									<c:if test="${cate1 eq 1}">[${cate.cate1_name}]</c:if>
 									${notice.content}<br/><br/>
 								</p>
 								<p>
@@ -20,7 +21,9 @@
 									감사합니다.<br/>
 								</p>
 							</div>
-							<a href="${ctxPath}/cs/notice/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+							<div>
+								<a href="${ctxPath}/cs/notice/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+							</div>
 						</article>
 					</section>
 				</div>

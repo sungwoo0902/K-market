@@ -16,6 +16,13 @@ import kr.co.kmarket.dao.TermsDAO;
 import kr.co.kmarket.dto.TermsDTO;
 import kr.co.kmarket.service.TermsService;
 
+/**
+ *	작업시작일 : 2023/09/13
+ *	작업종료일 : 2023/09/15
+ *	작업자 : 한상민
+ *  내용 : type(normal, seller)에 따라 다른 약관이 출력되도록 설계.
+ */
+
 @WebServlet("/member/signup.do")
 public class SignupController extends HttpServlet {
 

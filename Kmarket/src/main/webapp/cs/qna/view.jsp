@@ -14,14 +14,6 @@
 								<p>
 									${qna.content}
 								</p>
-								<p>
-									※ 피싱 관련 피해신고<br/><br/>
-									▶ 경찰청 사이버수사국 (국번없이)182 :
-									http://cyberbureau.police.go.kr<br/>
-									▶ KISA 인터넷침해대응센터 (국번없이)118 :
-									http://www.krcert.or.kr<br/>
-									감사합니다.<br/>
-								</p>
 							</div>
 							<c:if test="${ans ne null}">
 							<div class="answer">
@@ -31,7 +23,12 @@
 								</p>
 							</div>
 							</c:if>
-							<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+							<div>
+								<a href="${ctxPath}/cs/qna/list.do?cate1=${cate1}" class="btnList">목록보기</a>
+								<c:if test="${qna.uid eq sessUser.uid}">
+								<a href="${ctxPath}/cs/qna/modify.do?cate1=${cate1}&no=${qna.no}" class="btnModi">수정하기</a>
+								</c:if>
+							</div>
 						</article>
 					</section>
 				</div>
