@@ -19,6 +19,21 @@ import com.google.gson.JsonObject;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
 
+/**
+ *	작업시작일 : 2023/09/18
+ *	작업종료일 : 2023/09/18
+ *	작업자 : 한상민
+ *  내용 : cs 페이지 모듈화 및 view페이지 구현, write페이지 구현
+ *   - 문의하기 글 작성 insert 구현
+ *   - 카테고리 선택시 새로고침 없이, 카테고리 목록 불러오기.
+ *   - 현재 들어와 있는 cate에 맞게 자동으로 카테고리 선택된 상태로 게시글 작성 시작.
+ *   - 비회원일시 list 페이지에서 '문의하기' 버튼 출력x
+ *   
+ *   
+ *   
+ *   http://kor.pe.kr/util/4/charmap2.htm 참고하여 html 탈출문자 적용해보기.
+ */
+
 @WebServlet("/cs/qna/write.do")
 public class WriteController extends HttpServlet {
 	

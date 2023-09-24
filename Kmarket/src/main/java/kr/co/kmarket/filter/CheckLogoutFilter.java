@@ -16,6 +16,14 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dto.MemberDTO;
 
+/**
+ *	작업시작일 : 2023/09/23
+ *	작업종료일 : 2023/09/24
+ *	작업자 : 한상민
+ *  내용 : 로그아웃 상태인 이용자만 사용가능하게 함. 
+ *   (/member 페이지의 경우 로그인 후 이용못하게 하기 위함.)
+ */
+
 public class CheckLogoutFilter implements Filter {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

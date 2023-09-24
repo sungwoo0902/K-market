@@ -15,6 +15,17 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.service.MemberService;
 
+/**
+ *	작업시작일 : 2023/09/13
+ *	작업종료일 : 2023/09/15
+ *	작업자 : 한상민
+ *  내용 : 유효성 검사 및 중복체크 기능 구현 및 우편번호API 적용.
+ *   하이픈 자동 입력 js 기능 추가.
+ *   이전 signup.do 페이지에서 위치정보 이용약관을 동의하지 않았을 시, 
+ *   DB `km_member`의 `location` 컬럼에 0으로 저장
+ *   (동의한 경우엔 1로 저장 됨.)
+ */
+
 @WebServlet("/member/register.do")
 public class RegisterController extends HttpServlet {
 

@@ -27,6 +27,23 @@ import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.ProductService;
 import kr.co.kmarket.service.ReviewService;
 
+/**
+ *	작업시작일 : 2023/09/19
+ *	작업종료일 : 2023/09/24
+ *  작업자 : 강윤수
+ *  내용 : 
+ *   - view 페이지 출력 및 내용 출력 구현
+ *   - (+), (-) 클릭시 새로고침 없이 count 및 가격 변동 구현
+ *   - 장바구니, 구매하기 버튼으로 submit 기능 구현
+ *   
+ *	작업자 : 한상민
+ *  내용 : 
+ *   - 상품평 보기 클릭시 상품평이 있을 경우 상품평으로 자동 스크롤
+ *   - 현재 날짜를 기준으로 2일 후 배송 예정 안내메시지 출력(배송일이 '금','토', 도착일이 '일'인 경우 3일 후로 출력)
+ *   - 리뷰 있을 경우 리뷰 5개씩 10페이지 기준 출력
+ *   - 상품 view.do를 doGet시, 조회수(hit) ++; 
+ */
+
 @WebServlet("/product/view.do")
 public class ViewController extends HttpServlet{
 
@@ -120,6 +137,12 @@ public class ViewController extends HttpServlet{
 	        
 	        // 도착일이 일요일이면 하루 지연
 	        if(twoDaysLaterDayOfWeek.equals("일")) {
+	        	time++;
+	        	
+	        }else if(twoDaysLaterDayOfWeek.equals("월")) {
+	        	time++;
+	        	
+	        }else if(twoDaysLaterDayOfWeek.equals("화")) {
 	        	time++;
 	        }else {
 	        	rolex = false;

@@ -17,6 +17,15 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.service.MemberService;
 
+/**
+ *	작업시작일 : 2023/09/12
+ *	작업종료일 : 2023/09/13
+ *	작업자 : 한상민
+ *  내용 : 로그인시 uid, pass 데이터베이스와 비교하여 확인
+ *   자동로그인 체크했을 시, uid 쿠키 생성하여 2주간 보관.
+ *   쿠키를 삭제(강제 로그아웃)하지 않은 채 로그아웃 됐을 때, 로그인 클릭하면 즉시 로그인.
+ */
+
 @WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
 

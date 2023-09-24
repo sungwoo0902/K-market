@@ -40,7 +40,6 @@
                     <!-- 
                     <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true">
                      -->
-                    </i>&nbsp;장바구니</a>
                 </div>
             </div>
             <div class="logo">

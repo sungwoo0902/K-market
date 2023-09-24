@@ -9,6 +9,7 @@
 							
 							<div class="content">
 								<p>
+									<c:if test="${cate1 eq 1}">[${cate.cate1_name}]</c:if>
 									${notice.content}<br/><br/>
 								</p>
 								<p>

@@ -16,6 +16,13 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dto.MemberDTO;
 
+/**
+ *	작업시작일 : 2023/09/13
+ *	작업종료일 : 2023/09/15
+ *	작업자 : 한상민
+ *  내용 : 로그아웃 클릭시, 쿠키 및 세션을 제거하여 로그아웃 함. 
+ */
+
 @WebServlet("/member/logout.do")
 public class LogoutController extends HttpServlet {
 

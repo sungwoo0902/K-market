@@ -62,7 +62,7 @@
                         <a href="#" class="unready">비밀번호찾기</a>
                         <a href="${ctxPath}/member/join.do">회원가입</a>
                     </span>
-                    <a href="#" class="banner">
+                    <a href="https://safelogin.kr/sauth/regist?site_code=NA&sub_code=0" target="_blank" rel="noopener noreferrer" class="banner">
                         <img src="./images/member_login_banner.jpg" alt="1만원 할인 쿠폰 받기">
                     </a>
                 </form>
