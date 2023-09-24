@@ -2,6 +2,16 @@
 <%@ include file="./_header.jsp" %>
 <script>
 	$(function() {
+		
+		$('.loginBtn').click(function(e) {
+			e.preventDefault();
+			if($('input[name=uid]').val()=='' || $('input[name=pass]').val()=='') {
+				alert('아이디, 비밀번호를 모두 입력해주세요.');
+				
+			} else {
+				$(this).parent().submit();
+			}
+		});
 
 		if(${success eq '100'}) {
 			alert('회원가입에 실패하였습니다.\n다시 시도하거나 고객센터로 문의해주세요.')
@@ -43,7 +53,7 @@
                             </td>
                         </tr>
                     </table>
-                    <input type="submit" value="로그인">
+                    <input class="loginBtn" type="submit" value="로그인">
                     <span>
                         <label>
                             <input type="checkbox" name="auto">자동로그인

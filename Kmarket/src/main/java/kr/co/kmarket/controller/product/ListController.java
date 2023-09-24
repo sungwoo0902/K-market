@@ -56,7 +56,6 @@ public class ListController extends HttpServlet{
 		// 전체 게시물 갯수
 		if(cate1 == null || cate1.equals("")) {
 			total = prodService.selectCountProductsAll(null, 7, null, null);
-			logger.debug("total : " + total);
 			
 		}else if(cate2 == null || cate2.equals("")) {
 			total = prodService.selectCountProductsByCate1(cate1);
@@ -64,6 +63,7 @@ public class ListController extends HttpServlet{
 		}else {
 			total = prodService.selectCountProductsByCate2(cate1, cate2);
 		}
+		logger.debug("total : " + total);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = prodService.getLastPageNum(total);

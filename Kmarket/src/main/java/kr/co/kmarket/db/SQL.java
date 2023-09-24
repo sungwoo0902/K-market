@@ -44,6 +44,7 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public static final String SELECT_MEMBER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+	public static final String SELECT_MEMBER_AUTO_LOGIN = "SELECT * FROM `km_member` WHERE `uid`=?";
 	public static final String SELECT_MEMBER_RECEIPT = "SELECT `name`,`hp`,`zip`,`addr1`,`addr2`,`point` FROM `km_member` "
 														+ "WHERE `uid`=?";
 	// 사용자 중복체크
@@ -152,11 +153,23 @@ public class SQL {
 																	+ "ORDER BY `review` DESC "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_LATELY	    = "SELECT a.*, b.level, b.company FROM "
-																+ "`km_product` AS a JOIN `km_member` AS b "
-																+ "ON a.seller=b.uid "
-																+ "WHERE `stock` > 0 "
-																+ "ORDER BY `rdate` DESC "
-																+ "LIMIT ?, 10";
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `rdate` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_HIT_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 "
+																	+ "ORDER BY `hit` DESC "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_DISCOUNT_DESC	    = "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `discount` > 0 "
+																	+ "ORDER BY `rdate` DESC "
+																	+ "LIMIT ?, 10";
 	
 	public final static String SELECT_PRODUCTS_ALL_SEARCH 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -270,6 +283,7 @@ public class SQL {
 	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
 	public static final String SELECT_COUNT_PRODUCTS_SELLER 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
 	public static final String SELECT_COUNT_PRODUCTS_SEARCH	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_BY_ALL 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	

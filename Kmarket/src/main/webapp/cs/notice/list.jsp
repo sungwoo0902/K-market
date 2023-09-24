@@ -9,7 +9,11 @@
 		<table>
 			<c:forEach var="notice_list" items="${notice_lists}">
 				<tr>
-					<td><a href="./view.do?cate1=${notice_list.cate1}&no=${notice_list.no}">${notice_list.title}</a></td>
+					<td>
+						<a href="./view.do?cate1=${notice_list.cate1}&no=${notice_list.no}">
+							<c:if test="${cate.cate1 eq 1}">[${notice_list.cate1_name}]</c:if> ${notice_list.title}
+						</a>
+					</td>
 					<td>${notice_list.rdate}</td>
 				</tr>
 			</c:forEach>

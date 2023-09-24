@@ -281,6 +281,13 @@ public class ProductDAO extends DBHelper{
 				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_LATELY);
 				logger.debug("SELECT_PRODUCTS_BY_CATE1_LATELY");
 				
+			}else if(type.equals("7")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_HIT_DESC);
+				logger.debug("SELECT_PRODUCTS_HIT_DESC");
+				
+			}else if(type.equals("8")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_DISCOUNT_DESC);
+				logger.debug("SELECT_PRODUCTS_DISCOUNT_DESC");
 			}
 			psmt.setInt(1, start);
 			rs = psmt.executeQuery();
@@ -539,6 +546,24 @@ public class ProductDAO extends DBHelper{
 			close();
 		} catch (Exception e) {
 			logger.error("selectCountProductsAll() error : "+e.getMessage());
+		}
+		return total;
+	}
+	public int selectCountProductsByAll() {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_BY_ALL);
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectCountProductsByCate1() error : "+e.getMessage());
 		}
 		return total;
 	}

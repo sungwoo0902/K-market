@@ -37,7 +37,7 @@ public class IndexController extends HttpServlet{
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 		req.setAttribute("sessUser", sessUser);
-		logger.debug("sessUser : " + sessUser);
+		//logger.debug("sessUser : " + sessUser);
 		
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cService.selectCate1s();
@@ -58,8 +58,6 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("rcmdItems",    rcmdItems);
 		req.setAttribute("currentItems", currentItems);
 		req.setAttribute("discntItems",  discntItems);
-		
-		logger.debug("bestItems : " + bestItems);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);

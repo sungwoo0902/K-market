@@ -51,6 +51,9 @@ public enum ProductService {
 	public int selectCountProductsAll(String seller, int level, String search, String cate1) {
 		return dao.selectCountProductsAll(seller, level , search, cate1);
 	}
+	public int selectCountProductsByAll() {
+		return dao.selectCountProductsByAll();
+	}
 	public int selectCountProductsByCate1(String cate1) {
 		return dao.selectCountProductsByCate1(cate1);
 	}
