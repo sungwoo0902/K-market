@@ -8,9 +8,9 @@
     <%@ include file="../_aside.jsp" %>
     <section id="admin-cs-view">
 	     <nav>
-	            <h3>문의사항</h3>
+	            <h3>자주묻는질문</h3>
 	            <p>
-	                HOME > 고객센터 > <strong>문의사항</strong>
+	                HOME > 고객센터 > <strong>자주묻는질문</strong>
 	            </p>
 	        </nav>
 	    <article>
@@ -34,9 +34,9 @@
 					감사합니다.<br/></td>
 				</tr>
 			</table>
-				<input type="button" value="삭제" class="btnViewDelete"/>
-	            <input type="button" value="답변작성" class="btnViewModify"/>
-	            <input type="button" value="목록" class="btnList"/>
+            <a href="${ctxPath}/admin/faq/delete.do?no=${faq.no}" class="btnViewDelete">삭제</a>
+            <a href="${ctxPath}/admin/faq/modify.do?no=${faq.no}" class="btnViewModify">질문수정</a>
+            <a href="${ctxPath}/admin/faq/list.do?group=2&pg=1" class="btnList">목록</a>
 		</article>
 	</section>
 </main>	

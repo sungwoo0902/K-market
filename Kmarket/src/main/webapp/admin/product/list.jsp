@@ -51,12 +51,17 @@ $(function(){
 	});
 	
 	$('.btnSearch').click(function() {
-		
 		var seller = $('td:eq(8)').text();
-		var search= $('input[name=search]').val();
-		
-		window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller;
+	    
+	    var search = $('input[name=search]').val();
+	    // 선택한 검색 카테고리 값을 가져옴
+	    var searchCategory = $('#searchCategory').val();
+	    
+	    // 서버로 전송
+	    window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller + "&searchCategory=" + searchCategory;
+	    	
 	});
+
 });
 
 </script>
@@ -72,12 +77,12 @@ $(function(){
         </nav>
         <section>
             <div>
-                <select name="search">
-                    <option value="search1">상품명</option>
-                    <option value="search1">상품코드</option>
-                    <option value="search1">제조사</option>
-                    <option value="search1">판매자</option>
-                </select>
+                <select name="searchCategory" id="searchCategory">
+				    <option value="search1">상품명</option>
+				    <option value="search2">상품코드</option>
+				    <option value="search3">제조사</option>
+				    <option value="search4">판매자</option>
+				</select>
                 <input type="text" name="search">
                 <input type="button" value="검색" class="btnSearch">
             </div>

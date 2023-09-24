@@ -35,6 +35,28 @@ public class CsDAO extends DBHelper {
 		return result;
 	}
 	
+	public void insertComment(CsDTO dto) {
+		
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
+			psmt.setInt(1, dto.getGroup());
+			psmt.setInt(2, dto.getParent());
+			psmt.setInt(3, dto.getCate1());
+			psmt.setInt(4, dto.getCate2());
+			psmt.setString(5, dto.getUid());
+			psmt.setString(6, dto.getTitle());
+			psmt.setString(7, dto.getContent());
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public CsDTO selectBoard(String no) {
 		CsDTO dto = null;
 
@@ -254,7 +276,35 @@ public class CsDAO extends DBHelper {
 		
 	}
 	
-	public void updateBoard(CsDTO dto) {
+	public void updateNotice(CsDTO dto) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_BOARD_NOTICE);
+			psmt.setInt(1, dto.getCate1());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setInt(4, dto.getNo());
+			
+		} catch (Exception e) {
+			logger.error("deleteBoard() ERROR : " + e.getMessage());
+		}
+	}
+	
+	public void updateFaq(CsDTO dto) {
+		
+		 try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.UPDATE_BOARD);
+				psmt.setInt(1, dto.getCate1());
+				psmt.setInt(2, dto.getCate2());
+				psmt.setString(3, dto.getTitle());
+				psmt.setString(4, dto.getContent());
+				psmt.setInt(5, dto.getNo());
+		 
+		} catch (Exception e) {
+			logger.error("deleteBoard() ERROR : " + e.getMessage());
+		}
 	}
 	
 	public void deleteBoard(String no) {

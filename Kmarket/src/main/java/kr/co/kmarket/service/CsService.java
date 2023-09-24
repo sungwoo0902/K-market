@@ -20,6 +20,14 @@ public enum CsService {
 		return dao.insertBoard(dto);
 	}
 	
+	public void insertComment(CsDTO dto) {
+			dao.insertComment(dto);
+	}
+	
+	public int uBoard(CsDTO dto) {
+		return dao.insertBoard(dto);
+	}
+	
 	public CsDTO selectBoard(String no) {
 		return dao.selectBoard(no);
 	}
@@ -44,8 +52,11 @@ public enum CsService {
 		return dao.selectBoardsAll(group, cate1);
 	}
 	
-	public void updateBoard(CsDTO dto) {
-		dao.updateBoard(dto);
+	public void updateNotice(CsDTO dto) {
+		dao.updateNotice(dto);
+	}
+	public void updateFaq(CsDTO dto) {
+		dao.updateFaq(dto);
 	}
 	
 	public void deleteBoard(String no) {

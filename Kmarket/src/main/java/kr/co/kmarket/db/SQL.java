@@ -117,10 +117,45 @@ public class SQL {
 																	+ "WHERE `stock` > 0 "
 																	+ "LIMIT ?, 10";
 	
-	public final static String SELECT_PRODUCTS_ALL_SEARCH 		= "SELECT a.*, b.level, b.company FROM "
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH1		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%') "
+																	+ "WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH2 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH3 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `prodCompany` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH4 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ALL_SEARCH1		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `prodName` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ALL_SEARCH2 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `prodNo` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ALL_SEARCH3 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `prodCompany` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ALL_SEARCH4 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `seller`=? AND `seller` LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
 	
 	public final static String SELECT_PRODUCTS_BY_CATE1 		= "SELECT a.*, b.level, b.company FROM "
@@ -186,7 +221,14 @@ public class SQL {
 																	+ "LIMIT ?, 10";
 	public static final String SELECT_COUNT_PRODUCTS_ALL 		= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0";
 	public static final String SELECT_COUNT_PRODUCTS_SELLER 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=?";
-	public static final String SELECT_COUNT_PRODUCTS_SEARCH	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_SEARCH1	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `prodNo` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_SEARCH2	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `prodName` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_SEARCH3	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `prodCompany` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_SEARCH4	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `seller` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH2	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH3	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCompany` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH4	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE1 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=?";
 	public static final String SELECT_COUNT_PRODUCTS_BY_CATE2 	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCate1`=? AND `prodCate2`=?";
 	
@@ -308,6 +350,29 @@ public class SQL {
 												+ "`title`=?, "
 												+ "`content`=?, "
 												+ "`rdate`=NOW()";
+	
+	public final static String INSERT_COMMENT = "INSERT INTO `km_board` SET "
+												+ "`group`=?, "
+												+ "`parent`=?, "
+												+ "`cate1`=?, "
+												+ "`cate2`=?, "
+												+ "`uid`=?, "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "`rdate`=NOW()";
+	
+	public static final String UPDATE_BOARD = "UPDATE `km_board` SET "
+												+ "`cate1_name`=?, "
+												+ "`cate2_name`=?, "
+												+ "`title`=?, "
+												+ "`content`=? "
+												+ "WHERE `no`=?";
+	
+	public static final String UPDATE_BOARD_NOTICE = "UPDATE `km_board` SET "
+													+ "`cate1_name`=?, "
+													+ "`title`=?, "
+													+ "`content`=? "
+													+ "WHERE `no`=?";
 	
 	public static final String SELECT_BOARD = "SELECT "
 												+ "a.*, "

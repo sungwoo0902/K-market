@@ -33,7 +33,7 @@ public class Admin_NoticeListController extends HttpServlet {
 		
 		String pg = req.getParameter("pg");
 		String group = req.getParameter("group");
-		String cate1 = req.getParameter("cate1");
+		String cate1 = req.getParameter("boardCate2");
 		String cate2 = req.getParameter("cate2");
 
 		// 현재 페이지 번호
@@ -75,7 +75,7 @@ public class Admin_NoticeListController extends HttpServlet {
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group" + group + "&pg" + pg);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group=" + group + "&pg=" + pg + "&cate1=" + cate1);
 		dispatcher.forward(req, resp);
 	}
 	

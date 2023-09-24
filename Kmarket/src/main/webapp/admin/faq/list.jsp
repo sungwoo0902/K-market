@@ -39,7 +39,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "${ctxPath}/admin/faq/delete.do",
+	        url: "${ctxPath}/admin/faq/seletDelete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr

@@ -42,11 +42,9 @@ public class Admin_NoticeViewController extends HttpServlet {
 		logger.debug("dto : " + dto);
 		req.setAttribute("notice", dto);
 		
-		if(dto.getGroup() == 1) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/view.jsp");
-			dispatcher.forward(req, resp);
-			
-		}else {
-		}
+
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/view.jsp");
+		dispatcher.forward(req, resp);
+
 	}
 }

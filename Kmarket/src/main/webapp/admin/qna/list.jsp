@@ -34,7 +34,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "/Kmarket/admin/qna/delete.do",
+	        url: "/Kmarket/admin/qna/seletDelete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
