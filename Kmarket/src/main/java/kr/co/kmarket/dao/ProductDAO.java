@@ -1085,7 +1085,7 @@ public class ProductDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();	
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH2);
 			psmt.setString(1, search);
 			rs = psmt.executeQuery(); 
 			
@@ -1106,7 +1106,7 @@ public class ProductDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();	
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH3);
 			psmt.setString(1, search);
 			rs = psmt.executeQuery(); 
 			
@@ -1127,7 +1127,7 @@ public class ProductDAO extends DBHelper{
 		
 		try {
 			conn = getConnection();	
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH4);
 			psmt.setString(1, search);
 			rs = psmt.executeQuery(); 
 			

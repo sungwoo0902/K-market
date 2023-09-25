@@ -33,14 +33,13 @@ public class Admin_NoticeListController extends HttpServlet {
 		
 		String pg = req.getParameter("pg");
 		String group = req.getParameter("group");
-		String cate1 = req.getParameter("boardCate2");
-		String cate2 = req.getParameter("cate2");
+		String cate1 = req.getParameter("cate1");
 
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountBoard(group, cate1, cate2);
+		int total = service.selectCountBoard(group, cate1, null);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -58,25 +57,26 @@ public class Admin_NoticeListController extends HttpServlet {
 		logger.debug("cate1List : " + cate1List.toString());
 		req.setAttribute("cate1List", cate1List);
 		
-		List<CsDTO> notices = service.selectBoards(group, cate1, cate2, start);
+		List<CsDTO> notices = service.selectBoards(group, cate1, null, start);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate1", cate1);
-		req.setAttribute("cate2", cate2);
 		req.setAttribute("notices", notices);
 		
 		logger.debug("group : " + group);
 		logger.debug("cate1 : " + cate1);
-		logger.debug("cate2 : " + cate2);
 		logger.debug("notices : " + notices);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
-		
+
+				
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/notice/list.jsp?group=" + group + "&pg=" + pg + "&cate1=" + cate1);
 		dispatcher.forward(req, resp);
+
 	}
+	
 	
 }

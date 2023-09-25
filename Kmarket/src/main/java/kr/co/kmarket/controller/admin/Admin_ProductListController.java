@@ -40,7 +40,7 @@ public class Admin_ProductListController extends HttpServlet {
 		req.setAttribute("search", search);
 		req.setAttribute("searchCategory", searchCategory);
 			
-		if (search != null && searchCategory != null) {
+		if (level != 7 && seller != null && searchCategory != null) {
 			
 				switch (searchCategory) {
 				
@@ -189,6 +189,153 @@ public class Admin_ProductListController extends HttpServlet {
 		
 			}
 				
+		} else if(level == 7 && searchCategory != null) { 
+			
+				switch (searchCategory) {
+				
+				case "search1": {
+					
+					// 현재 페이지 번호
+					int currentPage = service.getCurrentPage(pg);
+					
+					// 전체 게시물 갯수 
+					int total = service.selectCountProductsAdminSearch1(search);
+					
+					// 마지막 페이지 번호
+					int lastPageNum = service.getLastPageNum(total);
+					
+					// 페이지 그룹 start, end 번호
+					int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+					
+					// 페이지 시작번호
+					int pageStartNum = service.getPageStartNum(total, currentPage);
+					
+					// 시작 인덱스
+					int start = service.getStartNum(currentPage);
+				
+					List<ProductDTO> products = service.selectProductsAdminSearch1(start, search);
+					req.setAttribute("products", products);
+					
+					req.setAttribute("currentPage", currentPage);
+					req.setAttribute("lastPageNum", lastPageNum);
+					req.setAttribute("pageGroupStart", result[0]);
+					req.setAttribute("pageGroupEnd", result[1]);
+					req.setAttribute("pageStartNum", pageStartNum+1);
+					
+					RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp?pg=" + pg);
+					dispatcher.forward(req, resp);
+					
+					break;
+				}
+					
+					
+				case "search2": {
+					
+					// 현재 페이지 번호
+					int currentPage = service.getCurrentPage(pg);
+					
+					// 전체 게시물 갯수 
+					int total = service.selectCountProductsAdminSearch2(search);
+					
+					// 마지막 페이지 번호
+					int lastPageNum = service.getLastPageNum(total);
+					
+					// 페이지 그룹 start, end 번호
+					int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+					
+					// 페이지 시작번호
+					int pageStartNum = service.getPageStartNum(total, currentPage);
+					
+					// 시작 인덱스
+					int start = service.getStartNum(currentPage);
+					
+					List<ProductDTO> products = service.selectProductsAdminSearch2(start, search);
+					req.setAttribute("products", products);
+					
+					req.setAttribute("currentPage", currentPage);
+					req.setAttribute("lastPageNum", lastPageNum);
+					req.setAttribute("pageGroupStart", result[0]);
+					req.setAttribute("pageGroupEnd", result[1]);
+					req.setAttribute("pageStartNum", pageStartNum+1);
+					
+					RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp?pg=" + pg);
+					dispatcher.forward(req, resp);
+					
+					break;
+				}
+					
+					
+				case "search3": {
+					
+					// 현재 페이지 번호
+					int currentPage = service.getCurrentPage(pg);
+					
+					// 전체 게시물 갯수 
+					int total = service.selectCountProductsAdminSearch3(search);
+					
+					// 마지막 페이지 번호
+					int lastPageNum = service.getLastPageNum(total);
+					
+					// 페이지 그룹 start, end 번호
+					int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+					
+					// 페이지 시작번호
+					int pageStartNum = service.getPageStartNum(total, currentPage);
+					
+					// 시작 인덱스
+					int start = service.getStartNum(currentPage);
+					
+					List<ProductDTO> products = service.selectProductsAdminSearch3(start, search);
+					req.setAttribute("products", products);
+					
+					req.setAttribute("currentPage", currentPage);
+					req.setAttribute("lastPageNum", lastPageNum);
+					req.setAttribute("pageGroupStart", result[0]);
+					req.setAttribute("pageGroupEnd", result[1]);
+					req.setAttribute("pageStartNum", pageStartNum+1);
+					
+					RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp?pg=" + pg);
+					dispatcher.forward(req, resp);
+					
+					break;
+				}
+					
+					
+				case "search4": {
+					
+					// 현재 페이지 번호
+					int currentPage = service.getCurrentPage(pg);
+					
+					// 전체 게시물 갯수 
+					int total = service.selectCountProductsAdminSearch4(search);
+					
+					// 마지막 페이지 번호
+					int lastPageNum = service.getLastPageNum(total);
+					
+					// 페이지 그룹 start, end 번호
+					int[] result = service.getPageGroupNum(currentPage, lastPageNum);
+					
+					// 페이지 시작번호
+					int pageStartNum = service.getPageStartNum(total, currentPage);
+					
+					// 시작 인덱스
+					int start = service.getStartNum(currentPage);
+					
+					List<ProductDTO> products = service.selectProductsAdminSearch4(start, search);
+					req.setAttribute("products", products);
+					
+					req.setAttribute("currentPage", currentPage);
+					req.setAttribute("lastPageNum", lastPageNum);
+					req.setAttribute("pageGroupStart", result[0]);
+					req.setAttribute("pageGroupEnd", result[1]);
+					req.setAttribute("pageStartNum", pageStartNum+1);
+					
+					RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/product/list.jsp?pg=" + pg);
+					dispatcher.forward(req, resp);
+					
+					break;
+				}
+			}	
 		} else if(searchCategory == null) {
 		// 현재 페이지 검색 게시물 조회
 			

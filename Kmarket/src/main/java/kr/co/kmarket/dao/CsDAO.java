@@ -120,7 +120,7 @@ public class CsDAO extends DBHelper {
 
 	public List<CsDTO> selectBoards(String group, String cate1, String cate2, int start) {
 			List<CsDTO> board = new ArrayList<>();
-		
+			
 			try {
 				conn = getConnection();
 				
