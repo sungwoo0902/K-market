@@ -54,8 +54,7 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("sessUser", sessUser);
 		
 		// 최근 본 상품 ****************************************************
-		/*
-		Cookie[] cookies = req.getCookies();
+        Cookie[] cookies = req.getCookies();
 		List<String> prodDatas = new ArrayList<>();
 		
 		// 최근 본 상품 불러오기 
@@ -63,12 +62,24 @@ public class IndexController extends HttpServlet{
 			for(Cookie cookie : cookies) {
 				if(cookie.getName().equals("lateView")) {
 					String value = cookie.getValue();
-					String[] prods = value.split(",");
+					String[] prods = value.split("DONTWORRYBEHAPPY");
 					prodDatas.addAll(Arrays.asList(prods));
 				}
 			}
 		}
-		*/
+		
+		// toolBar 출력 처리
+		List<ProductDTO> latelyProduct = new ArrayList<>(); 
+		logger.debug("prodDatas.size() : " + prodDatas.size());
+		for(int i=0 ; i < prodDatas.size() ; i+=2) {
+			logger.debug("for ..." + i);
+			ProductDTO dto = new ProductDTO();
+			dto.setProdNo(prodDatas.get(i));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i));
+			dto.setThumb1(prodDatas.get(i+1));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i+1));
+			latelyProduct.add(dto);
+		}
 		
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cService.selectCate1s();
@@ -89,7 +100,8 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("rcmdItems",    rcmdItems);
 		req.setAttribute("currentItems", currentItems);
 		req.setAttribute("discntItems",  discntItems);
-		//req.setAttribute("prodDatas", prodDatas);
+		
+		req.setAttribute("latelyProduct", latelyProduct);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);

@@ -2,6 +2,7 @@
 <%@ include file="./_header.jsp" %>
 <script>
 </script>
+<%@ include file="../_toolBar.jsp" %>
 <main id="product">
     <%@ include file="./_aside.jsp" %>
     <section class="list">

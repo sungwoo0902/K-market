@@ -2,11 +2,13 @@ package kr.co.kmarket.controller.product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +40,34 @@ public class ListController extends HttpServlet{
 		
 		if(type==null || type.equals("")) {
 			type = null;
+		}
+		
+		// 최근 본 상품 ****************************************************
+        Cookie[] cookies = req.getCookies();
+		List<String> prodDatas = new ArrayList<>();
+		
+		// 최근 본 상품 불러오기 
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("lateView")) {
+					String value = cookie.getValue();
+					String[] prods = value.split("DONTWORRYBEHAPPY");
+					prodDatas.addAll(Arrays.asList(prods));
+				}
+			}
+		}
+		
+		// toolBar 출력 처리
+		List<ProductDTO> latelyProduct = new ArrayList<>(); 
+		logger.debug("prodDatas.size() : " + prodDatas.size());
+		for(int i=0 ; i < prodDatas.size() ; i+=2) {
+			logger.debug("for ..." + i);
+			ProductDTO dto = new ProductDTO();
+			dto.setProdNo(prodDatas.get(i));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i));
+			dto.setThumb1(prodDatas.get(i+1));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i+1));
+			latelyProduct.add(dto);
 		}
 		
 		
@@ -119,6 +149,8 @@ public class ListController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum+1);
+		
+		req.setAttribute("latelyProduct", latelyProduct);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/list.jsp?pg="+pg);
 		dispatcher.forward(req, resp);

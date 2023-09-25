@@ -12,7 +12,9 @@
 		<article id="toolBar">
         	<ul>
         		<li>최근본상품</li>
-        		<li><a href="#"><img src="./thumb/10/10/0c903d75-0be6-4a6a-9067-665f2aacc97a.jpg"/></a></li>
+        		<c:forEach var="late" items="${latelyProduct}">
+        		<li><a href="${ctxPath}/product/view.do?prodNo=${late.prodNo}"><img src="${ctxPath}/thumb/${late.thumb1}"/></a></li>
+        		</c:forEach>
         	</ul>
        		<a href="${ctxPath}/product/cart.do"><i class="fas fa-cart-shopping fa-lg"><br><span>카트</span></i></a>
        		<a href="#" class="up"><i class="fas fa-angles-up fa-lg"><br><span>위로</span></i></a>
