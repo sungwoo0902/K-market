@@ -51,14 +51,21 @@ $(function(){
 	});
 	
 	$('.btnSearch').click(function() {
+
 		var seller = $('td:eq(8)').text();
+		
 	    
 	    var search = $('input[name=search]').val();
 	    // 선택한 검색 카테고리 값을 가져옴
 	    var searchCategory = $('#searchCategory').val();
 	    
 	    // 서버로 전송
-	    window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller + "&searchCategory=" + searchCategory;
+	    if(${sessUser.level ne 7}){
+	    	 window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&seller=" + seller + "&searchCategory=" + searchCategory;
+	    } else {
+	    	window.location.href = "${ctxPath}/admin/product/list.do?search=" + search + "&searchCategory=" + searchCategory;
+	    }
+	   
 	    	
 	});
 
@@ -121,7 +128,8 @@ $(function(){
             </table>
       
             <input type="button" value="선택 삭제" class="productDelete"/>
-			
+            
+            <c:if test="${search == null}">
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
                 <span class="prev">
@@ -139,6 +147,26 @@ $(function(){
                 </span>
             </c:if>    
             </div>
+            </c:if>
+             <c:if test="${search != null}">
+            <div class="paging">
+            <c:if test="${pageGroupStart > 1}">
+                <span class="prev">
+                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupStart - 1}&search=${search}&searchCategory=${searchCategory}"><&nbsp;이전</a>
+                </span>
+            </c:if>  
+            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
+                <span class="num">
+                    <a href="${ctxPath}/admin/product/list.do?pg=${i}&search=${search}&searchCategory=${searchCategory}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+                </span>
+            </c:forEach>  
+            <c:if test="${pageGroupEnd < lastPageNum}">   
+                <span class="next">
+                    <a href="${ctxPath}/admin/product/list.do?pg=${pageGroupEnd + 1}&search=${search}&searchCategory=${searchCategory}">다음&nbsp;></a>
+                </span>
+            </c:if>    
+            </div>
+             </c:if>
         </section>
 
         <p class="ico info">

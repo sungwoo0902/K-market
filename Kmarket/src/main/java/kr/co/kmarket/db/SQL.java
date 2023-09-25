@@ -184,12 +184,12 @@ public class SQL {
 	public final static String SELECT_PRODUCTS_ADMIN_SEARCH1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%') "
+																	+ "WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_ADMIN_SEARCH2 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
-																	+ "WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%') "
+																	+ "WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_ADMIN_SEARCH3 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -331,8 +331,8 @@ public class SQL {
 	public static final String SELECT_COUNT_PRODUCTS_SEARCH2	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `prodName` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_SEARCH3	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `prodCompany` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_SEARCH4	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `seller` LIKE CONCAT('%', ?, '%')";
-	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%')";
-	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH2	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%')";
+	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH2	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH3	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `prodCompany` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_ADMIN_SEARCH4	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller` LIKE CONCAT('%', ?, '%')";
 	public static final String SELECT_COUNT_PRODUCTS_SEARCH	= "SELECT COUNT(*) FROM `km_product` WHERE `stock` > 0 AND `seller`=? AND `c1Name`=? LIKE CONCAT('%', ?, '%')";

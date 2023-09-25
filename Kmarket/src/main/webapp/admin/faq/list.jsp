@@ -51,6 +51,7 @@ $(function(){
 	            alert(error);
 	        }
 	    });
+	    
 	});	
 	
 	// 2차 상세 유형 불러오기
@@ -93,6 +94,27 @@ $(function(){
 		});
 	});
 	
+	 $('#boardCate3').change(function () {
+	        const boardCate2 = $('#boardCate2').val();
+	        const boardCate3 = $(this).val();
+
+	        if (boardCate2 !== '0' && boardCate3 !== '0') {
+	            const url = "${ctxPath}/admin/faq/list.do?group=2&pg=1&cate1=" + boardCate2 + "&cate2=" + boardCate3;
+
+	            $.ajax({
+	                type: "GET",
+	                url: url,
+	                success: function (data) {
+
+	                    $('.row').html(data);
+	                },
+	                error: function (xhr, status, error) {
+	                    alert(error);
+	                }
+	            });
+	        }
+	    });
+
 	// 상세유형 선택 안 할 시 insert 진행 막기
 	$('.btnSubmit').click(function(e) {
 		e.preventDefault();
@@ -150,7 +172,7 @@ $(function(){
                     <th>관리</th>
                 </tr>
 				<c:forEach var="faq" items="${faqs}">
-                <tr>
+                <tr class="row">
                     <td><input type="checkbox" name="chk"></td>
                     <td>${faq.no}</td>
                     <td>${faq.cate1_name}</td>
