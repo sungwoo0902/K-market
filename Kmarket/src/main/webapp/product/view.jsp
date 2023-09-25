@@ -278,7 +278,7 @@
 
 	}); // end
 </script>
-
+<%@ include file="../_toolBar.jsp" %>
 <main id="product">
     <%@ include file="./_aside.jsp" %>
     <!-- 상품 상세페이지 시작 -->

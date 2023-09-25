@@ -45,6 +45,7 @@ import kr.co.kmarket.service.ReviewService;
  *   - 현재 날짜를 기준으로 2일 후 배송 예정 안내메시지 출력(배송일이 '금','토', 도착일이 '일'인 경우 3일 후로 출력)
  *   - 리뷰 있을 경우 리뷰 5개씩 10페이지 기준 출력
  *   - 상품 view.do를 doGet시, 조회수(hit) ++; 
+ *   - 최근 본 상품 쿠키에 저장하여 5개 출력 (5개를 초과시 가장 오래된 쿠키 삭제)
  */
 
 @WebServlet("/product/view.do")
@@ -156,39 +157,71 @@ public class ViewController extends HttpServlet{
         
 		
 		// 최근 본 상품 ****************************************************
-		/*
         Cookie[] cookies = req.getCookies();
 		List<String> prodDatas = new ArrayList<>();
-		String imgLoad = prod.getProdCate1() + "/" + prod.getProdCate2() + "/" +  prod.getThumb1();
+		String imgLoad = prod.getProdCate1() + "/" + prod.getProdCate2() + "/" +  prod.getThumb2();
 		
 		// 최근 본 상품 불러오기 
 		if(cookies != null) {
 			for(Cookie cookie : cookies) {
 				if(cookie.getName().equals("lateView")) {
 					String value = cookie.getValue();
-					String[] prods = value.split(",");
+					String[] prods = value.split("DONTWORRYBEHAPPY");
+					logger.debug("value : " + value);
 					prodDatas.addAll(Arrays.asList(prods));
 				}
 			}
 		}
-		
+		logger.debug("prodDatas1 : " + prodDatas);
 		// 최근 상품 추가
 		if(prodNo != null) {
+			int cnt = 0;
+			for(int i=0 ; i<prodDatas.size() ; i+=2) {
+				if(prodNo.equals(prodDatas.get(i))) {
+					logger.debug("count : " + cnt);
+					logger.debug("prodNo : " + prodNo);
+					logger.debug("data : " + prodDatas.get(i));
+					// 중복데이터 제거
+					prodDatas.remove(i+1);
+					prodDatas.remove(i);
+					break;
+				}
+			}
 			prodDatas.add(prodNo);
 			prodDatas.add(imgLoad);
+			logger.debug("prodDatas2 : " + prodDatas);
+			
+			// 최근 본 상품이 5개를 넘어갈 시 가장 오래된 상품 제거
 			if(prodDatas.size() > 10) {
 				prodDatas.remove(1);
+				logger.debug("prodDatas3 : " + prodDatas);
 				prodDatas.remove(0);
+				logger.debug("prodDatas4 : " + prodDatas);
 			}
+		}
+		logger.debug("prodDatas5 : " + prodDatas);
+		
+		// toolBar 출력 처리
+		List<ProductDTO> latelyProduct = new ArrayList<>(); 
+		logger.debug("prodDatas.size() : " + prodDatas.size());
+		for(int i=0 ; i < prodDatas.size() ; i+=2) {
+			logger.debug("for ..." + i);
+			ProductDTO dto = new ProductDTO();
+			dto.setProdNo(prodDatas.get(i));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i));
+			dto.setThumb1(prodDatas.get(i+1));
+			logger.debug("index (" + i + ") : " + prodDatas.get(i+1));
+			latelyProduct.add(dto);
 		}
 		
 		// 쿠키에 상품 저장
-		String prodCookie = String.join(",", prodDatas);
-		Cookie late = new Cookie("lateView", prodCookie);
-		late.setPath(req.getContextPath());
-		late.setMaxAge(60*60*24);
-		resp.addCookie(late);
-		*/
+		String prodCookie = String.join("DONTWORRYBEHAPPY", prodDatas);
+		logger.debug("prodCookie : " + prodCookie);
+		Cookie lateView = new Cookie("lateView", prodCookie);
+		lateView.setPath(req.getContextPath());
+		lateView.setMaxAge(60*60*24);
+		resp.addCookie(lateView);
+		
 		
         
         // req.setAttribute 영역 ********************************************
@@ -209,7 +242,7 @@ public class ViewController extends HttpServlet{
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		
-		//req.setAttribute("prodDatas", prodDatas);
+		req.setAttribute("latelyProduct", latelyProduct);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);
