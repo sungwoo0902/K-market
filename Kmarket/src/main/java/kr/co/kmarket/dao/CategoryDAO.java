@@ -17,7 +17,7 @@ public class CategoryDAO extends DBHelper{
 	
 	
 	public CategoryDTO selectCate1(String cate1){
-		
+		logger.debug("selectCate1()...");
 		CategoryDTO dto = null;
 		
 		try {
@@ -143,12 +143,14 @@ public class CategoryDAO extends DBHelper{
 	}
 	
 	public CategoryDTO selectCate(String cate1, String cate2) {
+		logger.debug("selectCate()...");
 		CategoryDTO dto = null;
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_CATE);
 			psmt.setString(1, cate1);
-			psmt.setString(2, cate2);
+			psmt.setString(2, cate1);
+			psmt.setString(3, cate2);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {

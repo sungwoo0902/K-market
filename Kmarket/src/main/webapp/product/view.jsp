@@ -288,15 +288,15 @@
             <h1>상품보기</h1>
             <p>
                 HOME > 
-                <span>${cate.c1Name}</span>
-                > 
-                <strong>${cate.c2Name}</strong>
+                <span>${prod.c1Name}</span>
+                >
+                <strong>${prod.c2Name}</strong>
             </p>
         </nav>
         <!-- 상품 전체 정보 내용 -->
         <article class="info">
             <div class="image">
-                <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.thumb3}" alt="상품이미지">
+                <img src="${ctxPath}/thumb/${prod.prodCate1}/${prod.prodCate2}/${prod.thumb3}" alt="상품이미지">
             </div>
             <div class="summary">
                 <nav>
@@ -413,7 +413,7 @@
                 <h1>상품정보</h1>
             </nav>
             <!-- 상품상세페이지 이미지 -->
-            <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.detail}" alt="상세페이지1">
+            <img src="${ctxPath}/thumb/${prod.prodCate1}/${prod.prodCate2}/${prod.detail}" alt="상세페이지1">
             <!-- <img src="./images/860x460.png" alt="상세페이지2"> -->
             <!-- <img src="./images/860x460.png" alt="상세페이지3"> -->
         </article>

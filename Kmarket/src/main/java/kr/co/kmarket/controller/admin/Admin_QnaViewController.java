@@ -42,11 +42,9 @@ public class Admin_QnaViewController extends HttpServlet {
 		logger.debug("dto : " + dto);
 		req.setAttribute("qna", dto);
 		
-		if(dto.getGroup() == 3) {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/qna/view.jsp");
 			dispatcher.forward(req, resp);
 			
-		}else {
-		}
+
 	}
 }

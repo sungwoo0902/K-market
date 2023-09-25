@@ -54,11 +54,6 @@ $(function() {
 			return false;
 		}
 		
-		if(cate3.val() < 1) {
-			alert('2차 상세유형을 선택해주세요.');
-			return false;
-		}
-		
 		$('.noticeRegister').submit();
 	})
 });
@@ -88,13 +83,6 @@ $(function() {
 										<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
 									</c:forEach>
 								</select>
-								<!--  type2는 jsonData로 받아와서 동적처리. -->
-								<select name="boardCate3" id="boardCate3">
-									<option value="0">2차 선택</option>
-									<c:forEach var="sub_cate" items="${cate2List}">
-										<option value="${sub_cate.cate2}">${sub_cate.cate2_name}</option>
-									</c:forEach>
-								</select>
 							</td>
 						</tr>
                     </table>
@@ -103,11 +91,11 @@ $(function() {
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><textarea class="noticeTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
+                            <td><textarea class="csTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea class="noticeArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
+                            <td><textarea class="csArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
                         </tr>
                     </table>
                 </section>

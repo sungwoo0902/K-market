@@ -56,16 +56,14 @@ public class ProductDAO extends DBHelper{
 			logger.error("insertProduct() error : "+e.getMessage());
 		}
 	}
-	public ProductDTO selectProduct(String cate1, String cate2, String prodNo) {
+	public ProductDTO selectProduct(String prodNo) {
 		
 		ProductDTO dto = null;
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_PRODUCT);
-			psmt.setString(1, cate1);
-			psmt.setString(2, cate2);
-			psmt.setString(3, prodNo);
+			psmt.setString(1, prodNo);
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
@@ -99,6 +97,8 @@ public class ProductDAO extends DBHelper{
 				dto.setRdate(rs.getString("rdate"));
 				dto.setLevel(rs.getString("level"));
 				dto.setCompany(rs.getString("company"));
+				dto.setC1Name(rs.getString("c1Name"));
+				dto.setC2Name(rs.getString("c2Name"));
 			}
 			close();
 		} catch (Exception e) {
@@ -181,29 +181,22 @@ public class ProductDAO extends DBHelper{
 		
 		return products;
 	}
-	public List<ProductDTO> selectProductsAll(int start, String seller, String search, int level) {
+	public List<ProductDTO> selectProductsAll(int start, String seller,int level) {
 		
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
-			if(search == null && level ==7 ) {
+			if(level ==7 ) {
 				conn = getConnection();
 				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN);
 				psmt.setInt(1, start);		
 				rs = psmt.executeQuery();
-			}else if(search == null) {
+			}else{
 				conn = getConnection();
 				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL);
 				psmt.setString(1, seller);
 				psmt.setInt(2, start);		
 				rs = psmt.executeQuery();
-			}else {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH);
-			psmt.setString(1, seller);
-			psmt.setString(2, search);	
-			psmt.setInt(3, start);		
-			rs = psmt.executeQuery();	
 			}
 			
 			while(rs.next()) {
@@ -249,6 +242,527 @@ public class ProductDAO extends DBHelper{
 		return products;
 	}
 	
+	public List<ProductDTO> selectProductsSearch1(int start, String seller, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH1);
+				psmt.setString(1, seller);		
+				psmt.setString(2, search);		
+				psmt.setInt(3, start);		
+				rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsSearch2(int start, String seller, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH2);
+			psmt.setString(1, seller);		
+			psmt.setString(2, search);		
+			psmt.setInt(3, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsSearch3(int start, String seller, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH3);
+			psmt.setString(1, seller);		
+			psmt.setString(2, search);		
+			psmt.setInt(3, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsSearch4(int start, String seller, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ALL_SEARCH4);
+			psmt.setString(1, seller);		
+			psmt.setString(2, search);		
+			psmt.setInt(3, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsAdminSearch1(int start, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN_SEARCH1);	
+			psmt.setString(1, search);		
+			psmt.setInt(2, start);		
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsAdminSearch2(int start, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN_SEARCH2);		
+			psmt.setString(1, search);		
+			psmt.setInt(2, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsAdminSearch3(int start, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN_SEARCH3);		
+			psmt.setString(1, search);		
+			psmt.setInt(2, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	public List<ProductDTO> selectProductsAdminSearch4(int start, String search) {
+		
+		List<ProductDTO> products = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN_SEARCH4);	
+			psmt.setString(1, search);		
+			psmt.setInt(2, start);			
+			rs = psmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAll() error :"+e.getMessage());
+		}
+		
+		return products;
+	}
+	
+	public List<ProductDTO> selectProductsAllWithType(String type, int start) {
+		List<ProductDTO> products = new ArrayList<ProductDTO>();
+		try {
+			conn = getConnection();
+			if(type == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_ADMIN);
+				logger.debug("SELECT_PRODUCTS_ADMIN");
+				
+			}else if(type.equals("1")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_SOLD_DESC);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_SOLD_DESC");
+				
+			}else if(type.equals("2")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_PRICE_ASC);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_PRICE_ASC");
+				
+			}else if(type.equals("3")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_PRICE_DESC);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_PRICE_DESC");
+				
+			}else if(type.equals("4")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_SCORE_DESC);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_SCORE_DESC");
+				
+			}else if(type.equals("5")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_REVIEW_DESC);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_REVIEW_DESC");
+				
+			}else if(type.equals("6")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_LATELY);
+				logger.debug("SELECT_PRODUCTS_BY_CATE1_LATELY");
+				
+			}else if(type.equals("7")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_HIT_DESC);
+				logger.debug("SELECT_PRODUCTS_HIT_DESC");
+				
+			}else if(type.equals("8")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_DISCOUNT_DESC);
+				logger.debug("SELECT_PRODUCTS_DISCOUNT_DESC");
+			}
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setProdNo(rs.getString("prodNo"));
+				dto.setProdCate1(rs.getString("prodCate1"));
+				dto.setProdCate2(rs.getString("prodCate2"));
+				dto.setProdName(rs.getString("prodName"));
+				dto.setDescript(rs.getString("descript"));
+				dto.setProdCompany(rs.getString("prodCompany"));
+				dto.setSeller(rs.getString("seller"));
+				dto.setPrice(rs.getString("price"));
+				dto.setDiscount(rs.getString("discount"));
+				dto.setPoint(rs.getString("point"));
+				dto.setStock(rs.getString("stock"));
+				dto.setSold(rs.getString("sold"));
+				dto.setDelivery(rs.getString("delivery"));
+				dto.setHit(rs.getString("hit"));
+				dto.setScore(rs.getString("score"));
+				dto.setReview(rs.getString("review"));
+				dto.setThumb1(rs.getString("thumb1"));
+				dto.setThumb2(rs.getString("thumb2"));
+				dto.setThumb3(rs.getString("thumb3"));
+				dto.setDetail(rs.getString("detail"));
+				dto.setStatus(rs.getString("status"));
+				dto.setDuty(rs.getString("duty"));
+				dto.setReceipt(rs.getString("receipt"));
+				dto.setBizType(rs.getString("bizType"));
+				dto.setOrigin(rs.getString("origin"));
+				dto.setIp(rs.getString("ip"));
+				dto.setRdate(rs.getString("rdate"));
+				dto.setLevel(rs.getString("level"));
+				dto.setCompany(rs.getString("company"));
+				
+				products.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			logger.error("selectProductsAllWithType : " + e.getMessage());
+		}
+		return products;
+	}
+	
 	
 	public void updateProductHit(String prodNo) {
 		try {
@@ -264,17 +778,46 @@ public class ProductDAO extends DBHelper{
 	}
 	
 	/************************* 대분류 상품 불러오기 *************************/
-	public List<ProductDTO> selectProductsByCate1(String cate1, int start) {
+	public List<ProductDTO> selectProductsByCate1(String cate1, int start, String type) {
 		List<ProductDTO> products = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1);
+			
+			if(type == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1);
+				logger.debug("selectProductsByCate1... ALL");
+				
+			}else if(type.equals("1")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_SOLD_DESC);
+				logger.debug("selectProductsByCate1... SOLD DESC");
+				
+			}else if(type.equals("2")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_PRICE_ASC);
+				logger.debug("selectProductsByCate1... PRICE ASC");
+				
+			}else if(type.equals("3")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_PRICE_DESC);
+				logger.debug("selectProductsByCate1... PRICE DESC");
+				
+			}else if(type.equals("4")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_SCORE_DESC);
+				logger.debug("selectProductsByCate1... SCORE DESC");
+				
+			}else if(type.equals("5")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_REVIEW_DESC);
+				logger.debug("selectProductsByCate1... REVIEW DESC");
+				
+			}else if(type.equals("6")) {
+				psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS_BY_CATE1_LATELY);
+				logger.debug("selectProductsByCate1... LATELY");
+				
+			}
+			
 			psmt.setString(1, cate1);
 			psmt.setInt(2, start);
 			
 			rs = psmt.executeQuery();
-
 			
 			while(rs.next()) {
 				ProductDTO dto = new ProductDTO();
@@ -402,19 +945,56 @@ public class ProductDAO extends DBHelper{
 	}
 	/************************* 상품 전체 불러오기 *************************/
 
-	public int selectCountProductsAll(String seller, int level , String search, String cate1) {
+	public int selectCountProductsAll(String seller, int level) {
+	    int total = 0;
+
+	    try {
+	        conn = getConnection();
+	        if (level == 7) {
+	            stmt = conn.createStatement();
+	            rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);
+	        } else {
+	            psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SELLER);
+	            psmt.setString(1, seller);
+	            rs = psmt.executeQuery();
+	        } 
+
+	        if (rs.next()) {
+	            total = rs.getInt(1);
+	        }
+	        
+	        close();
+	        
+	    } catch (Exception e) {
+	        logger.error("selectCountProductsAll() error: " + e.getMessage());
+	    }
+	    	
+	    return total;
+	}
+	
+	public int selectCountProductsSearch1(String seller, String search) {
 		int total = 0;
 		
 		try {
-			if(search == null && level ==7 ) {
-			conn = getConnection();
-			stmt = conn.createStatement();
-			stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);			
-			} else if(search == null) {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SELLER);
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH1);
 			psmt.setString(1, seller);
-			rs = psmt.executeQuery();
+			psmt.setString(2, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			if(search == null && level ==7 ) {
+				conn = getConnection();
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);
+				
+			} else if(search == null) {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SELLER);
+				psmt.setString(1, seller);
+				rs = psmt.executeQuery();
+				
 			} else {
 				conn = getConnection();
 				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH);
@@ -424,16 +1004,184 @@ public class ProductDAO extends DBHelper{
 				rs = psmt.executeQuery();
 			}
 			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsSearch2(String seller, String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH2);
+			psmt.setString(1, seller);
+			psmt.setString(2, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsSearch3(String seller, String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH3);
+			psmt.setString(1, seller);
+			psmt.setString(2, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsSearch4(String seller, String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH4);
+			psmt.setString(1, seller);
+			psmt.setString(2, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsAdminSearch1(String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt.setString(1, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsAdminSearch2(String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt.setString(1, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsAdminSearch3(String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt.setString(1, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+	public int selectCountProductsAdminSearch4(String search) {
+		int total = 0;
+		
+		try {
+			conn = getConnection();	
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_ADMIN_SEARCH1);
+			psmt.setString(1, search);
+			rs = psmt.executeQuery(); 
+			
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectCountProductsAll() error: " + e.getMessage());
+		}
+		
+		return total;
+	}
+
+	public int selectCountProductsByAll() {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_BY_ALL);
+			
 			if(rs.next()) {
 				total = rs.getInt(1);
 			}
 			
 			close();
 		} catch (Exception e) {
-			logger.error("selectCountProductsAll() error : "+e.getMessage());
+			logger.error("selectCountProductsByCate1() error : "+e.getMessage());
 		}
 		return total;
 	}
+
 	public int selectCountProductsByCate1(String cate1) {
 		int total = 0;
 		

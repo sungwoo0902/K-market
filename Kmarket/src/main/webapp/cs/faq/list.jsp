@@ -21,8 +21,8 @@
 </script>
 	<article>
 		<nav>
-			<h1>${faq_name_dis.cate1_name}</h1>
-			<h2>${faq_name_dis.cate1_discription}</h2>
+			<h1>${cate.cate1_name}</h1>
+			<h2>${cate.cate1_discription}</h2>
 		</nav>
 		<c:forEach var="cate" items="${cate2List}" varStatus="status">
 		    <div>

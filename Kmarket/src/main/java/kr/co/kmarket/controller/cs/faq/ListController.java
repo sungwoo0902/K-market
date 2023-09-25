@@ -57,7 +57,7 @@ public class ListController extends HttpServlet {
 		List<CsDTO> faq_list = service.selectBoardsAll(group, cate1);
 		
 		// cate1 이름, 설명 조회
-		CsDTO faq_name_dis = service.selectBoard_list(group, cate1);
+		CsDTO cate = service.selectBoard_list(group, cate1);
 		
 		// cate2 목록 불러오기
 		List<CsDTO> cate2List = service.selectCate2ListWhenCate1Choose(cate1);
@@ -65,7 +65,7 @@ public class ListController extends HttpServlet {
 		req.setAttribute("board", "list");
 		req.setAttribute("cate2List", cate2List);
 		req.setAttribute("faq_lists", faq_list);
-		req.setAttribute("faq_name_dis", faq_name_dis);
+		req.setAttribute("cate", cate);
 		
 		logger.debug("group ; " + group);
 		logger.debug("cate1 ; " + cate1);

@@ -23,18 +23,9 @@ public class Admin_QnaDeleteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String[] checkBoxArr = req.getParameterValues("checkBoxArr");
-        logger.debug("checkBoxArr : " + Arrays.toString(checkBoxArr));
+    	
+    	String no = req.getParameter("no");
         
-        if (checkBoxArr != null && checkBoxArr.length != 0) {
-  
-	            for (int i = 0; i < checkBoxArr.length; i += 1) {
-	                String no = checkBoxArr[i];            
-	            logger.debug("no : " + no);
-	            
-	            service.deleteBoard(no);
-            }
-        }
+	    service.deleteBoard(no);
     }
 }
-

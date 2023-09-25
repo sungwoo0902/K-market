@@ -28,6 +28,10 @@ public enum MemberService {
 		return dao.selectMember(uid, pass);
 	}
 	
+	public MemberDTO selectMember(String uid) {
+		return dao.selectMember(uid);
+	}
+	
 	public List<MemberDTO> selectMembers() {
 		return dao.selectMembers();
 	}

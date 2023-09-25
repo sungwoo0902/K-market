@@ -3,13 +3,17 @@
 <jsp:include page="../_asideNotice.jsp"/>
 	<article>
 			<nav>
-				<h1>${name_dis.cate1_name}</h1>
-				<h2>${name_dis.cate1_discription}</h2>
+				<h1>${cate.cate1_name}</h1>
+				<h2>${cate.cate1_discription}</h2>
 			</nav>
 		<table>
 			<c:forEach var="notice_list" items="${notice_lists}">
 				<tr>
-					<td><a href="./view.do?cate1=${notice_list.cate1}&no=${notice_list.no}">${notice_list.title}</a></td>
+					<td>
+						<a href="./view.do?cate1=${notice_list.cate1}&no=${notice_list.no}">
+							<c:if test="${cate.cate1 eq 1}">[${notice_list.cate1_name}]</c:if> ${notice_list.title}
+						</a>
+					</td>
 					<td>${notice_list.rdate}</td>
 				</tr>
 			</c:forEach>

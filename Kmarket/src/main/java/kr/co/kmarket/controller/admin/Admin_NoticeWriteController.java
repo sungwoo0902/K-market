@@ -80,12 +80,10 @@ public class Admin_NoticeWriteController extends HttpServlet {
 				
 			case "write":
 				String boardCate2 = req.getParameter("boardCate2");
-				String boardCate3 = req.getParameter("boardCate3");
 				String uid        = req.getParameter("uid");
 				String title      = req.getParameter("title");
 				String content    = req.getParameter("content");
 				logger.debug("boardCate2 : " + boardCate2);
-				logger.debug("boardCate3 : " + boardCate3);
 				logger.debug("uid        : " + uid);
 				logger.debug("title      : " + title);
 				logger.debug("content    : " + content);
@@ -93,7 +91,6 @@ public class Admin_NoticeWriteController extends HttpServlet {
 				CsDTO dto = new CsDTO();
 				dto.setGroup(1);
 				dto.setCate1(boardCate2);
-				dto.setCate2(boardCate3);
 				dto.setUid(uid);
 				dto.setTitle(title);
 				dto.setContent(content);

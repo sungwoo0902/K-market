@@ -3,6 +3,7 @@ package kr.co.kmarket.controller.admin;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,17 +24,12 @@ public class Admin_FaqDeleteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String[] checkBoxArr = req.getParameterValues("checkBoxArr");
-        logger.debug("checkBoxArr : " + Arrays.toString(checkBoxArr));
         
-        if (checkBoxArr != null && checkBoxArr.length != 0) {
-  
-	            for (int i = 0; i < checkBoxArr.length; i += 1) {
-	                String no = checkBoxArr[i];            
-	                logger.debug("no : " + no);
-	            
-	                service.deleteBoard(no);
-            }
-        }
+    	String no = req.getParameter("no");
+       
+	    service.deleteBoard(no);
+	    
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/faq/list.jsp?group=2");
+		dispatcher.forward(req, resp);
     }
 }

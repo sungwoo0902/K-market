@@ -230,6 +230,10 @@ main > aside > .category ol > li > a:hover{
     color: #41ab47;
     text-decoration: underline;
 }
+.category span {
+	width: 20px;
+	text-align: center;
+}
 
 /********************** 베스트 배너 **********************/
 main > aside > .best{

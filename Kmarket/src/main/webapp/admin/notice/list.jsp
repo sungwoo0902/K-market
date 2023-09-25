@@ -35,7 +35,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "${ctxPath}/admin/qna/delete.do",
+	        url: "${ctxPath}/admin/notice/seletDelete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
@@ -152,8 +152,8 @@ $(function(){
                     <td><a href="${ctxPath}/admin/notice/view.do?group=1&no=${notice.no}">${notice.title}</a></td>
                    	<td>${notice.rdate}</td>
                     <td>
-                        <a href="${ctxPath}/admin/notice/delete?no=${notice.no}">[삭제]</a>
-                        <a href="${ctxPath}/admin/notice/modify?no=${notice.no}">[수정]</a>
+                        <a href="${ctxPath}/admin/notice/delete.do?no=${notice.no}">[삭제]</a>
+                        <a href="${ctxPath}/admin/notice/modify.do?group=1&no=${notice.no}">[수정]</a>
                     </td>                   
                 </tr>
                 </c:forEach>

@@ -16,6 +16,12 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.kmarket.dto.MemberDTO;
 
+/**
+ *	작업시작일 : 2023/09/23
+ *	작업종료일 : 2023/09/24
+ *	작업자 : 한상민
+ *  내용 : sessUser의 level이 admin인 이용자만 이용 가능하게 함.
+ */
 
 public class CheckAdminFilter implements Filter {
 
@@ -25,24 +31,22 @@ public class CheckAdminFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		logger.debug("doFilter...");
 
-		// sessUser 불러오기
-		HttpServletRequest httprRequest = (HttpServletRequest) request;
-		HttpSession session = httprRequest.getSession();
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpSession session = httpRequest.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
-		/*
-		if(sessUser == null) { 
-			// 다음 필터 호출. 필터 없을 시 최종 자원 요청
-			logger.debug("doFilter...3 : sessUser IS NOT ADMIN");
-			((HttpServletResponse)response).sendRedirect("/Kmarket/member/login.do?success=101");
+        String contextPath = ((HttpServletRequest) request).getContextPath();
+		
+        if(sessUser == null) { 
+			logger.info("sessUser is NULL : " + request.getRemoteAddr());
+			((HttpServletResponse)response).sendRedirect(contextPath + "/member/login.do?success=104");
 			
 		}else if(sessUser.getLevel() == 7) {
-			logger.debug("doFilter...3 : sessUser IS ADMIN");
+			logger.debug("sessUser IS ADMIN");
 			chain.doFilter(request, response);
 			
-		}else if(sessUser.getLevel() < 7) {
-			logger.debug("doFilter...2");
-			((HttpServletResponse)response).sendRedirect("/Kmarket/member/login.do?success=102");
-		}
-		*/
+		}else {
+			logger.info("sessUser IS NOT ADMIN : " + sessUser.getUid() +"("+ request.getRemoteAddr() +")");
+			((HttpServletResponse)response).sendRedirect(contextPath + "/index.do?success=104");
+		} 
 	}
 }

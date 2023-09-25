@@ -4,9 +4,17 @@
 <script>
 	$(function() {
 		
-		if(${success eq '200'}){
+		if(${success eq '102'}) {
+			alert('[경고] 비정상적인 접근')
+			
+		}else if(${success eq '104'}) {
+			alert('서비스 이용 권한이 없습니다.')
+			
+		}else if(${success eq '200'}){
 			alert('로그아웃 되었습니다.');
 		}
+		
+		
 		
 	});
 </script>
@@ -18,11 +26,15 @@
 	                <li>
 	                	<i class="fa fa-bars" aria-hidden="true"></i>카테고리
 	                </li>
-	                
+	                <li>
+	                	<a href="${ctxPath}/product/list.do">
+	                		<span><i class="fas fa-shop"></i></span>전체
+	                	</a>
+	                </li>
 	                <c:forEach var="ct1" items="${category1}">
                 	<li>
-	                    <a href="#">
-		                    <i class="${ct1.cate1Icon}"></i>${ct1.c1Name}
+	                    <a href="${ctxPath}/product/list.do?cate1=${ct1.cate1No}">
+		                    <span><i class="${ct1.cate1Icon}"></i></span>${ct1.c1Name}
 		                    <i class="fas fa-angle-right"></i>
 	                    </a>
 	                    <ol>
