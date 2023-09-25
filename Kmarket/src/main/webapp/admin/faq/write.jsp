@@ -103,11 +103,11 @@ $(function() {
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><textarea class="noticeTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
+                            <td><textarea class="csTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea class="noticeArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
+                            <td><textarea class="csArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
                         </tr>
                     </table>
                 </section>
