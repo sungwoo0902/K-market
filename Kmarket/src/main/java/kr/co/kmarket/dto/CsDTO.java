@@ -65,7 +65,7 @@ public class CsDTO {
 	
 	
 	public String getTitle() {
-		return title;
+		return getReplace(title);
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -74,7 +74,7 @@ public class CsDTO {
 	
 	
 	public String getContent() {
-		return content;
+		return getReplace(content);
 	}
 	public void setContent(String content) {
 		this.content = content;
@@ -178,9 +178,66 @@ public class CsDTO {
 				+ ", cate2_name=" + cate2_name + "]";
 	}
 	
-
+	public static String toReplace(String str) {
+		 
+	    if(str == null) {
+	        return null;
+	    }
+	 
+	    String returnStr = str;
+	 
+	    returnStr = returnStr.replaceAll("<br>", "\n");
+	 
+	    returnStr = returnStr.replaceAll("&gt;", ">");
+	 
+	    returnStr = returnStr.replaceAll("&lt;", "<");
+	 
+	    returnStr = returnStr.replaceAll("&quot;", "");
+	    
+	    returnStr = returnStr.replaceAll("&nbsp;", " ");
+	 
+	    returnStr = returnStr.replaceAll("&amp;", "&");
+	    
+	    return returnStr;
+	 
+	}
 	
-	
+	public static String getReplace(String srcString) {
+		 
+		  String rtnStr = null;
+		  
+		  try{
+			  StringBuffer strTxt = new StringBuffer("");
+			  char chrBuff;
+			  
+			  int len = srcString.length();
+			    for(int i = 0; i < len; i++) {
+			    
+			    chrBuff = (char)srcString.charAt(i);
+			    
+			      switch(chrBuff) {
+			        case '<':
+				        strTxt.append("&lt;");
+				        break;
+			        
+			        case '>':
+				        strTxt.append("&gt;");
+				        break;
+			        
+			        case '&':
+				        strTxt.append("&amp;");
+				        break;
+			        
+			        default:
+			        	strTxt.append(chrBuff);
+			      }
+			    }
+			  rtnStr = strTxt.toString();
+		  }catch(Exception e) {
+			  e.printStackTrace();
+		  }
+		  return rtnStr;
+	}
 	
 	
 }

@@ -17,6 +17,14 @@
 					<td>${notice_list.rdate}</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${notice_lists.size() < 1}">
+				<tr>
+					<td style="text-align: center; font-size: 14px; padding: 50px 0;">
+						<i class="fa-regular fa-face-sad-tear" style="color: #2eb275; font-size: 100px;"></i><br><br>
+						등록된 문의 내용이 없습니다.
+					</td>
+				</tr>
+			</c:if>
 		</table>
 			
 		<div class="page">

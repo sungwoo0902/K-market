@@ -55,7 +55,10 @@ public class LoginController extends HttpServlet {
 						session.invalidate();
 						session = req.getSession(true);
 						session.setAttribute("sessUser", sessUser);
-						resp.sendRedirect(req.getContextPath());
+						
+						String before_address = req.getHeader("referer");
+						logger.debug("before_address : " + before_address);
+						resp.sendRedirect(before_address);
 						return;
 					}
 				}
