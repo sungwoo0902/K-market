@@ -18,9 +18,11 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonObject;
 
 import kr.co.kmarket.dto.CartDTO;
+import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.dto.ProductDTO;
 import kr.co.kmarket.service.CartService;
+import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.ProductService;
 
 @WebServlet("/product/cart.do")
@@ -29,6 +31,7 @@ public class CartController extends HttpServlet{
 	private static final long serialVersionUID = 346919740737893000L;
 	private ProductService prodService = ProductService.INSTANCE;
 	private CartService cartService = CartService.INSTANCE;
+	private CategoryService cateService = CategoryService.INSTANCE;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
@@ -40,6 +43,15 @@ public class CartController extends HttpServlet{
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 		String uid = sessUser.getUid();
+		
+		// 사이드바 영역 ****************************************************
+		// 사이드 카테고리(cate1) 불러오기
+		List<CategoryDTO> category1 = cateService.selectCate1s();
+		req.setAttribute("category1", category1);
+		
+		// 사이드 카테고리(cate2) 불러오기
+		List<CategoryDTO> allCate = cateService.selectAllCate();
+		req.setAttribute("allCate", allCate);
 		
 		/*
 		if(sessUser.uid.equal) {

@@ -17,9 +17,11 @@ import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonObject;
 
+import kr.co.kmarket.dto.CategoryDTO;
 import kr.co.kmarket.dto.MemberDTO;
 import kr.co.kmarket.dto.OrderDTO;
 import kr.co.kmarket.dto.OrderItemDTO;
+import kr.co.kmarket.service.CategoryService;
 import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.service.OrderService;
 
@@ -30,6 +32,7 @@ public class CompleteController extends HttpServlet{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private OrderService ordService = OrderService.INSTANCE;
 	private MemberService memService = MemberService.INSTANCE;
+	private CategoryService cateService = CategoryService.INSTANCE;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +43,15 @@ public class CompleteController extends HttpServlet{
 		HttpSession session = req.getSession();
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 		String uid = sessUser.getUid();
+		
+		// 사이드바 영역 ****************************************************
+		// 사이드 카테고리(cate1) 불러오기
+		List<CategoryDTO> category1 = cateService.selectCate1s();
+		req.setAttribute("category1", category1);
+		
+		// 사이드 카테고리(cate2) 불러오기
+		List<CategoryDTO> allCate = cateService.selectAllCate();
+		req.setAttribute("allCate", allCate);
 		
 		int ordNo = ordService.selectLastOrdNo(uid);
 		
