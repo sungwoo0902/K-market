@@ -49,46 +49,52 @@ $(function(){
 	});
 	
 	// 2차 상세 유형 불러오기
-	const cate2 = $('#boardCate2');
-	const cate3 = $('#boardCate3');
-	let selectCate = null;
-	
-	$(cate2).change(function() {
-		const selectedCate2 = $(this).val();
-		
-		console.log(selectedCate2);
-		
-		const jsonData = {
-			"jsonCate2": selectedCate2 
-		}
-		
-		$.ajax({
-			url: './list.do',
-			type: 'post',
-			data: jsonData,
-			dataType: 'json',
-			success: function(data) {
-				// 소분류 초기화
-				cate3.empty();
-				cate3.append($('<option>', {
-					value: '0',
-					text: '2차 선택'
-				}));
-				
-				// 소분류 동적처리
-				for(let i=0 ; i<data.categorys.length ; i++) {
-					const category = data.categorys[i];
-					
-					console.log('category : ' + category);
-					
-					cate3.append($('<option>', {
-						value: category.cate2,
-						text: category.cate2_name
-					}));
-				}
-			}
-		});
-	});
+    const cate2 = $('#boardCate2');
+    const cate3 = $('#boardCate3');
+
+    function updateQNAList() {
+        const boardCate2 = cate2.val();
+        const boardCate3 = cate3.val();
+
+        if (boardCate2 !== '0' && boardCate3 !== '0') {
+            const url = "${ctxPath}/admin/qna/list.do?group=3&pg=1&cate1=" + boardCate2 + "&cate2=" + boardCate3;
+            window.location.href = url; // Redirect to the updated URL
+        }
+    }
+
+    $(cate2).change(function() {
+        const selectedCate2 = $(this).val();
+        const jsonData = {
+            "jsonCate2": selectedCate2 
+        }
+
+        // AJAX request to update the second category dropdown
+        $.ajax({
+            url: './list.do',
+            type: 'post',
+            data: jsonData,
+            dataType: 'json',
+            success: function(data) {
+                // Update the second category dropdown options
+                cate3.empty();
+                cate3.append($('<option>', {
+                    value: '0',
+                    text: '2차 선택'
+                }));
+                for (let i = 0; i < data.categorys.length; i++) {
+                    const category = data.categorys[i];
+                    cate3.append($('<option>', {
+                        value: category.cate2,
+                        text: category.cate2_name
+                    }));
+                }
+
+                updateQNAList();
+            }
+        });
+    });
+
+    $('#boardCate3').change(updateQNAList);
 	
 	// 상세유형 선택 안 할 시 insert 진행 막기
 	$('.btnSubmit').click(function(e) {
@@ -164,24 +170,49 @@ $(function(){
             </table>
             
             <input type="button" value="선택 삭제" class="csDelete"/>
-			
-            <div class="paging">
-            <c:if test="${pageGroupStart > 1}">
-                <span class="prev">
-                    <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
-                </span>
-            </c:if>  
-            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
-                <span class="num">
-                    <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${i}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
-                </span>
-            </c:forEach>  
-            <c:if test="${pageGroupEnd < lastPageNum}">   
-                <span class="next">
-                    <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
-                </span>
-            </c:if>    
-            </div>
+            
+
+		<c:if test="${cate1 == null && cate2 == null}">
+		<div class="paging">
+		    <c:if test="${pageGroupStart > 1}">
+		        <span class="prev">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupStart - 1}"><&nbsp;이전</a>
+		        </span>
+		    </c:if>  
+		    <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
+		        <span class="num">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${i}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+		        </span>
+		    </c:forEach>  
+		    <c:if test="${pageGroupEnd < lastPageNum}">   
+		        <span class="next">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupEnd + 1}">다음&nbsp;></a>
+		        </span>
+		    </c:if>    
+		</div>
+		</c:if>
+		
+		<c:if test="${cate1 != null && cate2 != null}">
+		<div class="paging">
+		    <c:if test="${pageGroupStart > 1}">
+		        <span class="prev">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupStart - 1}&cate1=${cate1}&cate2=${cate2}"><&nbsp;이전</a>
+		        </span>
+		    </c:if>  
+		    <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
+		        <span class="num">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${i}&cate1=${cate1}&cate2=${cate2}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+		        </span>
+		    </c:forEach>  
+		    <c:if test="${pageGroupEnd < lastPageNum}">   
+		        <span class="next">
+		            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=${pageGroupEnd + 1}&cate1=${cate1}&cate2=${cate2}">다음&nbsp;></a>
+		        </span>
+		    </c:if>    
+		</div>
+		</c:if>
+
+
         </section>
     </section>
 </main>

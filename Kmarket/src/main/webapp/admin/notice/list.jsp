@@ -110,6 +110,7 @@ $(function(){
             <input type="button" value="선택 삭제" class="csDelete"/>
             <input type="button" value="공지 작성" class="csWrite"/>
 			
+			<c:if test="${cate1 == null}">
             <div class="paging">
             <c:if test="${pageGroupStart > 1}">
                 <span class="prev">
@@ -127,6 +128,27 @@ $(function(){
                 </span>
             </c:if>    
             </div>
+            </c:if>
+            
+            <c:if test="${cate1 != null}">
+            <div class="paging">
+            <c:if test="${pageGroupStart > 1}">
+                <span class="prev">
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${pageGroupStart - 1}&cate1=${cate1}"><&nbsp;이전</a>
+                </span>
+            </c:if>  
+            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">     
+                <span class="num">
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${i}&cate1=${cate1}" class="num ${currentPage == i ? 'on current':''}">${i}</a>
+                </span>
+            </c:forEach>  
+            <c:if test="${pageGroupEnd < lastPageNum}">   
+                <span class="next">
+                    <a href="${ctxPath}/admin/notice/list.do?group=1&pg=${pageGroupEnd + 1}&cate1=${cate1}">다음&nbsp;></a>
+                </span>
+            </c:if>    
+            </div>
+            </c:if>
         </section>
     </section>
 </main>

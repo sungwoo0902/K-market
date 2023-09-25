@@ -62,9 +62,9 @@ $(function() {
 	<%@ include file="../_aside.jsp" %>
     <section id="admin-notice-register">
         <nav>
-            <h3>공지사항</h3>
+            <h3>자주묻는질문</h3>
             <p>
-                HOME > 고객센터 > <strong>공지사항</strong>
+                HOME > 고객센터 > <strong>자주묻는질문</strong>
             </p>
         </nav>
         <article>
