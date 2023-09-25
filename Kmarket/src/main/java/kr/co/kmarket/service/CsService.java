@@ -58,7 +58,7 @@ public enum CsService {
 	}
 	public void updateFaq(CsDTO dto) {
 		dao.updateFaq(dto);
-
+	}
 	public int updateBoard(CsDTO dto) {
 		return dao.updateBoard(dto);
 

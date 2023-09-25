@@ -127,8 +127,6 @@ public class SQL {
 																	+ "LIMIT ?, 10";
 	
 
-	public final static String SELECT_PRODUCTS_ADMIN_SEARCH1		= "SELECT a.*, b.level, b.company FROM "
-
 	public final static String SELECT_PRODUCTS_SOLD_DESC	    = "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
@@ -183,10 +181,15 @@ public class SQL {
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
-	public final static String SELECT_PRODUCTS_ADMIN_SEARCH2 		= "SELECT a.*, b.level, b.company FROM "
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH1 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
 																	+ "ON a.seller=b.uid "
 																	+ "WHERE `stock` > 0 AND `prodNo` LIKE CONCAT('%', ?, '%') "
+																	+ "LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_ADMIN_SEARCH2 		= "SELECT a.*, b.level, b.company FROM "
+																	+ "`km_product` AS a JOIN `km_member` AS b "
+																	+ "ON a.seller=b.uid "
+																	+ "WHERE `stock` > 0 AND `prodName` LIKE CONCAT('%', ?, '%') "
 																	+ "LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_ADMIN_SEARCH3 		= "SELECT a.*, b.level, b.company FROM "
 																	+ "`km_product` AS a JOIN `km_member` AS b "
@@ -483,15 +486,8 @@ public class SQL {
 												+ "`content`=?, "
 												+ "`rdate`=NOW()";
 	
-	public static final String UPDATE_BOARD = "UPDATE `km_board` SET "
-												+ "`cate1_name`=?, "
-												+ "`cate2_name`=?, "
-												+ "`title`=?, "
-												+ "`content`=? "
-												+ "WHERE `no`=?";
-	
 	public static final String UPDATE_BOARD_NOTICE = "UPDATE `km_board` SET "
-													+ "`cate1_name`=?, "
+													+ "`cate1`=?, "
 													+ "`title`=?, "
 													+ "`content`=? "
 													+ "WHERE `no`=?";
