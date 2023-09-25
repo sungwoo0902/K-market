@@ -47,6 +47,10 @@ public class SQL {
 	public static final String SELECT_MEMBER_AUTO_LOGIN = "SELECT * FROM `km_member` WHERE `uid`=?";
 	public static final String SELECT_MEMBER_RECEIPT = "SELECT `name`,`hp`,`zip`,`addr1`,`addr2`,`point` FROM `km_member` "
 														+ "WHERE `uid`=?";
+	// 포인트 사용시 포인트 차감
+	public static final String MINUS_MEMBER_POINT = "UPDATE `km_member` SET `point`= `point`-? WHERE `uid`=?";
+	// 포인트 사용시 포인트 적립
+	public static final String PLUS_MEMBER_POINT = "UPDATE `km_member` SET `point`= `point`+? WHERE `uid`=?";
 	// 사용자 중복체크
 	public static final String DUPLICATION_CHECK_UID        = "SELECT COUNT(*) FROM `km_member` WHERE `uid`=?";
 	public static final String DUPLICATION_CHECK_HP         = "SELECT COUNT(*) FROM `km_member` WHERE `hp`=?";
@@ -408,6 +412,20 @@ public class SQL {
 												+ "`ordPayment`=?,"
 												+ "`ordDate`=NOW()";
 	public static final String SELECT_ORDER = "SELECT * FROM `km_product_order` WHERE `ordNo`=? AND `ordUid`=?";
+	public static final String SELECT_ORDER_COUNT = "SELECT * FROM `km_product_order` WHERE `ordUid`=? AND `ordComplete`=0";
+	public static final String DELETE_BEFORE_ORDER = "DELETE FROM `km_product_order` WHERE `ordUid`=? AND `ordComplete`=0";
+	public static final String UPDATE_ORDER = "UPDATE `km_product_order` SET "
+			+ "`usedPoint`=?,"
+			+ "`ordTotPrice`=?,"
+			+ "`recipName`=?,"
+			+ "`recipHp`=?,"
+			+ "`recipZip`=?,"
+			+ "`recipAddr1`=?,"
+			+ "`recipAddr2`=?,"
+			+ "`ordPayment`=?,"
+			+ "`ordComplete`=? "
+			+ "WHERE `ordNo`=?";
+	
 	public static final String SELECT_LAST_ORDNO = "SELECT * FROM `km_product_order` WHERE `ordUid`=? ORDER BY `ordNo` DESC LIMIT 1";
 	
 	//**************************************************************************************************************//
@@ -431,7 +449,10 @@ public class SQL {
 													+ "`km_product` AS c "
 													+ "ON b.prodNo=c.prodNo "
 													+ "WHERE a.ordUid=? AND b.ordNo=?";
-													
+	public static final String DELETE_BEFORE_ORDER_ITEMS = "DELETE b FROM `km_product_order` as a INNER JOIN `km_product_order_item` AS b "
+													+ "ON a.ordNo=b.ordNo "
+													+ "WHERE a.ordUid=? "
+													+ "AND a.ordComplete=0";												
 	
 	//**********************************************************************************************************//
 	//********************************************* Product_Review *********************************************//

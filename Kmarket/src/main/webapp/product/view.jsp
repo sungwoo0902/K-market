@@ -101,7 +101,7 @@
 	  	
 	    const prodNo = $('#prodNo').val();
 	  	const point = $('#point').val();
-	  	const delivery = $('#delivery');
+	  	const delivery = $('#delivery').val();
 	    
 	    $('.cart').click(function(e){
 	    	if(${sessUser == null}){
@@ -113,16 +113,18 @@
 	    	//alert('장바구니');
 	    	console.log(inputCount.val());
 	    	console.log(price);	   
-			
+			const orgPrice = $('#org_price').val();
+			const totalPrice = parseInt(inputCount.val() * price) + parseInt(delivery);
+			console.log('orgPrice : '+orgPrice);
 	    	// jsonData 초기화
 	    	const jsonData = {
       	    		"prodNo" : prodNo,
       	    		"inputCount" : inputCount.val(),
-      	    		"price" : price,
+      	    		"price" : orgPrice,
       	    		"discount" : discount,
       	    		"point" : point,
-      	    		"delivery" : delivery.val(),
-      	    		"totalPrice" : inputCount.val() * price
+      	    		"delivery" : delivery,
+      	    		"totalPrice" : totalPrice
       	    	};
     			// 위의 jsonData를 insertCartController로 보낸다
 	    		$.ajax({
@@ -204,17 +206,49 @@
 	    
 	    
 		//***************** 즉시 구매 **************************************************//
-		$('.order').click(function(e) {
-			e.prevenDefault();
+		$('.order').click(function() {
+			if(${sessUser == null}){
+	    		alert('로그인 후 이용 가능합니다.');
+	    		return false;
+	    	}
+			const ordTotPrice = (parseInt(inputCount.val()) * parseInt(price)) + parseInt(delivery);
+			const ordCount = inputCount.val();
+			const ordPrice = (parseInt($('#org_price').val())) * parseInt(inputCount.val());
+			const ordDiscount = Math.ceil((ordPrice / 100) * discount);
+			const ordDelivery = delivery;
+			const savePoint = Math.ceil(((ordTotPrice - delivery) / 100) * point);
 			
-			console.log("inputCount : " + inputCount.val());
-			console.log("price : " + price);
-			console.log("discount : " + discount);
-			console.log("point : " + point);
-			console.log("delivery : " + delivery);
-			console.log("totalPrice : " + totalPrice);
 			
+			// jsonData 초기화
+	    	const jsonData = {
+      	    		"prodNo" : prodNo,
+      	    		"ordCount" : inputCount.val(),
+      	    		"ordPrice" : ordPrice,
+      	    		"ordDiscount" : (price * inputCount.val())/100 * discount,
+      	    		"discountPercent": discount,
+      	    		"savePoint" : savePoint,
+      	    		"ordDelivery" : delivery,
+      	    		"ordTotPrice" : ordTotPrice
+      	    	};
 			
+			console.log('ordTotPrice :'+ ordTotPrice);
+			console.log('ordCount :'+ ordCount);
+			console.log('ordPrice :'+ ordPrice);
+			console.log('ordDiscount :'+ ordDiscount);
+			console.log('ordDelivery :'+ ordDelivery);
+			console.log('savePoint :'+ savePoint);
+			console.log('-------------------');
+
+			$.ajax({
+					url: '${ctxPath}/product/order.do',
+    	    		type: 'post',
+    	    		data: jsonData,
+    	    		dataType: 'json',
+    	    		success: function(data){
+    	    			console.log('order complete');
+    	    			window.location.href = '${ctxPath}/product/order.do';
+    	    		}
+				}); // ajax end
     	}); // order click end..
 	    
 	    

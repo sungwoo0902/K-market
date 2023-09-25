@@ -20,6 +20,38 @@ public class OrderDTO {
 	private int ordComplete;
 	private String ordDate;
 	
+	///// 추가
+	private String ordPaymentName;
+	
+	public String getOrdPaymentName() {
+		return ordPaymentName;
+	}
+	public void setOrdPaymentName(int ordPayment) {
+		
+		switch(ordPayment) {
+		
+		case 11:
+			this.ordPaymentName = "신용카드";
+			break;
+		case 12:
+			this.ordPaymentName = "체크카드";
+			break;
+		case 21:
+			this.ordPaymentName = "실시간 계좌이체";
+			break;
+		case 22:
+			this.ordPaymentName = "무통장 입금";
+			break;
+		case 31:
+			this.ordPaymentName = "휴대폰 결제";
+			break;
+		case 32:
+			this.ordPaymentName = "카카오페이";
+			break;
+		}
+	}
+	
+	////////////////
 	
 	public int getOrdNo() {
 		return ordNo;

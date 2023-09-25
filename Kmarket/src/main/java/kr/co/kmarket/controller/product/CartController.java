@@ -60,9 +60,19 @@ public class CartController extends HttpServlet{
 		
 		int deleteResult = 0;
 		
+		HttpSession session = req.getSession();
+		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
+		String uid = sessUser.getUid();
+		
+		String user = req.getParameter("uid");
+		
+		if(!uid.equals(user)) {
+			return;
+		}
+		
 		String[] selectedCartNos = req.getParameterValues("selectedCartNos");
 		logger.debug("cart here1...");
-		String uid = req.getParameter("uid");
+		
 		for(String no : selectedCartNos) {
 			System.out.println(no);
 		}

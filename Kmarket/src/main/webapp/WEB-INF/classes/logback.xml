@@ -3,14 +3,12 @@
 	<property name="NAME" value="Kmarket"/>
 	
 	<!-- 개발용 --> 
-	<property name="LOG_DIR" value="/logs"/> 
-	 
-	<!-- 배포용 -->
-	<!--<property name="DIR" value="/home/jsp/logs"/>-->
 	<property name="LOG_DIR" value="/logs"/>
 	 
 	<!-- 배포용 -->
 	<!-- <property name="DIR" value="/home/jsp/logs"/> -->
+	<property name="LOG_DIR" value="/logs"/> 
+	 
 
 	
 	
@@ -63,7 +61,8 @@
   
 	<root level="debug">
 	  <appender-ref ref="STDOUT" />
-	  <!-- <appender-ref ref="FILE" />
-	  <appender-ref ref="ROLLING_DAILY" /> -->
+	  <!-- <appender-ref ref="FILE" /> -->
+	  <!-- <appender-ref ref="ROLLING_DAILY" /> -->
+
 	</root>
 </configuration>
