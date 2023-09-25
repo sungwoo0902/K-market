@@ -34,9 +34,9 @@
 					감사합니다.<br/></td>
 				</tr>
 			</table>
-				<input type="button" value="삭제" class="btnViewDelete"/>
-	            <input type="button" value="답변작성" class="btnViewModify"/>
-	            <input type="button" value="목록" class="btnList"/>
+            <a href="${ctxPath}/admin/notice/delete.do?no=${notice.no}" class="btnViewDelete">삭제</a>
+            <a href="${ctxPath}/admin/notice/modify.do?group=${notice.group}&no=${notice.no}" class="btnViewModify">공지수정</a>
+            <a href="${ctxPath}/admin/notice/list.do?group=1&pg=1" class="btnList">목록</a>
 		</article>
 	</section>
 </main>			

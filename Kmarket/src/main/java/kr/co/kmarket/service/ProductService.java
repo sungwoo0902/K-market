@@ -36,20 +36,75 @@ public enum ProductService {
 	public List<ProductDTO> selectProductsByCate2(String cate1, String cate2, int start, String type) {
 		return dao.selectProductsByCate2(cate1, cate2, start, type);
 	}
-	public List<ProductDTO> selectProductsAll(int start, String seller, String search, int level) {
-		return dao.selectProductsAll(start, seller, search , level);
+	public List<ProductDTO> selectProductsAll(int start, String seller,int level) {
+		return dao.selectProductsAll(start, seller, level);
 	}
+
+
+	public List<ProductDTO> selectProductsSearch1(int start, String seller, String search) {
+		return dao.selectProductsSearch1(start, seller, search);
+	}
+	public List<ProductDTO> selectProductsSearch2(int start, String seller,String search) {
+		return dao.selectProductsSearch2(start, seller, search);
+	}
+	public List<ProductDTO> selectProductsSearch3(int start, String seller,String search) {
+		return dao.selectProductsSearch3(start, seller, search);
+	}
+	public List<ProductDTO> selectProductsSearch4(int start, String seller,String search) {
+		return dao.selectProductsSearch4(start, seller, search);
+	}
+	
+	public List<ProductDTO> selectProductsAdminSearch1(int start, String search) {
+		return dao.selectProductsAdminSearch1(start, search);
+	}
+	public List<ProductDTO> selectProductsAdminSearch2(int start, String search) {
+		return dao.selectProductsAdminSearch2(start, search);
+	}
+	public List<ProductDTO> selectProductsAdminSearch3(int start, String search) {
+		return dao.selectProductsAdminSearch3(start, search);
+	}
+	public List<ProductDTO> selectProductsAdminSearch4(int start, String search) {
+		return dao.selectProductsAdminSearch4(start, search);
+	}
+	
+=======
 	public List<ProductDTO> selectProductsAllWithType(String type, int start) {
 		return dao.selectProductsAllWithType(type, start);
 	}
+
 	public void updateProduct(ProductDTO dto) {
 		dao.updateProduct(dto);
 	}
 	public void deleteProduct(String uid, String no) {
 		dao.deleteProduct(uid, no);
 	}
-	public int selectCountProductsAll(String seller, int level, String search, String cate1) {
-		return dao.selectCountProductsAll(seller, level , search, cate1);
+	public int selectCountProductsAll(String seller, int level) {
+		return dao.selectCountProductsAll(seller, level);
+	}
+	
+	public int selectCountProductsSearch1(String seller, String search) {
+		return dao.selectCountProductsSearch1(seller, search);
+	}
+	public int selectCountProductsSearch2(String seller, String search) {
+		return dao.selectCountProductsSearch2(seller, search);
+	}
+	public int selectCountProductsSearch3(String seller, String search) {
+		return dao.selectCountProductsSearch3(seller, search);
+	}
+	public int selectCountProductsSearch4(String seller, String search) {
+		return dao.selectCountProductsSearch4(seller, search);
+	}
+	public int selectCountProductsAdminSearch1(String search) {
+		return dao.selectCountProductsAdminSearch1(search);
+	}
+	public int selectCountProductsAdminSearch2(String search) {
+		return dao.selectCountProductsAdminSearch2(search);
+	}
+	public int selectCountProductsAdminSearch3(String search) {
+		return dao.selectCountProductsAdminSearch3(search);
+	}
+	public int selectCountProductsAdminSearch4(String search) {
+		return dao.selectCountProductsAdminSearch4(search);
 	}
 	public int selectCountProductsByAll() {
 		return dao.selectCountProductsByAll();

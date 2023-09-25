@@ -10,6 +10,13 @@
 	            </p>
 	        </nav>
 	    <article>
+	    <form action="${ctxPath}/admin/qna/answer.do" method="post">
+            <input type="hidden" name="group" value="${qna.group}">
+            <input type="hidden" name="no" value="${qna.no}">
+            <input type="hidden" name="uid" value="${qna.uid}">
+            <input type="hidden" name="cate1" value="${qna.cate1}">
+            <input type="hidden" name="cate2" value="${qna.cate2}">
+            <input type="hidden" name="title" value="${qna.title}">
 			<table class="cstable">
 				<tr class="cstable1">
 					<td>유형</td>
@@ -30,13 +37,16 @@
 					감사합니다.<br/></td>
 				</tr>
 				<tr class="cstable4">
-					<td>답변</td>
-					<td><input type="text" name="answer"></td>
-				</tr>
-			</table>
-				<input type="button" value="삭제" class="btnViewDelete"/>
-	            <input type="button" value="답변작성" class="btnViewModify"/>
-	            <input type="button" value="목록" class="btnList"/>
+				<td>답변</td>
+                  <td>
+                      <textarea name="content" rows="4" cols="50"></textarea>
+                  </td>
+                </tr>
+                </table>
+                <input type="submit" value="답변 제출">
+            </form>
+            <a href="${ctxPath}/admin/qna/delete.do?no=${qna.no}" class="btnViewDelete">삭제</a>
+            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=1" class="btnList">목록</a>
 		</article>
 	</section>
 </main>		

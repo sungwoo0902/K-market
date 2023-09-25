@@ -19,7 +19,7 @@ $(function() {
 		}
 		
 		$.ajax({
-			url: '${ctxPath}/admin/notice/write.do',
+			url: '${ctxPath}/admin/faq/modify.do',
 			type: 'POST',
 			data: jsonData,
 			dataType: 'json',
@@ -54,7 +54,7 @@ $(function() {
 			return false;
 		}
 		
-		$('.noticeRegister').submit();
+		$('.csModify').submit();
 	})
 });
 </script>
@@ -68,9 +68,9 @@ $(function() {
             </p>
         </nav>
         <article>
-            <form action="${ctxPath}/admin/notice/write.do" method="post">
+            <form action="${ctxPath}/admin/faq/modify.do" method="post">
             <input type="hidden" name="type" value="write"/>
-			<input type="hidden" name="uid" value="${sessUser.uid}"/>
+			<input type="hidden" name="no" value="${faq.no}"/>
                 <section>
                     <table>
                     	<tr>
@@ -83,6 +83,13 @@ $(function() {
 										<option value="${main_cate.cate1}" ${cate1 eq main_cate.cate1?'selected':''}>${main_cate.cate1_name}</option>
 									</c:forEach>
 								</select>
+								<!--  type2는 jsonData로 받아와서 동적처리. -->
+								<select name="boardCate3" id="boardCate3">
+									<option value="0">2차 선택</option>
+									<c:forEach var="sub_cate" items="${cate2List}">
+										<option value="${sub_cate.cate2}">${sub_cate.cate2_name}</option>
+									</c:forEach>
+								</select>
 							</td>
 						</tr>
                     </table>
@@ -91,15 +98,15 @@ $(function() {
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><textarea class="csTitle" name="title" placeholder="제목을 입력하세요"></textarea></td>
+                            <td><textarea class="csTitle" name="title">${faq.title}</textarea></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea class="csArea" name="content" placeholder="내용을 입력하세요."></textarea></td>
+                            <td><textarea class="csArea" name="content">${faq.content}</textarea></td>
                         </tr>
                     </table>
                 </section>
-                <input type="submit" value="등록하기" class="noticeRegister">
+                <input type="submit" value="수정하기" class="csModify">
             </form>
         </article>
     </section>
