@@ -36,6 +36,10 @@ public class ListController extends HttpServlet{
 		String type = req.getParameter("type");
 		String pg = req.getParameter("pg");
 		
+		if(type==null || type.equals("")) {
+			type = null;
+		}
+		
 		
 		// 사이드바 영역 ****************************************************
 		// 사이드 카테고리(cate1) 불러오기

@@ -13,11 +13,9 @@
 		}else if(${success eq '200'}){
 			alert('로그아웃 되었습니다.');
 		}
-		
-		
-		
 	});
 </script>
+	<%@ include file="./_toolBar.jsp" %>
         <main>
             <!-- 카테고리/베스트 상품 영역 -->
             <aside>
