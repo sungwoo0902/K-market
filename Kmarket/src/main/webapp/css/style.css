@@ -239,6 +239,7 @@ main > aside > .category ol > li > a:hover{
 main > aside > .best{
     width: 215px;
     height: auto;
+    background-color: white;
     border: 1px solid #dbdbdb;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(55, 55, 5, 0.2);
@@ -536,6 +537,56 @@ footer p > strong {
 
 
 /********************** 우측 하단의 페이지 상단 이동버튼 **********************/
+#toolBar {
+	bottom: 45px;
+	right: 45px; 
+	position: fixed; 
+	width: 80px; 
+	height: auto; 
+	background-color: white;
+	border: 1px solid #dbdbdb; 
+	box-sizing: border-box; 
+	box-shadow: 0 0 5px rgba(55, 55, 5, 0.2);
+	z-index: 100;
+}
+
+#toolBar ul {
+	padding: 10px;
+	padding-bottom: 0;
+	box-sizing: border-box;
+}
+#toolBar li:first-child {
+	font-size: 11px; 
+	text-align: center;
+}
+#toolBar li {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+}
+#toolBar img {
+	width: 60px;
+	height: 60px;
+	border: 1px solid #dbdbdb;
+	box-sizing: border-box;
+}
+#toolBar i {
+	width: 100%; 
+	height: 100%;
+	text-align: center;
+}
+#toolBar > a {
+	display: inline-block;
+	float: right;
+	width: 39px;
+	height: 39px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+#toolBar span {
+	font-size: 11px;
+}
+
 #top{
     position: fixed;
     left: 50%;

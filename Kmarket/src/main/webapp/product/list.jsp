@@ -106,23 +106,23 @@
         <div class="paging">
         <c:if test="${pageGroupStart > 1}">
             <span class="prev">
-                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupStart - 1}">〈&nbsp;이전</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=${type}&pg=${pageGroupStart - 1}">〈&nbsp;이전</a>
             </span>
         </c:if>
         <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
             <span class="num">
             <!-- 대분류 소분류 구분 -->
             	<c:if test="${cate2 ne null}">
-                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=${type}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
             	</c:if>
             	<c:if test="${cate2 eq null}">
-                <a href="${ctxPath}/product/list.do?cate1=${cate1}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&type=${type}&pg=${i}" class="num ${currentPage == i?'on':'off'}">${i}</a>
             	</c:if>
             </span>
         </c:forEach>
         <c:if test="${pageGroupEnd < lastPageNum}">
             <span class="next">
-                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&pg=${pageGroupEnd + 1}">다음&nbsp;〉</a>
+                <a href="${ctxPath}/product/list.do?cate1=${cate1}&cate2=${cate2}&type=${type}&pg=${pageGroupEnd + 1}">다음&nbsp;〉</a>
             </span>
         </c:if>
         </div>

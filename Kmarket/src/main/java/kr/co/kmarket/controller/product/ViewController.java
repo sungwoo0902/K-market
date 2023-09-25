@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Locale;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -151,6 +154,42 @@ public class ViewController extends HttpServlet{
         logger.debug("이틀 날짜 : " + twoDaysLaterFormatted);
         logger.debug("이틀 요일 : " + twoDaysLaterDayOfWeek);
         
+		
+		// 최근 본 상품 ****************************************************
+		/*
+        Cookie[] cookies = req.getCookies();
+		List<String> prodDatas = new ArrayList<>();
+		String imgLoad = prod.getProdCate1() + "/" + prod.getProdCate2() + "/" +  prod.getThumb1();
+		
+		// 최근 본 상품 불러오기 
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("lateView")) {
+					String value = cookie.getValue();
+					String[] prods = value.split(",");
+					prodDatas.addAll(Arrays.asList(prods));
+				}
+			}
+		}
+		
+		// 최근 상품 추가
+		if(prodNo != null) {
+			prodDatas.add(prodNo);
+			prodDatas.add(imgLoad);
+			if(prodDatas.size() > 10) {
+				prodDatas.remove(1);
+				prodDatas.remove(0);
+			}
+		}
+		
+		// 쿠키에 상품 저장
+		String prodCookie = String.join(",", prodDatas);
+		Cookie late = new Cookie("lateView", prodCookie);
+		late.setPath(req.getContextPath());
+		late.setMaxAge(60*60*24);
+		resp.addCookie(late);
+		*/
+		
         
         // req.setAttribute 영역 ********************************************
         req.setAttribute("day", twoDaysLaterFormatted);
@@ -169,6 +208,8 @@ public class ViewController extends HttpServlet{
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
+		
+		//req.setAttribute("prodDatas", prodDatas);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/product/view.jsp");
 		dispatcher.forward(req, resp);

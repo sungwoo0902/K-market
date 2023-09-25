@@ -257,9 +257,9 @@
 	    $('.goToReview').click(function(e) {
 	    	e.preventDefault();
 	    	
-	    	const review = document.querySelector('.yes'); // querySelector 사용
+	    	const review = document.querySelector('.yes');
 	        if(review) {
-	            review.scrollIntoView({ behavior: 'smooth' }); // 'smooth' 오타 수정
+	            review.scrollIntoView({ behavior: 'smooth' });
 	        }else {
 	        	alert('등록된 리뷰가 없습니다.');
 	        }

@@ -1,11 +1,14 @@
 package kr.co.kmarket.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +53,23 @@ public class IndexController extends HttpServlet{
 		MemberDTO sessUser = (MemberDTO) session.getAttribute("sessUser");
 		req.setAttribute("sessUser", sessUser);
 		
+		// 최근 본 상품 ****************************************************
+		/*
+		Cookie[] cookies = req.getCookies();
+		List<String> prodDatas = new ArrayList<>();
+		
+		// 최근 본 상품 불러오기 
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("lateView")) {
+					String value = cookie.getValue();
+					String[] prods = value.split(",");
+					prodDatas.addAll(Arrays.asList(prods));
+				}
+			}
+		}
+		*/
+		
 		// 사이드 카테고리(cate1) 불러오기
 		List<CategoryDTO> category1 = cService.selectCate1s();
 		req.setAttribute("category1", category1);
@@ -69,6 +89,7 @@ public class IndexController extends HttpServlet{
 		req.setAttribute("rcmdItems",    rcmdItems);
 		req.setAttribute("currentItems", currentItems);
 		req.setAttribute("discntItems",  discntItems);
+		//req.setAttribute("prodDatas", prodDatas);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/index.jsp");
 		dispatcher.forward(req, resp);
