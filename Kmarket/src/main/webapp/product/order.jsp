@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="./js/zipcode.js"></script>
 <script>
 	$(function(){
 		let prevPoint = 0;
@@ -97,7 +99,27 @@
 				ordComplete = 2;
 			}
 			
+			if(recipName == ""){
+				alert('받으실 분의 이름을 입력하세요.');
+				return;
+			}else if(recipHp == ""){
+				alert('받으실 분의 휴대폰 번호를 입력하세요.');
+				return;
+			}else if(recipZip == ""){
+				alert('받으실 분의 주소를 입력하세요.');
+				return;
+			}
+			// 이름이 주어진 형식과 일치하는지 검사
+			if (!/^[a-zA-Z가-힣]{2,}$/.test(recipName)) {
+			    alert('이름이 유효하지 않습니다. 2자리 이상의 영문자 또는 한글만 입력하세요.');
+			    return;
+			}
 			
+			// 휴대폰 번호가 주어진 형식과 일치하는지 검사
+			if (!/^\d{3}-\d{4}-\d{4}$/.test(recipHp)) {
+			    alert('휴대폰 번호가 유효하지 않습니다. - 포함 11자리를 입력해주세요.');
+			    return;
+			}
 			
 			const jsonData = {
 					"usedPoint": usedPoint,
@@ -125,7 +147,6 @@
 					window.location.href = '${ctxPath}/product/complete.do';
 				}
 			});
-			
 	    });
 	}); //end
 
@@ -214,6 +235,10 @@
                             <td class="ordDiscount"><fmt:formatNumber value="-${order.ordDiscount}" pattern="#,###" />원</td>
                         </tr>
                         <tr>
+                            <td>적립금</td>
+                            <td class="savePoint"><fmt:formatNumber value="${order.savePoint}" pattern="#,###" />원</td>
+                        </tr>
+                        <tr>
                             <td>배송비</td>
                             <td class="ordDelivery"><fmt:formatNumber value="${order.ordDelivery}" pattern="#,###" />원</td>
                         </tr>
@@ -237,33 +262,33 @@
                         <tr>
                             <td>주문자</td>
                             <td>
-                                <input type="text" id="orderer" name="orderer" value="${member.name}">
+                                <input type="text" id="orderer" name="orderer" value="${member.name}" placeholder="이름을 입력" required>
                             </td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
                             <td>
-                                <input type="text" id="hp" name="hp" value="${member.hp}">
+                                <input type="text" id="hp" name="hp" value="${member.hp}" maxlength="13" placeholder="휴대폰번호 입력" required>
                                 <span>- 포함 입력</span>
                             </td>
                         </tr>
                         <tr>
                             <td>우편번호</td>
                             <td>
-                                <input type="text" id="zip" name="zip" value="${member.zip}" readonly>
-                                <input type="button" value="검색">
+                                <input type="text" id="zip" name="zip" value="${member.zip}" readonly required>
+                                <input type="button" value="검색" onclick="zipcode()">
                             </td>
                         </tr>
                         <tr>
                             <td>기본주소</td>
                             <td>
-                                <input type="text"id="addr1"  name="addr1" value="${member.addr1}">
+                                <input type="text" id="addr1"  name="addr1" value="${member.addr1}" readonly>
                             </td>
                         </tr>
                         <tr>
                             <td>상세주소</td>
                             <td>
-                                <input type="text" id="addr2" name="addr2" value="${member.addr2}">
+                                <input type="text" id="addr2" name="addr2" value="${member.addr2}" placeholder="상세주소를 입력하세요">
                             </td>
                         </tr>
                     </tbody>
