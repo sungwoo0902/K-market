@@ -984,26 +984,7 @@ public class ProductDAO extends DBHelper{
 			
 			if (rs.next()) {
 				total = rs.getInt(1);
-			if(search == null && level ==7 ) {
-				conn = getConnection();
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(SQL.SELECT_COUNT_PRODUCTS_ALL);
-				
-			} else if(search == null) {
-				conn = getConnection();
-				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SELLER);
-				psmt.setString(1, seller);
-				rs = psmt.executeQuery();
-				
-			} else {
-				conn = getConnection();
-				psmt = conn.prepareStatement(SQL.SELECT_COUNT_PRODUCTS_SEARCH);
-				psmt.setString(1, seller);
-				psmt.setString(2, cate1);
-				psmt.setString(3, search);
-				rs = psmt.executeQuery();
 			}
-			
 			close();
 			
 		} catch (Exception e) {

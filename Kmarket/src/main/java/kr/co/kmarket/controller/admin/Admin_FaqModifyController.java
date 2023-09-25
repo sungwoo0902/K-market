@@ -99,6 +99,7 @@ public class Admin_FaqModifyController extends HttpServlet {
 				dto.setCate2(boardCate3);
 				dto.setTitle(title);
 				dto.setContent(content);
+				dto.setNo(no);
 				logger.debug("dto : " + dto);
 				
 				// 작성한 글 DB 등록

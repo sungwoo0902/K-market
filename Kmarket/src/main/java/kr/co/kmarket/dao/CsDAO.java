@@ -285,6 +285,8 @@ public class CsDAO extends DBHelper {
 			psmt.setString(2, dto.getTitle());
 			psmt.setString(3, dto.getContent());
 			psmt.setInt(4, dto.getNo());
+			psmt.executeUpdate();
+			close();
 			
 		} catch (Exception e) {
 			logger.error("deleteBoard() ERROR : " + e.getMessage());
@@ -301,10 +303,14 @@ public class CsDAO extends DBHelper {
 				psmt.setString(3, dto.getTitle());
 				psmt.setString(4, dto.getContent());
 				psmt.setInt(5, dto.getNo());
-		 
+				psmt.executeUpdate();
+				close();
+				
 		} catch (Exception e) {
 			logger.error("deleteBoard() ERROR : " + e.getMessage());
+			
 		}
+	}
 	public int updateBoard(CsDTO dto) {
 		int result = 0;
 		try {

@@ -67,7 +67,6 @@ public enum ProductService {
 		return dao.selectProductsAdminSearch4(start, search);
 	}
 	
-=======
 	public List<ProductDTO> selectProductsAllWithType(String type, int start) {
 		return dao.selectProductsAllWithType(type, start);
 	}
