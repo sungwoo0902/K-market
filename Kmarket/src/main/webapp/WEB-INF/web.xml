@@ -27,9 +27,6 @@
   	- controller.IndexController를 통한 기본 메인페이지 출력
   -->
   
-  <!-- 로그인 여부 체크 필터 등록 -->
-  
-  
   <!-- 인코딩 필터 등록 -->
   <filter>
   	<filter-name>SetCharacterEncodingFilter</filter-name>
@@ -44,4 +41,113 @@
   	<filter-name>SetCharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern> <!-- 모든 파일에 대한 설정 -->
   </filter-mapping>
+  
+  
+  
+  <!-- 필터 등록 및 연결 -->
+  <!-- 필터 : 비회원만 이용 가능한 페이지 -->
+  <filter>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<filter-class>kr.co.kmarket.filter.CheckLogoutFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<url-pattern>/member/join.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<url-pattern>/member/login.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<url-pattern>/member/register.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<url-pattern>/member/registerSeller.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLogoutFilter</filter-name>
+  	<url-pattern>/member/signup.do</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <!-- 필터 : 로그인 후 이용 가능한 페이지 -->
+  <filter>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<filter-class>kr.co.kmarket.filter.CheckLoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/member/logout.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/product/cart.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/product/order.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/product/complete.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/cs/qna/write.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/cs/qna/modify.do</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <!-- 필터 : 판매자 등급 이상만 이용 가능한 페이지 -->
+  <filter>
+  	<filter-name>CheckSellerFilter</filter-name>
+  	<filter-class>kr.co.kmarket.filter.CheckSellerFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckSellerFilter</filter-name>
+  	<url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  <!-- 필터 : 최고관리자 등급만 이용 가능한 페이지 -->
+  <filter>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<filter-class>kr.co.kmarket.filter.CheckAdminFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<url-pattern>/admin/notice/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<url-pattern>/admin/faq/*</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<url-pattern>/admin/qna/*</url-pattern>
+  </filter-mapping>
+  
 </web-app>

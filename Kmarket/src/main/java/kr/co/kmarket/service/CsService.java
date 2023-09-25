@@ -52,11 +52,16 @@ public enum CsService {
 		return dao.selectBoardsAll(group, cate1);
 	}
 	
+
 	public void updateNotice(CsDTO dto) {
 		dao.updateNotice(dto);
 	}
 	public void updateFaq(CsDTO dto) {
 		dao.updateFaq(dto);
+
+	public int updateBoard(CsDTO dto) {
+		return dao.updateBoard(dto);
+
 	}
 	
 	public void deleteBoard(String no) {

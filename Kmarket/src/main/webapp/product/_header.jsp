@@ -9,15 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>케이마켓::대한민국 1등 온라인 쇼핑몰</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="./css/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" href="../css/style.css"/>
-    <link rel="stylesheet" href="./css/style.css"/>
     <script>
 		$(function() {
 			// 구현되지 않은 서비스 및 2차 개발 예정인 서비스 알림
@@ -70,21 +70,11 @@
             <div class="menu">
                 <div>
                     <ul>
-                        <li>
-                            <a href="#" class="unready">히트상품</a>
-                        </li>
-                        <li>
-                            <a href="#" class="unready">추천상품</a>
-                        </li>
-                        <li>
-                            <a href="#" class="unready">최신상품</a>
-                        </li>
-                        <li>
-                            <a href="#" class="unready">인기상품</a>
-                        </li>
-                        <li>
-                            <a href="#" class="unready">할인상품</a>
-                        </li>
+                        <li><a href="${ctxPath}/product/list.do?type=7">히트상품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?type=4">추천상품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?type=6">최신상품</a></li>
+	                    <li><a href="#" class="unready">인기상품</a></li>
+	                    <li><a href="${ctxPath}/product/list.do?type=8">할인상품</a></li>
                     </ul>
                     <ul>
                         <li>

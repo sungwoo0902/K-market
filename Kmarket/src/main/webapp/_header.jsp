@@ -116,11 +116,11 @@
             <div class="menu">
                 <div>
                   <ul>
-                    <li><a href="#" class="unready">히트상품</a></li>
-                    <li><a href="#" class="unready">추천상품</a></li>
-                    <li><a href="#" class="unready">최신상품</a></li>
+                    <li><a href="${ctxPath}/product/list.do?type=7">히트상품</a></li>
+                    <li><a href="${ctxPath}/product/list.do?type=4">추천상품</a></li>
+                    <li><a href="${ctxPath}/product/list.do?type=6">최신상품</a></li>
                     <li><a href="#" class="unready">인기상품</a></li>
-                    <li><a href="#" class="unready">할인상품</a></li>
+                    <li><a href="${ctxPath}/product/list.do?type=8">할인상품</a></li>
                   </ul>
                   <ul>
                     <li><a href="${ctxPath}/cs/notice/list.do?cate1=1">공지사항</a></li>

@@ -7,6 +7,11 @@
 	 
 	<!-- 배포용 -->
 	<!--<property name="DIR" value="/home/jsp/logs"/>-->
+	<property name="LOG_DIR" value="/logs"/>
+	 
+	<!-- 배포용 -->
+	<!-- <property name="DIR" value="/home/jsp/logs"/> -->
+
 	
 	
 	
@@ -56,9 +61,9 @@
 		</encoder>
 	</appender>
   
-	<root level="info">
-	  <!-- <appender-ref ref="STDOUT" /> -->
-	  <appender-ref ref="FILE" />
-	  <appender-ref ref="ROLLING_DAILY" />
+	<root level="debug">
+	  <appender-ref ref="STDOUT" />
+	  <!-- <appender-ref ref="FILE" />
+	  <appender-ref ref="ROLLING_DAILY" /> -->
 	</root>
 </configuration>

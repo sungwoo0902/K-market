@@ -10,9 +10,9 @@
             <h1>상품목록</h1>
             <!-- 처리해야됨 -->
             <p>
-                HOME > 
+                ${(cate eq null)?'전체보기':'HOME >'} 
                 <span>${cate.c1Name}</span>
-                > 
+                <c:if test="${cate.c2Name ne null}">></c:if> 
                 <strong>${cate.c2Name}</strong>
             </p>
         </nav>
@@ -43,8 +43,8 @@
             	<c:forEach var="prod" items="${products}">
                 <tr>
                     <td>
-                        <a href="${ctxPath}/product/view.do?cate1=${cate1}&cate2=${cate2}&prodNo=${prod.prodNo}" class="thumb">
-                            <img src="${ctxPath}/thumb/${cate1}/${cate2}/${prod.thumb2}" alt="상품이미지">
+                        <a href="${ctxPath}/product/view.do?cate1=${prod.prodCate1}&cate2=${prod.prodCate2}&prodNo=${prod.prodNo}" class="thumb">
+                            <img src="${ctxPath}/thumb/${prod.prodCate1}/${prod.prodCate2}/${prod.thumb2}" alt="상품이미지">
                         </a>
                     </td>
                     <td>
@@ -94,6 +94,12 @@
                     </td>
                 </tr>
                 </c:forEach>
+                <c:if test="${products.size() < 1}">
+                	<div class="prodListNull">
+	                	<i class="fas fa-store-slash"></i><br><br>
+	                	등록된 상품이 없습니다.
+                	</div>
+                </c:if>
             </tbody>
         </table>
         <!-- 상품목록 페이지번호 -->

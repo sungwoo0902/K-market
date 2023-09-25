@@ -355,27 +355,49 @@ footer p > strong {
 }
 
 .btnList {
-  display: inline-block;
-  width: 200px;
-  height: 60px;
-  margin: 40px auto 0;
-  border: 1px solid #ccc;
-  border-radius: 34px;
-  font-size: 16px;
-  color: #000;
-  line-height: 58px;
-  text-align: center;
-  box-sizing: border-box;
+	float: right;
+	display: inline-block;
+	width: 200px;
+	height: 60px;
+	margin: 40px auto 0;
+	border: 1px solid #ccc;
+	border-radius: 34px;
+	font-size: 16px;
+	color: #000;
+	line-height: 58px;
+	text-align: center;
+	box-sizing: border-box;
 }
 .btnList:hover {
   background-color: #f7f7f7;
 }
+.btnModi {
+	float: right;
+	display: inline-block;
+	width: 200px;
+	height: 60px;
+	margin: 40px auto 0;
+	margin-right: 10px;
+	border: 1px solid #0063ce;
+	background-color: #067dfd;
+	border-radius: 34px;
+	font-size: 16px;
+	color: #fff;
+	line-height: 58px;
+	text-align: center;
+	box-sizing: border-box;
+}
+.btnModi:hover {
+  background-color: #0954f6;
+}
 
 .btnSubmit {
+  float: right;
   display: inline-block;
   width: 200px;
   height: 60px;
   margin: 40px auto 0;
+  margin-left: 10px;
   background-color: #067dfd;
   border: 1px solid #0063ce;  
   border-radius: 34px;
@@ -423,7 +445,11 @@ footer p > strong {
   margin-top: 16px;
   font-size: 16px;
 }
-
+#cs > .notice > nav p strong {
+	color: green;
+	font-weight: bold; 
+	font-size: 16px;
+}
 #cs > .notice > nav p > span {
   font-size: 12px;
   margin-left: 10px;
@@ -592,6 +618,11 @@ footer p > strong {
   float: left;
   margin-top: 16px;
   font-size: 16px;
+}
+#cs > .faq > nav p strong {
+	color: green;
+	font-weight: bold; 
+	font-size: 16px;
 }
 
 #cs > .faq > nav p > span {
@@ -765,6 +796,11 @@ footer p > strong {
   float: left;
   margin-top: 16px;
   font-size: 16px;
+}
+#cs > .qna > nav p strong {
+	color: green;
+	font-weight: bold; 
+	font-size: 16px;
 }
 
 #cs > .qna > nav p > span {

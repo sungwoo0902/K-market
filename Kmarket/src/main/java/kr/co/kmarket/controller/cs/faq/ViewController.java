@@ -15,6 +15,13 @@ import org.slf4j.LoggerFactory;
 import kr.co.kmarket.dto.CsDTO;
 import kr.co.kmarket.service.CsService;
 
+/**
+ *	작업시작일 : 2023/09/18
+ *	작업종료일 : 2023/09/18
+ *	작업자 : 한상민
+ *  내용 : cs 페이지 모듈화 및 view페이지 구현
+ */
+
 @WebServlet("/cs/faq/view.do")
 public class ViewController extends HttpServlet {
 
@@ -28,11 +35,16 @@ public class ViewController extends HttpServlet {
 		
 		String cate1 = req.getParameter("cate1");
 		String no    = req.getParameter("no");
+		String group = "2";
 		logger.debug("cate1 : " + cate1);
 		logger.debug("no    : " + no);
 		
-		req.setAttribute("cate1", cate1);
+		// cate1_name 조회
+		CsDTO cate = service.selectBoard_list(group, cate1);
+
 		req.setAttribute("board", "view");
+		req.setAttribute("cate1", cate1);
+		req.setAttribute("cate", cate);
 		
 		CsDTO dto = service.selectBoard(no);
 		logger.debug("dto : " + dto);
