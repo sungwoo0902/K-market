@@ -11,14 +11,14 @@
 							</nav>
 							
 							<div class="content">
-								<p>
+								<p style="white-space: pre-wrap;">
 									<c:out value="${qna.content}"/>
 								</p>
 							</div>
 							<c:if test="${ans ne null}">
 							<div class="answer">
-								<h2 class="title">☞ [답변] <c:out value="${ans.title}"/></h2>
-								<p>
+								<h2 class="title">☞ [답변] ${ans.title}</h2>
+								<p style="white-space: pre-wrap;">
 									<c:out value="${ans.content}"/>
 								</p>
 							</div>

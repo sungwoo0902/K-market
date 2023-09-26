@@ -7,7 +7,7 @@
 							</nav>
 							
 							<div class="content">
-								<p>
+								<p style="white-space: pre-wrap;">
 									<c:out value="${faq.content}"/>
 								</p>
 								<p>
