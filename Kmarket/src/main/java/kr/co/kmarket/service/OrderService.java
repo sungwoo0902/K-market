@@ -49,4 +49,10 @@ public enum OrderService {
 	public void deleteBeforeOrderItems(String uid) {
 		dao.deleteBeforeOrder(uid);
 	}
+	
+	
+	
+	public void insertPoint(String uid, int ordNo, String savePoint) {
+		dao.insertPoint(uid, ordNo, savePoint);
+	}
 }

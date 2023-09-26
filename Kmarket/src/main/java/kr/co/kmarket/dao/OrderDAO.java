@@ -282,4 +282,21 @@ public class OrderDAO extends DBHelper{
 		
 	}
 	
+	
+	public void insertPoint(String uid, int ordNo, String savePoint) {
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_POINT);
+			psmt.setString(1, uid);
+			psmt.setInt(2, ordNo);
+			psmt.setString(3, savePoint);
+			psmt.executeUpdate();
+			
+			close();
+		} catch (Exception e) {
+			logger.error("insertPoint() error : "+e.getMessage());
+		}
+	}
+	
 }

@@ -202,6 +202,7 @@
 				success: function(data){
 					
 					if(data.result == 1){
+						alert('선택된 상품들을 주문합니다.');
 						window.location.href = ctxPath+'/product/order.do';
 					}
 				}

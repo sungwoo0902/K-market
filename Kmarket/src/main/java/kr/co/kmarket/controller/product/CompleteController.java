@@ -93,6 +93,7 @@ public class CompleteController extends HttpServlet{
 		String recipAddr2 = req.getParameter("recipAddr2");
 		String ordCompletePayment = req.getParameter("ordCompletePayment");
 		String ordComplete = req.getParameter("ordComplete");
+		String savePoint = req.getParameter("savePoint");
 		
 		logger.debug("ordCompletePayment : "+ ordCompletePayment);
 		
@@ -117,6 +118,7 @@ public class CompleteController extends HttpServlet{
 		if(ordComplete.equals("1")) {
 			result = 1;
 		}else if(ordComplete.equals("2")) {
+			ordService.insertPoint(uid, ordNo, savePoint);
 			result = 2;
 		}
 		
