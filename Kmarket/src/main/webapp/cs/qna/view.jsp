@@ -3,7 +3,7 @@
 <jsp:include page="../_asideQna.jsp"/>
 						<article>
 							<nav>
-								<h2 class="title">[${qna.cate2_name}] ${qna.title}</h2>
+								<h2 class="title">[${qna.cate2_name}] <c:out value="${qna.title}"/></h2>
 								<p>
 									<span>${qna.maskingUid}</span>
 									<span>${qna.rdate}</span>
@@ -12,14 +12,14 @@
 							
 							<div class="content">
 								<p>
-									${qna.content}
+									<c:out value="${qna.content}"/>
 								</p>
 							</div>
 							<c:if test="${ans ne null}">
 							<div class="answer">
-								<h2 class="title">☞ [답변] ${ans.title}</h2>
+								<h2 class="title">☞ [답변] <c:out value="${ans.title}"/></h2>
 								<p>
-									${ans.content}
+									<c:out value="${ans.content}"/>
 								</p>
 							</div>
 							</c:if>

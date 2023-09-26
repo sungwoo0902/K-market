@@ -10,7 +10,7 @@
 							<c:forEach var="qna_list" items="${qna_lists}">
 								<c:if test="${qna_list.group == 3}">
 									<tr>
-										<td><a href="./view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="btnQna">[${qna_list.cate2_name}] ${qna_list.title}</a></td>
+										<td><a href="./view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="btnQna">[${qna_list.cate2_name}] <c:out value="${qna_list.title}"/></a></td>
 										<c:if test="${qna_list.answer eq 0}">
 											<td style="font-size: 14px; color: grey;">검토중</td>
 										</c:if>

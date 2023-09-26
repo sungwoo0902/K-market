@@ -3,12 +3,12 @@
 <jsp:include page="../_asideFaq.jsp"/>
 						<article>
 							<nav>
-								<h2 class="title"><span>Q.</span>${faq.title}</a></h2>                
+								<h2 class="title"><span>Q.</span><c:out value="${faq.title}"/></a></h2>                
 							</nav>
 							
 							<div class="content">
 								<p>
-									${faq.content}
+									<c:out value="${faq.content}"/>
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>
