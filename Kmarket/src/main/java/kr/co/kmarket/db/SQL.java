@@ -431,7 +431,7 @@ public class SQL {
 			+ "`ordPayment`=?,"
 			+ "`ordComplete`=? "
 			+ "WHERE `ordNo`=?";
-	
+	public static final String INSERT_POINT = "INSERT INTO `km_member_point` SET `uid`=?, `ordNo`=?, `point`=?, `pointDate`=NOW()";
 	public static final String SELECT_LAST_ORDNO = "SELECT * FROM `km_product_order` WHERE `ordUid`=? ORDER BY `ordNo` DESC LIMIT 1";
 	
 	//**************************************************************************************************************//

@@ -80,9 +80,10 @@
 	  	//***********************************************//
 	    //****************** 결제 하기 클릭 ******************//
 	    //***********************************************//
+	    const savePoint = parseFloat($('.savePoint').text().replace(/[^0-9.]+/g, ''));
 	    $('#ordComplete').click(function(e){
 	    	e.preventDefault();
-			
+			console.log(savePoint);
 			const usedPoint = parseFloat($('.usePoint').text().replace(/[^0-9.]+/g, ''));
 			const completeTotPrice =  parseFloat($('#ordTotPrice').text().replace(/[^0-9.]+/g, ''));
 			const recipName = $('#orderer').val();
@@ -130,7 +131,8 @@
 					"recipAddr1": recipAddr1,
 					"recipAddr2": recipAddr2,
 					"ordCompletePayment": ordCompletePayment,
-					"ordComplete": ordComplete
+					"ordComplete": ordComplete,
+					"savePoint": savePoint
 			};
 			
 			$.ajax({
