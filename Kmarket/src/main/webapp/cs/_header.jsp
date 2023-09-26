@@ -27,7 +27,12 @@
 				<div class="top">
 					<div>
 						<p>
-							<a href="${ctxPath}/index.do">홈</a>
+							<c:if test="${sessUser != null}">
+								<span>
+			                    	<span style="color: #2eb275; font-weight: bold;">${sessUser.name}</span>님 반갑습니다.
+			                   	</span>
+							</c:if>
+							<a href="${ctxPath}/index.do" style="margin-left: 8px;">홈</a>
 							<c:choose>
 				                <c:when test="${sessUser eq null}">
 					                <a href="${ctxPath}/member/login.do">로그인</a>

@@ -39,6 +39,9 @@
                     <a href="${ctxPath}/member/join.do">회원가입</a>
                     </c:when>
                     <c:otherwise>
+                    <span>
+                    	<span style="color: #2eb275; font-weight: bold;">${sessUser.name}</span>님 반갑습니다.
+                   	</span>
                     <c:if test="${sessUser.type eq 2 or sessUser.type eq 3}">
                     <a href="${ctxPath}/admin/index.do">관리자</a>
                     </c:if>

@@ -30,7 +30,7 @@
 		        <ul>
 		            <c:forEach var="faq" items="${faq_lists}">
 		                <c:if test="${faq.cate2 eq status.count}">
-		                    <li><a href="./view.do?cate1=${faq.cate1}&no=${faq.no}"><span>Q.</span>${faq.title}</a></li>
+		                    <li><a href="./view.do?cate1=${faq.cate1}&no=${faq.no}"><span>Q.</span><c:out value="${faq.title}"/></a></li>
 		                </c:if>
 		            </c:forEach>
 		            <li class="more"><a href="#">더보기</a></li>

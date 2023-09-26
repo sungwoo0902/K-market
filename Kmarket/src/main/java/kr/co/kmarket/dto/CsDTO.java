@@ -65,7 +65,7 @@ public class CsDTO {
 	
 	
 	public String getTitle() {
-		return getReplace(title);
+		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -74,7 +74,7 @@ public class CsDTO {
 	
 	
 	public String getContent() {
-		return getReplace(content);
+		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
@@ -178,6 +178,8 @@ public class CsDTO {
 				+ ", cate2_name=" + cate2_name + "]";
 	}
 	
+	
+	/*
 	public static String toReplace(String str) {
 		 
 	    if(str == null) {
@@ -238,6 +240,5 @@ public class CsDTO {
 		  }
 		  return rtnStr;
 	}
-	
-	
+	*/
 }
