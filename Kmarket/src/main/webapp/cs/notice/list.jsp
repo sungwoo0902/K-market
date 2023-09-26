@@ -11,7 +11,7 @@
 				<tr>
 					<td>
 						<a href="./view.do?cate1=${notice_list.cate1}&no=${notice_list.no}">
-							<c:if test="${cate.cate1 eq 1}">[${notice_list.cate1_name}]</c:if> ${notice_list.title}
+							<c:if test="${cate.cate1 eq 1}">[${notice_list.cate1_name}]</c:if> <c:out value="${notice_list.title}"/>
 						</a>
 					</td>
 					<td>${notice_list.rdate}</td>

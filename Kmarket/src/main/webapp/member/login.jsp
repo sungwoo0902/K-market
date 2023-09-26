@@ -39,6 +39,7 @@
                     <h1>로그인</h1>
                 </nav>
                 <form action="${ctxPath}/member/login.do" method="post">
+                	<input type="hidden" value="${bfAddr}" name="bfAddr">
                     <table border="0">
                         <tr>
                             <td>아이디</td>

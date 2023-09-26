@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./_header.jsp" %>
 <script>
 	$(function() {
@@ -23,7 +24,7 @@
             <ul>
             <c:forEach var="notice_list" items="${notice_lists}" begin="0" step="1" end="4">            
             	<li>
-            		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">[${notice_list.cate1_name}] ${notice_list.title}</a>
+            		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">[${notice_list.cate1_name}] <c:out value="${notice_list.title}"/></a>
             		<span class="date">${notice_list.rdate}</span>
             	</li>
             </c:forEach>
@@ -68,7 +69,7 @@
             <ul>
             <c:forEach var="qna_list" items="${qna_lists}" begin="0" step="1" end="4">
             	<li>
-                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">[${qna_list.cate1_name}] ${qna_list.title}</a>
+                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">[${qna_list.cate1_name}] <c:out value="${qna_list.title}"/></a>
                 	<p>
                   		<span class="uid">${qna_list.maskingUid}</span>
                   		<span class="date">${qna_list.rdate}</span>

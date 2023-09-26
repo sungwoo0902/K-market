@@ -3,14 +3,14 @@
 <jsp:include page="../_asideNotice.jsp"/>
 						<article>
 							<nav>
-								<h2 class="title">${notice.title}</h2>
+								<h2 class="title"><c:out value="${notice.title}"/></h2>
 								<span class="date">${notice.fullRdate}</span>
 							</nav>
 							
 							<div class="content">
 								<p>
 									<c:if test="${cate1 eq 1}">[${cate.cate1_name}]</c:if>
-									${notice.content}<br/><br/>
+									<c:out value="${notice.content}"/><br/><br/>
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>
