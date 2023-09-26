@@ -100,7 +100,7 @@ $(function(){
                     <td><a href="${ctxPath}/admin/notice/view.do?group=1&no=${notice.no}">${notice.title}</a></td>
                    	<td>${notice.rdate}</td>
                     <td>
-                        <a href="${ctxPath}/admin/notice/delete.do?no=${notice.no}">[삭제]</a>
+                        <a href="${ctxPath}/admin/notice/delete.do?group=1&pg=1&no=${notice.no}">[삭제]</a>
                         <a href="${ctxPath}/admin/notice/modify.do?group=1&no=${notice.no}">[수정]</a>
                     </td>                   
                 </tr>

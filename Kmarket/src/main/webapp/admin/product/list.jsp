@@ -36,7 +36,7 @@ $(function(){
         
 	    $.ajax({
 	        type: "GET",
-	        url: "${ctxPath}/admin/product/delete.do",
+	        url: "${ctxPath}/admin/product/selcteDelete.do",
 	        traditional: true,
 	        data: {
 	            checkBoxArr: checkBoxArr
@@ -68,6 +68,11 @@ $(function(){
 	   
 	    	
 	});
+	
+	$(".dtnProductDelete").click(function (e) {
+		e.preventDefault();
+		$('.delete').submit();
+	})
 
 });
 
@@ -120,7 +125,10 @@ $(function(){
                     <td>${product.seller}</td>
                     <td>${product.hit}</td>
                     <td>
-                        <a href="${ctxPath}/admin/product/delete.do?no=${product.prodNo}">[삭제]</a>
+                    	<form action="${ctxPath}/admin/product/delete.do" method="post" class="delete">
+                    	<input type="hidden" name="no" value="${product.prodNo}">
+                        <a href="#" class="dtnProductDelete">[삭제]</a>
+                        </form>
                     </td>
                     
                 </tr>

@@ -8,9 +8,9 @@
     <%@ include file="../_aside.jsp" %>
     <section id="admin-cs-view">
 	     <nav>
-	            <h3>문의사항</h3>
+	            <h3>공지사항</h3>
 	            <p>
-	                HOME > 고객센터 > <strong>문의사항</strong>
+	                HOME > 고객센터 > <strong>공지사항</strong>
 	            </p>
 	        </nav>
 	    <article>

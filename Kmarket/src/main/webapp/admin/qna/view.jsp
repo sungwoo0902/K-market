@@ -43,10 +43,11 @@
                   </td>
                 </tr>
                 </table>
-                <input type="submit" value="답변 제출">
+                <input type="submit" value="답변 제출" class="inputSubmit">
+                <a href="${ctxPath}/admin/qna/delete.do?no=${qna.no}" class="btnViewDelete">삭제</a>
+           		<a href="${ctxPath}/admin/qna/list.do?group=3&pg=1" class="btnList">목록</a>
             </form>
-            <a href="${ctxPath}/admin/qna/delete.do?no=${qna.no}" class="btnViewDelete">삭제</a>
-            <a href="${ctxPath}/admin/qna/list.do?group=3&pg=1" class="btnList">목록</a>
+
 		</article>
 	</section>
 </main>		

@@ -2,7 +2,7 @@
 <%@ include file="../_header.jsp" %>
 <main>
 	<%@ include file="../_aside.jsp" %>
-    <section id="admin-notice-register">
+    <section id="admin-cs-register">
         <nav>
             <h3>공지사항</h3>
             <p>
@@ -42,7 +42,7 @@
                 </section>
                 <input type="submit" value="수정하기" class="csModify">           
             </form>
-            
+            	<a href="${ctxPath}/admin/notice/view.do?no=${faq.no}" class="csCancle">취소</a>
         </article>
     </section>
 </main>
