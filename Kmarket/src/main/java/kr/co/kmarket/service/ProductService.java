@@ -77,6 +77,11 @@ public enum ProductService {
 	public void deleteProduct(String uid, String no) {
 		dao.deleteProduct(uid, no);
 	}
+	
+	public void deleteProductPrivacy(String no) {
+		dao.deleteProductPrivacy(no);
+	}
+	
 	public int selectCountProductsAll(String seller, int level) {
 		return dao.selectCountProductsAll(seller, level);
 	}

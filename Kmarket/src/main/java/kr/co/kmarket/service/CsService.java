@@ -36,6 +36,10 @@ public enum CsService {
 		return dao.selectBoard_list(group, cate1);
 	}
 	
+	public List<CsDTO> selectLatests(int group, int size) {
+		return dao.selectLatests(group, size);
+	}
+	
 	public CsDTO selectBoard_parent(String group, String cate1, int start) {
 		return dao.selectBoard_parent(group, cate1, start);
 	}

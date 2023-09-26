@@ -75,14 +75,12 @@ $(function(){
             "jsonCate2": selectedCate2 
         }
 
-        // AJAX request to update the second category dropdown
         $.ajax({
             url: './list.do',
             type: 'post',
             data: jsonData,
             dataType: 'json',
             success: function(data) {
-                // Update the second category dropdown options
                 cate3.empty();
                 cate3.append($('<option>', {
                     value: '0',
@@ -96,7 +94,6 @@ $(function(){
                     }));
                 }
 
-                // After updating the options, trigger the list update
                 updateFAQList();
             }
         });
@@ -169,7 +166,7 @@ $(function(){
                     <td><a href="${ctxPath}/admin/faq/view.do?group=2&no=${faq.no}">${faq.title}</a></td>
                     <td>${faq.rdate}</td>
                     <td>
-                        <a href="${ctxPath}/admin/faq/delete.do?no=${faq.no}">[삭제]</a>
+                        <a href="${ctxPath}/admin/faq/delete.do?group=2&pg=1&no=${faq.no}">[삭제]</a>
                         <a href="${ctxPath}/admin/faq/modify.do?no=${faq.no}">[수정]</a>
                     </td>                  
                 </tr>

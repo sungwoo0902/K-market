@@ -169,7 +169,7 @@ main table tr > td:nth-child(1) {
     border-bottom: 1px solid #e6e6e6;
     background: #f6f6f6;
     padding: 10px;    
-    text-align: left;
+    text-align: center;
 }
 
 main table tr:nth-child(5) > td:nth-child(2) > input:nth-child(3){
@@ -255,6 +255,62 @@ select {
     box-sizing: border-box;
 }
 
+.csCancle {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
+    font-size: 13px; 
+    
+}
+.btnViewDelete {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
+    font-size: 13px; 
+    
+}
+.btnViewModify {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
+    font-size: 13px; 
+    
+}
+.btnList {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
+    font-size: 13px; 
+    
+}
+
+.inputSubmit {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 13px; 
+    
+}
+
 /* span {
     vertical-align: bottom;
     color: #bc2e13;
@@ -276,6 +332,7 @@ button[type=submit] {
     padding: 0 15px;
     background-color: #a8b2c5;            
     border: 1px solid #959595;
+    line-height: 26px;
     font-size: 12px;            
     color: #fff;            
     vertical-align: middle;
@@ -615,6 +672,8 @@ button[type=submit] {
     padding: 26px;
     box-sizing: border-box;
 }
+
+
 	
 #admin-cs-view > nav {
   width: 100%;

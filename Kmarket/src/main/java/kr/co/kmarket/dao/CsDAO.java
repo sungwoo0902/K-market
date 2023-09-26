@@ -89,6 +89,43 @@ public class CsDAO extends DBHelper {
 		return dto;
 	}
 	
+	public List<CsDTO> selectLatests(int group, int size) {
+		
+		List<CsDTO> latests = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LATESTS);
+			psmt.setInt(1, group);
+			logger.debug("group : " + group);
+			psmt.setInt(2, size);
+			logger.debug("size :" + size);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				CsDTO dto = new CsDTO();
+				dto.setNo(rs.getString(1));
+				dto.setParent(rs.getString(2));
+				dto.setGroup(rs.getString(3));
+				dto.setCate1(rs.getString(4));
+				dto.setCate2(rs.getString(5));
+				dto.setUid(rs.getString(6));
+				dto.setTitle(rs.getString(7));
+				dto.setContent(rs.getString(8));
+				dto.setRdate(rs.getString(9));
+				latests.add(dto);
+				
+				logger.debug("dto : " + dto);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error("selectLatests : " + e.getMessage());
+		}
+
+		return latests;
+		
+	}
+	
 	public CsDTO selectAnswer(String no) {
 		CsDTO dto = null;
 		try {

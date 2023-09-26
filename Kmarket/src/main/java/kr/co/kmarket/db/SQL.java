@@ -101,6 +101,7 @@ public class SQL {
 												+ "`ip`=?,"
 												+ "`rdate`=NOW()";
 	public final static String DELETE_PRODUCT 					= "DELETE FROM `km_product` WHERE `seller`=? AND prodNo =?";
+	public final static String DELETE_PRODUCT_PRIVACY 			= "DELETE FROM `km_product` WHERE prodNo =?";
 	
 	public final static String SELECT_PRODUCT 					= "SELECT "
 																+ "	a.*, "
@@ -375,6 +376,8 @@ public class SQL {
 																	+ "`total`= `total`+? "
 																	+ "WHERE `uid`=? AND `prodNo`=?";
 	public static final String DELETE_CART						= "DELETE FROM `km_product_cart` WHERE `uid`=? AND `cartNo`=?";
+	
+	public static final String DELETE_CART_BY_PRODUCT = "DELETE FROM `km_product_cart` WHERE `prodNo`=?";
 	//*********************************************************************************************************//
 	//********************************************* Product_Cate1 *********************************************//
 	//*********************************************************************************************************//
@@ -503,6 +506,11 @@ public class SQL {
 												+ "LEFT JOIN `km_board_cate2` AS d ON a.`cate2` = d.`cate2` AND a.`cate1` = d.`cate1` "
 												+ "WHERE `no`=?";
 	
+	public final static String SELECT_LATESTS = "SELECT * FROM `km_board` "
+												+ "WHERE `parent`=0 AND `group`=? "
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT 0, ?";
+
 	public static final String UPDATE_BOARD = "UPDATE `km_board` SET `cate1`=?, `cate2`=?, `title`=?, `content`=? WHERE `no`=?";
 	
 	public static final String DELETE_BOARD = "DELETE FROM `km_board` WHERE no=?";

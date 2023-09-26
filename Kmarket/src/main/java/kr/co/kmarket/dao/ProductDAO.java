@@ -113,6 +113,8 @@ public class ProductDAO extends DBHelper{
 		
 		try {
 			conn= getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_CART_BY_PRODUCT);
+			psmt.setString(1, no);
 			psmt = conn.prepareStatement(SQL.DELETE_PRODUCT);
 			psmt.setString(1, uid);
 			psmt.setString(2, no);
@@ -126,8 +128,25 @@ public class ProductDAO extends DBHelper{
 		}
 		
 	}
-	
-	
+	public void deleteProductPrivacy(String no) {
+		
+		try {
+			conn= getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_CART_BY_PRODUCT);
+			psmt.setString(1, no);
+			psmt = conn.prepareStatement(SQL.DELETE_PRODUCT_PRIVACY);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			
+			close();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+		
 
 	public List<ProductDTO> selectProductsAdmin(int start, String search) {
 		

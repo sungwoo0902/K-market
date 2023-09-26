@@ -39,7 +39,7 @@ public class Admin_FaqModifyController extends HttpServlet {
 		req.setAttribute("board", "write");
 		
 		// 글 작성시 대분류 리스트 가져오기.
-		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose("1");
+		List<CsDTO> cate1List = service.selectCate1ListWhenGroupChoose("2");
 		logger.debug("cate1List : " + cate1List.toString());
 		req.setAttribute("cate1List", cate1List);
 

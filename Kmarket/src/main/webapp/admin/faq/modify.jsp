@@ -60,7 +60,7 @@ $(function() {
 </script>
 <main>
 	<%@ include file="../_aside.jsp" %>
-    <section id="admin-notice-register">
+    <section id="admin-cs-register">
         <nav>
             <h3>자주묻는질문</h3>
             <p>
@@ -107,7 +107,9 @@ $(function() {
                     </table>
                 </section>
                 <input type="submit" value="수정하기" class="csModify">
+                <a href="${ctxPath}/admin/faq/view.do?no=${faq.no}" class="csCancle">취소</a>
             </form>
+            	
         </article>
     </section>
 </main>
