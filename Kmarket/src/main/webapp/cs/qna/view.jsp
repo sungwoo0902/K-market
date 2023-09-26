@@ -18,7 +18,7 @@
 							<c:if test="${ans ne null}">
 							<div class="answer">
 								<h2 class="title">☞ [답변] ${ans.title}</h2>
-								<p>
+								<p style="white-space: pre-wrap;">
 									${ans.content}
 								</p>
 							</div>
