@@ -65,6 +65,9 @@ public class LoginController extends HttpServlet {
 			}
 		}
 		
+		String bfAddr = req.getHeader("referer");
+		req.setAttribute("bfAddr", bfAddr);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/member/login.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -73,12 +76,14 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("doPost()...1");
 		
-		String uid  = req.getParameter("uid");
-		String pass = req.getParameter("pass");
-		String auto = req.getParameter("auto"); // 자동로그인 체크
-		logger.debug("uid  : " + uid);
-		logger.debug("pass : " + pass);
-		logger.debug("auto : " + auto);
+		String uid    = req.getParameter("uid");
+		String pass   = req.getParameter("pass");
+		String auto   = req.getParameter("auto"); // 자동로그인 체크
+		String bfAddr = req.getParameter("bfAddr");
+		logger.debug("uid    : " + uid);
+		logger.debug("pass   : " + pass);
+		logger.debug("auto   : " + auto);
+		logger.debug("bfAddr : " + bfAddr);
 		
 		MemberDTO member = service.selectMember(uid, pass);
 		logger.debug("member : " + member);
@@ -95,8 +100,7 @@ public class LoginController extends HttpServlet {
 				cookie.setMaxAge(60*60*24*14); // 단위(초)
 				resp.addCookie(cookie);
 			}
-			
-			resp.sendRedirect("../");
+			resp.sendRedirect(bfAddr);
 		}else {
 			logger.info("LOGIN FAILED : " + " (regip : " + req.getRemoteAddr() + ")");
 			resp.sendRedirect("./login.do?success=101");
