@@ -11,7 +11,7 @@
 							</nav>
 							
 							<div class="content">
-								<p>
+								<p style="white-space: pre-wrap;">
 									${qna.content}
 								</p>
 							</div>

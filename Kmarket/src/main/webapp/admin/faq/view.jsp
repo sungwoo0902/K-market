@@ -25,7 +25,7 @@
 				</tr>
 				<tr class="cstable3">
 					<td>내용</td>
-					<td>${faq.content}<br/><br/>
+					<td style="white-space: pre-wrap;">${faq.content}<br/><br/>
 					※ 피싱 관련 피해신고<br/><br/>
 					▶ 경찰청 사이버수사국 (국번없이)182 :
 					http://cyberbureau.police.go.kr<br/>

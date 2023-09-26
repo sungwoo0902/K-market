@@ -7,7 +7,7 @@
 							</nav>
 							
 							<div class="content">
-								<p>
+								<p style="white-space: pre-wrap;">
 									${faq.content}
 								</p>
 								<p>

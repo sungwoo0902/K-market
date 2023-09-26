@@ -8,7 +8,7 @@
 							</nav>
 							
 							<div class="content">
-								<p>
+								<p style="white-space: pre-wrap;">
 									<c:if test="${cate1 eq 1}">[${cate.cate1_name}]</c:if>
 									${notice.content}<br/><br/>
 								</p>
