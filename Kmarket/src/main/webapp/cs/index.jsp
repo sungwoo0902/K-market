@@ -65,11 +65,11 @@
         
 		  <!-- 문의하기 --> 
           <section class="qna">
-            <h1>문의하기<a href="./cs/qna/list.do?cate1=1">전체보기</a></h1>
+            <h1>문의하기<a href="${ctxPath}/cs/qna/list.do?cate1=1">전체보기</a></h1>
             <ul>
             <c:forEach var="qna_list" items="${qna_lists}" begin="0" step="1" end="4">
             	<li>
-                	<a href="./cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">[${qna_list.cate1_name}] <c:out value="${qna_list.title}"/></a>
+                	<a href="${ctxPath}/cs/qna/view.do?cate1=${qna_list.cate1}&no=${qna_list.no}" class="title">[${qna_list.cate1_name}] <c:out value="${qna_list.title}"/></a>
                 	<p>
                   		<span class="uid">${qna_list.maskingUid}</span>
                   		<span class="date">${qna_list.rdate}</span>
@@ -77,7 +77,7 @@
             	</li>
             </c:forEach>
             </ul>
-            <a href="./cs/qna/write.do?cate1=1" class="ask">문의글 작성 ></a>
+            <a href="${ctxPath}/cs/qna/write.do?cate1=1" class="ask">문의글 작성 ></a>
           </section>
 
           <section class="tel">

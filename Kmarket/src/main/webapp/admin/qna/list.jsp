@@ -142,7 +142,7 @@ $(function(){
 					</c:forEach>
 				</select>
             </div>
-            <table>
+            <table class="qna">
                 <tr>
                     <th><input type="checkbox" name="all"></th>
 					<th>번호</th>

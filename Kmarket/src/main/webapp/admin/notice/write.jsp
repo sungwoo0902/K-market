@@ -99,7 +99,7 @@ $(function() {
                         </tr>
                     </table>
                 </section>
-                <input type="submit" value="등록하기" class="noticeRegister">
+                <input type="submit" value="등록하기" class="csRegister">
             </form>
         </article>
     </section>

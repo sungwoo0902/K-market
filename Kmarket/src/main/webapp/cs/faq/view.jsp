@@ -6,9 +6,9 @@
 								<h2 class="title"><span>Q.</span><c:out value="${faq.title}"/></a></h2>                
 							</nav>
 							
-							<div class="content">
+							<div class="content" style="margin-top:-106px">
 								<p style="white-space: pre-wrap;">
-									<c:out value="${faq.content}"/>
+									<br><c:out value="${faq.content}" escapeXml="true"/>
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>

@@ -83,7 +83,7 @@ $(function(){
 					</c:forEach>
 				</select>
             </div>
-            <table>
+            <table class="notice">
                 <tr>
                     <th><input type="checkbox" name="all"></th>
                     <th>번호</th>

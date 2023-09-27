@@ -28,24 +28,18 @@
 				</tr>
 				<tr class="cstable3">
 					<td>내용</td>
-					<td style="white-space: pre-wrap;">${qna.content}<br/><br/>
-					※ 피싱 관련 피해신고<br/><br/>
-					▶ 경찰청 사이버수사국 (국번없이)182 :
-					http://cyberbureau.police.go.kr<br/>
-					▶ KISA 인터넷침해대응센터 (국번없이)118 :
-					http://www.krcert.or.kr<br/>
-					감사합니다.<br/></td>
+					<td style="white-space: pre-wrap; height:200px; vertical-align: top;">${qna.content}</td>
 				</tr>
 				<tr class="cstable4">
 				<td>답변</td>
                   <td>
-                      <textarea name="content" rows="4" cols="50"></textarea>
+                      <textarea class="qnaAnswer" name="content" rows="4" cols="50"></textarea>
                   </td>
                 </tr>
                 </table>
                 <input type="submit" value="답변 제출" class="inputSubmit">
-                <a href="${ctxPath}/admin/qna/delete.do?no=${qna.no}" class="btnViewDelete">삭제</a>
-           		<a href="${ctxPath}/admin/qna/list.do?group=3&pg=1" class="btnList">목록</a>
+                <a href="${ctxPath}/admin/qna/delete.do?no=${qna.no}" class="qnabtnViewDelete">삭제</a>
+           		<a href="${ctxPath}/admin/qna/list.do?group=3&pg=1" class="qnabtnList">목록</a>
             </form>
 
 		</article>

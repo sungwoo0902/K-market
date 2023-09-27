@@ -267,8 +267,21 @@ select {
     
 }
 .btnViewDelete {
-    display: block;
+	display: block;
     float: right;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
+    font-size: 13px 
+    
+}
+.qnabtnViewDelete {
+	position: absolute;
+	bottom: 35px;
+	right: 151px;
+    display: block;
     width: 100px;
     height: 27px;
     border: 1px solid black;
@@ -296,19 +309,33 @@ select {
     border: 1px solid black;
     text-align: center;
     line-height: 27px;
+    font-size: 13px
+    
+}
+.qnabtnList {
+    position: absolute;
+    display: block;
+    bottom: 35px;
+    right: 250px;
+    width: 100px;
+    height: 27px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 27px;
     font-size: 13px; 
     
 }
 
 .inputSubmit {
     display: block;
-    float: right;
+    position: absolute;
+    right: 50px;
+    bottom: 35px;
     width: 100px;
-    height: 27px;
+    height: 29px;
     border: 1px solid black;
     text-align: center;
-    font-size: 13px; 
-    
+    font-size: 13px;
 }
 
 /* span {
@@ -579,6 +606,30 @@ button[type=submit] {
 #admin-cs-list > section > table  tr > td:nth-child(10) {width: 80px;}
 #admin-cs-list > section > table  tr > td:nth-child(11) {width: 100px;}
 
+#admin-cs-list > section > table.faq  tr > td:nth-child(1) {width: 5%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(2) {width: 5%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(3) {width: 10%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(4) {width: 15%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(5) {width: 45%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(6) {width: 10%;}
+#admin-cs-list > section > table.faq  tr > td:nth-child(7) {width: 10%;}
+
+#admin-cs-list > section > table.notice  tr > td:nth-child(1) {width: 5%;}
+#admin-cs-list > section > table.notice  tr > td:nth-child(2) {width: 5%;}
+#admin-cs-list > section > table.notice  tr > td:nth-child(3) {width: 15%;}
+#admin-cs-list > section > table.notice  tr > td:nth-child(4) {width: 55%;}
+#admin-cs-list > section > table.notice  tr > td:nth-child(5) {width: 10%;}
+#admin-cs-list > section > table.notice  tr > td:nth-child(6) {width: 10%;}
+
+#admin-cs-list > section > table.qna  tr > td:nth-child(1) {width: 5%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(2) {width: 5%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(3) {width: 13%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(4) {width: 13%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(5) {width: 34%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(6) {width: 10%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(7) {width: 10%;}
+#admin-cs-list > section > table.qna  tr > td:nth-child(8) {width: 10%;}
+
 #admin-cs-list > section > table img.thumb {width: 60px;}
 
 #admin-cs-list > section > .csDelete {
@@ -643,19 +694,20 @@ button[type=submit] {
 .csTitle {
     padding: 5px;
     font-size: 13px;                   
-    width: 700px; 
+    width: 880px; 
     resize: none; 
 }
 .csArea {
     padding: 5px;
     font-size: 13px;                   
-    width: 700px;
+    width: 880px;
     height: 400px;
     resize: none;   
 }
 
 /* cs - 글보기 영역 */
 #admin-cs-view {
+	position: relative;
 	float: right;
     width: 1130px;
     min-height: 600px;
@@ -833,4 +885,17 @@ button[type=submit] {
 	font-size: 16px;
 	padding: 10px;
 	
+}
+
+.csRegister{
+	float: right;
+	width: 100px;
+	height: 30px;
+}
+
+.qnaAnswer{
+	resize: none;
+    outline: none;
+    width: 600px;
+    height: 120px;
 }

@@ -10,16 +10,16 @@
 								</p>
 							</nav>
 							
-							<div class="content">
+							<div class="content" style="margin-top:-106px">
 								<p style="white-space: pre-wrap;">
-									<c:out value="${qna.content}"/>
+									<br><c:out value="${qna.content}" escapeXml="true"/>
 								</p>
 							</div>
 							<c:if test="${ans ne null}">
 							<div class="answer">
 								<h2 class="title">☞ [답변] ${ans.title}</h2>
 								<p style="white-space: pre-wrap;">
-									<c:out value="${ans.content}"/>
+									<c:out value="${ans.content}" escapeXml="true"/>
 								</p>
 							</div>
 							</c:if>

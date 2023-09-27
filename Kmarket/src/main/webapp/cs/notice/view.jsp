@@ -7,10 +7,9 @@
 								<span class="date">${notice.fullRdate}</span>
 							</nav>
 							
-							<div class="content">
+							<div class="content" style="margin-top:-106px">
 								<p style="white-space: pre-wrap;">
-									<c:if test="${cate1 eq 1}">[${cate.cate1_name}]</c:if>
-									<c:out value="${notice.content}"/><br/><br/>
+									<br><c:out value="${notice.content}" escapeXml="true"/><br/><br/>
 								</p>
 								<p>
 									※ 피싱 관련 피해신고<br/><br/>
