@@ -20,11 +20,11 @@
           
           <!-- 공지사항 -->           
           <section class="notice">
-            <h1>공지사항<a href="./cs/notice/list.do?cate1=1">전체보기</a></h1>
+            <h1>공지사항<a href="${ctxPath}/cs/notice/list.do?cate1=1">전체보기</a></h1>
             <ul>
             <c:forEach var="notice_list" items="${notice_lists}" begin="0" step="1" end="4">            
             	<li>
-            		<a href="./cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">[${notice_list.cate1_name}] <c:out value="${notice_list.title}"/></a>
+            		<a href="${ctxPath}/cs/notice/view.do?cate1=${notice_list.cate1}&no=${notice_list.no}" class="title">[${notice_list.cate1_name}] <c:out value="${notice_list.title}"/></a>
             		<span class="date">${notice_list.rdate}</span>
             	</li>
             </c:forEach>
@@ -34,29 +34,29 @@
         
           <!-- 자주 묻는 질문 --> 
           <section class="faq">
-            <h1>자주 묻는 질문<a href="./cs/faq/list.do?group=2&cate1=1">전체보기</a>
+            <h1>자주 묻는 질문<a href="${ctxPath}/cs/faq/list.do?group=2&cate1=1">전체보기</a>
             </h1>
             <ol>
               <li>
-                <a href="./cs/faq/list.do?cate1=1"><span>회원</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=1"><span>회원</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=2"><span>쿠폰/이벤트</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=2"><span>쿠폰/이벤트</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=3"><span>주문/결제</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=3"><span>주문/결제</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=4"><span>배송</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=4"><span>배송</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=5"><span>취소/반품/교환</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=5"><span>취소/반품/교환</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=6"><span>여행/숙박/항공</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=6"><span>여행/숙박/항공</span></a>
               </li>
               <li>
-                <a href="./cs/faq/list.do?cate1=7"><span>안전거래</span></a>
+                <a href="${ctxPath}/cs/faq/list.do?cate1=7"><span>안전거래</span></a>
               </li>
             </ol>
           </section>
