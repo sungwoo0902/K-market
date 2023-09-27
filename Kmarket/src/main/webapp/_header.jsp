@@ -38,7 +38,9 @@
 	                best.css({ position: "static" });
 	            }
             });
-            
+            $('#bannerTop .btnClose').click(function(){
+                $(this).closest('#bannerTop').removeClass('on');
+            });
          	// 구현되지 않은 서비스 및 2차 개발 예정인 서비스 알림
 			$('.unready').click(function() {
 				alert('아직 준비 중인 서비스입니다.\n불편을 끼쳐드려 죄송합니다.');
@@ -72,7 +74,7 @@
           top: 0px;
           width: 40px;
           height: 40px;
-          background-image: url('./images/ico_sprite.png');
+          background-image: url('${ctxPath}/images/ico_sprite.png');
           background-position: -122px -142px;
           background-color: transparent;
           font-size: 0;
@@ -83,6 +85,12 @@
       </style>
 </head>
 <body>
+	<div id="bannerTop" class="on" style="background: #e4dfdf;">
+	      <article>
+	        <a href="#"><img src="${ctxPath}/images/topBanner1.png"/></a>
+	        <button class="btnClose">close</button>
+	      </article>
+	    </div>
     <div id="wrapper">
         <header>
             <div class="top">

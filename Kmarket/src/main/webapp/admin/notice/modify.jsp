@@ -42,7 +42,7 @@
                 </section>
                 <input type="submit" value="수정하기" class="csModify">           
             </form>
-            	<a href="${ctxPath}/admin/notice/view.do?no=${faq.no}" class="csCancle">취소</a>
+            	<a href="${ctxPath}/admin/notice/view.do?no=${modify.no}" class="csCancle">취소</a>
         </article>
     </section>
 </main>

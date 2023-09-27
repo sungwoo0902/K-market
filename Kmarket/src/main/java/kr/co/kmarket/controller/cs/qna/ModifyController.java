@@ -48,6 +48,7 @@ public class ModifyController extends HttpServlet {
 		req.setAttribute("cate1", qna.getCate1());
 		req.setAttribute("cate2", qna.getCate2());
 		req.setAttribute("board", "write");
+		req.setAttribute("no", no);
 		
 		// 본인 게시글인지 확인
 		HttpSession session = req.getSession();
@@ -64,7 +65,7 @@ public class ModifyController extends HttpServlet {
 
 		if(!uid.equals(qna.getUid())) {
 			logger.info("sessUser ne uid : " + sessUser.getUid() + "(" + req.getRemoteAddr() + ")");
-			resp.sendRedirect("./list.do?cate1="+qna.getCate1()+"&success=102");
+			resp.sendRedirect("./view.do?cate1="+qna.getCate1()+"&no="+no+"&success=102");
 			
 		}else {
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/cs/qna/modify.jsp");
@@ -124,10 +125,10 @@ public class ModifyController extends HttpServlet {
 				int result = service.updateBoard(dto);
 				
 				if(result > 0) {
-					resp.sendRedirect("./list.do?cate1="+cate1+"&success=201");
+					resp.sendRedirect("./view.do?cate1="+cate1+"&no="+no+"&success=201");
 					
 				}else {
-					resp.sendRedirect("./list.do?cate1="+cate1+"&success=101");
+					resp.sendRedirect("./list.do?cate1="+cate1+"&no="+no+"&success=101");
 				}
 		}
 	}

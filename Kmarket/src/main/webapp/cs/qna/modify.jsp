@@ -97,7 +97,7 @@
 								</table>
 								<div>
 									<input type="submit" class="btnSubmit" value="수정하기"/>
-									<a href="./list.do?cate1=${cate1}" class="btnList">취소하기</a>
+									<a href="${ctxPath}/cs/qna/view.do?cate1=${cate1}&no=${no}" class="btnList">취소하기</a>
 								</div>
 							</form>
 						</article>
